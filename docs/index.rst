@@ -11,7 +11,7 @@ It's engraved in it's design that you are working not with just tables, you work
    Kleinmann ORM is young project and breaking changes are to be expected.
    We keep a :ref:`changelog` and it will have possible breakage clearly documented.
 
-Source & issue trackers are available at `<https://github.com/kleinmann/kleinmann-orm/>`_
+Source & issue trackers are available at `<https://github.com/kleinmann-orm/kleinmann-orm/>`_
 
 Kleinmann ORM is supported on CPython >= 3.8 for SQLite, MySQL and PostgreSQL.
 

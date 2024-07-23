@@ -6,7 +6,7 @@ KleinmannCLI
 
 This document describes how to use `kleinmann-cli`, a cli tool for kleinmann-orm, build on top of click and ptpython.
 
-You can see `https://github.com/kleinmann/kleinmann-cli <https://github.com/kleinmann/kleinmann-cli>`_ for more details.
+You can see `https://github.com/kleinmann-orm/kleinmann-cli <https://github.com/kleinmann-orm/kleinmann-cli>`_ for more details.
 
 
 Quick Start

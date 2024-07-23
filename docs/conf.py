@@ -126,8 +126,8 @@ def get_version_info():
 
 
 html_theme_options = {
-    "google_analytics": ["G-MJ7RHW2FRB", "auto"],
-    "repo_url": "https://github.com/kleinmann/kleinmann-orm",
+    # "google_analytics": ["G-MJ7RHW2FRB", "auto"],
+    "repo_url": "https://github.com/kleinmann-orm/kleinmann-orm",
     "repo_name": "kleinmann-orm",
     "globaltoc_collapse": True,
     "globaltoc_includehidden": True,
