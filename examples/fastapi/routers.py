@@ -15,7 +15,7 @@ async def get_users():
 @router.post("/users", response_model=User_Pydantic)
 async def create_user(user: UserIn_Pydantic):
     user_obj = await Users.create(**user.model_dump(exclude_unset=True))
-    return await User_Pydantic.from_tortoise_orm(user_obj)
+    return await User_Pydantic.from_kleinmann_orm(user_obj)
 
 
 @router.get("/user/{user_id}", response_model=User_Pydantic)

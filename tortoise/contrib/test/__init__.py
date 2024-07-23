@@ -488,4 +488,4 @@ def init_memory_sqlite(
         models = default_models
     elif isinstance(models, str):
         models = [models]
-    return partial(wrapper, ms=models)
+    return partial(wrapper, ms=models)  # type: ignore[arg-type]

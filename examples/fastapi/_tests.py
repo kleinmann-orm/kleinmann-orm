@@ -76,7 +76,7 @@ class UserTester:
         assert response.status_code == 200, response.text
         data = response.json()
         assert isinstance(data, list)
-        item = await User_Pydantic.from_tortoise_orm(user_obj)
+        item = await User_Pydantic.from_kleinmann_orm(user_obj)
         assert JSON_LOADS(item.model_dump_json()) in data
         return utc_now, user_obj, item
 

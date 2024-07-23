@@ -353,16 +353,16 @@ class MetaInfo:
                     partial(
                         _fk_getter,
                         ftype=fk_field_object.related_model,
-                        **property_kwargs,
+                        **property_kwargs,  # type: ignore[arg-type]
                     ),
                     partial(
                         _fk_setter,
-                        **property_kwargs,
+                        **property_kwargs,  # type: ignore[arg-type]
                     ),
                     partial(
                         _fk_setter,
                         value=None,
-                        **property_kwargs,
+                        **property_kwargs,  # type: ignore[arg-type]
                     ),
                 ),
             )
@@ -403,16 +403,16 @@ class MetaInfo:
                     partial(
                         _fk_getter,
                         ftype=o2o_field_object.related_model,
-                        **property_kwargs,
+                        **property_kwargs,  # type: ignore[arg-type]
                     ),
                     partial(
                         _fk_setter,
-                        **property_kwargs,
+                        **property_kwargs,  # type: ignore[arg-type]
                     ),
                     partial(
                         _fk_setter,
                         value=None,
-                        **property_kwargs,
+                        **property_kwargs,  # type: ignore[arg-type]
                     ),
                 ),
             )
@@ -443,7 +443,7 @@ class MetaInfo:
             setattr(
                 self._model,
                 key,
-                property(partial(_m2m_getter, _key=_key, field_object=self.fields_map[key])),
+                property(partial(_m2m_getter, _key=_key, field_object=self.fields_map[key])),  # type: ignore[arg-type]
             )
 
     def _generate_db_fields(self) -> None:

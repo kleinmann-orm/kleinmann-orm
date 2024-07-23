@@ -71,7 +71,7 @@ class F(PypikaField):  # type: ignore
                 left_field_object,
             ) = cls.resolver_arithmetic_expression(model, left)
             if left_field_object:
-                if field_object and type(field_object) != type(left_field_object):
+                if field_object and type(field_object) != type(left_field_object):  # noqa: E721
                     raise FieldError(
                         "Cannot use arithmetic expression between different field type"
                     )
@@ -82,7 +82,7 @@ class F(PypikaField):  # type: ignore
                 right_field_object,
             ) = cls.resolver_arithmetic_expression(model, right)
             if right_field_object:
-                if field_object and type(field_object) != type(right_field_object):
+                if field_object and type(field_object) != type(right_field_object):  # noqa: E721
                     raise FieldError(
                         "Cannot use arithmetic expression between different field type"
                     )
