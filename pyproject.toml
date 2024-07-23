@@ -2,13 +2,14 @@
 name = "kleinmann-orm"
 version = "0.0.1"
 description = "Easy async ORM for python, built with relations in mind"
-authors = ["Andrey Bondar <andrey@bondar.ru>", "Nickolas Grigoriadis <nagrigoriadis@gmail.com>", "long2ice <long2ice@gmail.com>"]
+# NOTE: See CONTRIBUTORS.rst for upstream authors/contributors
+authors = ["Lev Gorodetskii <github@drsr.io>"]
 maintainers = ["Lev Gorodetskii <github@drsr.io>"]
 license = "Apache-2.0"
 readme = "README.md"
 homepage = "https://github.com/kleinmann/kleinmann-orm"
 repository = "https://github.com/kleinmann/kleinmann-orm.git"
-documentation = "https://kleinmann-orm.readthedocs.io"
+documentation = "https://github.com/kleinmann/kleinmann-orm"
 keywords = ["sql", "mysql", "postgres", "psql", "sqlite", "aiosqlite", "asyncpg", "relational", "database", "rdbms", "orm", "object mapper", "async", "asyncio", "aio", "psycopg"]
 packages = [
     { include = "kleinmann" }

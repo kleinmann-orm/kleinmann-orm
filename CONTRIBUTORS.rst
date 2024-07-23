@@ -2,8 +2,10 @@
 Thanks
 ======
 
-Contributors
-============
+Tortoise ORM Contributors
+=========================
+
+As of 2024-07-24. See the upstream repository for the most up-to-date list.
 
 * Andrey Bondar ``@abondar``
 * Nickolas Grigoriadis ``@grigi``
