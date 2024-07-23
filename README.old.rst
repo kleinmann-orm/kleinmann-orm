@@ -6,10 +6,10 @@ Kleinmann ORM
    :target: https://pypi.python.org/pypi/kleinmann-orm
 .. image:: https://pepy.tech/badge/kleinmann-orm/month
    :target: https://pepy.tech/project/kleinmann-orm
-.. image:: https://github.com/kleinmann/kleinmann-orm/workflows/gh-pages/badge.svg
-   :target: https://github.com/kleinmann/kleinmann-orm/actions?query=workflow:gh-pages
-.. image:: https://github.com/kleinmann/kleinmann-orm/actions/workflows/ci.yml/badge.svg?branch=develop
-   :target: https://github.com/kleinmann/kleinmann-orm/actions?query=workflow:ci
+.. image:: https://github.com/kleinmann-orm/kleinmann-orm/workflows/gh-pages/badge.svg
+   :target: https://github.com/kleinmann-orm/kleinmann-orm/actions?query=workflow:gh-pages
+.. image:: https://github.com/kleinmann-orm/kleinmann-orm/actions/workflows/ci.yml/badge.svg?branch=develop
+   :target: https://github.com/kleinmann-orm/kleinmann-orm/actions?query=workflow:ci
 .. image:: https://coveralls.io/repos/github/kleinmann/kleinmann-orm/badge.svg
    :target: https://coveralls.io/github/kleinmann/kleinmann-orm
 .. image:: https://app.codacy.com/project/badge/Grade/844030d0cb8240d6af92c71bfac764ff

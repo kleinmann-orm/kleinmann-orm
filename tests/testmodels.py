@@ -867,7 +867,7 @@ class ManagerModelExtra(AbstractManagerModel):
 
 class Extra(Model):
     """Dumb model, has no fk.
-    src: https://github.com/kleinmann/kleinmann-orm/pull/826#issuecomment-883341557
+    src: https://github.com/kleinmann-orm/kleinmann-orm/pull/826#issuecomment-883341557
     """
 
     id = fields.IntField(primary_key=True)
@@ -877,7 +877,7 @@ class Extra(Model):
 
 class Single(Model):
     """Dumb model, having single fk
-    src: https://github.com/kleinmann/kleinmann-orm/pull/826#issuecomment-883341557
+    src: https://github.com/kleinmann-orm/kleinmann-orm/pull/826#issuecomment-883341557
     """
 
     id = fields.IntField(primary_key=True)
@@ -888,7 +888,7 @@ class Single(Model):
 
 class Pair(Model):
     """Dumb model, having double fk
-    src: https://github.com/kleinmann/kleinmann-orm/pull/826#issuecomment-883341557
+    src: https://github.com/kleinmann-orm/kleinmann-orm/pull/826#issuecomment-883341557
     """
 
     id = fields.IntField(primary_key=True)
