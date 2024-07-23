@@ -2,6 +2,14 @@ import json
 import uuid
 from typing import Union
 
+from kleinmann import Kleinmann, fields
+from kleinmann.contrib import test
+from kleinmann.fields.relational import (
+    BackwardFKRelation,
+    ForeignKeyFieldInstance,
+    ManyToManyFieldInstance,
+    OneToOneFieldInstance,
+)
 from tests.testmodels import (
     Event,
     JSONFields,
@@ -15,25 +23,17 @@ from tests.testmodels import (
     UUIDM2MRelatedModel,
     UUIDPkModel,
 )
-from tortoise import Tortoise, fields
-from tortoise.contrib import test
-from tortoise.fields.relational import (
-    BackwardFKRelation,
-    ForeignKeyFieldInstance,
-    ManyToManyFieldInstance,
-    OneToOneFieldInstance,
-)
 
 
 class TestDescribeModels(test.TestCase):
     def test_describe_models_all_serializable(self):
-        val = Tortoise.describe_models()
+        val = Kleinmann.describe_models()
         json.dumps(val)
         self.assertIn("models.SourceFields", val.keys())
         self.assertIn("models.Event", val.keys())
 
     def test_describe_models_all_not_serializable(self):
-        val = Tortoise.describe_models(serializable=False)
+        val = Kleinmann.describe_models(serializable=False)
         with self.assertRaisesRegex(TypeError, "not JSON serializable"):
             json.dumps(val)
         self.assertIn("models.SourceFields", val.keys())
@@ -130,7 +130,7 @@ class TestDescribeModel(test.SimpleTestCase):
         )
 
     def test_describe_models_some(self):
-        val = Tortoise.describe_models([Event, Tournament, Reporter, Team])
+        val = Kleinmann.describe_models([Event, Tournament, Reporter, Team])
         self.assertEqual(
             {"models.Event", "models.Tournament", "models.Reporter", "models.Team"}, set(val.keys())
         )

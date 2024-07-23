@@ -1,9 +1,9 @@
+from kleinmann import connections
+from kleinmann.contrib import test
+from kleinmann.contrib.mysql.functions import Rand
+from kleinmann.contrib.postgres.functions import Random as PostgresRandom
+from kleinmann.contrib.sqlite.functions import Random as SqliteRandom
 from tests.testmodels import IntFields
-from tortoise import connections
-from tortoise.contrib import test
-from tortoise.contrib.mysql.functions import Rand
-from tortoise.contrib.postgres.functions import Random as PostgresRandom
-from tortoise.contrib.sqlite.functions import Random as SqliteRandom
 
 
 class TestFunction(test.TestCase):

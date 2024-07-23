@@ -1,17 +1,17 @@
 .. _contrib_aiohttp:
 
 ================================
-Tortoise-ORM aiohttp integration
+Kleinmann-ORM aiohttp integration
 ================================
 
-We have a lightweight integration util ``tortoise.contrib.aiohttp`` which has a single function ``register_tortoise`` which sets up Tortoise-ORM on startup and cleans up on teardown.
+We have a lightweight integration util ``kleinmann.contrib.aiohttp`` which has a single function ``register_kleinmann`` which sets up Kleinmann-ORM on startup and cleans up on teardown.
 
 See the :ref:`example_aiohttp`
 
 Reference
 =========
 
-.. automodule:: tortoise.contrib.aiohttp
+.. automodule:: kleinmann.contrib.aiohttp
     :members:
     :undoc-members:
     :show-inheritance:

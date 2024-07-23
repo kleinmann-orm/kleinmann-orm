@@ -1,9 +1,9 @@
 from typing import List, Optional, Type
 
+from kleinmann import BaseDBAsyncClient
+from kleinmann.contrib import test
+from kleinmann.signals import post_delete, post_save, pre_delete, pre_save
 from tests.testmodels import Signals
-from tortoise import BaseDBAsyncClient
-from tortoise.contrib import test
-from tortoise.signals import post_delete, post_save, pre_delete, pre_save
 
 
 @pre_save(Signals)

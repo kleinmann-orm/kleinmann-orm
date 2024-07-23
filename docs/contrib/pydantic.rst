@@ -4,7 +4,7 @@
 Pydantic serialisation
 ======================
 
-Tortoise ORM has a Pydantic plugin that will generate Pydantic Models from Tortoise Models, and then provides helper functions to serialise that model and its related objects.
+Kleinmann ORM has a Pydantic plugin that will generate Pydantic Models from Kleinmann Models, and then provides helper functions to serialise that model and its related objects.
 
 We currently only support generating Pydantic objects for serialisation, and no deserialisation at this stage.
 
@@ -22,19 +22,19 @@ Tutorial
 
 Here we introduce:
 
-* Creating a Pydantic model from a Tortoise model
+* Creating a Pydantic model from a Kleinmann model
 * Docstrings & doc-comments are used
 * Evaluating the generated schema
 * Simple serialisation with both ``.model_dump()`` and ``.model_dump_json()``
 
 Source to example: :ref:`example_pydantic_tut1`
 
-Lets start with a basic Tortoise Model:
+Lets start with a basic Kleinmann Model:
 
 .. code-block:: py3
 
-    from tortoise import fields
-    from tortoise.models import Model
+    from kleinmann import fields
+    from kleinmann.models import Model
 
     class Tournament(Model):
         """
@@ -46,11 +46,11 @@ Lets start with a basic Tortoise Model:
         created_at = fields.DatetimeField(auto_now_add=True)
 
 | To create a Pydantic model from that one would call:
-| :meth:`tortoise.contrib.pydantic.creator.pydantic_model_creator`
+| :meth:`kleinmann.contrib.pydantic.creator.pydantic_model_creator`
 
 .. code-block:: py3
 
-    from tortoise.contrib.pydantic import pydantic_model_creator
+    from kleinmann.contrib.pydantic import pydantic_model_creator
 
     Tournament_Pydantic = pydantic_model_creator(Tournament)
 
@@ -90,7 +90,7 @@ To serialise an object it is simply *(in an async context)*:
 .. code-block:: py3
 
     tournament = await Tournament.create(name="New Tournament")
-    tourpy = await Tournament_Pydantic.from_tortoise_orm(tournament)
+    tourpy = await Tournament_Pydantic.from_kleinmann_orm(tournament)
 
 And one could get the contents by using `regular Pydantic-object methods <https://pydantic-docs.helpmanual.io/usage/exporting_models/>`_, such as ``.model_dump()`` or ``.model_dump_json()``
 
@@ -124,8 +124,8 @@ Source to example: :ref:`example_pydantic_tut2`
 
 .. code-block:: py3
 
-    from tortoise import fields
-    from tortoise.models import Model
+    from kleinmann import fields
+    from kleinmann.models import Model
 
     class Tournament(Model):
         """
@@ -142,11 +142,11 @@ Source to example: :ref:`example_pydantic_tut2`
             ordering = ["name"]
 
 | To create a Pydantic list-model from that one would call:
-| :meth:`tortoise.contrib.pydantic.creator.pydantic_queryset_creator`
+| :meth:`kleinmann.contrib.pydantic.creator.pydantic_queryset_creator`
 
 .. code-block:: py3
 
-    from tortoise.contrib.pydantic import pydantic_queryset_creator
+    from kleinmann.contrib.pydantic import pydantic_queryset_creator
 
     Tournament_Pydantic_List = pydantic_queryset_creator(Tournament)
 
@@ -260,9 +260,9 @@ Here we introduce:
 
 .. note::
 
-    The part of this tutorial about early-init is only required if you need to generate the pydantic models **before** you have initialised Tortoise ORM.
+    The part of this tutorial about early-init is only required if you need to generate the pydantic models **before** you have initialised Kleinmann ORM.
 
-    Look at :ref:`example_pydantic_basic` (in function ``run``) to see where the ``*_creator is only`` called **after** we initialised Tortoise ORM properly, in that case an early init is not needed.
+    Look at :ref:`example_pydantic_basic` (in function ``run``) to see where the ``*_creator is only`` called **after** we initialised Kleinmann ORM properly, in that case an early init is not needed.
 
 Source to example: :ref:`example_pydantic_tut3`
 
@@ -270,8 +270,8 @@ We define our models with a relationship:
 
 .. code-block:: py3
 
-    from tortoise import fields
-    from tortoise.models import Model
+    from kleinmann import fields
+    from kleinmann.models import Model
 
     class Tournament(Model):
         """
@@ -300,7 +300,7 @@ Next we create our `Pydantic Model <https://pydantic-docs.helpmanual.io/usage/mo
 
 .. code-block:: py3
 
-    from tortoise.contrib.pydantic import pydantic_model_creator
+    from kleinmann.contrib.pydantic import pydantic_model_creator
 
     Tournament_Pydantic = pydantic_model_creator(Tournament)
 
@@ -335,13 +335,13 @@ Oh no! Where is the relation?
 
 Because the models have not fully initialised, it doesn't know about the relations at this stage.
 
-We need to initialise our model relationships early using :meth:`tortoise.Tortoise.init_models`
+We need to initialise our model relationships early using :meth:`kleinmann.Kleinmann.init_models`
 
 .. code-block:: py3
 
-    from tortoise import Tortoise
+    from kleinmann import Kleinmann
 
-    Tortoise.init_models(["__main__"], "models")
+    Kleinmann.init_models(["__main__"], "models")
     # Now lets try again
     Tournament_Pydantic = pydantic_model_creator(Tournament)
 
@@ -477,7 +477,7 @@ Lets create and serialise the objects and see what they look like *(in an async 
     event = await Event.create(name="The Event", tournament=tournament)
 
     # Serialise Tournament
-    tourpy = await Tournament_Pydantic.from_tortoise_orm(tournament)
+    tourpy = await Tournament_Pydantic.from_kleinmann_orm(tournament)
 
     >>> print(tourpy.model_dump_json())
     {
@@ -497,7 +497,7 @@ And serialising the event *(in an async context)*:
 
 .. code-block:: py3
 
-    eventpy = await Event_Pydantic.from_tortoise_orm(event)
+    eventpy = await Event_Pydantic.from_kleinmann_orm(event)
 
     >>> print(eventpy.model_dump_json())
     {
@@ -585,25 +585,25 @@ Let's add some methods that calculate data, and tell the creators to use them:
 There is much to unpack here.
 
 Firstly, we defined a ``PydanticMeta`` block, and in there is configuration options for the pydantic model creator.
-See :class:`tortoise.contrib.pydantic.creator.PydanticMeta` for the available options.
+See :class:`kleinmann.contrib.pydantic.creator.PydanticMeta` for the available options.
 
 Secondly, we excluded ``created_at`` in both models, as we decided it provided no benefit.
 
 Thirly, we added two callables: ``name_length`` and ``events_num``. We want these as part of the result set.
 Note that callables/computed fields require manual specification of return type, as without this we can't determine the record type which is needed to create a valid Pydantic schema.
-This is not needed for standard Tortoise ORM fields, as the fields already define a valid type.
+This is not needed for standard Kleinmann ORM fields, as the fields already define a valid type.
 
-Note that the Pydantic serializer can't call async methods, but since the tortoise helpers pre-fetch relational data, it is available before serialization.
+Note that the Pydantic serializer can't call async methods, but since the kleinmann helpers pre-fetch relational data, it is available before serialization.
 So we don't need to await the relation.
-We should however protect against the case where no prefetching was done, hence catching and handling the ``tortoise.exceptions.NoValuesFetched`` exception.
+We should however protect against the case where no prefetching was done, hence catching and handling the ``kleinmann.exceptions.NoValuesFetched`` exception.
 
 Next we create our `Pydantic Model <https://pydantic-docs.helpmanual.io/usage/models/>`__ using ``pydantic_model_creator``:
 
 .. code-block:: py3
 
-    from tortoise import Tortoise
+    from kleinmann import Kleinmann
 
-    Tortoise.init_models(["__main__"], "models")
+    Kleinmann.init_models(["__main__"], "models")
     Tournament_Pydantic = pydantic_model_creator(Tournament)
 
 The JSON-Schema of ``Tournament_Pydantic`` is now:
@@ -673,7 +673,7 @@ Lets create and serialise the objects and see what they look like *(in an async 
     await Event.create(name="Event 2", tournament=tournament)
 
     # Serialise Tournament
-    tourpy = await Tournament_Pydantic.from_tortoise_orm(tournament)
+    tourpy = await Tournament_Pydantic.from_kleinmann_orm(tournament)
 
     >>> print(tourpy.model_dump_json())
     {
@@ -698,18 +698,18 @@ Lets create and serialise the objects and see what they look like *(in an async 
 Creators
 ========
 
-.. automodule:: tortoise.contrib.pydantic.creator
+.. automodule:: kleinmann.contrib.pydantic.creator
     :members:
     :exclude-members: PydanticMeta
 
 PydanticMeta
 ============
 
-.. autoclass:: tortoise.contrib.pydantic.creator.PydanticMeta
+.. autoclass:: kleinmann.contrib.pydantic.creator.PydanticMeta
     :members:
 
 Model classes
 =============
 
-.. automodule:: tortoise.contrib.pydantic.base
+.. automodule:: kleinmann.contrib.pydantic.base
     :members:

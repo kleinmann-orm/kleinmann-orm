@@ -28,7 +28,7 @@ The two methods return a connection string defined in configuration.
 Config Router
 -------------
 
-Just put it in configuration of tortoise or in `Tortoise.init` method.
+Just put it in configuration of kleinmann or in `Kleinmann.init` method.
 
 .. code-block:: python3
 
@@ -44,9 +44,9 @@ Just put it in configuration of tortoise or in `Tortoise.init` method.
         "use_tz": False,
         "timezone": "UTC",
     }
-    await Tortoise.init(config=config)
+    await Kleinmann.init(config=config)
     # or
     routers = config.pop('routers')
-    await Tortoise.init(config=config, routers=routers)
+    await Kleinmann.init(config=config, routers=routers)
 
 After that, all `select` operations will use `slave` connection, all `create/update/delete` operations will use `master` connection.

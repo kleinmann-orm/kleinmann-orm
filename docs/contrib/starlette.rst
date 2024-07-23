@@ -1,17 +1,17 @@
 .. _contrib_starlette:
 
 ==================================
-Tortoise-ORM Starlette integration
+Kleinmann-ORM Starlette integration
 ==================================
 
-We have a lightweight integration util ``tortoise.contrib.starlette`` which has a single function ``register_tortoise`` which sets up Tortoise-ORM on startup and cleans up on teardown.
+We have a lightweight integration util ``kleinmann.contrib.starlette`` which has a single function ``register_kleinmann`` which sets up Kleinmann-ORM on startup and cleans up on teardown.
 
 See the :ref:`example_starlette`
 
 Reference
 =========
 
-.. automodule:: tortoise.contrib.starlette
+.. automodule:: kleinmann.contrib.starlette
     :members:
     :undoc-members:
     :show-inheritance:

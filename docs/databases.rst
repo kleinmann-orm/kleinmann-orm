@@ -4,7 +4,7 @@
 Databases
 =========
 
-Tortoise currently supports the following databases:
+Kleinmann currently supports the following databases:
 
 * SQLite (using ``aiosqlite``）
 * PostgreSQL >= 9.4 (using ``asyncpg`` or ``psycopg``)
@@ -18,7 +18,7 @@ To use, please ensure that corresponding asyncio driver is installed.
 DB_URL
 ======
 
-Tortoise supports specifying Database configuration in a URL form.
+Kleinmann supports specifying Database configuration in a URL form.
 
 The form is:
 
@@ -56,7 +56,7 @@ Capabilities
 Since each database has a different set of features we have a ``Capabilities`` that is registered on each client.
 Primarily this is to work around larger-than SQL differences, or common issues.
 
-.. autoclass:: tortoise.backends.base.client.Capabilities
+.. autoclass:: kleinmann.backends.base.client.Capabilities
     :members:
 
 
@@ -200,7 +200,7 @@ Required Parameters
 Optional parameters:
 --------------------
 
-MSSQL/Oracle optional parameters are pass-though parameters to the driver, see `here <https://github.com/tortoise/asyncodbc>`__ for more details.
+MSSQL/Oracle optional parameters are pass-though parameters to the driver, see `here <https://github.com/kleinmann/asyncodbc>`__ for more details.
 
 ``minsize`` (defaults to ``1``):
     Minimum connection pool size
@@ -234,11 +234,11 @@ handle complex objects.
     ctx.verify_mode = ssl.CERT_NONE
 
     # Here we do a verbose init
-    await Tortoise.init(
+    await Kleinmann.init(
         config={
             "connections": {
                 "default": {
-                    "engine": "tortoise.backends.asyncpg",
+                    "engine": "kleinmann.backends.asyncpg",
                     "credentials": {
                         "database": None,
                         "host": "127.0.0.1",
@@ -265,7 +265,7 @@ Base DB client
 
 The Base DB client interface is provided here, but should only be directly used as an advanced case.
 
-.. automodule:: tortoise.backends.base.client
+.. automodule:: kleinmann.backends.base.client
 
     .. autoclass:: BaseDBAsyncClient
         :members:

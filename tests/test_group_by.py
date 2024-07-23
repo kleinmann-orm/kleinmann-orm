@@ -1,6 +1,6 @@
+from kleinmann.contrib import test
+from kleinmann.functions import Avg, Count, Sum, Upper
 from tests.testmodels import Author, Book
-from tortoise.contrib import test
-from tortoise.functions import Avg, Count, Sum, Upper
 
 
 class TestGroupBy(test.TestCase):

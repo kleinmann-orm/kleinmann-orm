@@ -1,6 +1,6 @@
-from tortoise import Model, fields
-from tortoise.contrib.postgres.fields import TSVectorField
-from tortoise.contrib.postgres.indexes import (
+from kleinmann import Model, fields
+from kleinmann.contrib.postgres.fields import TSVectorField
+from kleinmann.contrib.postgres.indexes import (
     BloomIndex,
     BrinIndex,
     GinIndex,

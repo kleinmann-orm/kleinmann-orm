@@ -14,13 +14,13 @@ from typing import List, Union
 import pytz
 from pydantic import ConfigDict
 
-from tortoise import fields
-from tortoise.exceptions import ValidationError
-from tortoise.fields import NO_ACTION
-from tortoise.manager import Manager
-from tortoise.models import Model
-from tortoise.queryset import QuerySet
-from tortoise.validators import (
+from kleinmann import fields
+from kleinmann.exceptions import ValidationError
+from kleinmann.fields import NO_ACTION
+from kleinmann.manager import Manager
+from kleinmann.models import Model
+from kleinmann.queryset import QuerySet
+from kleinmann.validators import (
     CommaSeparatedIntegerListValidator,
     MaxValueValidator,
     MinValueValidator,
@@ -566,11 +566,11 @@ class Employee(Model):
         Note that this function needs to be annotated with a return type so that pydantic can
          generate a valid schema.
 
-        Note that the pydantic serializer can't call async methods, but the tortoise helpers
+        Note that the pydantic serializer can't call async methods, but the kleinmann helpers
          pre-fetch relational data, so that it is available before serialization. So we don't
          need to await the relation. We do however have to protect against the case where no
          prefetching was done, hence catching and handling the
-         ``tortoise.exceptions.NoValuesFetched`` exception.
+         ``kleinmann.exceptions.NoValuesFetched`` exception.
         """
         try:
             return len(self.team_members)
@@ -786,7 +786,7 @@ class DefaultModel(Model):
     float_default = fields.FloatField(default=1.5)
     decimal_default = fields.DecimalField(max_digits=8, decimal_places=2, default=Decimal(1))
     bool_default = fields.BooleanField(default=True)
-    char_default = fields.CharField(max_length=20, default="tortoise")
+    char_default = fields.CharField(max_length=20, default="kleinmann")
     date_default = fields.DateField(default=datetime.date(year=2020, month=5, day=21))
     datetime_default = fields.DatetimeField(
         default=datetime.datetime(year=2020, month=5, day=20, tzinfo=pytz.utc)
@@ -867,17 +867,17 @@ class ManagerModelExtra(AbstractManagerModel):
 
 class Extra(Model):
     """Dumb model, has no fk.
-    src: https://github.com/tortoise/tortoise-orm/pull/826#issuecomment-883341557
+    src: https://github.com/kleinmann/kleinmann-orm/pull/826#issuecomment-883341557
     """
 
     id = fields.IntField(primary_key=True)
-    # currently, tortoise don't save models with single pk field for some reason \_0_/
+    # currently, kleinmann don't save models with single pk field for some reason \_0_/
     some_name = fields.CharField(default=lambda: str(uuid.uuid4()), max_length=64)
 
 
 class Single(Model):
     """Dumb model, having single fk
-    src: https://github.com/tortoise/tortoise-orm/pull/826#issuecomment-883341557
+    src: https://github.com/kleinmann/kleinmann-orm/pull/826#issuecomment-883341557
     """
 
     id = fields.IntField(primary_key=True)
@@ -888,7 +888,7 @@ class Single(Model):
 
 class Pair(Model):
     """Dumb model, having double fk
-    src: https://github.com/tortoise/tortoise-orm/pull/826#issuecomment-883341557
+    src: https://github.com/kleinmann/kleinmann-orm/pull/826#issuecomment-883341557
     """
 
     id = fields.IntField(primary_key=True)

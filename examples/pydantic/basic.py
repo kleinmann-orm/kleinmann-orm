@@ -2,9 +2,9 @@
 This example demonstrates pydantic serialisation
 """
 
-from tortoise import Tortoise, fields, run_async
-from tortoise.contrib.pydantic import pydantic_model_creator, pydantic_queryset_creator
-from tortoise.models import Model
+from kleinmann import Kleinmann, fields, run_async
+from kleinmann.contrib.pydantic import pydantic_model_creator, pydantic_queryset_creator
+from kleinmann.models import Model
 
 
 class Tournament(Model):
@@ -59,8 +59,8 @@ class Team(Model):
 
 
 async def run():
-    await Tortoise.init(db_url="sqlite://:memory:", modules={"models": ["__main__"]})
-    await Tortoise.generate_schemas()
+    await Kleinmann.init(db_url="sqlite://:memory:", modules={"models": ["__main__"]})
+    await Kleinmann.generate_schemas()
     Event_Pydantic = pydantic_model_creator(Event)
     Event_Pydantic_List = pydantic_queryset_creator(Event)
     Tournament_Pydantic = pydantic_model_creator(Tournament)
@@ -86,13 +86,13 @@ async def run():
     await event2.participants.add(team1, team2)
     await event3.participants.add(team1, team3)
 
-    p = await Event_Pydantic.from_tortoise_orm(await Event.get(name="Test"))
+    p = await Event_Pydantic.from_kleinmann_orm(await Event.get(name="Test"))
     print("One Event:", p.model_dump_json(indent=4))
 
-    p = await Tournament_Pydantic.from_tortoise_orm(await Tournament.get(name="New Tournament"))
+    p = await Tournament_Pydantic.from_kleinmann_orm(await Tournament.get(name="New Tournament"))
     print("One Tournament:", p.model_dump_json(indent=4))
 
-    p = await Team_Pydantic.from_tortoise_orm(await Team.get(name="Onesies"))
+    p = await Team_Pydantic.from_kleinmann_orm(await Team.get(name="Onesies"))
     print("One Team:", p.model_dump_json(indent=4))
 
     pl = await Event_Pydantic_List.from_queryset(Event.filter(address__event_id__isnull=True))

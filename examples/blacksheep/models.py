@@ -1,5 +1,5 @@
-from tortoise import fields, models
-from tortoise.contrib.pydantic import pydantic_model_creator
+from kleinmann import fields, models
+from kleinmann.contrib.pydantic import pydantic_model_creator
 
 
 class Users(models.Model):

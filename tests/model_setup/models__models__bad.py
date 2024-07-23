@@ -2,8 +2,8 @@
 'Failure' tests for __models__
 """
 
-from tortoise import fields
-from tortoise.models import Model
+from kleinmann import fields
+from kleinmann.models import Model
 
 
 class BadTournament(Model):

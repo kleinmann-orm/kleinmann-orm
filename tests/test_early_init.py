@@ -1,7 +1,7 @@
-from tortoise import Tortoise, fields
-from tortoise.contrib import test
-from tortoise.contrib.pydantic import pydantic_model_creator
-from tortoise.models import Model
+from kleinmann import Kleinmann, fields
+from kleinmann.contrib import test
+from kleinmann.contrib.pydantic import pydantic_model_creator
+from kleinmann.models import Model
 
 
 class Tournament(Model):
@@ -160,7 +160,7 @@ class TestBasic(test.TestCase):
             },
         )
 
-        Tortoise.init_models(["tests.test_early_init"], "models")
+        Kleinmann.init_models(["tests.test_early_init"], "models")
 
         Event_Pydantic = pydantic_model_creator(Event)
         self.assertEqual(

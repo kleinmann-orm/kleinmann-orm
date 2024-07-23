@@ -1,11 +1,11 @@
 """
-This example demonstrates how you can use transactions with tortoise
+This example demonstrates how you can use transactions with kleinmann
 """
 
-from tortoise import Tortoise, fields, run_async
-from tortoise.exceptions import OperationalError
-from tortoise.models import Model
-from tortoise.transactions import atomic, in_transaction
+from kleinmann import Kleinmann, fields, run_async
+from kleinmann.exceptions import OperationalError
+from kleinmann.models import Model
+from kleinmann.transactions import atomic, in_transaction
 
 
 class Event(Model):
@@ -20,8 +20,8 @@ class Event(Model):
 
 
 async def run():
-    await Tortoise.init(db_url="sqlite://:memory:", modules={"models": ["__main__"]})
-    await Tortoise.generate_schemas()
+    await Kleinmann.init(db_url="sqlite://:memory:", modules={"models": ["__main__"]})
+    await Kleinmann.generate_schemas()
 
     try:
         async with in_transaction() as connection:

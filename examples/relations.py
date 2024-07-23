@@ -6,9 +6,9 @@ to declare relations and use of .prefetch_related() and .fetch_related()
 to get this related objects
 """
 
-from tortoise import Tortoise, fields, run_async
-from tortoise.exceptions import NoValuesFetched
-from tortoise.models import Model
+from kleinmann import Kleinmann, fields, run_async
+from kleinmann.exceptions import NoValuesFetched
+from kleinmann.models import Model
 
 
 class Tournament(Model):
@@ -58,8 +58,8 @@ class Team(Model):
 
 
 async def run():
-    await Tortoise.init(db_url="sqlite://:memory:", modules={"models": ["__main__"]})
-    await Tortoise.generate_schemas()
+    await Kleinmann.init(db_url="sqlite://:memory:", modules={"models": ["__main__"]})
+    await Kleinmann.generate_schemas()
 
     tournament = Tournament(name="New Tournament")
     await tournament.save()

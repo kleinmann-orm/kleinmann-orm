@@ -4,7 +4,7 @@
 Indexes
 =======
 
-Default tortoise use `BTree` index when define index use `db_index=True` in field, or define indexes use in `Meta` class, but if you want use other index types, like `FullTextIndex` in `MySQL`, or `GinIndex` in `Postgres`, you should use `tortoise.indexes.Index` and its subclasses.
+Default kleinmann use `BTree` index when define index use `db_index=True` in field, or define indexes use in `Meta` class, but if you want use other index types, like `FullTextIndex` in `MySQL`, or `GinIndex` in `Postgres`, you should use `kleinmann.indexes.Index` and its subclasses.
 
 Usage
 =====
@@ -13,9 +13,9 @@ Following is example which use `FullTextIndex` and `SpatialIndex` of `MySQL`:
 
 .. code-block:: python3
 
-    from tortoise import Model, fields
-    from tortoise.contrib.mysql.fields import GeometryField
-    from tortoise.contrib.mysql.indexes import FullTextIndex, SpatialIndex
+    from kleinmann import Model, fields
+    from kleinmann.contrib.mysql.fields import GeometryField
+    from kleinmann.contrib.mysql.indexes import FullTextIndex, SpatialIndex
 
 
     class Index(Model):
@@ -28,18 +28,18 @@ Following is example which use `FullTextIndex` and `SpatialIndex` of `MySQL`:
                 SpatialIndex(fields={"geometry"}),
             ]
 
-Some built-in indexes can be found in `tortoise.contrib.mysql.indexes` and `tortoise.contrib.postgres.indexes`.
+Some built-in indexes can be found in `kleinmann.contrib.mysql.indexes` and `kleinmann.contrib.postgres.indexes`.
 
 Extending Index
 ===============
 
-Extending index is simply, you just need to inherit the `tortoise.indexes.Index`, following is example how to create `FullTextIndex`:
+Extending index is simply, you just need to inherit the `kleinmann.indexes.Index`, following is example how to create `FullTextIndex`:
 
 .. code-block:: python3
 
     from typing import Optional, Set
     from pypika.terms import Term
-    from tortoise.indexes import Index
+    from kleinmann.indexes import Index
 
     class FullTextIndex(Index):
         INDEX_TYPE = "FULLTEXT"
@@ -55,7 +55,7 @@ Extending index is simply, you just need to inherit the `tortoise.indexes.Index`
             if parser_name:
                 self.extra = f" WITH PARSER {parser_name}"
 
-Differently for `Postgres`, you should inherit `tortoise.contrib.postgres.indexes.PostgresIndex`:
+Differently for `Postgres`, you should inherit `kleinmann.contrib.postgres.indexes.PostgresIndex`:
 
 .. code-block:: python3
 

@@ -1,10 +1,10 @@
+from kleinmann.contrib import test
+from kleinmann.exceptions import IntegrityError
 from tests.testmodels import (
     Tournament,
     UniqueTogetherFields,
     UniqueTogetherFieldsWithFK,
 )
-from tortoise.contrib import test
-from tortoise.exceptions import IntegrityError
 
 
 class TestUniqueTogether(test.TestCase):

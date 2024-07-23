@@ -4,8 +4,8 @@ This example to use router to implement read/write separation
 
 from typing import Type
 
-from tortoise import Tortoise, fields, run_async
-from tortoise.models import Model
+from kleinmann import Kleinmann, fields, run_async
+from kleinmann.models import Model
 
 
 class Event(Model):
@@ -41,8 +41,8 @@ async def run():
         "use_tz": False,
         "timezone": "UTC",
     }
-    await Tortoise.init(config=config)
-    await Tortoise.generate_schemas()
+    await Kleinmann.init(config=config)
+    await Kleinmann.generate_schemas()
     # this will use connection master
     event = await Event.create(name="Test")
     # this will use connection slave

@@ -21,5 +21,5 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     # db connections closed
 
 
-app = FastAPI(title="Tortoise ORM FastAPI example", lifespan=lifespan)
+app = FastAPI(title="Kleinmann ORM FastAPI example", lifespan=lifespan)
 app.include_router(users_router, prefix="")

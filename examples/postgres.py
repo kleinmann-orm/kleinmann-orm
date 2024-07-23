@@ -2,8 +2,8 @@
 This example showcases postgres features
 """
 
-from tortoise import Tortoise, fields, run_async
-from tortoise.models import Model
+from kleinmann import Kleinmann, fields, run_async
+from kleinmann.models import Model
 
 
 class Report(Model):
@@ -15,15 +15,15 @@ class Report(Model):
 
 
 async def run():
-    await Tortoise.init(
+    await Kleinmann.init(
         {
             "connections": {
                 "default": {
-                    "engine": "tortoise.backends.asyncpg",
+                    "engine": "kleinmann.backends.asyncpg",
                     "credentials": {
                         "host": "localhost",
                         "port": "5432",
-                        "user": "tortoise",
+                        "user": "kleinmann",
                         "password": "qwerty123",
                         "database": "test",
                     },
@@ -33,12 +33,12 @@ async def run():
         },
         _create_db=True,
     )
-    await Tortoise.generate_schemas()
+    await Kleinmann.generate_schemas()
 
     report_data = {"foo": "bar"}
     print(await Report.create(content=report_data))
     print(await Report.filter(content=report_data).first())
-    await Tortoise._drop_databases()
+    await Kleinmann._drop_databases()
 
 
 if __name__ == "__main__":

@@ -10,7 +10,7 @@ from starlette.responses import JSONResponse
 from starlette.status import HTTP_201_CREATED, HTTP_400_BAD_REQUEST
 from uvicorn.main import run
 
-from tortoise.contrib.starlette import register_tortoise
+from kleinmann.contrib.starlette import register_kleinmann
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -37,7 +37,7 @@ async def add_user(request: Request) -> JSONResponse:
     return JSONResponse({"user": str(user)}, status_code=HTTP_201_CREATED)
 
 
-register_tortoise(
+register_kleinmann(
     app, db_url="sqlite://:memory:", modules={"models": ["models"]}, generate_schemas=True
 )
 

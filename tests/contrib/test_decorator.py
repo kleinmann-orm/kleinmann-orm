@@ -1,8 +1,8 @@
 import subprocess  # nosec
 from unittest.mock import AsyncMock, patch
 
-from tortoise.contrib import test
-from tortoise.contrib.test import init_memory_sqlite
+from kleinmann.contrib import test
+from kleinmann.contrib.test import init_memory_sqlite
 
 
 class TestDecorator(test.TestCase):
@@ -14,8 +14,8 @@ class TestDecorator(test.TestCase):
         self.assertIn(s, output)
 
     @test.requireCapability(dialect="sqlite")
-    @patch("tortoise.Tortoise.init")
-    @patch("tortoise.Tortoise.generate_schemas")
+    @patch("kleinmann.Kleinmann.init")
+    @patch("kleinmann.Kleinmann.generate_schemas")
     async def test_init_memory_sqlite(
         self,
         mocked_generate: AsyncMock,
@@ -34,8 +34,8 @@ class TestDecorator(test.TestCase):
         mocked_generate.assert_awaited_once()
 
     @test.requireCapability(dialect="sqlite")
-    @patch("tortoise.Tortoise.init")
-    @patch("tortoise.Tortoise.generate_schemas")
+    @patch("kleinmann.Kleinmann.init")
+    @patch("kleinmann.Kleinmann.generate_schemas")
     async def test_init_memory_sqlite_with_models(
         self,
         mocked_generate: AsyncMock,
@@ -54,8 +54,8 @@ class TestDecorator(test.TestCase):
         mocked_generate.assert_awaited_once()
 
     @test.requireCapability(dialect="sqlite")
-    @patch("tortoise.Tortoise.init")
-    @patch("tortoise.Tortoise.generate_schemas")
+    @patch("kleinmann.Kleinmann.init")
+    @patch("kleinmann.Kleinmann.generate_schemas")
     async def test_init_memory_sqlite_model_str(
         self,
         mocked_generate: AsyncMock,

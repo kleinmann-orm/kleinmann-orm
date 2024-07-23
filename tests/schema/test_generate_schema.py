@@ -2,10 +2,10 @@
 import re
 from unittest.mock import MagicMock, patch
 
-from tortoise import Tortoise, connections
-from tortoise.contrib import test
-from tortoise.exceptions import ConfigurationError
-from tortoise.utils import get_schema_sql
+from kleinmann import Kleinmann, connections
+from kleinmann.contrib import test
+from kleinmann.exceptions import ConfigurationError
+from kleinmann.utils import get_schema_sql
 
 
 class TestGenerateSchema(test.SimpleTestCase):
@@ -95,11 +95,11 @@ CREATE UNIQUE INDEX IF NOT EXISTS "uidx_teamevents_event_i_664dbc" ON "teamevent
     async def asyncSetUp(self):
         await super().asyncSetUp()
         try:
-            Tortoise.apps = {}
-            Tortoise._inited = False
+            Kleinmann.apps = {}
+            Kleinmann._inited = False
         except ConfigurationError:
             pass
-        Tortoise._inited = False
+        Kleinmann._inited = False
         self.sqls = []
         self.post_sqls = []
         self.engine = test.getDBConfig(app_label="models", modules=[])["connections"]["models"][
@@ -107,18 +107,18 @@ CREATE UNIQUE INDEX IF NOT EXISTS "uidx_teamevents_event_i_664dbc" ON "teamevent
         ]
 
     async def asyncTearDown(self) -> None:
-        await Tortoise._reset_apps()
+        await Kleinmann._reset_apps()
         await super().asyncTearDown()
 
     async def init_for(self, module: str, safe=False) -> None:
         with patch(
-            "tortoise.backends.sqlite.client.SqliteClient.create_connection", new=MagicMock()
+            "kleinmann.backends.sqlite.client.SqliteClient.create_connection", new=MagicMock()
         ):
-            await Tortoise.init(
+            await Kleinmann.init(
                 {
                     "connections": {
                         "default": {
-                            "engine": "tortoise.backends.sqlite",
+                            "engine": "kleinmann.backends.sqlite",
                             "credentials": {"file_path": ":memory:"},
                         }
                     },
@@ -407,11 +407,11 @@ class TestGenerateSchemaMySQL(TestGenerateSchema):
     async def init_for(self, module: str, safe=False) -> None:
         try:
             with patch("asyncmy.create_pool", new=MagicMock()):
-                await Tortoise.init(
+                await Kleinmann.init(
                     {
                         "connections": {
                             "default": {
-                                "engine": "tortoise.backends.mysql",
+                                "engine": "kleinmann.backends.mysql",
                                 "credentials": {
                                     "database": "test",
                                     "host": "127.0.0.1",
@@ -1181,11 +1181,11 @@ class TestGenerateSchemaAsyncpg(GenerateSchemaPostgresSQL):
     async def init_for(self, module: str, safe=False) -> None:
         try:
             with patch("asyncpg.create_pool", new=MagicMock()):
-                await Tortoise.init(
+                await Kleinmann.init(
                     {
                         "connections": {
                             "default": {
-                                "engine": "tortoise.backends.asyncpg",
+                                "engine": "kleinmann.backends.asyncpg",
                                 "credentials": {
                                     "database": "test",
                                     "host": "127.0.0.1",
@@ -1207,11 +1207,11 @@ class TestGenerateSchemaPsycopg(GenerateSchemaPostgresSQL):
     async def init_for(self, module: str, safe=False) -> None:
         try:
             with patch("psycopg_pool.AsyncConnectionPool.open", new=MagicMock()):
-                await Tortoise.init(
+                await Kleinmann.init(
                     {
                         "connections": {
                             "default": {
-                                "engine": "tortoise.backends.psycopg",
+                                "engine": "kleinmann.backends.psycopg",
                                 "credentials": {
                                     "database": "test",
                                     "host": "127.0.0.1",

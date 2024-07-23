@@ -5,6 +5,9 @@ from typing import Any
 import pytz
 from pypika.terms import Function
 
+from kleinmann.contrib import test
+from kleinmann.contrib.test.condition import In, NotEQ
+from kleinmann.expressions import F
 from tests.testmodels import (
     Currency,
     DatetimeFields,
@@ -19,9 +22,6 @@ from tests.testmodels import (
     Tournament,
     UUIDFields,
 )
-from tortoise.contrib import test
-from tortoise.contrib.test.condition import In, NotEQ
-from tortoise.expressions import F
 
 
 class TestUpdate(test.TestCase):

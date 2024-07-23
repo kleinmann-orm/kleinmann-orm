@@ -1,7 +1,7 @@
-Tortoise-ORM Sanic example
+Kleinmann-ORM Sanic example
 ==========================
 
-We have a lightweight integration util ``tortoise.contrib.sanic`` which has a single function ``register_tortoise`` which sets up Tortoise-ORM on startup and cleans up on teardown.
+We have a lightweight integration util ``kleinmann.contrib.sanic`` which has a single function ``register_kleinmann`` which sets up Kleinmann-ORM on startup and cleans up on teardown.
 
 Usage
 -----

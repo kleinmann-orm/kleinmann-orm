@@ -2,9 +2,9 @@
 This example demonstrates pydantic serialisation, and how to use early partial init.
 """
 
-from tortoise import Tortoise, fields
-from tortoise.contrib.pydantic import pydantic_model_creator
-from tortoise.models import Model
+from kleinmann import Kleinmann, fields
+from kleinmann.contrib.pydantic import pydantic_model_creator
+from kleinmann.models import Model
 
 
 class Tournament(Model):
@@ -35,7 +35,7 @@ print("Relations are missing if models not initialized:")
 print(Event_TooEarly.schema_json(indent=4))
 
 
-Tortoise.init_models(["__main__"], "models")
+Kleinmann.init_models(["__main__"], "models")
 
 Event_Pydantic = pydantic_model_creator(Event)
 print("\nRelations are now present:")

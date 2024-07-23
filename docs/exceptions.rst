@@ -3,7 +3,7 @@ Exceptions
 ==========
 
 
-.. automodule:: tortoise.exceptions
+.. automodule:: kleinmann.exceptions
     :members:
     :undoc-members:
     :show-inheritance:

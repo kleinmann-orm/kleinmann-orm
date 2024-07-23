@@ -1,29 +1,29 @@
-from tortoise import Tortoise
-from tortoise.contrib import test
-from tortoise.exceptions import ConfigurationError
+from kleinmann import Kleinmann
+from kleinmann.contrib import test
+from kleinmann.exceptions import ConfigurationError
 
 
 class TestBadRelationReferenceErrors(test.SimpleTestCase):
     async def asyncSetUp(self):
         await super().asyncSetUp()
         try:
-            Tortoise.apps = {}
-            Tortoise._inited = False
+            Kleinmann.apps = {}
+            Kleinmann._inited = False
         except ConfigurationError:
             pass
-        Tortoise._inited = False
+        Kleinmann._inited = False
 
     async def asyncTearDown(self) -> None:
-        await Tortoise._reset_apps()
+        await Kleinmann._reset_apps()
         await super(TestBadRelationReferenceErrors, self).asyncTearDown()
 
     async def test_wrong_app_init(self):
         with self.assertRaisesRegex(ConfigurationError, "No app with name 'app' registered."):
-            await Tortoise.init(
+            await Kleinmann.init(
                 {
                     "connections": {
                         "default": {
-                            "engine": "tortoise.backends.sqlite",
+                            "engine": "kleinmann.backends.sqlite",
                             "credentials": {"file_path": ":memory:"},
                         }
                     },
@@ -40,11 +40,11 @@ class TestBadRelationReferenceErrors(test.SimpleTestCase):
         with self.assertRaisesRegex(
             ConfigurationError, "No model with name 'Tour' registered in app 'models'."
         ):
-            await Tortoise.init(
+            await Kleinmann.init(
                 {
                     "connections": {
                         "default": {
-                            "engine": "tortoise.backends.sqlite",
+                            "engine": "kleinmann.backends.sqlite",
                             "credentials": {"file_path": ":memory:"},
                         }
                     },
@@ -61,11 +61,11 @@ class TestBadRelationReferenceErrors(test.SimpleTestCase):
         with self.assertRaisesRegex(
             ConfigurationError, 'ForeignKeyField accepts model name in format "app.Model"'
         ):
-            await Tortoise.init(
+            await Kleinmann.init(
                 {
                     "connections": {
                         "default": {
-                            "engine": "tortoise.backends.sqlite",
+                            "engine": "kleinmann.backends.sqlite",
                             "credentials": {"file_path": ":memory:"},
                         }
                     },
@@ -82,11 +82,11 @@ class TestBadRelationReferenceErrors(test.SimpleTestCase):
         with self.assertRaisesRegex(
             ConfigurationError, 'ForeignKeyField accepts model name in format "app.Model"'
         ):
-            await Tortoise.init(
+            await Kleinmann.init(
                 {
                     "connections": {
                         "default": {
-                            "engine": "tortoise.backends.sqlite",
+                            "engine": "kleinmann.backends.sqlite",
                             "credentials": {"file_path": ":memory:"},
                         }
                     },
@@ -103,11 +103,11 @@ class TestBadRelationReferenceErrors(test.SimpleTestCase):
         with self.assertRaisesRegex(
             ConfigurationError, 'OneToOneField accepts model name in format "app.Model"'
         ):
-            await Tortoise.init(
+            await Kleinmann.init(
                 {
                     "connections": {
                         "default": {
-                            "engine": "tortoise.backends.sqlite",
+                            "engine": "kleinmann.backends.sqlite",
                             "credentials": {"file_path": ":memory:"},
                         }
                     },
@@ -124,11 +124,11 @@ class TestBadRelationReferenceErrors(test.SimpleTestCase):
         with self.assertRaisesRegex(
             ConfigurationError, 'field "uuid" in model "Tournament" is not unique'
         ):
-            await Tortoise.init(
+            await Kleinmann.init(
                 {
                     "connections": {
                         "default": {
-                            "engine": "tortoise.backends.sqlite",
+                            "engine": "kleinmann.backends.sqlite",
                             "credentials": {"file_path": ":memory:"},
                         }
                     },
@@ -145,11 +145,11 @@ class TestBadRelationReferenceErrors(test.SimpleTestCase):
         with self.assertRaisesRegex(
             ConfigurationError, 'there is no field named "uuids" in model "Tournament"'
         ):
-            await Tortoise.init(
+            await Kleinmann.init(
                 {
                     "connections": {
                         "default": {
-                            "engine": "tortoise.backends.sqlite",
+                            "engine": "kleinmann.backends.sqlite",
                             "credentials": {"file_path": ":memory:"},
                         }
                     },
@@ -166,11 +166,11 @@ class TestBadRelationReferenceErrors(test.SimpleTestCase):
         with self.assertRaisesRegex(
             ConfigurationError, 'field "uuid" in model "Tournament" is not unique'
         ):
-            await Tortoise.init(
+            await Kleinmann.init(
                 {
                     "connections": {
                         "default": {
-                            "engine": "tortoise.backends.sqlite",
+                            "engine": "kleinmann.backends.sqlite",
                             "credentials": {"file_path": ":memory:"},
                         }
                     },
@@ -187,11 +187,11 @@ class TestBadRelationReferenceErrors(test.SimpleTestCase):
         with self.assertRaisesRegex(
             ConfigurationError, 'there is no field named "uuids" in model "Tournament"'
         ):
-            await Tortoise.init(
+            await Kleinmann.init(
                 {
                     "connections": {
                         "default": {
-                            "engine": "tortoise.backends.sqlite",
+                            "engine": "kleinmann.backends.sqlite",
                             "credentials": {"file_path": ":memory:"},
                         }
                     },

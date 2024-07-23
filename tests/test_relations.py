@@ -1,3 +1,7 @@
+from kleinmann.contrib import test
+from kleinmann.contrib.test.condition import NotIn
+from kleinmann.exceptions import FieldError, NoValuesFetched
+from kleinmann.functions import Count, Trim
 from tests.testmodels import (
     Address,
     Author,
@@ -13,10 +17,6 @@ from tests.testmodels import (
     Tournament,
     UUIDFkRelatedNullModel,
 )
-from tortoise.contrib import test
-from tortoise.contrib.test.condition import NotIn
-from tortoise.exceptions import FieldError, NoValuesFetched
-from tortoise.functions import Count, Trim
 
 
 class TestRelations(test.TestCase):
@@ -337,7 +337,7 @@ class TestRelations(test.TestCase):
 
         The idea was that on the moment of writing this feature, there were no way to correctly set attributes for
         select_related fields attributes.
-        src: https://github.com/tortoise/tortoise-orm/pull/826#issuecomment-883341557
+        src: https://github.com/kleinmann/kleinmann-orm/pull/826#issuecomment-883341557
         """
 
         extra = await Extra.create()
@@ -362,7 +362,7 @@ class TestRelations(test.TestCase):
     @test.requireCapability(dialect=NotIn("mssql", "mysql"))
     async def test_0_value_fk(self):
         """ForegnKeyField should exits even if the the source_field looks like false, but not None
-        src: https://github.com/tortoise/tortoise-orm/issues/1274
+        src: https://github.com/kleinmann/kleinmann-orm/issues/1274
         """
         extra = await Extra.create(id=0)
         single = await Single.create(extra=extra)

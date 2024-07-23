@@ -1,5 +1,7 @@
 from decimal import Decimal
 
+from kleinmann.contrib import test
+from kleinmann.exceptions import FieldError
 from tests.testmodels import (
     BooleanFields,
     CharFields,
@@ -7,8 +9,6 @@ from tests.testmodels import (
     CharPkModel,
     DecimalFields,
 )
-from tortoise.contrib import test
-from tortoise.exceptions import FieldError
 
 
 class TestCharFieldFilters(test.TestCase):

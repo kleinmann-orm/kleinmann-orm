@@ -1,9 +1,9 @@
-checkfiles = tortoise/ examples/ tests/ conftest.py
+checkfiles = kleinmann/ examples/ tests/ conftest.py
 py_warn = PYTHONDEVMODE=1
-pytest_opts = -n auto --cov=tortoise --cov-append --tb=native -q
+pytest_opts = -n auto --cov=kleinmann --cov-append --tb=native -q
 
 help:
-	@echo  "Tortoise ORM development makefile"
+	@echo  "Kleinmann ORM development makefile"
 	@echo
 	@echo  "usage: make <target>"
 	@echo  "Targets:"
@@ -41,28 +41,28 @@ endif
 	twine check dist/*
 
 test: deps
-	$(py_warn) TORTOISE_TEST_DB=sqlite://:memory: pytest $(pytest_opts)
+	$(py_warn) KLEINMANN_TEST_DB=sqlite://:memory: pytest $(pytest_opts)
 
 test_sqlite:
-	$(py_warn) TORTOISE_TEST_DB=sqlite://:memory: pytest --cov-report= $(pytest_opts)
+	$(py_warn) KLEINMANN_TEST_DB=sqlite://:memory: pytest --cov-report= $(pytest_opts)
 
 test_postgres_asyncpg:
-	python -V | grep PyPy || $(py_warn) TORTOISE_TEST_DB="asyncpg://postgres:$(TORTOISE_POSTGRES_PASS)@127.0.0.1:5432/test_\{\}" pytest $(pytest_opts) --cov-append --cov-report=
+	python -V | grep PyPy || $(py_warn) KLEINMANN_TEST_DB="asyncpg://postgres:$(KLEINMANN_POSTGRES_PASS)@127.0.0.1:5432/test_\{\}" pytest $(pytest_opts) --cov-append --cov-report=
 
 test_postgres_psycopg:
-	python -V | grep PyPy || $(py_warn) TORTOISE_TEST_DB="psycopg://postgres:$(TORTOISE_POSTGRES_PASS)@127.0.0.1:5432/test_\{\}" pytest $(pytest_opts) --cov-append --cov-report=
+	python -V | grep PyPy || $(py_warn) KLEINMANN_TEST_DB="psycopg://postgres:$(KLEINMANN_POSTGRES_PASS)@127.0.0.1:5432/test_\{\}" pytest $(pytest_opts) --cov-append --cov-report=
 
 test_mysql_myisam:
-	$(py_warn) TORTOISE_TEST_DB="mysql://root:$(TORTOISE_MYSQL_PASS)@127.0.0.1:3306/test_\{\}?storage_engine=MYISAM" pytest $(pytest_opts) --cov-append --cov-report=
+	$(py_warn) KLEINMANN_TEST_DB="mysql://root:$(KLEINMANN_MYSQL_PASS)@127.0.0.1:3306/test_\{\}?storage_engine=MYISAM" pytest $(pytest_opts) --cov-append --cov-report=
 
 test_mysql:
-	$(py_warn) TORTOISE_TEST_DB="mysql://root:$(TORTOISE_MYSQL_PASS)@127.0.0.1:3306/test_\{\}" pytest $(pytest_opts) --cov-append --cov-report=
+	$(py_warn) KLEINMANN_TEST_DB="mysql://root:$(KLEINMANN_MYSQL_PASS)@127.0.0.1:3306/test_\{\}" pytest $(pytest_opts) --cov-append --cov-report=
 
 test_mssql:
-	$(py_warn) TORTOISE_TEST_DB="mssql://sa:$(TORTOISE_MSSQL_PASS)@127.0.0.1:1433/test_\{\}?driver=$(TORTOISE_MSSQL_DRIVER)&TrustServerCertificate=YES" pytest $(pytest_opts) --cov-append --cov-report=
+	$(py_warn) KLEINMANN_TEST_DB="mssql://sa:$(KLEINMANN_MSSQL_PASS)@127.0.0.1:1433/test_\{\}?driver=$(KLEINMANN_MSSQL_DRIVER)&TrustServerCertificate=YES" pytest $(pytest_opts) --cov-append --cov-report=
 
 test_oracle:
-	$(py_warn) TORTOISE_TEST_DB="oracle://SYSTEM:$(TORTOISE_ORACLE_PASS)@127.0.0.1:1521/test_\{\}?driver=$(TORTOISE_ORACLE_DRIVER)" pytest $(pytest_opts) --cov-append --cov-report=
+	$(py_warn) KLEINMANN_TEST_DB="oracle://SYSTEM:$(KLEINMANN_ORACLE_PASS)@127.0.0.1:1521/test_\{\}?driver=$(KLEINMANN_ORACLE_DRIVER)" pytest $(pytest_opts) --cov-append --cov-report=
 
 _testall: test_sqlite test_postgres_asyncpg test_postgres_psycopg test_mysql_myisam test_mysql test_mssql
 	coverage report

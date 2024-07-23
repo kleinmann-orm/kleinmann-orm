@@ -8,12 +8,12 @@ from unittest.mock import patch
 import pytz
 from iso8601 import ParseError
 
+from kleinmann import Model, fields, timezone
+from kleinmann.contrib import test
+from kleinmann.contrib.test.condition import NotIn
+from kleinmann.exceptions import ConfigurationError, IntegrityError
+from kleinmann.timezone import get_default_timezone
 from tests import testmodels
-from tortoise import Model, fields, timezone
-from tortoise.contrib import test
-from tortoise.contrib.test.condition import NotIn
-from tortoise.exceptions import ConfigurationError, IntegrityError
-from tortoise.timezone import get_default_timezone
 
 
 class TestEmpty(test.TestCase):

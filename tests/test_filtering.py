@@ -1,5 +1,9 @@
 import datetime
 
+from kleinmann.contrib import test
+from kleinmann.contrib.test.condition import NotEQ
+from kleinmann.expressions import F, Q
+from kleinmann.functions import Coalesce, Count, Length, Lower, Max, Trim, Upper
 from tests.testmodels import (
     DatetimeFields,
     Event,
@@ -8,10 +12,6 @@ from tests.testmodels import (
     Team,
     Tournament,
 )
-from tortoise.contrib import test
-from tortoise.contrib.test.condition import NotEQ
-from tortoise.expressions import F, Q
-from tortoise.functions import Coalesce, Count, Length, Lower, Max, Trim, Upper
 
 
 class TestFiltering(test.TestCase):

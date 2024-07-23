@@ -4,9 +4,9 @@ This example shows some more complex querying
 Key points are filtering by related names and using Q objects
 """
 
-from tortoise import Tortoise, fields, run_async
-from tortoise.expressions import Q
-from tortoise.models import Model
+from kleinmann import Kleinmann, fields, run_async
+from kleinmann.expressions import Q
+from kleinmann.models import Model
 
 
 class Tournament(Model):
@@ -44,8 +44,8 @@ class Team(Model):
 
 
 async def run():
-    await Tortoise.init(db_url="sqlite://:memory:", modules={"models": ["__main__"]})
-    await Tortoise.generate_schemas()
+    await Kleinmann.init(db_url="sqlite://:memory:", modules={"models": ["__main__"]})
+    await Kleinmann.generate_schemas()
 
     tournament = Tournament(name="Tournament")
     await tournament.save()

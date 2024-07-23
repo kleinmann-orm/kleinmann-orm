@@ -9,30 +9,30 @@ Indexes
 
 Postgres specific indexes.
 
-.. autoclass:: tortoise.contrib.postgres.indexes.BloomIndex
-.. autoclass:: tortoise.contrib.postgres.indexes.BrinIndex
-.. autoclass:: tortoise.contrib.postgres.indexes.GinIndex
-.. autoclass:: tortoise.contrib.postgres.indexes.GistIndex
-.. autoclass:: tortoise.contrib.postgres.indexes.HashIndex
-.. autoclass:: tortoise.contrib.postgres.indexes.SpGistIndex
+.. autoclass:: kleinmann.contrib.postgres.indexes.BloomIndex
+.. autoclass:: kleinmann.contrib.postgres.indexes.BrinIndex
+.. autoclass:: kleinmann.contrib.postgres.indexes.GinIndex
+.. autoclass:: kleinmann.contrib.postgres.indexes.GistIndex
+.. autoclass:: kleinmann.contrib.postgres.indexes.HashIndex
+.. autoclass:: kleinmann.contrib.postgres.indexes.SpGistIndex
 
 Fields
 ======
 
 Postgres specific fields.
 
-.. autoclass:: tortoise.contrib.postgres.fields.TSVectorField
+.. autoclass:: kleinmann.contrib.postgres.fields.TSVectorField
 
 Functions
 =========
 
-.. autoclass:: tortoise.contrib.postgres.functions.ToTsVector
-.. autoclass:: tortoise.contrib.postgres.functions.ToTsQuery
-.. autoclass:: tortoise.contrib.postgres.functions.PlainToTsQuery
+.. autoclass:: kleinmann.contrib.postgres.functions.ToTsVector
+.. autoclass:: kleinmann.contrib.postgres.functions.ToTsQuery
+.. autoclass:: kleinmann.contrib.postgres.functions.PlainToTsQuery
 
 Search
 ======
 
 Postgres full text search.
 
-.. autoclass:: tortoise.contrib.postgres.search.SearchCriterion
+.. autoclass:: kleinmann.contrib.postgres.search.SearchCriterion

@@ -1,30 +1,30 @@
 import os
 
-from tortoise import Tortoise, connections
-from tortoise.contrib import test
-from tortoise.exceptions import ConfigurationError
+from kleinmann import Kleinmann, connections
+from kleinmann.contrib import test
+from kleinmann.exceptions import ConfigurationError
 
 
 class TestInitErrors(test.SimpleTestCase):
     async def asyncSetUp(self):
         await super().asyncSetUp()
         try:
-            Tortoise.apps = {}
-            Tortoise._inited = False
+            Kleinmann.apps = {}
+            Kleinmann._inited = False
         except ConfigurationError:
             pass
-        Tortoise._inited = False
+        Kleinmann._inited = False
 
     async def asyncTearDown(self) -> None:
-        await Tortoise._reset_apps()
+        await Kleinmann._reset_apps()
         await super(TestInitErrors, self).asyncTearDown()
 
     async def test_basic_init(self):
-        await Tortoise.init(
+        await Kleinmann.init(
             {
                 "connections": {
                     "default": {
-                        "engine": "tortoise.backends.sqlite",
+                        "engine": "kleinmann.backends.sqlite",
                         "credentials": {"file_path": ":memory:"},
                     }
                 },
@@ -33,16 +33,16 @@ class TestInitErrors(test.SimpleTestCase):
                 },
             }
         )
-        self.assertIn("models", Tortoise.apps)
+        self.assertIn("models", Kleinmann.apps)
         self.assertIsNotNone(connections.get("default"))
 
     async def test_empty_modules_init(self):
         with self.assertWarnsRegex(RuntimeWarning, 'Module "tests.model_setup" has no models'):
-            await Tortoise.init(
+            await Kleinmann.init(
                 {
                     "connections": {
                         "default": {
-                            "engine": "tortoise.backends.sqlite",
+                            "engine": "kleinmann.backends.sqlite",
                             "credentials": {"file_path": ":memory:"},
                         }
                     },
@@ -56,11 +56,11 @@ class TestInitErrors(test.SimpleTestCase):
         with self.assertRaisesRegex(
             ConfigurationError, 'backward relation "events" duplicates in model Tournament'
         ):
-            await Tortoise.init(
+            await Kleinmann.init(
                 {
                     "connections": {
                         "default": {
-                            "engine": "tortoise.backends.sqlite",
+                            "engine": "kleinmann.backends.sqlite",
                             "credentials": {"file_path": ":memory:"},
                         }
                     },
@@ -77,11 +77,11 @@ class TestInitErrors(test.SimpleTestCase):
         with self.assertRaisesRegex(
             ConfigurationError, 'backward relation "events" duplicates in model Team'
         ):
-            await Tortoise.init(
+            await Kleinmann.init(
                 {
                     "connections": {
                         "default": {
-                            "engine": "tortoise.backends.sqlite",
+                            "engine": "kleinmann.backends.sqlite",
                             "credentials": {"file_path": ":memory:"},
                         }
                     },
@@ -98,11 +98,11 @@ class TestInitErrors(test.SimpleTestCase):
         with self.assertRaisesRegex(
             ConfigurationError, 'backward relation "event" duplicates in model Tournament'
         ):
-            await Tortoise.init(
+            await Kleinmann.init(
                 {
                     "connections": {
                         "default": {
-                            "engine": "tortoise.backends.sqlite",
+                            "engine": "kleinmann.backends.sqlite",
                             "credentials": {"file_path": ":memory:"},
                         }
                     },
@@ -119,11 +119,11 @@ class TestInitErrors(test.SimpleTestCase):
         with self.assertRaisesRegex(
             ConfigurationError, "Field 'val' \\(CharField\\) can't be DB-generated"
         ):
-            await Tortoise.init(
+            await Kleinmann.init(
                 {
                     "connections": {
                         "default": {
-                            "engine": "tortoise.backends.sqlite",
+                            "engine": "kleinmann.backends.sqlite",
                             "credentials": {"file_path": ":memory:"},
                         }
                     },
@@ -141,11 +141,11 @@ class TestInitErrors(test.SimpleTestCase):
             ConfigurationError,
             "Can't create model Tournament with two primary keys, only single primary key is supported",
         ):
-            await Tortoise.init(
+            await Kleinmann.init(
                 {
                     "connections": {
                         "default": {
-                            "engine": "tortoise.backends.sqlite",
+                            "engine": "kleinmann.backends.sqlite",
                             "credentials": {"file_path": ":memory:"},
                         }
                     },
@@ -164,11 +164,11 @@ class TestInitErrors(test.SimpleTestCase):
             "Can't create model Tournament without explicit primary key if"
             " field 'id' already present",
         ):
-            await Tortoise.init(
+            await Kleinmann.init(
                 {
                     "connections": {
                         "default": {
-                            "engine": "tortoise.backends.sqlite",
+                            "engine": "kleinmann.backends.sqlite",
                             "credentials": {"file_path": ":memory:"},
                         }
                     },
@@ -187,11 +187,11 @@ class TestInitErrors(test.SimpleTestCase):
             "Unable to get db settings for alias 'fioop'. Please "
             "check if the config dict contains this alias and try again",
         ):
-            await Tortoise.init(
+            await Kleinmann.init(
                 {
                     "connections": {
                         "default": {
-                            "engine": "tortoise.backends.sqlite",
+                            "engine": "kleinmann.backends.sqlite",
                             "credentials": {"file_path": ":memory:"},
                         }
                     },
@@ -205,25 +205,25 @@ class TestInitErrors(test.SimpleTestCase):
         with self.assertRaisesRegex(
             ConfigurationError, 'You must specify "db_url" and "modules" together'
         ):
-            await Tortoise.init(db_url=f"sqlite://{':memory:'}")
+            await Kleinmann.init(db_url=f"sqlite://{':memory:'}")
 
     async def test_default_connection_init(self):
-        await Tortoise.init(
+        await Kleinmann.init(
             {
                 "connections": {
                     "default": {
-                        "engine": "tortoise.backends.sqlite",
+                        "engine": "kleinmann.backends.sqlite",
                         "credentials": {"file_path": ":memory:"},
                     }
                 },
                 "apps": {"models": {"models": ["tests.testmodels"]}},
             }
         )
-        self.assertIn("models", Tortoise.apps)
+        self.assertIn("models", Kleinmann.apps)
         self.assertIsNotNone(connections.get("default"))
 
     async def test_db_url_init(self):
-        await Tortoise.init(
+        await Kleinmann.init(
             {
                 "connections": {"default": f"sqlite://{':memory:'}"},
                 "apps": {
@@ -231,23 +231,23 @@ class TestInitErrors(test.SimpleTestCase):
                 },
             }
         )
-        self.assertIn("models", Tortoise.apps)
+        self.assertIn("models", Kleinmann.apps)
         self.assertIsNotNone(connections.get("default"))
 
     async def test_shorthand_init(self):
-        await Tortoise.init(
+        await Kleinmann.init(
             db_url=f"sqlite://{':memory:'}", modules={"models": ["tests.testmodels"]}
         )
-        self.assertIn("models", Tortoise.apps)
+        self.assertIn("models", Kleinmann.apps)
         self.assertIsNotNone(connections.get("default"))
 
     async def test_init_wrong_connection_engine(self):
-        with self.assertRaisesRegex(ImportError, "tortoise.backends.test"):
-            await Tortoise.init(
+        with self.assertRaisesRegex(ImportError, "kleinmann.backends.test"):
+            await Kleinmann.init(
                 {
                     "connections": {
                         "default": {
-                            "engine": "tortoise.backends.test",
+                            "engine": "kleinmann.backends.test",
                             "credentials": {"file_path": ":memory:"},
                         }
                     },
@@ -260,13 +260,13 @@ class TestInitErrors(test.SimpleTestCase):
     async def test_init_wrong_connection_engine_2(self):
         with self.assertRaisesRegex(
             ConfigurationError,
-            'Backend for engine "tortoise.backends" does not implement db client',
+            'Backend for engine "kleinmann.backends" does not implement db client',
         ):
-            await Tortoise.init(
+            await Kleinmann.init(
                 {
                     "connections": {
                         "default": {
-                            "engine": "tortoise.backends",
+                            "engine": "kleinmann.backends",
                             "credentials": {"file_path": ":memory:"},
                         }
                     },
@@ -278,7 +278,7 @@ class TestInitErrors(test.SimpleTestCase):
 
     async def test_init_no_connections(self):
         with self.assertRaisesRegex(ConfigurationError, 'Config must define "connections" section'):
-            await Tortoise.init(
+            await Kleinmann.init(
                 {
                     "apps": {
                         "models": {"models": ["tests.testmodels"], "default_connection": "default"}
@@ -288,11 +288,11 @@ class TestInitErrors(test.SimpleTestCase):
 
     async def test_init_no_apps(self):
         with self.assertRaisesRegex(ConfigurationError, 'Config must define "apps" section'):
-            await Tortoise.init(
+            await Kleinmann.init(
                 {
                     "connections": {
                         "default": {
-                            "engine": "tortoise.backends.sqlite",
+                            "engine": "kleinmann.backends.sqlite",
                             "credentials": {"file_path": ":memory:"},
                         }
                     }
@@ -303,11 +303,11 @@ class TestInitErrors(test.SimpleTestCase):
         with self.assertRaisesRegex(
             ConfigurationError, 'You should init either from "config", "config_file" or "db_url"'
         ):
-            await Tortoise.init(
+            await Kleinmann.init(
                 {
                     "connections": {
                         "default": {
-                            "engine": "tortoise.backends.sqlite",
+                            "engine": "kleinmann.backends.sqlite",
                             "credentials": {"file_path": ":memory:"},
                         }
                     },
@@ -322,39 +322,39 @@ class TestInitErrors(test.SimpleTestCase):
         with self.assertRaisesRegex(
             ConfigurationError, "Unknown config extension .ini, only .yml and .json are supported"
         ):
-            await Tortoise.init(config_file="config.ini")
+            await Kleinmann.init(config_file="config.ini")
 
     @test.skipIf(os.name == "nt", "path issue on Windows")
     async def test_init_json_file(self):
-        await Tortoise.init(config_file=os.path.dirname(__file__) + "/init.json")
-        self.assertIn("models", Tortoise.apps)
+        await Kleinmann.init(config_file=os.path.dirname(__file__) + "/init.json")
+        self.assertIn("models", Kleinmann.apps)
         self.assertIsNotNone(connections.get("default"))
 
     @test.skipIf(os.name == "nt", "path issue on Windows")
     async def test_init_yaml_file(self):
-        await Tortoise.init(config_file=os.path.dirname(__file__) + "/init.yaml")
-        self.assertIn("models", Tortoise.apps)
+        await Kleinmann.init(config_file=os.path.dirname(__file__) + "/init.yaml")
+        self.assertIn("models", Kleinmann.apps)
         self.assertIsNotNone(connections.get("default"))
 
     async def test_generate_schema_without_init(self):
         with self.assertRaisesRegex(
             ConfigurationError, r"You have to call \.init\(\) first before generating schemas"
         ):
-            await Tortoise.generate_schemas()
+            await Kleinmann.generate_schemas()
 
     async def test_drop_databases_without_init(self):
         with self.assertRaisesRegex(
             ConfigurationError, r"You have to call \.init\(\) first before deleting schemas"
         ):
-            await Tortoise._drop_databases()
+            await Kleinmann._drop_databases()
 
     async def test_bad_models(self):
         with self.assertRaisesRegex(ConfigurationError, 'Module "tests.testmodels2" not found'):
-            await Tortoise.init(
+            await Kleinmann.init(
                 {
                     "connections": {
                         "default": {
-                            "engine": "tortoise.backends.sqlite",
+                            "engine": "kleinmann.backends.sqlite",
                             "credentials": {"file_path": ":memory:"},
                         }
                     },

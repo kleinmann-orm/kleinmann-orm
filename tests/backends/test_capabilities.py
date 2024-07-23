@@ -1,5 +1,5 @@
-from tortoise import connections
-from tortoise.contrib import test
+from kleinmann import connections
+from kleinmann.contrib import test
 
 
 class TestCapabilities(test.TestCase):

@@ -6,10 +6,10 @@ Here we introduce:
 * Using callable functions to annotate extra data.
 """
 
-from tortoise import Tortoise, fields, run_async
-from tortoise.contrib.pydantic import pydantic_model_creator
-from tortoise.exceptions import NoValuesFetched
-from tortoise.models import Model
+from kleinmann import Kleinmann, fields, run_async
+from kleinmann.contrib.pydantic import pydantic_model_creator
+from kleinmann.exceptions import NoValuesFetched
+from kleinmann.models import Model
 
 
 class Tournament(Model):
@@ -40,11 +40,11 @@ class Tournament(Model):
         # Note that this function needs to be annotated with a return type so that pydantic
         #  can generate a valid schema.
 
-        # Note that the pydantic serializer can't call async methods, but the tortoise helpers
+        # Note that the pydantic serializer can't call async methods, but the kleinmann helpers
         #  pre-fetch relational data, so that it is available before serialization. So we don't
         #  need to await the relation. We do however have to protect against the case where no
         #  prefetching was done, hence catching and handling the
-        #  ``tortoise.exceptions.NoValuesFetched`` exception
+        #  ``kleinmann.exceptions.NoValuesFetched`` exception
         try:
             return len(self.events)
         except NoValuesFetched:
@@ -78,7 +78,7 @@ class Event(Model):
 
 
 # Initialise model structure early. This does not init any database structures
-Tortoise.init_models(["__main__"], "models")
+Kleinmann.init_models(["__main__"], "models")
 Tournament_Pydantic = pydantic_model_creator(Tournament)
 
 
@@ -87,8 +87,8 @@ print(Tournament_Pydantic.schema_json(indent=4))
 
 
 async def run():
-    await Tortoise.init(db_url="sqlite://:memory:", modules={"models": ["__main__"]})
-    await Tortoise.generate_schemas()
+    await Kleinmann.init(db_url="sqlite://:memory:", modules={"models": ["__main__"]})
+    await Kleinmann.generate_schemas()
 
     # Create objects
     tournament = await Tournament.create(name="New Tournament")
@@ -96,7 +96,7 @@ async def run():
     await Event.create(name="Event 2", tournament=tournament)
 
     # Serialise Tournament
-    tourpy = await Tournament_Pydantic.from_tortoise_orm(tournament)
+    tourpy = await Tournament_Pydantic.from_kleinmann_orm(tournament)
 
     # As serialised JSON
     print(tourpy.model_dump_json(indent=4))

@@ -1,8 +1,8 @@
 from enum import Enum, IntEnum
 
+from kleinmann import fields
+from kleinmann.models import Model
 from tests.fields.subclass_fields import EnumField, IntEnumField
-from tortoise import fields
-from tortoise.models import Model
 
 
 class RacePlacingEnum(Enum):

@@ -19,23 +19,23 @@ Functions
 
 Functions apply a transform on each instance of a Field.
 
-.. autoclass:: tortoise.functions.Trim
+.. autoclass:: kleinmann.functions.Trim
 
-.. autoclass:: tortoise.functions.Length
+.. autoclass:: kleinmann.functions.Length
 
-.. autoclass:: tortoise.functions.Coalesce
+.. autoclass:: kleinmann.functions.Coalesce
 
-.. autoclass:: tortoise.functions.Lower
+.. autoclass:: kleinmann.functions.Lower
 
-.. autoclass:: tortoise.functions.Upper
+.. autoclass:: kleinmann.functions.Upper
 
-.. autoclass:: tortoise.functions.Concat
+.. autoclass:: kleinmann.functions.Concat
 
-.. autoclass:: tortoise.contrib.mysql.functions.Rand
+.. autoclass:: kleinmann.contrib.mysql.functions.Rand
 
-.. autoclass:: tortoise.contrib.postgres.functions.Random
+.. autoclass:: kleinmann.contrib.postgres.functions.Random
 
-.. autoclass:: tortoise.contrib.sqlite.functions.Random
+.. autoclass:: kleinmann.contrib.sqlite.functions.Random
 
 Aggregates
 ==========
@@ -43,21 +43,21 @@ Aggregates
 Aggregated apply on the entire column, and will often be used with grouping.
 So often makes sense with a ``.first()`` QuerySet.
 
-.. autoclass:: tortoise.functions.Count
+.. autoclass:: kleinmann.functions.Count
 
-.. autoclass:: tortoise.functions.Sum
+.. autoclass:: kleinmann.functions.Sum
 
-.. autoclass:: tortoise.functions.Max
+.. autoclass:: kleinmann.functions.Max
 
-.. autoclass:: tortoise.functions.Min
+.. autoclass:: kleinmann.functions.Min
 
-.. autoclass:: tortoise.functions.Avg
+.. autoclass:: kleinmann.functions.Avg
 
 
 Base function class
 ===================
 
-.. automodule:: tortoise.functions
+.. automodule:: kleinmann.functions
     :members: Aggregate
 
     .. autoclass:: Function
@@ -70,7 +70,7 @@ You can define custom functions which are not builtin, such as ``TruncMonth`` an
 .. code-block:: python3
 
     from pypika import CustomFunction
-    from tortoise.expressions import F, Function
+    from kleinmann.expressions import F, Function
 
     class TruncMonth(Function):
         database_func = CustomFunction("DATE_FORMAT", ["name", "dt_format"])
@@ -83,7 +83,7 @@ And you can also use functions in update, the example is only suitable for MySQL
 
 .. code-block:: python3
 
-    from tortoise.expressions import F
+    from kleinmann.expressions import F
     from pypika.terms import Function
 
     class JsonSet(Function):

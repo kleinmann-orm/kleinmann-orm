@@ -1,8 +1,8 @@
+from kleinmann.contrib import test
+from kleinmann.contrib.test.condition import NotEQ
+from kleinmann.exceptions import FieldError
+from kleinmann.functions import Length, Trim
 from tests.testmodels import Event, Team, Tournament
-from tortoise.contrib import test
-from tortoise.contrib.test.condition import NotEQ
-from tortoise.exceptions import FieldError
-from tortoise.functions import Length, Trim
 
 
 class TestValues(test.TestCase):

@@ -4,16 +4,16 @@ Test some PostgreSQL-specific features
 
 import ssl
 
+from kleinmann import Kleinmann, connections
+from kleinmann.contrib import test
+from kleinmann.exceptions import OperationalError
 from tests.testmodels import Tournament
-from tortoise import Tortoise, connections
-from tortoise.contrib import test
-from tortoise.exceptions import OperationalError
 
 
 class TestPostgreSQL(test.SimpleTestCase):
     async def asyncSetUp(self):
         await super().asyncSetUp()
-        if Tortoise._inited:
+        if Kleinmann._inited:
             await self._tearDownDB()
         self.db_config = test.getDBConfig(app_label="models", modules=["tests.testmodels"])
         if not self.is_asyncpg and not self.is_psycopg:
@@ -21,15 +21,15 @@ class TestPostgreSQL(test.SimpleTestCase):
 
     @property
     def is_psycopg(self) -> bool:
-        return self.db_config["connections"]["models"]["engine"] == "tortoise.backends.psycopg"
+        return self.db_config["connections"]["models"]["engine"] == "kleinmann.backends.psycopg"
 
     @property
     def is_asyncpg(self) -> bool:
-        return self.db_config["connections"]["models"]["engine"] == "tortoise.backends.asyncpg"
+        return self.db_config["connections"]["models"]["engine"] == "kleinmann.backends.asyncpg"
 
     async def asyncTearDown(self) -> None:
-        if Tortoise._inited:
-            await Tortoise._drop_databases()
+        if Kleinmann._inited:
+            await Kleinmann._drop_databases()
         await super().asyncTearDown()
 
     async def test_schema(self):
@@ -39,20 +39,20 @@ class TestPostgreSQL(test.SimpleTestCase):
             from psycopg.errors import InvalidSchemaName as InvalidSchemaNameError
 
         self.db_config["connections"]["models"]["credentials"]["schema"] = "mytestschema"
-        await Tortoise.init(self.db_config, _create_db=True)
+        await Kleinmann.init(self.db_config, _create_db=True)
 
         with self.assertRaises(InvalidSchemaNameError):
-            await Tortoise.generate_schemas()
+            await Kleinmann.generate_schemas()
 
         conn = connections.get("models")
         await conn.execute_script("CREATE SCHEMA mytestschema;")
-        await Tortoise.generate_schemas()
+        await Kleinmann.generate_schemas()
 
         tournament = await Tournament.create(name="Test")
         await connections.close_all()
 
         del self.db_config["connections"]["models"]["credentials"]["schema"]
-        await Tortoise.init(self.db_config)
+        await Kleinmann.init(self.db_config)
 
         with self.assertRaises(OperationalError):
             await Tournament.filter(name="Test").first()
@@ -69,7 +69,7 @@ class TestPostgreSQL(test.SimpleTestCase):
     async def test_ssl_true(self):
         self.db_config["connections"]["models"]["credentials"]["ssl"] = True
         try:
-            await Tortoise.init(self.db_config, _create_db=True)
+            await Kleinmann.init(self.db_config, _create_db=True)
         except (ConnectionError, ssl.SSLError):
             pass
         else:
@@ -83,7 +83,7 @@ class TestPostgreSQL(test.SimpleTestCase):
 
         self.db_config["connections"]["models"]["credentials"]["ssl"] = ctx
         try:
-            await Tortoise.init(self.db_config, _create_db=True)
+            await Kleinmann.init(self.db_config, _create_db=True)
         except ConnectionError:
             pass
 
@@ -91,7 +91,7 @@ class TestPostgreSQL(test.SimpleTestCase):
         self.db_config["connections"]["models"]["credentials"][
             "application_name"
         ] = "mytest_application"
-        await Tortoise.init(self.db_config, _create_db=True)
+        await Kleinmann.init(self.db_config, _create_db=True)
 
         conn = connections.get("models")
         _, res = await conn.execute_query(

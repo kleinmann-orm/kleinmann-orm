@@ -4,7 +4,7 @@ import logging
 from aiohttp import web
 from models import Users
 
-from tortoise.contrib.aiohttp import register_tortoise
+from kleinmann.contrib.aiohttp import register_kleinmann
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -21,7 +21,7 @@ async def add_user(request):
 
 app = web.Application()
 app.add_routes([web.get("/", list_all), web.post("/user", add_user)])
-register_tortoise(
+register_kleinmann(
     app, db_url="sqlite://:memory:", modules={"models": ["models"]}, generate_schemas=True
 )
 

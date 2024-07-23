@@ -26,21 +26,21 @@ Built-in Validators
 
 Here is the list of built-in validators:
 
-.. automodule:: tortoise.validators
+.. automodule:: kleinmann.validators
     :members:
     :undoc-members:
 
 Custom Validator
 ================
 
-There are two methods to write a custom validator, one you can write a function by passing a given value, another you can inherit `tortoise.validators.Validator` and implement `__call__`.
+There are two methods to write a custom validator, one you can write a function by passing a given value, another you can inherit `kleinmann.validators.Validator` and implement `__call__`.
 
 Here is a example to write a custom validator to validate the given value is an even number:
 
 .. code-block:: python3
 
-    from tortoise.validators import Validator
-    from tortoise.exceptions import ValidationError
+    from kleinmann.validators import Validator
+    from kleinmann.exceptions import ValidationError
 
     class EvenNumberValidator(Validator):
         """

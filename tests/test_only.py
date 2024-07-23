@@ -1,6 +1,6 @@
+from kleinmann.contrib import test
+from kleinmann.exceptions import IncompleteInstanceError
 from tests.testmodels import SourceFields, StraightFields
-from tortoise.contrib import test
-from tortoise.exceptions import IncompleteInstanceError
 
 
 class TestOnlyStraight(test.TestCase):

@@ -5,9 +5,9 @@ Key points in this example are use of ForeignKeyField and OneToOneField has to_f
 For other basic parts, it is the same as relation example.
 """
 
-from tortoise import Tortoise, fields, run_async
-from tortoise.models import Model
-from tortoise.query_utils import Prefetch
+from kleinmann import Kleinmann, fields, run_async
+from kleinmann.models import Model
+from kleinmann.query_utils import Prefetch
 
 
 class School(Model):
@@ -36,8 +36,8 @@ class Principal(Model):
 
 
 async def run():
-    await Tortoise.init(db_url="sqlite://:memory:", modules={"models": ["__main__"]})
-    await Tortoise.generate_schemas()
+    await Kleinmann.init(db_url="sqlite://:memory:", modules={"models": ["__main__"]})
+    await Kleinmann.generate_schemas()
 
     school1 = await School.create(id=1024, name="School1")
     student1 = await Student.create(name="Sang-Heon Jeon1", school_id=school1.id)

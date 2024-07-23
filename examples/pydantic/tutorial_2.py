@@ -6,9 +6,9 @@ Here we introduce:
 * Default sorting is honoured
 """
 
-from tortoise import Tortoise, fields, run_async
-from tortoise.contrib.pydantic import pydantic_queryset_creator
-from tortoise.models import Model
+from kleinmann import Kleinmann, fields, run_async
+from kleinmann.contrib.pydantic import pydantic_queryset_creator
+from kleinmann.models import Model
 
 
 class Tournament(Model):
@@ -34,8 +34,8 @@ print(Tournament_Pydantic_List.schema_json(indent=4))
 
 
 async def run():
-    await Tortoise.init(db_url="sqlite://:memory:", modules={"models": ["__main__"]})
-    await Tortoise.generate_schemas()
+    await Kleinmann.init(db_url="sqlite://:memory:", modules={"models": ["__main__"]})
+    await Kleinmann.generate_schemas()
 
     # Create objects
     await Tournament.create(name="New Tournament")

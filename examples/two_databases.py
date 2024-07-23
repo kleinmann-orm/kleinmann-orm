@@ -1,17 +1,17 @@
 """
-This example demonstrates how you can use Tortoise if you have to
+This example demonstrates how you can use Kleinmann if you have to
 separate databases
 
 Disclaimer: Although it allows to use two databases, you can't
 use relations between two databases
 
-Key notes of this example is using db_route for Tortoise init
+Key notes of this example is using db_route for Kleinmann init
 and explicitly declaring model apps in class Meta
 """
 
-from tortoise import Tortoise, connections, fields, run_async
-from tortoise.exceptions import OperationalError
-from tortoise.models import Model
+from kleinmann import Kleinmann, connections, fields, run_async
+from kleinmann.exceptions import OperationalError
+from kleinmann.models import Model
 
 
 class Tournament(Model):
@@ -55,15 +55,15 @@ class Team(Model):
 
 
 async def run():
-    await Tortoise.init(
+    await Kleinmann.init(
         {
             "connections": {
                 "first": {
-                    "engine": "tortoise.backends.sqlite",
+                    "engine": "kleinmann.backends.sqlite",
                     "credentials": {"file_path": "example.sqlite3"},
                 },
                 "second": {
-                    "engine": "tortoise.backends.sqlite",
+                    "engine": "kleinmann.backends.sqlite",
                     "credentials": {"file_path": "example1.sqlite3"},
                 },
             },
@@ -73,7 +73,7 @@ async def run():
             },
         }
     )
-    await Tortoise.generate_schemas()
+    await Kleinmann.generate_schemas()
     client = connections.get("first")
     second_client = connections.get("second")
 

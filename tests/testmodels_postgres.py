@@ -1,5 +1,5 @@
-from tortoise import Model, fields
-from tortoise.contrib.postgres.fields import ArrayField
+from kleinmann import Model, fields
+from kleinmann.contrib.postgres.fields import ArrayField
 
 
 class ArrayFields(Model):

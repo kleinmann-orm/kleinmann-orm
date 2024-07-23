@@ -1,12 +1,12 @@
 .. _cli:
 
 ===========
-TortoiseCLI
+KleinmannCLI
 ===========
 
-This document describes how to use `tortoise-cli`, a cli tool for tortoise-orm, build on top of click and ptpython.
+This document describes how to use `kleinmann-cli`, a cli tool for kleinmann-orm, build on top of click and ptpython.
 
-You can see `https://github.com/tortoise/tortoise-cli <https://github.com/tortoise/tortoise-cli>`_ for more details.
+You can see `https://github.com/kleinmann/kleinmann-cli <https://github.com/kleinmann/kleinmann-cli>`_ for more details.
 
 
 Quick Start
@@ -14,12 +14,12 @@ Quick Start
 
 .. code-block:: shell
 
-    > tortoise-cli -h                                                                                                                                                                 23:59:38
-    Usage: tortoise-cli [OPTIONS] COMMAND [ARGS]...
+    > kleinmann-cli -h                                                                                                                                                                 23:59:38
+    Usage: kleinmann-cli [OPTIONS] COMMAND [ARGS]...
 
     Options:
       -V, --version      Show the version and exit.
-      -c, --config TEXT  TortoiseORM config dictionary path, like settings.TORTOISE_ORM
+      -c, --config TEXT  KleinmannORM config dictionary path, like settings.KLEINMANN_ORM
       -h, --help         Show this message and exit.
 
     Commands:
@@ -28,11 +28,11 @@ Quick Start
 Usage
 =====
 
-First, you need make a TortoiseORM config object, assuming that in `settings.py`.
+First, you need make a KleinmannORM config object, assuming that in `settings.py`.
 
 .. code-block:: shell
 
-    TORTOISE_ORM = {
+    KLEINMANN_ORM = {
         "connections": {
             "default": "sqlite://:memory:",
         },
@@ -45,21 +45,21 @@ First, you need make a TortoiseORM config object, assuming that in `settings.py`
 Interactive shell
 =================
 
-Then you can start an interactive shell for TortoiseORM.
+Then you can start an interactive shell for KleinmannORM.
 
 .. code-block:: shell
 
-    tortoise-cli -c settings.TORTOISE_ORM shell
+    kleinmann-cli -c settings.KLEINMANN_ORM shell
 
 
 Or you can set config by set environment variable.
 
 .. code-block:: shell
 
-    export TORTOISE_ORM=settings.TORTOISE_ORM
+    export KLEINMANN_ORM=settings.KLEINMANN_ORM
 
 Then just run:
 
 .. code-block:: shell
 
-    tortoise-cli shell
+    kleinmann-cli shell

@@ -2,9 +2,9 @@
 This example demonstrates most basic operations with single model
 """
 
-from tortoise import fields, run_async
-from tortoise.contrib.test import init_memory_sqlite
-from tortoise.models import Model
+from kleinmann import fields, run_async
+from kleinmann.contrib.test import init_memory_sqlite
+from kleinmann.models import Model
 
 
 class Event(Model):

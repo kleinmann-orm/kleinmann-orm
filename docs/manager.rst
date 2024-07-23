@@ -4,9 +4,9 @@
 Manager
 =======
 
-A Manager is the interface through which database query operations are provided to tortoise models.
+A Manager is the interface through which database query operations are provided to kleinmann models.
 
-There is one default Manager for every tortoise model.
+There is one default Manager for every kleinmann model.
 
 Usage
 =====
@@ -15,7 +15,7 @@ There are two ways to use a Manager, one is use `manager` in `Meta` to override 
 
 .. code-block:: python3
 
-    from tortoise.manager import Manager
+    from kleinmann.manager import Manager
 
     class StatusManager(Manager):
         def get_queryset(self):

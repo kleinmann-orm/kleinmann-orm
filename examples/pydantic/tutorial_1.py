@@ -2,15 +2,15 @@
 Pydantic tutorial 1
 
 Here we introduce:
-* Creating a Pydantic model from a Tortoise model
+* Creating a Pydantic model from a Kleinmann model
 * Docstrings & doc-comments are used
 * Evaluating the generated schema
 * Simple serialisation with both .model_dump() and .model_dump_json()
 """
 
-from tortoise import Tortoise, fields, run_async
-from tortoise.contrib.pydantic import pydantic_model_creator
-from tortoise.models import Model
+from kleinmann import Kleinmann, fields, run_async
+from kleinmann.contrib.pydantic import pydantic_model_creator
+from kleinmann.models import Model
 
 
 class Tournament(Model):
@@ -30,13 +30,13 @@ print(Tournament_Pydantic.schema_json(indent=4))
 
 
 async def run():
-    await Tortoise.init(db_url="sqlite://:memory:", modules={"models": ["__main__"]})
-    await Tortoise.generate_schemas()
+    await Kleinmann.init(db_url="sqlite://:memory:", modules={"models": ["__main__"]})
+    await Kleinmann.generate_schemas()
 
     # Create object
     tournament = await Tournament.create(name="New Tournament")
     # Serialise it
-    tourpy = await Tournament_Pydantic.from_tortoise_orm(tournament)
+    tourpy = await Tournament_Pydantic.from_kleinmann_orm(tournament)
 
     # As Python dict with Python objects (e.g. datetime)
     print(tourpy.model_dump())

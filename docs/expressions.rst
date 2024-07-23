@@ -47,7 +47,7 @@ Also, Q objects support negated to generate ``NOT`` (``~`` operator) clause in y
 
     not_third_events = await Event.filter(~Q(name='3'))
 
-.. automodule:: tortoise.expressions
+.. automodule:: kleinmann.expressions
     :members: Q
     :undoc-members:
 
@@ -60,7 +60,7 @@ For example to use ``F`` to update user balance atomic:
 
 .. code-block:: python3
 
-    from tortoise.expressions import F
+    from kleinmann.expressions import F
 
     await User.filter(id=1).update(balance = F('balance') - 10)
     await User.filter(id=1).update(balance = F('balance') + F('award'), award = 0)
@@ -93,7 +93,7 @@ You can use `Subquery` in `filter()` and `annotate()`.
 
 .. code-block:: python3
 
-    from tortoise.expressions import Subquery
+    from kleinmann.expressions import Subquery
 
     await Tournament.annotate(ids=Subquery(Tournament.all().limit(1).values("id"))).values("ids", "id")
     await Tournament.filter(pk=Subquery(Tournament.filter(pk=t1.pk).values("id"))).first()
@@ -117,9 +117,9 @@ Case-When Expression
 
 Build classic `CASE WHEN ... THEN ... ELSE ... END` sql snippet.
 
-.. autoclass:: tortoise.expressions.When
+.. autoclass:: kleinmann.expressions.When
 
-.. autoclass:: tortoise.expressions.Case
+.. autoclass:: kleinmann.expressions.Case
 
 .. code-block:: py3
 

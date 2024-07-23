@@ -1,5 +1,5 @@
+from kleinmann.contrib import test
 from tests.testmodels import OldStyleModel, Tournament
-from tortoise.contrib import test
 
 
 class TestBasic(test.TestCase):

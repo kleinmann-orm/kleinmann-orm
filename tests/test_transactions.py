@@ -1,7 +1,7 @@
+from kleinmann.contrib import test
+from kleinmann.exceptions import OperationalError, TransactionManagementError
+from kleinmann.transactions import atomic, in_transaction
 from tests.testmodels import CharPkModel, Event, Team, Tournament
-from tortoise.contrib import test
-from tortoise.exceptions import OperationalError, TransactionManagementError
-from tortoise.transactions import atomic, in_transaction
 
 
 class SomeException(Exception):

@@ -1,7 +1,7 @@
-Tortoise-ORM FastAPI example
+Kleinmann-ORM FastAPI example
 ============================
 
-We have a lightweight integration util ``tortoise.contrib.fastapi`` which has a class ``RegisterTortoise`` that can be used to set/clean up Tortoise-ORM in lifespan context.
+We have a lightweight integration util ``kleinmann.contrib.fastapi`` which has a class ``RegisterKleinmann`` that can be used to set/clean up Kleinmann-ORM in lifespan context.
 
 Usage
 -----

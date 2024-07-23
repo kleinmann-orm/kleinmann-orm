@@ -6,7 +6,7 @@ from random import choice
 from models import Users, Workers
 from quart import Quart, jsonify
 
-from tortoise.contrib.quart import register_tortoise
+from kleinmann.contrib.quart import register_kleinmann
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -35,7 +35,7 @@ async def add_worker():
     return str(worker)
 
 
-register_tortoise(
+register_kleinmann(
     app,
     db_url="mysql://root:@127.0.0.1:3306/quart",
     modules={"models": ["models"]},

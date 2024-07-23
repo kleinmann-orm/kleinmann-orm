@@ -1,8 +1,8 @@
+from kleinmann import connections
+from kleinmann.contrib import test
+from kleinmann.expressions import Case, F, Q, When
+from kleinmann.functions import Coalesce
 from tests.testmodels import IntFields
-from tortoise import connections
-from tortoise.contrib import test
-from tortoise.expressions import Case, F, Q, When
-from tortoise.functions import Coalesce
 
 
 class TestCaseWhen(test.TestCase):

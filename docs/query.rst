@@ -6,7 +6,7 @@ Query API
 
 This document describes how to use QuerySet to build your queries
 
-Be sure to check `examples <https://github.com/tortoise/tortoise-orm/tree/master/examples>`_ for better understanding
+Be sure to check `examples <https://github.com/kleinmann/kleinmann-orm/tree/master/examples>`_ for better understanding
 
 You start your query from your model class:
 
@@ -55,7 +55,7 @@ QuerySet
 
 After you obtained queryset from object you can do following operations with it:
 
-.. automodule:: tortoise.queryset
+.. automodule:: kleinmann.queryset
     :members:
     :exclude-members: QuerySetSingle, QuerySet, AwaitableQuery
 
@@ -136,7 +136,7 @@ QuerySet also supports aggregation and database functions through ``.annotate()`
 
 .. code-block:: python3
 
-    from tortoise.functions import Count, Trim, Lower, Upper, Coalesce
+    from kleinmann.functions import Count, Trim, Lower, Upper, Coalesce
 
     # This query will fetch all tournaments with 10 or more events, and will
     # populate filed `.events_count` on instances with corresponding value
@@ -146,39 +146,39 @@ QuerySet also supports aggregation and database functions through ``.annotate()`
     await Tournament.annotate(name_lower=Lower('name')).filter(name_lower='tournament')
     await Tournament.annotate(desc_clean=Coalesce('desc', '')).filter(desc_clean='')
 
-Check `examples <https://github.com/tortoise/tortoise-orm/tree/master/examples>`_ to see it all in work
+Check `examples <https://github.com/kleinmann/kleinmann-orm/tree/master/examples>`_ to see it all in work
 
 .. _foreign_key:
 
 Foreign Key
 ===========
 
-Tortoise ORM provides an API for working with FK relations
+Kleinmann ORM provides an API for working with FK relations
 
-.. autoclass:: tortoise.fields.relational.ReverseRelation
+.. autoclass:: kleinmann.fields.relational.ReverseRelation
     :members:
 
-.. autodata:: tortoise.fields.relational.ForeignKeyNullableRelation
+.. autodata:: kleinmann.fields.relational.ForeignKeyNullableRelation
 
-.. autodata:: tortoise.fields.relational.ForeignKeyRelation
+.. autodata:: kleinmann.fields.relational.ForeignKeyRelation
 
 .. _one_to_one:
 
 One to One
 ==========
 
-.. autodata:: tortoise.fields.relational.OneToOneNullableRelation
+.. autodata:: kleinmann.fields.relational.OneToOneNullableRelation
 
-.. autodata:: tortoise.fields.relational.OneToOneRelation
+.. autodata:: kleinmann.fields.relational.OneToOneRelation
 
 .. _many_to_many:
 
 Many to Many
 ============
 
-Tortoise ORM provides an API for working with M2M relations
+Kleinmann ORM provides an API for working with M2M relations
 
-.. autoclass:: tortoise.fields.relational.ManyToManyRelation
+.. autoclass:: kleinmann.fields.relational.ManyToManyRelation
     :members:
     :inherited-members:
 
@@ -249,10 +249,10 @@ In PostgreSQL and MYSQL, you can use the ``contains``, ``contained_by`` and ``fi
     obj = await JSONModel.filter(data__contains=[{"msg": "msg2"}]).first()
 
     await JSONModel.create(data=["text"])
-    await JSONModel.create(data=["tortoise", "msg"])
-    await JSONModel.create(data=["tortoise"])
+    await JSONModel.create(data=["kleinmann", "msg"])
+    await JSONModel.create(data=["kleinmann"])
 
-    objects = await JSONModel.filter(data__contained_by=["text", "tortoise", "msg"])
+    objects = await JSONModel.filter(data__contained_by=["text", "kleinmann", "msg"])
 
 .. code-block:: python3
 
@@ -291,5 +291,5 @@ Sometimes it is required to fetch only certain related records. You can achieve 
 
 You can view full example here:  :ref:`example_prefetching`
 
-.. autoclass:: tortoise.query_utils.Prefetch
+.. autoclass:: kleinmann.query_utils.Prefetch
     :members:

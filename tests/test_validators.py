@@ -1,8 +1,8 @@
 from decimal import Decimal
 
+from kleinmann.contrib import test
+from kleinmann.exceptions import ValidationError
 from tests.testmodels import ValidatorModel
-from tortoise.contrib import test
-from tortoise.exceptions import ValidationError
 
 
 class TestValues(test.TestCase):

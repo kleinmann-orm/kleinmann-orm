@@ -10,7 +10,7 @@ Contribution Guide
 
 If you want to contribute check out issues, or just straightforwardly create PR.
 
-Tortoise ORM is a volunteer effort. We encourage you to pitch in and join the team!
+Kleinmann ORM is a volunteer effort. We encourage you to pitch in and join the team!
 
 Please have a look at the :ref:`code_conduct`
 
@@ -27,7 +27,7 @@ If you have an incomplete change, but won't/can't continue working on it, please
 Have a chat
 ===========
 
-We have a chatroom on `Gitter <https://gitter.im/tortoise/community>`_
+We have a chatroom on `Gitter <https://gitter.im/kleinmann/community>`_
 
 
 Project structure
@@ -35,7 +35,7 @@ Project structure
 
 We have a ``Makefile`` that has the common operations listed, to get started just type ``make``::
 
-    Tortoise ORM development makefile
+    Kleinmann ORM development makefile
 
     usage: make <target>
     Targets:
@@ -55,18 +55,18 @@ The code is structured in the following directories:
     Documentation
 ``examples/``:
     Example code
-``tortoise/``:
-    Base Tortoise ORM
-``tortoise/fields/``:
+``kleinmann/``:
+    Base Kleinmann ORM
+``kleinmann/fields/``:
     The Fields are defined here.
-``tortoise/backends/``:
+``kleinmann/backends/``:
     DB Backends, such as ``sqlite``, ``asyncpg``, ``psycopg`` & ``mysql``
-``tortoise/backends/base/``:
+``kleinmann/backends/base/``:
     Common DB Backend code
-``tortoise/contrib/``:
+``kleinmann/contrib/``:
     Anything that helps people use the project, such as Testing framework and linter plugins
-``tortoise/tests/``:
-    The Tortoise test code
+``kleinmann/tests/``:
+    The Kleinmann test code
 
 
 Coding Guideline
@@ -77,7 +77,7 @@ We believe to keep the code simple, so it is easier to test and there is less pl
 Priorities
 ----------
 
-An important part of Tortoise ORM is that we want a simple interface, that only does what is expected.
+An important part of Kleinmann ORM is that we want a simple interface, that only does what is expected.
 As this is a value that is different for different people, we have settled on:
 
 * Model/QuerySet usage should be explicit and concise.
@@ -92,7 +92,7 @@ Style
 
 We try and automate as much as we can, so a simple ``make check`` will do automated style checking and linting, but these don't pick up on the non-obvious style preferences.
 
-Tortoise ORM follows a the following agreed upon style:
+Kleinmann ORM follows a the following agreed upon style:
 
 * Keep to PEP8 where you can
 * Max line-length is changed to 100
@@ -107,7 +107,7 @@ Tortoise ORM follows a the following agreed upon style:
 Running tests
 ================
 Running tests natively on windows isn't supported (yet). Best way to run them atm is by using WSL.
-Postgres uses the default ``postgres`` user, mysql uses ``root``. If either of them has a password you can set it with the ``TORTOISE_POSTGRES_PASS`` and ``TORTOISE_MYSQL_PASS`` env variables respectively.
+Postgres uses the default ``postgres`` user, mysql uses ``root``. If either of them has a password you can set it with the ``KLEINMANN_POSTGRES_PASS`` and ``KLEINMANN_MYSQL_PASS`` env variables respectively.
 
 
 
@@ -121,7 +121,7 @@ Different types of tests
 - ``make test_mysql``: Runs the tests on the mysql database
 - ``make testall``: runs the tests on all 4 database types: sqlite (in memory), postgresql, MySQL-MyISAM and MySQL-InnoDB
 - ``green``: runs the same tests as ``make test``, ensures the green plugin works
-- ``nose2 --plugin tortoise.contrib.test.nose2 --db-module tests.testmodels --db-url sqlite://:memory: ``: same test as ``make test`` , ensures the nose2 plugin works
+- ``nose2 --plugin kleinmann.contrib.test.nose2 --db-module tests.testmodels --db-url sqlite://:memory: ``: same test as ``make test`` , ensures the nose2 plugin works
 
 
 Things to be aware of when running the test suite

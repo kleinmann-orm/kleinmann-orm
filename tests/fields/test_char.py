@@ -1,7 +1,7 @@
+from kleinmann import fields
+from kleinmann.contrib import test
+from kleinmann.exceptions import ConfigurationError, ValidationError
 from tests import testmodels
-from tortoise import fields
-from tortoise.contrib import test
-from tortoise.exceptions import ConfigurationError, ValidationError
 
 
 class TestCharFields(test.TestCase):

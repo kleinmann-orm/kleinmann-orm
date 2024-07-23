@@ -4,6 +4,6 @@
 Transactions
 ============
 
-.. automodule:: tortoise.transactions
+.. automodule:: kleinmann.transactions
     :members:
     :undoc-members:

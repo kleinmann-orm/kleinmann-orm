@@ -1,5 +1,5 @@
+from kleinmann.contrib import test
 from tests import testmodels
-from tortoise.contrib import test
 
 
 class TestCallableDefault(test.TestCase):

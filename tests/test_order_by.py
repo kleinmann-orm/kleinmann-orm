@@ -1,3 +1,7 @@
+from kleinmann.contrib import test
+from kleinmann.contrib.test.condition import NotEQ
+from kleinmann.exceptions import ConfigurationError, FieldError
+from kleinmann.functions import Count, Sum
 from tests.testmodels import (
     DefaultOrdered,
     DefaultOrderedDesc,
@@ -6,10 +10,6 @@ from tests.testmodels import (
     FKToDefaultOrdered,
     Tournament,
 )
-from tortoise.contrib import test
-from tortoise.contrib.test.condition import NotEQ
-from tortoise.exceptions import ConfigurationError, FieldError
-from tortoise.functions import Count, Sum
 
 
 class TestOrderBy(test.TestCase):

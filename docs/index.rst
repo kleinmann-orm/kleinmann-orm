@@ -1,39 +1,39 @@
-============
-Tortoise ORM
-============
+=============
+Kleinmann ORM
+=============
 
-Tortoise ORM is an easy-to-use ``asyncio`` ORM *(Object Relational Mapper)* inspired by Django.
+Kleinmann ORM is an easy-to-use ``asyncio`` ORM *(Object Relational Mapper)* inspired by Django.
 
-Tortoise ORM was built with relations in mind and admiration for the excellent and popular Django ORM.
+Kleinmann ORM was built with relations in mind and admiration for the excellent and popular Django ORM.
 It's engraved in it's design that you are working not with just tables, you work with relational data.
 
 .. note::
-   Tortoise ORM is young project and breaking changes are to be expected.
+   Kleinmann ORM is young project and breaking changes are to be expected.
    We keep a :ref:`changelog` and it will have possible breakage clearly documented.
 
-Source & issue trackers are available at `<https://github.com/tortoise/tortoise-orm/>`_
+Source & issue trackers are available at `<https://github.com/kleinmann/kleinmann-orm/>`_
 
-Tortoise ORM is supported on CPython >= 3.8 for SQLite, MySQL and PostgreSQL.
+Kleinmann ORM is supported on CPython >= 3.8 for SQLite, MySQL and PostgreSQL.
 
 Introduction
 ============
 
-Why was Tortoise ORM built?
+Why was Kleinmann ORM built?
 ---------------------------
 
 Python has many existing and mature ORMs, unfortunately they are designed with an opposing paradigm of how I/O gets processed.
 ``asyncio`` is relatively new technology that has a different concurrency model, and the largest change is regarding how I/O is handled.
 
-However, Tortoise ORM is not first attempt of building ``asyncio`` ORM, there are many cases of developers attempting to map synchronous python ORMs to the async world, initial attempts did not have a clean API.
+However, Kleinmann ORM is not first attempt of building ``asyncio`` ORM, there are many cases of developers attempting to map synchronous python ORMs to the async world, initial attempts did not have a clean API.
 
-Hence we started Tortoise ORM.
+Hence we started Kleinmann ORM.
 
-Tortoise ORM is designed to be functional, yet familiar, to ease the migration of developers wishing to switch to ``asyncio``.
+Kleinmann ORM is designed to be functional, yet familiar, to ease the migration of developers wishing to switch to ``asyncio``.
 
 It also performs well when compared to other Python ORMs, trading places with Pony ORM:
 
 .. image:: ORM_Perf.png
-    :target: https://github.com/tortoise/orm-benchmarks
+    :target: https://github.com/kleinmann/orm-benchmarks
 
 How is an ORM useful?
 ---------------------
@@ -54,8 +54,8 @@ Define your models like so:
 
 .. code-block:: python3
 
-    from tortoise.models import Model
-    from tortoise import fields
+    from kleinmann.models import Model
+    from kleinmann import fields
 
     class Tournament(Model):
         id = fields.IntField(primary_key=True)
@@ -65,20 +65,20 @@ Initialise your models and database like so:
 
 .. code-block:: python3
 
-    from tortoise import Tortoise, run_async
+    from kleinmann import Kleinmann, run_async
 
     async def init():
         # Here we create a SQLite DB using file "db.sqlite3"
         #  also specify the app name of "models"
         #  which contain models from "app.models"
-        await Tortoise.init(
+        await Kleinmann.init(
             db_url='sqlite://db.sqlite3',
             modules={'models': ['app.models']}
         )
         # Generate the schema
-        await Tortoise.generate_schemas()
+        await Kleinmann.generate_schemas()
 
-    # run_async is a helper function to run simple async Tortoise scripts.
+    # run_async is a helper function to run simple async Kleinmann scripts.
     run_async(init())
 
 And use it like so:
@@ -99,7 +99,7 @@ And use it like so:
 
 Pluggable Database backends
 ---------------------------
-Tortoise ORM currently supports the following :ref:`databases`:
+Kleinmann ORM currently supports the following :ref:`databases`:
 
 * `PostgreSQL` >= 9.4 (using ``asyncpg``)
 * `SQLite` (using ``aiosqlite``)
@@ -109,7 +109,7 @@ Tortoise ORM currently supports the following :ref:`databases`:
 And more
 --------
 
-Tortoise ORM supports the following features:
+Kleinmann ORM supports the following features:
 
 * Designed to be used in an existing project:
     * Testing framework uses existing Python Unittest framework, just requires

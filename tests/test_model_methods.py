@@ -1,6 +1,20 @@
 import os
 from uuid import uuid4
 
+from kleinmann.contrib import test
+from kleinmann.contrib.test.condition import NotEQ
+from kleinmann.exceptions import (
+    ConfigurationError,
+    DoesNotExist,
+    IntegrityError,
+    MultipleObjectsReturned,
+    ObjectDoesNotExistError,
+    OperationalError,
+    ParamsError,
+    ValidationError,
+)
+from kleinmann.expressions import F, Q
+from kleinmann.models import NoneAwaitable
 from tests.testmodels import (
     Dest_null,
     Event,
@@ -13,20 +27,6 @@ from tests.testmodels import (
     Tournament,
     UUIDFkRelatedNullModel,
 )
-from tortoise.contrib import test
-from tortoise.contrib.test.condition import NotEQ
-from tortoise.exceptions import (
-    ConfigurationError,
-    DoesNotExist,
-    IntegrityError,
-    MultipleObjectsReturned,
-    ObjectDoesNotExistError,
-    OperationalError,
-    ParamsError,
-    ValidationError,
-)
-from tortoise.expressions import F, Q
-from tortoise.models import NoneAwaitable
 
 
 class TestModelCreate(test.TestCase):

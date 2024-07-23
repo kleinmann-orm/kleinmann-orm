@@ -1,11 +1,11 @@
+from kleinmann.contrib import test
+from kleinmann.exceptions import IntegrityError, OperationalError
 from tests import testmodels_postgres as testmodels
-from tortoise.contrib import test
-from tortoise.exceptions import IntegrityError, OperationalError
 
 
 @test.requireCapability(dialect="postgres")
 class TestArrayFields(test.IsolatedTestCase):
-    tortoise_test_modules = ["tests.testmodels_postgres"]
+    kleinmann_test_modules = ["tests.testmodels_postgres"]
 
     async def _setUpDB(self) -> None:
         try:

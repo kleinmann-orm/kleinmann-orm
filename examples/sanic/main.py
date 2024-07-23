@@ -4,7 +4,7 @@ import logging
 from models import Users
 from sanic import Sanic, response
 
-from tortoise.contrib.sanic import register_tortoise
+from kleinmann.contrib.sanic import register_kleinmann
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -23,7 +23,7 @@ async def add_user(request):
     return response.json({"user": str(user)})
 
 
-register_tortoise(
+register_kleinmann(
     app, db_url="sqlite://:memory:", modules={"models": ["models"]}, generate_schemas=True
 )
 

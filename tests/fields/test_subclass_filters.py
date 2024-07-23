@@ -1,9 +1,9 @@
+from kleinmann.contrib import test
 from tests.fields.subclass_models import RaceParticipant, RacePlacingEnum
-from tortoise.contrib import test
 
 
 class TestCustomFieldFilters(test.IsolatedTestCase):
-    tortoise_test_modules = ["tests.fields.subclass_models"]
+    kleinmann_test_modules = ["tests.fields.subclass_models"]
 
     async def asyncSetUp(self):
         await super().asyncSetUp()

@@ -1,13 +1,13 @@
-from tortoise.backends.base.config_generator import expand_db_url, generate_config
-from tortoise.contrib import test
-from tortoise.exceptions import ConfigurationError
+from kleinmann.backends.base.config_generator import expand_db_url, generate_config
+from kleinmann.contrib import test
+from kleinmann.exceptions import ConfigurationError
 
 
 class TestConfigGenerator(test.SimpleTestCase):
     _postgres_scheme_engines = {
-        "postgres": "tortoise.backends.asyncpg",
-        "asyncpg": "tortoise.backends.asyncpg",
-        "psycopg": "tortoise.backends.psycopg",
+        "postgres": "kleinmann.backends.asyncpg",
+        "asyncpg": "kleinmann.backends.asyncpg",
+        "psycopg": "kleinmann.backends.psycopg",
     }
 
     def test_unknown_scheme(self):
@@ -19,7 +19,7 @@ class TestConfigGenerator(test.SimpleTestCase):
         self.assertDictEqual(
             res,
             {
-                "engine": "tortoise.backends.sqlite",
+                "engine": "kleinmann.backends.sqlite",
                 "credentials": {
                     "file_path": "/some/test.sqlite",
                     "journal_mode": "WAL",
@@ -37,7 +37,7 @@ class TestConfigGenerator(test.SimpleTestCase):
         self.assertDictEqual(
             res,
             {
-                "engine": "tortoise.backends.sqlite",
+                "engine": "kleinmann.backends.sqlite",
                 "credentials": {
                     "file_path": "test.sqlite",
                     "journal_mode": "WAL",
@@ -51,7 +51,7 @@ class TestConfigGenerator(test.SimpleTestCase):
         self.assertDictEqual(
             res,
             {
-                "engine": "tortoise.backends.sqlite",
+                "engine": "kleinmann.backends.sqlite",
                 "credentials": {
                     "file_path": "data/db.sqlite",
                     "journal_mode": "WAL",
@@ -69,7 +69,7 @@ class TestConfigGenerator(test.SimpleTestCase):
         self.assertDictEqual(
             res,
             {
-                "engine": "tortoise.backends.sqlite",
+                "engine": "kleinmann.backends.sqlite",
                 "credentials": {
                     "file_path": file_path,
                     "journal_mode": "WAL",
@@ -83,7 +83,7 @@ class TestConfigGenerator(test.SimpleTestCase):
         self.assertDictEqual(
             res,
             {
-                "engine": "tortoise.backends.sqlite",
+                "engine": "kleinmann.backends.sqlite",
                 "credentials": {
                     "file_path": "/some/test.sqlite",
                     "AHA": "5",
@@ -217,7 +217,7 @@ class TestConfigGenerator(test.SimpleTestCase):
         self.assertEqual(
             res,
             {
-                "engine": "tortoise.backends.mysql",
+                "engine": "kleinmann.backends.mysql",
                 "credentials": {
                     "database": "test",
                     "host": "127.0.0.1",
@@ -235,7 +235,7 @@ class TestConfigGenerator(test.SimpleTestCase):
         self.assertEqual(
             res,
             {
-                "engine": "tortoise.backends.mysql",
+                "engine": "kleinmann.backends.mysql",
                 "credentials": {
                     "database": "test",
                     "host": "127.0.0.1",
@@ -253,7 +253,7 @@ class TestConfigGenerator(test.SimpleTestCase):
         self.assertEqual(
             res,
             {
-                "engine": "tortoise.backends.mysql",
+                "engine": "kleinmann.backends.mysql",
                 "credentials": {
                     "database": None,
                     "host": "127.0.0.1",
@@ -271,7 +271,7 @@ class TestConfigGenerator(test.SimpleTestCase):
         self.assertEqual(
             res,
             {
-                "engine": "tortoise.backends.mysql",
+                "engine": "kleinmann.backends.mysql",
                 "credentials": {
                     "database": "test",
                     "host": "127.0.0.1",
@@ -295,7 +295,7 @@ class TestConfigGenerator(test.SimpleTestCase):
         self.assertEqual(
             res,
             {
-                "engine": "tortoise.backends.mysql",
+                "engine": "kleinmann.backends.mysql",
                 "credentials": {
                     "database": res["credentials"]["database"],
                     "host": "127.0.0.1",
@@ -316,7 +316,7 @@ class TestConfigGenerator(test.SimpleTestCase):
         self.assertEqual(
             res,
             {
-                "engine": "tortoise.backends.mysql",
+                "engine": "kleinmann.backends.mysql",
                 "credentials": {
                     "database": "test",
                     "host": "127.0.0.1",
@@ -351,7 +351,7 @@ class TestConfigGenerator(test.SimpleTestCase):
                             "journal_mode": "WAL",
                             "journal_size_limit": 16384,
                         },
-                        "engine": "tortoise.backends.sqlite",
+                        "engine": "kleinmann.backends.sqlite",
                     }
                 },
                 "apps": {
@@ -380,7 +380,7 @@ class TestConfigGenerator(test.SimpleTestCase):
                             "journal_mode": "WAL",
                             "journal_size_limit": 16384,
                         },
-                        "engine": "tortoise.backends.sqlite",
+                        "engine": "kleinmann.backends.sqlite",
                     }
                 },
                 "apps": {
@@ -407,7 +407,7 @@ class TestConfigGenerator(test.SimpleTestCase):
                             "journal_mode": "WAL",
                             "journal_size_limit": 16384,
                         },
-                        "engine": "tortoise.backends.sqlite",
+                        "engine": "kleinmann.backends.sqlite",
                     }
                 },
                 "apps": {

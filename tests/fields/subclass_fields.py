@@ -1,8 +1,8 @@
 from enum import Enum, IntEnum
 from typing import Any, Type
 
-from tortoise import ConfigurationError
-from tortoise.fields import CharField, IntField
+from kleinmann import ConfigurationError
+from kleinmann.fields import CharField, IntField
 
 
 class EnumField(CharField):

@@ -1,6 +1,6 @@
+from kleinmann.contrib import test
+from kleinmann.contrib.test.condition import NotEQ
 from tests.testmodels import CharFields
-from tortoise.contrib import test
-from tortoise.contrib.test.condition import NotEQ
 
 DODGY_STRINGS = [
     "a/",

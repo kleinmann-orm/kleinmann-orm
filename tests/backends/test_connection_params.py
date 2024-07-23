@@ -2,8 +2,8 @@ from unittest.mock import AsyncMock, patch
 
 import asyncpg
 
-from tortoise import connections
-from tortoise.contrib import test
+from kleinmann import connections
+from kleinmann.contrib import test
 
 
 class TestConnectionParams(test.SimpleTestCase):
@@ -15,12 +15,12 @@ class TestConnectionParams(test.SimpleTestCase):
 
     async def test_mysql_connection_params(self):
         with patch(
-            "tortoise.backends.mysql.client.mysql.create_pool", new=AsyncMock()
+            "kleinmann.backends.mysql.client.mysql.create_pool", new=AsyncMock()
         ) as mysql_connect:
             await connections._init(
                 {
                     "models": {
-                        "engine": "tortoise.backends.mysql",
+                        "engine": "kleinmann.backends.mysql",
                         "credentials": {
                             "database": "test",
                             "host": "127.0.0.1",
@@ -53,12 +53,12 @@ class TestConnectionParams(test.SimpleTestCase):
     async def test_asyncpg_connection_params(self):
         try:
             with patch(
-                "tortoise.backends.asyncpg.client.asyncpg.create_pool", new=AsyncMock()
+                "kleinmann.backends.asyncpg.client.asyncpg.create_pool", new=AsyncMock()
             ) as asyncpg_connect:
                 await connections._init(
                     {
                         "models": {
-                            "engine": "tortoise.backends.asyncpg",
+                            "engine": "kleinmann.backends.asyncpg",
                             "credentials": {
                                 "database": "test",
                                 "host": "127.0.0.1",
@@ -95,14 +95,14 @@ class TestConnectionParams(test.SimpleTestCase):
     async def test_psycopg_connection_params(self):
         try:
             with patch(
-                "tortoise.backends.psycopg.client.PsycopgClient.create_pool", new=AsyncMock()
+                "kleinmann.backends.psycopg.client.PsycopgClient.create_pool", new=AsyncMock()
             ) as patched_create_pool:
                 mocked_pool = AsyncMock()
                 patched_create_pool.return_value = mocked_pool
                 await connections._init(
                     {
                         "models": {
-                            "engine": "tortoise.backends.psycopg",
+                            "engine": "kleinmann.backends.psycopg",
                             "credentials": {
                                 "database": "test",
                                 "host": "127.0.0.1",
