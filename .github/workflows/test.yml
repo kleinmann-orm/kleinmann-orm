@@ -1,14 +1,16 @@
-name: ci
+name: test
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 on:
   push:
-    branches-ignore:
-      - main
-  # pull_request:
-  #   branches-ignore:
-  #     - main
+    paths:
+      - 'kleinmann/**'
+      - 'tests/**'
+      - 'examples/**'
+      - 'pyproject.toml'
+      - 'poetry.lock'
+      - '.github/workflows/test.yml'
 jobs:
   test:
     runs-on: ubuntu-latest
