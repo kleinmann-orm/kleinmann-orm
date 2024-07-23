@@ -1,9 +1,9 @@
 from enum import IntEnum
 
+from kleinmann.contrib import test
+from kleinmann.exceptions import ConfigurationError, IntegrityError
+from kleinmann.fields import CharEnumField, IntEnumField
 from tests import testmodels
-from tortoise.contrib import test
-from tortoise.exceptions import ConfigurationError, IntegrityError
-from tortoise.fields import CharEnumField, IntEnumField
 
 
 class BadIntEnum1(IntEnum):

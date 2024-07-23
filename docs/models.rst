@@ -13,7 +13,7 @@ To get working with models, first you should import them
 
 .. code-block:: python3
 
-    from tortoise.models import Model
+    from kleinmann.models import Model
 
 With that you can start describing your own models like that
 
@@ -81,7 +81,7 @@ If you define the variable ``__models__`` in the module which you load your mode
 Primary Keys
 ------------
 
-In Tortoise ORM we require that a model has a primary key.
+In Kleinmann ORM we require that a model has a primary key.
 
 That primary key will be accessible through a reserved field ``pk`` which will be an alias of whichever field has been nominated as a primary key.
 That alias field can be used as a field name when doing filtering e.g. ``.filter(pk=...)`` etc…
@@ -117,7 +117,7 @@ Any of these are valid primary key definitions in a Model:
 Inheritance
 -----------
 
-When defining models in Tortoise ORM, you can save a lot of
+When defining models in Kleinmann ORM, you can save a lot of
 repetitive work by leveraging from inheritance.
 
 You can define fields in more generic classes and they are
@@ -130,8 +130,8 @@ Let's have a look at some examples.
 
 .. code-block:: python3
 
-    from tortoise import fields
-    from tortoise.models import Model
+    from kleinmann import fields
+    from kleinmann.models import Model
 
     class TimestampMixin():
         created_at = fields.DatetimeField(null=True, auto_now_add=True)
@@ -175,7 +175,7 @@ without breaking the schema. So the following definition is valid.
 The ``Meta`` class
 ------------------
 
-.. autoclass:: tortoise.models.Model.Meta
+.. autoclass:: kleinmann.models.Model.Meta
 
     .. attribute:: abstract
         :annotation: = False
@@ -235,10 +235,10 @@ The ``Meta`` class
             ordering = ["name", "-score"]
 
     .. attribute:: manager
-        :annotation: = tortoise.manager.Manager
+        :annotation: = kleinmann.manager.Manager
 
         Specify ``manager`` to override the default manager.
-        It should be instance of ``tortoise.manager.Manager`` or subclass.
+        It should be instance of ``kleinmann.manager.Manager`` or subclass.
 
         .. code-block:: python3
 
@@ -396,7 +396,7 @@ The reverse lookup of ``team.event_team`` works exactly the same way.
 Improving relational type hinting
 =================================
 
-Since Tortoise ORM is still a young project, it does not have such widespread support by
+Since Kleinmann ORM is still a young project, it does not have such widespread support by
 various editors who help you writing code using good autocomplete for models and
 different relations between them.
 However, you can get such autocomplete by doing a little work yourself.
@@ -408,8 +408,8 @@ all models including fields for the relations between models.
 
 .. code-block:: python3
 
-    from tortoise.models import Model
-    from tortoise import fields
+    from kleinmann.models import Model
+    from kleinmann import fields
 
 
     class Tournament(Model):
@@ -449,6 +449,6 @@ all models including fields for the relations between models.
 Reference
 =========
 
-.. automodule:: tortoise.models
+.. automodule:: kleinmann.models
     :members: Model
     :undoc-members:

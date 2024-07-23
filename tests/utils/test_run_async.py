@@ -1,8 +1,8 @@
 import os
 from unittest import skipIf
 
-from tortoise import Tortoise, connections, run_async
-from tortoise.contrib.test import TestCase
+from kleinmann import Kleinmann, connections, run_async
+from kleinmann.contrib.test import TestCase
 
 
 @skipIf(os.name == "nt", "stuck with Windows")
@@ -17,12 +17,12 @@ class TestRunAsync(TestCase):
         self.somevalue = 1
 
     async def init(self):
-        await Tortoise.init(db_url="sqlite://:memory:", modules={"models": []})
+        await Kleinmann.init(db_url="sqlite://:memory:", modules={"models": []})
         self.somevalue = 2
         self.assertNotEqual(connections._get_storage(), {})
 
     async def init_raise(self):
-        await Tortoise.init(db_url="sqlite://:memory:", modules={"models": []})
+        await Kleinmann.init(db_url="sqlite://:memory:", modules={"models": []})
         self.somevalue = 3
         self.assertNotEqual(connections._get_storage(), {})
         raise Exception("Some exception")

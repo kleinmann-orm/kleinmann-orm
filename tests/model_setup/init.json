@@ -1,7 +1,7 @@
 {
     "connections": {
         "default": {
-            "engine": "tortoise.backends.sqlite",
+            "engine": "kleinmann.backends.sqlite",
             "credentials": {
                 "file_path": "/tmp/tester.sqlite"
             }

@@ -1,4 +1,4 @@
-from tortoise import fields, models
+from kleinmann import fields, models
 
 
 class Users(models.Model):

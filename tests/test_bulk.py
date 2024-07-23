@@ -1,10 +1,10 @@
 from uuid import UUID, uuid4
 
+from kleinmann.contrib import test
+from kleinmann.contrib.test.condition import NotEQ
+from kleinmann.exceptions import IntegrityError
+from kleinmann.transactions import in_transaction
 from tests.testmodels import UniqueName, UUIDPkModel
-from tortoise.contrib import test
-from tortoise.contrib.test.condition import NotEQ
-from tortoise.exceptions import IntegrityError
-from tortoise.transactions import in_transaction
 
 
 class TestBulk(test.TruncationTestCase):

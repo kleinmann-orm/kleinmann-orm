@@ -2,10 +2,10 @@
 This example demonstrates pydantic serialisation of a recursively cycled model.
 """
 
-from tortoise import Tortoise, fields, run_async
-from tortoise.contrib.pydantic import pydantic_model_creator
-from tortoise.exceptions import NoValuesFetched
-from tortoise.models import Model
+from kleinmann import Kleinmann, fields, run_async
+from kleinmann.contrib.pydantic import pydantic_model_creator
+from kleinmann.exceptions import NoValuesFetched
+from kleinmann.models import Model
 
 
 class Employee(Model):
@@ -34,11 +34,11 @@ class Employee(Model):
         Note that this function needs to be annotated with a return type so that pydantic can
          generate a valid schema.
 
-        Note that the pydantic serializer can't call async methods, but the tortoise helpers
+        Note that the pydantic serializer can't call async methods, but the kleinmann helpers
          pre-fetch relational data, so that it is available before serialization. So we don't
          need to await the relation. We do however have to protect against the case where no
          prefetching was done, hence catching and handling the
-         ``tortoise.exceptions.NoValuesFetched`` exception.
+         ``kleinmann.exceptions.NoValuesFetched`` exception.
         """
         try:
             return len(self.team_members)
@@ -57,8 +57,8 @@ class Employee(Model):
 
 
 async def run():
-    await Tortoise.init(db_url="sqlite://:memory:", modules={"models": ["__main__"]})
-    await Tortoise.generate_schemas()
+    await Kleinmann.init(db_url="sqlite://:memory:", modules={"models": ["__main__"]})
+    await Kleinmann.generate_schemas()
 
     Employee_Pydantic = pydantic_model_creator(Employee)
     # print(Employee_Pydantic.schema_json(indent=4))
@@ -75,7 +75,7 @@ async def run():
     await _1.talks_to.add(_2, _1_1_1, loose)
     await _2_1.gets_talked_to.add(_2_2, _1_1, loose)
 
-    p = await Employee_Pydantic.from_tortoise_orm(await Employee.get(name="Root"))
+    p = await Employee_Pydantic.from_kleinmann_orm(await Employee.get(name="Root"))
     print(p.model_dump_json(indent=4))
 
 

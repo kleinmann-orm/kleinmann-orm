@@ -1,5 +1,5 @@
 # pylint: disable=W1503
-from tortoise.contrib import test
+from kleinmann.contrib import test
 
 
 class TestTesterSync(test.SimpleTestCase):

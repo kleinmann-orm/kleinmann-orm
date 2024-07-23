@@ -2,9 +2,9 @@
 This example demonstrates executing manual SQL queries
 """
 
-from tortoise import Tortoise, connections, fields, run_async
-from tortoise.models import Model
-from tortoise.transactions import in_transaction
+from kleinmann import Kleinmann, connections, fields, run_async
+from kleinmann.models import Model
+from kleinmann.transactions import in_transaction
 
 
 class Event(Model):
@@ -14,8 +14,8 @@ class Event(Model):
 
 
 async def run():
-    await Tortoise.init(db_url="sqlite://:memory:", modules={"models": ["__main__"]})
-    await Tortoise.generate_schemas()
+    await Kleinmann.init(db_url="sqlite://:memory:", modules={"models": ["__main__"]})
+    await Kleinmann.generate_schemas()
 
     # Need to get a connection. Unless explicitly specified, the name should be 'default'
     conn = connections.get("default")

@@ -1,7 +1,7 @@
 from enum import Enum, IntEnum
 
-from tortoise import Tortoise, fields, run_async
-from tortoise.models import Model
+from kleinmann import Kleinmann, fields, run_async
+from kleinmann.models import Model
 
 
 class Service(IntEnum):
@@ -22,8 +22,8 @@ class EnumFields(Model):
 
 
 async def run():
-    await Tortoise.init(db_url="sqlite://:memory:", modules={"models": ["__main__"]})
-    await Tortoise.generate_schemas()
+    await Kleinmann.init(db_url="sqlite://:memory:", modules={"models": ["__main__"]})
+    await Kleinmann.generate_schemas()
 
     obj0 = await EnumFields.create(service=Service.python_programming, currency=Currency.USD)
     # also you can use valid int and str value directly

@@ -4,9 +4,9 @@ This example demonstrates SQL Schema generation for each DB type supported.
 
 from uuid import uuid4
 
-from tortoise import fields
-from tortoise.fields import SET_NULL
-from tortoise.models import Model
+from kleinmann import fields
+from kleinmann.fields import SET_NULL
+from kleinmann.models import Model
 
 
 class Tournament(Model):

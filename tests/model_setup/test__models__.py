@@ -5,21 +5,21 @@ Tests for __models__
 import re
 from unittest.mock import AsyncMock, patch
 
-from tortoise import Tortoise, connections
-from tortoise.contrib import test
-from tortoise.exceptions import ConfigurationError
-from tortoise.utils import get_schema_sql
+from kleinmann import Kleinmann, connections
+from kleinmann.contrib import test
+from kleinmann.exceptions import ConfigurationError
+from kleinmann.utils import get_schema_sql
 
 
 class TestGenerateSchema(test.SimpleTestCase):
     async def asyncSetUp(self):
         await super().asyncSetUp()
         try:
-            Tortoise.apps = {}
-            Tortoise._inited = False
+            Kleinmann.apps = {}
+            Kleinmann._inited = False
         except ConfigurationError:
             pass
-        Tortoise._inited = False
+        Kleinmann._inited = False
         self.sqls = ""
         self.post_sqls = ""
         self.engine = test.getDBConfig(app_label="models", modules=[])["connections"]["models"][
@@ -27,19 +27,19 @@ class TestGenerateSchema(test.SimpleTestCase):
         ]
 
     async def asyncTearDown(self) -> None:
-        await Tortoise._reset_apps()
+        await Kleinmann._reset_apps()
 
     async def init_for(self, module: str, safe=False) -> None:
-        if self.engine != "tortoise.backends.sqlite":
+        if self.engine != "kleinmann.backends.sqlite":
             raise test.SkipTest("sqlite only")
         with patch(
-            "tortoise.backends.sqlite.client.SqliteClient.create_connection", new=AsyncMock()
+            "kleinmann.backends.sqlite.client.SqliteClient.create_connection", new=AsyncMock()
         ):
-            await Tortoise.init(
+            await Kleinmann.init(
                 {
                     "connections": {
                         "default": {
-                            "engine": "tortoise.backends.sqlite",
+                            "engine": "kleinmann.backends.sqlite",
                             "credentials": {"file_path": ":memory:"},
                         }
                     },

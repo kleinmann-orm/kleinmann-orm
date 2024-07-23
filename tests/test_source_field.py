@@ -5,11 +5,11 @@ This module does a series of use tests on a non-source_field model,
 This is to test that behaviour doesn't change when one defined source_field parameters.
 """
 
+from kleinmann.contrib import test
+from kleinmann.contrib.test.condition import NotEQ
+from kleinmann.expressions import F, Q
+from kleinmann.functions import Coalesce, Count, Length, Lower, Trim, Upper
 from tests.testmodels import NumberSourceField, SourceFields, StraightFields
-from tortoise.contrib import test
-from tortoise.contrib.test.condition import NotEQ
-from tortoise.expressions import F, Q
-from tortoise.functions import Coalesce, Count, Length, Lower, Trim, Upper
 
 
 class StraightFieldTests(test.TestCase):

@@ -1,15 +1,15 @@
+from kleinmann import Kleinmann, connections
+from kleinmann.backends.oracle import OracleClient
+from kleinmann.contrib import test
+from kleinmann.exceptions import OperationalError, ParamsError
+from kleinmann.transactions import in_transaction
 from tests.testmodels import Event, EventTwo, TeamTwo, Tournament
-from tortoise import Tortoise, connections
-from tortoise.backends.oracle import OracleClient
-from tortoise.contrib import test
-from tortoise.exceptions import OperationalError, ParamsError
-from tortoise.transactions import in_transaction
 
 
 class TestTwoDatabases(test.SimpleTestCase):
     async def asyncSetUp(self):
         await super().asyncSetUp()
-        if Tortoise._inited:
+        if Kleinmann._inited:
             await self._tearDownDB()
         first_db_config = test.getDBConfig(app_label="models", modules=["tests.testmodels"])
         second_db_config = test.getDBConfig(app_label="events", modules=["tests.testmodels"])
@@ -17,13 +17,13 @@ class TestTwoDatabases(test.SimpleTestCase):
             "connections": {**first_db_config["connections"], **second_db_config["connections"]},
             "apps": {**first_db_config["apps"], **second_db_config["apps"]},
         }
-        await Tortoise.init(merged_config, _create_db=True)
-        await Tortoise.generate_schemas()
+        await Kleinmann.init(merged_config, _create_db=True)
+        await Kleinmann.generate_schemas()
         self.db = connections.get("models")
         self.second_db = connections.get("events")
 
     async def asyncTearDown(self) -> None:
-        await Tortoise._drop_databases()
+        await Kleinmann._drop_databases()
         await super(TestTwoDatabases, self).asyncTearDown()
 
     async def test_two_databases(self):

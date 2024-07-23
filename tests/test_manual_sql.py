@@ -1,6 +1,6 @@
-from tortoise import connections
-from tortoise.contrib import test
-from tortoise.transactions import in_transaction
+from kleinmann import connections
+from kleinmann.contrib import test
+from kleinmann.transactions import in_transaction
 
 
 class TestManualSQL(test.TruncationTestCase):

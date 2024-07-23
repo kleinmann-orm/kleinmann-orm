@@ -1,6 +1,6 @@
+from kleinmann.contrib import test
+from kleinmann.contrib.test.condition import NotEQ
 from tests.testmodels import Event, Tournament
-from tortoise.contrib import test
-from tortoise.contrib.test.condition import NotEQ
 
 
 class TestOrderByNested(test.TestCase):

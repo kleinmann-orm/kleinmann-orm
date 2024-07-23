@@ -1,6 +1,6 @@
-from tortoise import Model, fields
-from tortoise.contrib.mysql.fields import GeometryField
-from tortoise.contrib.mysql.indexes import FullTextIndex, SpatialIndex
+from kleinmann import Model, fields
+from kleinmann.contrib.mysql.fields import GeometryField
+from kleinmann.contrib.mysql.indexes import FullTextIndex, SpatialIndex
 
 
 class Index(Model):

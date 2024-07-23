@@ -11,8 +11,8 @@ import pytz
 from asgi_lifespan import LifespanManager
 from httpx import ASGITransport, AsyncClient
 
-from tortoise.contrib.test import MEMORY_SQLITE
-from tortoise.fields.data import JSON_LOADS
+from kleinmann.contrib.test import MEMORY_SQLITE
+from kleinmann.fields.data import JSON_LOADS
 
 os.environ["DB_URL"] = MEMORY_SQLITE
 try:
@@ -38,6 +38,7 @@ def anyio_backend() -> str:
 
 @asynccontextmanager
 async def client_manager(app, base_url="http://test", **kw) -> ClientManagerType:
+    app.state.testing = True
     async with LifespanManager(app):
         transport = ASGITransport(app=app)
         async with AsyncClient(transport=transport, base_url=base_url, **kw) as c:
@@ -76,7 +77,7 @@ class UserTester:
         assert response.status_code == 200, response.text
         data = response.json()
         assert isinstance(data, list)
-        item = await User_Pydantic.from_tortoise_orm(user_obj)
+        item = await User_Pydantic.from_kleinmann_orm(user_obj)
         assert JSON_LOADS(item.model_dump_json()) in data
         return utc_now, user_obj, item
 

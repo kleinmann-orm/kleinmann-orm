@@ -1,10 +1,10 @@
 import asyncio
 import sys
 
+from kleinmann.contrib import test
+from kleinmann.contrib.test.condition import NotEQ
+from kleinmann.transactions import in_transaction
 from tests.testmodels import Tournament, UniqueName
-from tortoise.contrib import test
-from tortoise.contrib.test.condition import NotEQ
-from tortoise.transactions import in_transaction
 
 
 class TestConcurrencyIsolated(test.IsolatedTestCase):

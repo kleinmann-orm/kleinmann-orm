@@ -1,8 +1,8 @@
 from typing import Any
 
-from tortoise import fields
-from tortoise.contrib import test
-from tortoise.exceptions import ConfigurationError
+from kleinmann import fields
+from kleinmann.contrib import test
+from kleinmann.exceptions import ConfigurationError
 
 
 class TestIndexAlias(test.TestCase):

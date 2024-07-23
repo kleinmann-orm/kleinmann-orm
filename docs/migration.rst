@@ -6,7 +6,7 @@ Migration
 
 This document describes how to use `Aerich` to make migrations.
 
-You can see `https://github.com/tortoise/aerich <https://github.com/tortoise/aerich>`_ for more details.
+You can see `https://github.com/kleinmann/aerich <https://github.com/kleinmann/aerich>`_ for more details.
 
 Quick Start
 ===========
@@ -19,7 +19,7 @@ Quick Start
 
     Options:
       -c, --config TEXT  Config file.  [default: aerich.ini]
-      --app TEXT         Tortoise-ORM app name.  [default: models]
+      --app TEXT         Kleinmann-ORM app name.  [default: models]
       -n, --name TEXT    Name of section in .ini file to use for aerich config.
                          [default: aerich]
       -h, --help         Show this message and exit.
@@ -36,12 +36,12 @@ Quick Start
 Usage
 =====
 
-You need add `aerich.models` to your `Tortoise-ORM` config first,
+You need add `aerich.models` to your `Kleinmann-ORM` config first,
 example:
 
 .. code-block:: python3
 
-    TORTOISE_ORM = {
+    KLEINMANN_ORM = {
         "connections": {"default": "mysql://root:123456@127.0.0.1:3306/test"},
         "apps": {
             "models": {
@@ -63,7 +63,7 @@ Initialization
       Init config file and generate root migrate location.
 
     Options:
-      -t, --tortoise-orm TEXT  Tortoise-ORM config module dict variable, like settings.TORTOISE_ORM.
+      -t, --kleinmann-orm TEXT  Kleinmann-ORM config module dict variable, like settings.KLEINMANN_ORM.
                                [required]
       --location TEXT          Migrate store location.  [default: ./migrations]
       -h, --help               Show this message and exit.
@@ -73,7 +73,7 @@ Init config file and location:
 
 .. code-block:: shell
 
-    > aerich init -t tests.backends.mysql.TORTOISE_ORM
+    > aerich init -t tests.backends.mysql.KLEINMANN_ORM
 
     Success create migrate location ./migrations
     Success generate config file aerich.ini
@@ -90,7 +90,7 @@ Init db
     Success generate schema for app "models"
 
 
-If your Tortoise-ORM app is not default `models`, you must specify
+If your Kleinmann-ORM app is not default `models`, you must specify
 `--app` like `aerich --app other_models init-db`.
 
 Update models and make migrate

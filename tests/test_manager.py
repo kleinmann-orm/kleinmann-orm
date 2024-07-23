@@ -1,5 +1,5 @@
+from kleinmann.contrib import test
 from tests.testmodels import ManagerModel, ManagerModelExtra
-from tortoise.contrib import test
 
 
 class TestManager(test.TestCase):

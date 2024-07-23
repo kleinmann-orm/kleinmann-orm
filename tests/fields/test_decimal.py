@@ -1,11 +1,11 @@
 from decimal import Decimal
 
+from kleinmann import fields
+from kleinmann.contrib import test
+from kleinmann.exceptions import ConfigurationError, FieldError, IntegrityError
+from kleinmann.expressions import F
+from kleinmann.functions import Avg, Max, Sum
 from tests import testmodels
-from tortoise import fields
-from tortoise.contrib import test
-from tortoise.exceptions import ConfigurationError, FieldError, IntegrityError
-from tortoise.expressions import F
-from tortoise.functions import Avg, Max, Sum
 
 
 class TestDecimalFields(test.TestCase):

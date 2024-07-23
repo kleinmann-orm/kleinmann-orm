@@ -1,7 +1,7 @@
+from kleinmann import connections
+from kleinmann.contrib import test
+from kleinmann.transactions import in_transaction
 from tests.testmodels import Tournament
-from tortoise import connections
-from tortoise.contrib import test
-from tortoise.transactions import in_transaction
 
 
 @test.requireCapability(daemon=True)

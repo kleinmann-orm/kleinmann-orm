@@ -1,6 +1,6 @@
-from tortoise import fields
-from tortoise.contrib.mysql import fields as mysql_fields
-from tortoise.models import Model
+from kleinmann import fields
+from kleinmann.contrib.mysql import fields as mysql_fields
+from kleinmann.models import Model
 
 
 class UUIDPkModel(Model):

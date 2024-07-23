@@ -12,8 +12,8 @@ Fields are defined as properties of a ``Model`` class object:
 
 .. code-block:: python3
 
-    from tortoise.models import Model
-    from tortoise import fields
+    from kleinmann.models import Model
+    from kleinmann import fields
 
     class Tournament(Model):
         id = fields.IntField(primary_key=True)
@@ -30,7 +30,7 @@ Here is the list of fields available with custom options of these fields:
 Base Field
 ----------
 
-.. automodule:: tortoise.fields.base
+.. automodule:: kleinmann.fields.base
     :members:
     :undoc-members:
     :exclude-members: field_type, indexable, has_db_field, skip_to_python_if_native, allows_generated, function_cast, SQL_TYPE, GENERATED_SQL
@@ -38,14 +38,14 @@ Base Field
 Data Fields
 -----------
 
-.. automodule:: tortoise.fields.data
+.. automodule:: kleinmann.fields.data
     :members:
     :exclude-members: to_db_value, to_python_value
 
 Relational Fields
 -----------------
 
-.. automodule:: tortoise.fields.relational
+.. automodule:: kleinmann.fields.relational
     :members: ForeignKeyField, OneToOneField, ManyToManyField
     :exclude-members: to_db_value, to_python_value
 
@@ -55,20 +55,20 @@ DB Specific Fields
 MySQL
 ^^^^^
 
-.. automodule:: tortoise.contrib.mysql.fields
+.. automodule:: kleinmann.contrib.mysql.fields
     :members: GeometryField, UUIDField
 
 Postgres
 ^^^^^^^^
 
-.. automodule:: tortoise.contrib.postgres.fields
+.. automodule:: kleinmann.contrib.postgres.fields
     :members: TSVectorField
 
 Extending A Field
 =================
 
 It is possible to subclass fields allowing use of arbitrary types as long as they can be represented in a
-database compatible format. An example of this would be a simple wrapper around the :class:`~tortoise.fields.CharField`
+database compatible format. An example of this would be a simple wrapper around the :class:`~kleinmann.fields.CharField`
 to store and query Enum types.
 
 .. code-block:: python3
@@ -76,8 +76,8 @@ to store and query Enum types.
     from enum import Enum
     from typing import Type
 
-    from tortoise import ConfigurationError
-    from tortoise.fields import CharField
+    from kleinmann import ConfigurationError
+    from kleinmann.fields import CharField
 
 
     class EnumField(CharField):

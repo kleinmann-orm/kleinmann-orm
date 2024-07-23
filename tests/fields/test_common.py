@@ -1,5 +1,5 @@
-from tortoise import fields
-from tortoise.contrib import test
+from kleinmann import fields
+from kleinmann.contrib import test
 
 
 class TestRequired(test.SimpleTestCase):

@@ -1,5 +1,17 @@
 from typing import Type
 
+from kleinmann import connections
+from kleinmann.contrib import test
+from kleinmann.contrib.test.condition import NotEQ
+from kleinmann.exceptions import (
+    DoesNotExist,
+    FieldError,
+    IntegrityError,
+    MultipleObjectsReturned,
+    NotExistOrMultiple,
+    ParamsError,
+)
+from kleinmann.expressions import F, RawSQL, Subquery
 from tests.testmodels import (
     Event,
     IntFields,
@@ -9,18 +21,6 @@ from tests.testmodels import (
     Tournament,
     Tree,
 )
-from tortoise import connections
-from tortoise.contrib import test
-from tortoise.contrib.test.condition import NotEQ
-from tortoise.exceptions import (
-    DoesNotExist,
-    FieldError,
-    IntegrityError,
-    MultipleObjectsReturned,
-    NotExistOrMultiple,
-    ParamsError,
-)
-from tortoise.expressions import F, RawSQL, Subquery
 
 # TODO: Test the many exceptions in QuerySet
 # TODO: .filter(intnum_null=None) does not work as expected

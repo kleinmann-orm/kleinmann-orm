@@ -25,13 +25,13 @@ sys.path.insert(0, os.path.abspath(".."))
 # -- Project information -----------------------------------------------------
 
 
-project = "Tortoise ORM"
+project = "Kleinmann ORM"
 copyright = f"2018 - {datetime.today().year}, Andrey Bondar & Nickolas Grigoriadis & long2ice"  # pylint: disable=W0622
 author = "Andrey Bondar & Nickolas Grigoriadis & long2ice"
 
 
 # The short X.Y version
-version = importlib_metadata.version("tortoise-orm")
+version = importlib_metadata.version("kleinmann-orm")
 # The full version, including alpha/beta/rc tags
 release = version
 
@@ -127,8 +127,8 @@ def get_version_info():
 
 html_theme_options = {
     "google_analytics": ["G-MJ7RHW2FRB", "auto"],
-    "repo_url": "https://github.com/tortoise/tortoise-orm",
-    "repo_name": "tortoise-orm",
+    "repo_url": "https://github.com/kleinmann/kleinmann-orm",
+    "repo_name": "kleinmann-orm",
     "globaltoc_collapse": True,
     "globaltoc_includehidden": True,
     "icon": {
@@ -156,7 +156,7 @@ html_theme_options = {
             },
         },
     ],
-    "site_url": "https://tortoise.github.io",
+    "site_url": "https://kleinmann.github.io",
     "repo_type": "github",
     "features": [
         "navigation.expand",
@@ -187,7 +187,7 @@ html_short_title = "%s %s Documentation" % (project, version)
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
 #
-html_favicon = html_logo = os.path.join("_static", "tortoise.png")
+html_favicon = html_logo = os.path.join("_static", "kleinmann.png")
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -209,7 +209,7 @@ html_sidebars = {
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = "tortoisedoc"
+htmlhelp_basename = "kleinmanndoc"
 
 # -- Options for LaTeX output ------------------------------------------------
 
@@ -232,14 +232,14 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, "tortoise.tex", "tortoise Documentation", "Andrey Bondar", "manual"),
+    (master_doc, "kleinmann.tex", "kleinmann Documentation", "Andrey Bondar", "manual"),
 ]
 
 # -- Options for manual page output ------------------------------------------
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [(master_doc, "tortoise", "tortoise Documentation", [author], 1)]
+man_pages = [(master_doc, "kleinmann", "kleinmann Documentation", [author], 1)]
 
 # -- Options for Texinfo output ----------------------------------------------
 
@@ -249,10 +249,10 @@ man_pages = [(master_doc, "tortoise", "tortoise Documentation", [author], 1)]
 texinfo_documents = [
     (
         master_doc,
-        "tortoise",
-        "tortoise Documentation",
+        "kleinmann",
+        "kleinmann Documentation",
         author,
-        "tortoise",
+        "kleinmann",
         "One line description of project.",
         "Miscellaneous",
     ),

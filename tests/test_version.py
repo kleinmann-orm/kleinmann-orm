@@ -1,7 +1,7 @@
 import sys
 from pathlib import Path
 
-from tortoise import __version__
+from kleinmann import __version__
 
 if sys.version_info >= (3, 11):
     import tomllib

@@ -2,11 +2,11 @@
 Logging
 =======
 
-Current tortoise has two loggers, `tortoise.db_client` and `tortoise`.
+Current kleinmann has two loggers, `kleinmann.db_client` and `kleinmann`.
 
-`tortoise.db_client` logging the information about execute query, and `tortoise` logging the information about runtime.
+`kleinmann.db_client` logging the information about execute query, and `kleinmann` logging the information about runtime.
 
-If you want control the behavior of tortoise logging, such as print debug sql, you can configure it yourself like following.
+If you want control the behavior of kleinmann logging, such as print debug sql, you can configure it yourself like following.
 
 .. code-block:: python3
 
@@ -21,13 +21,13 @@ If you want control the behavior of tortoise logging, such as print debug sql, y
     sh.setFormatter(fmt)
 
     # will print debug sql
-    logger_db_client = logging.getLogger("tortoise.db_client")
+    logger_db_client = logging.getLogger("kleinmann.db_client")
     logger_db_client.setLevel(logging.DEBUG)
     logger_db_client.addHandler(sh)
 
-    logger_tortoise = logging.getLogger("tortoise")
-    logger_tortoise.setLevel(logging.DEBUG)
-    logger_tortoise.addHandler(sh)
+    logger_kleinmann = logging.getLogger("kleinmann")
+    logger_kleinmann.setLevel(logging.DEBUG)
+    logger_kleinmann.addHandler(sh)
 
 
 You can also use your own formatter to add syntax coloration to sql, by using `pygments <https://pygments.org/>` :
@@ -65,7 +65,7 @@ You can also use your own formatter to add syntax coloration to sql, by using `p
             name = record.name
             asctime = self.formatTime(record, self.datefmt)
 
-            if name == "tortoise.db_client":
+            if name == "kleinmann.db_client":
                 if (
                     record.levelname == "DEBUG"
                     and not message.startswith("Created connection pool")

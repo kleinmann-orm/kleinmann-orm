@@ -2,8 +2,8 @@
 This example demonstrates SQL Schema generation for each DB type supported without db fk constraint.
 """
 
-from tortoise import fields
-from tortoise.models import Model
+from kleinmann import fields
+from kleinmann.models import Model
 
 
 class Tournament(Model):

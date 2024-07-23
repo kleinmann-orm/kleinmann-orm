@@ -1,6 +1,9 @@
 import uuid
 from typing import Any
 
+from kleinmann import fields
+from kleinmann.contrib import test
+from kleinmann.exceptions import ConfigurationError
 from tests.testmodels import (
     CharFkRelatedModel,
     CharM2MRelatedModel,
@@ -10,9 +13,6 @@ from tests.testmodels import (
     UUIDM2MRelatedModel,
     UUIDPkModel,
 )
-from tortoise import fields
-from tortoise.contrib import test
-from tortoise.exceptions import ConfigurationError
 
 
 class TestQueryset(test.TestCase):

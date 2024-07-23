@@ -9,8 +9,8 @@ Key points in this example are:
 * That insert-order gets preserved for ForeignFields, but not ManyToManyFields
 """
 
-from tortoise import Tortoise, fields, run_async
-from tortoise.models import Model
+from kleinmann import Kleinmann, fields, run_async
+from kleinmann.models import Model
 
 
 class Employee(Model):
@@ -70,8 +70,8 @@ class Employee(Model):
 
 
 async def run():
-    await Tortoise.init(db_url="sqlite://:memory:", modules={"models": ["__main__"]})
-    await Tortoise.generate_schemas()
+    await Kleinmann.init(db_url="sqlite://:memory:", modules={"models": ["__main__"]})
+    await Kleinmann.generate_schemas()
 
     root = await Employee.create(name="Root")
     loose = await Employee.create(name="Loose")

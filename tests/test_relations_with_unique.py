@@ -1,6 +1,6 @@
+from kleinmann.contrib import test
+from kleinmann.query_utils import Prefetch
 from tests.testmodels import Principal, School, Student
-from tortoise.contrib import test
-from tortoise.query_utils import Prefetch
 
 
 class TestRelationsWithUnique(test.TestCase):

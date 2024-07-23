@@ -1,8 +1,8 @@
+from kleinmann.contrib import test
+from kleinmann.exceptions import FieldError, OperationalError
+from kleinmann.functions import Count
+from kleinmann.query_utils import Prefetch
 from tests.testmodels import Address, Event, Team, Tournament
-from tortoise.contrib import test
-from tortoise.exceptions import FieldError, OperationalError
-from tortoise.functions import Count
-from tortoise.query_utils import Prefetch
 
 
 class TestPrefetching(test.TestCase):

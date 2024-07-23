@@ -1,10 +1,10 @@
 import os
 from functools import partial
 
-from tortoise.contrib.fastapi import RegisterTortoise
+from kleinmann.contrib.fastapi import RegisterKleinmann
 
 register_orm = partial(
-    RegisterTortoise,
+    RegisterKleinmann,
     db_url=os.getenv("DB_URL", "sqlite://db.sqlite3"),
     modules={"models": ["models"]},
     generate_schemas=True,

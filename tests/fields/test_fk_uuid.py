@@ -1,7 +1,7 @@
+from kleinmann.contrib import test
+from kleinmann.exceptions import IntegrityError, NoValuesFetched, OperationalError
+from kleinmann.queryset import QuerySet
 from tests import testmodels
-from tortoise.contrib import test
-from tortoise.exceptions import IntegrityError, NoValuesFetched, OperationalError
-from tortoise.queryset import QuerySet
 
 
 class TestForeignKeyUUIDField(test.TestCase):

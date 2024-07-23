@@ -1,5 +1,5 @@
-from tortoise import Model, Tortoise, fields, run_async
-from tortoise.functions import Avg, Count, Sum
+from kleinmann import Kleinmann, Model, fields, run_async
+from kleinmann.functions import Avg, Count, Sum
 
 
 class Author(Model):
@@ -15,8 +15,8 @@ class Book(Model):
 
 
 async def run():
-    await Tortoise.init(db_url="sqlite://:memory:", modules={"models": ["__main__"]})
-    await Tortoise.generate_schemas()
+    await Kleinmann.init(db_url="sqlite://:memory:", modules={"models": ["__main__"]})
+    await Kleinmann.generate_schemas()
 
     a1 = await Author.create(name="author1")
     a2 = await Author.create(name="author2")

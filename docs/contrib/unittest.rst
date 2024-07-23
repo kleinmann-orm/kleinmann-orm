@@ -4,14 +4,14 @@
 UnitTest support
 ================
 
-Tortoise ORM includes its own helper utilities to assist in unit tests.
+Kleinmann ORM includes its own helper utilities to assist in unit tests.
 
 Usage
 =====
 
 .. code-block:: python3
 
-    from tortoise.contrib import test
+    from kleinmann.contrib import test
 
     class TestSomething(test.TestCase):
         def test_something(self):
@@ -33,7 +33,7 @@ To get ``test.TestCase`` to work as expected, you need to configure your test en
 
 .. code-block:: python3
 
-    from tortoise.contrib.test import initializer, finalizer
+    from kleinmann.contrib.test import initializer, finalizer
 
     # In setup
     initializer(['module.a', 'module.b.c'])
@@ -48,8 +48,8 @@ To get ``test.TestCase`` to work as expected, you need to configure your test en
 
 On the DB_URL it should follow the following standard:
 
-    TORTOISE_TEST_DB=sqlite:///tmp/test-{}.sqlite
-    TORTOISE_TEST_DB=postgres://postgres:@127.0.0.1:5432/test_{}
+    KLEINMANN_TEST_DB=sqlite:///tmp/test-{}.sqlite
+    KLEINMANN_TEST_DB=postgres://postgres:@127.0.0.1:5432/test_{}
 
 
 The ``{}`` is a string-replacement parameter, that will create a randomized database name.
@@ -69,15 +69,15 @@ In your ``.green`` file:
 
 .. code-block:: ini
 
-    initializer = tortoise.contrib.test.env_initializer
-    finalizer = tortoise.contrib.test.finalizer
+    initializer = kleinmann.contrib.test.env_initializer
+    finalizer = kleinmann.contrib.test.finalizer
 
-And then define the ``TORTOISE_TEST_MODULES`` environment variable with a comma separated list of module paths.
+And then define the ``KLEINMANN_TEST_MODULES`` environment variable with a comma separated list of module paths.
 
 Furthermore, you may set the database configuration parameter as an environment variable (defaults to ``sqlite://:memory:``):
 
-    TORTOISE_TEST_DB=sqlite:///tmp/test-{}.sqlite
-    TORTOISE_TEST_DB=postgres://postgres:@127.0.0.1:5432/test_{}
+    KLEINMANN_TEST_DB=sqlite:///tmp/test-{}.sqlite
+    KLEINMANN_TEST_DB=postgres://postgres:@127.0.0.1:5432/test_{}
 
 
 Py.test
@@ -93,11 +93,11 @@ Run the initializer and finalizer in your ``conftest.py`` file:
 
     import os
     import pytest
-    from tortoise.contrib.test import finalizer, initializer
+    from kleinmann.contrib.test import finalizer, initializer
 
     @pytest.fixture(scope="session", autouse=True)
     def initialize_tests(request):
-        db_url = os.environ.get("TORTOISE_TEST_DB", "sqlite://:memory:")
+        db_url = os.environ.get("KLEINMANN_TEST_DB", "sqlite://:memory:")
         initializer(["tests.testmodels"], db_url=db_url, app_label="models")
         request.addfinalizer(finalizer)
 
@@ -105,18 +105,18 @@ Run the initializer and finalizer in your ``conftest.py`` file:
 Nose2
 -----
 
-Load the plugin ``tortoise.contrib.test.nose2`` either via command line::
+Load the plugin ``kleinmann.contrib.test.nose2`` either via command line::
 
-    nose2 --plugin tortoise.contrib.test.nose2 --db-module tortoise.tests.testmodels
+    nose2 --plugin kleinmann.contrib.test.nose2 --db-module kleinmann.tests.testmodels
 
 Or via the config file:
 
 .. code-block:: ini
 
     [unittest]
-    plugins = tortoise.contrib.test.nose2
+    plugins = kleinmann.contrib.test.nose2
 
-    [tortoise]
+    [kleinmann]
     # Must specify at least one module path
     db-module =
         tests.testmodels
@@ -127,7 +127,7 @@ Or via the config file:
 Reference
 =========
 
-.. automodule:: tortoise.contrib.test
+.. automodule:: kleinmann.contrib.test
     :members:
     :undoc-members:
     :show-inheritance:

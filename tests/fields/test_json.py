@@ -1,7 +1,7 @@
+from kleinmann.contrib import test
+from kleinmann.exceptions import ConfigurationError, FieldError, IntegrityError
+from kleinmann.fields import JSONField
 from tests import testmodels
-from tortoise.contrib import test
-from tortoise.exceptions import ConfigurationError, FieldError, IntegrityError
-from tortoise.fields import JSONField
 
 
 class TestJSONFields(test.TestCase):
@@ -79,11 +79,11 @@ class TestJSONFields(test.TestCase):
     @test.requireCapability(dialect="postgres")
     async def test_list_contained_by(self):
         obj0 = await testmodels.JSONFields.create(data=["text"])
-        obj1 = await testmodels.JSONFields.create(data=["tortoise", "msg"])
-        obj2 = await testmodels.JSONFields.create(data=["tortoise"])
+        obj1 = await testmodels.JSONFields.create(data=["kleinmann", "msg"])
+        obj2 = await testmodels.JSONFields.create(data=["kleinmann"])
         obj3 = await testmodels.JSONFields.create(data=["new_message", "some_message"])
         objs = set(
-            await testmodels.JSONFields.filter(data__contained_by=["text", "tortoise", "msg"])
+            await testmodels.JSONFields.filter(data__contained_by=["text", "kleinmann", "msg"])
         )
         created_objs = {obj0, obj1, obj2}
         self.assertSetEqual(created_objs, objs)

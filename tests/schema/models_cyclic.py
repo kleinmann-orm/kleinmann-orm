@@ -2,8 +2,8 @@
 This is the testing Models — Cyclic
 """
 
-from tortoise import fields
-from tortoise.models import Model
+from kleinmann import fields
+from kleinmann.models import Model
 
 
 class One(Model):

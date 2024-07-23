@@ -9,20 +9,20 @@ Indexes
 
 MySQL specific indexes.
 
-.. autoclass:: tortoise.contrib.mysql.indexes.FullTextIndex
-.. autoclass:: tortoise.contrib.mysql.indexes.SpatialIndex
+.. autoclass:: kleinmann.contrib.mysql.indexes.FullTextIndex
+.. autoclass:: kleinmann.contrib.mysql.indexes.SpatialIndex
 
 Fields
 ======
 
 MySQL specific fields.
 
-.. autoclass:: tortoise.contrib.mysql.fields.GeometryField
-.. autoclass:: tortoise.contrib.mysql.fields.UUIDField
+.. autoclass:: kleinmann.contrib.mysql.fields.GeometryField
+.. autoclass:: kleinmann.contrib.mysql.fields.UUIDField
 
 Search
 ======
 
 MySQL full text search.
 
-.. autoclass:: tortoise.contrib.mysql.search.SearchCriterion
+.. autoclass:: kleinmann.contrib.mysql.search.SearchCriterion

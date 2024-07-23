@@ -1,7 +1,7 @@
+from kleinmann.contrib import test
+from kleinmann.exceptions import ConfigurationError, IntegrityError
+from kleinmann.fields import TextField
 from tests import testmodels
-from tortoise.contrib import test
-from tortoise.exceptions import ConfigurationError, IntegrityError
-from tortoise.fields import TextField
 
 
 class TestTextFields(test.TestCase):

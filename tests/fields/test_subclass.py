@@ -1,10 +1,10 @@
+from kleinmann.contrib import test
 from tests.fields.subclass_models import (
     Contact,
     ContactTypeEnum,
     RaceParticipant,
     RacePlacingEnum,
 )
-from tortoise.contrib import test
 
 
 async def create_participants():
@@ -27,7 +27,7 @@ async def create_participants():
 class TestEnumField(test.IsolatedTestCase):
     """Tests the enumeration field."""
 
-    tortoise_test_modules = ["tests.fields.subclass_models"]
+    kleinmann_test_modules = ["tests.fields.subclass_models"]
 
     async def test_enum_field_create(self):
         """Asserts that the new field is saved properly."""

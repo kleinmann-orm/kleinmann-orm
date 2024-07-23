@@ -3,14 +3,14 @@ from decimal import Decimal
 
 import pytz
 
+from kleinmann.backends.asyncpg import AsyncpgDBClient
+from kleinmann.backends.mssql import MSSQLClient
+from kleinmann.backends.mysql import MySQLClient
+from kleinmann.backends.oracle import OracleClient
+from kleinmann.backends.psycopg import PsycopgClient
+from kleinmann.backends.sqlite import SqliteClient
+from kleinmann.contrib import test
 from tests.testmodels import DefaultModel
-from tortoise.backends.asyncpg import AsyncpgDBClient
-from tortoise.backends.mssql import MSSQLClient
-from tortoise.backends.mysql import MySQLClient
-from tortoise.backends.oracle import OracleClient
-from tortoise.backends.psycopg import PsycopgClient
-from tortoise.backends.sqlite import SqliteClient
-from tortoise.contrib import test
 
 
 class TestDefault(test.TestCase):
@@ -40,7 +40,7 @@ class TestDefault(test.TestCase):
         self.assertEqual(default_model.float_default, 1.5)
         self.assertEqual(default_model.decimal_default, Decimal(1))
         self.assertTrue(default_model.bool_default)
-        self.assertEqual(default_model.char_default, "tortoise")
+        self.assertEqual(default_model.char_default, "kleinmann")
         self.assertEqual(default_model.date_default, datetime.date(year=2020, month=5, day=21))
         self.assertEqual(
             default_model.datetime_default,

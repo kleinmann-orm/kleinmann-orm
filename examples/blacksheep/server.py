@@ -8,10 +8,10 @@ from blacksheep.server.openapi.v3 import Info, OpenAPIHandler
 from blacksheep.server.responses import created, no_content, ok
 from models import UserPydanticIn, UserPydanticOut, Users
 
-from tortoise.contrib.blacksheep import register_tortoise
+from kleinmann.contrib.blacksheep import register_kleinmann
 
 app = Application()
-register_tortoise(
+register_kleinmann(
     app,
     db_url="sqlite://:memory:",
     modules={"models": ["models"]},
@@ -20,7 +20,7 @@ register_tortoise(
 )
 
 
-docs = OpenAPIHandler(info=Info(title="Tortoise ORM BlackSheep example", version="0.0.1"))
+docs = OpenAPIHandler(info=Info(title="Kleinmann ORM BlackSheep example", version="0.0.1"))
 docs.bind_app(app)
 
 
@@ -32,19 +32,19 @@ async def users_list() -> Union[UserPydanticOut]:
 @app.router.post("/")
 async def users_create(user: UserPydanticIn) -> UserPydanticOut:
     user = await Users.create(**user.model_dump(exclude_unset=True))
-    return created(await UserPydanticOut.from_tortoise_orm(user))
+    return created(await UserPydanticOut.from_kleinmann_orm(user))
 
 
 @app.router.patch("/{id}")
 async def users_patch(id: UUID, user: UserPydanticIn) -> UserPydanticOut:
     await Users.filter(id=id).update(**user.model_dump(exclude_unset=True))
-    return ok(await UserPydanticOut.from_tortoise_orm(await Users.get(id=id)))
+    return ok(await UserPydanticOut.from_kleinmann_orm(await Users.get(id=id)))
 
 
 @app.router.put("/{id}")
 async def users_put(id: UUID, user: UserPydanticIn) -> UserPydanticOut:
     await Users.filter(id=id).update(**user.model_dump())
-    return ok(await UserPydanticOut.from_tortoise_orm(await Users.get(id=id)))
+    return ok(await UserPydanticOut.from_kleinmann_orm(await Users.get(id=id)))
 
 
 @app.router.delete("/{id}")

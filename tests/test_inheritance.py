@@ -1,5 +1,5 @@
+from kleinmann.contrib import test
 from tests.testmodels import MyAbstractBaseModel, MyDerivedModel
-from tortoise.contrib import test
 
 
 class TestInheritance(test.TestCase):

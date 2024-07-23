@@ -6,11 +6,11 @@ Getting started
 
 Installation
 ===============
-First you have to install tortoise like this:
+First you have to install kleinmann like this:
 
 .. code-block:: bash
 
-    pip install tortoise-orm
+    pip install kleinmann-orm
 
 ..
 
@@ -18,7 +18,7 @@ You can also install with your db driver:
 
 .. code-block:: bash
 
-    pip install tortoise-orm[asyncpg]
+    pip install kleinmann-orm[asyncpg]
 
 ..
 
@@ -26,7 +26,7 @@ Or PsycoPG:
 
 .. code-block:: bash
 
-    pip install tortoise-orm[psycopg]
+    pip install kleinmann-orm[psycopg]
 
 ..
 
@@ -34,7 +34,7 @@ For MySQL:
 
 .. code-block:: bash
 
-    pip install tortoise-orm[asyncmy]
+    pip install kleinmann-orm[asyncmy]
 
 ..
 
@@ -42,7 +42,7 @@ For Microsoft SQL Server/Oracle:
 
 .. code-block:: bash
 
-    pip install tortoise-orm[asyncodbc]
+    pip install kleinmann-orm[asyncodbc]
 
 ..
 
@@ -65,21 +65,21 @@ You can install with all accelerators above:
 
 .. code-block:: bash
 
-    pip install tortoise-orm[accel]
+    pip install kleinmann-orm[accel]
 
 ..
 
 Tutorial
 ========
 
-Primary entity of tortoise is ``tortoise.models.Model``.
+Primary entity of kleinmann is ``kleinmann.models.Model``.
 You can start writing models like this:
 
 
 .. code-block:: python3
 
-    from tortoise.models import Model
-    from tortoise import fields
+    from kleinmann.models import Model
+    from kleinmann import fields
 
     class Tournament(Model):
         # Defining `id` field is optional, it will be defined automatically
@@ -97,7 +97,7 @@ You can start writing models like this:
         id = fields.IntField(primary_key=True)
         name = fields.CharField(max_length=255)
         # References to other models are defined in format
-        # "{app_name}.{model_name}" - where {app_name} is defined in tortoise config
+        # "{app_name}.{model_name}" - where {app_name} is defined in kleinmann config
         tournament = fields.ForeignKeyField('models.Tournament', related_name='events')
         participants = fields.ManyToManyField('models.Team', related_name='events', through='event_team')
 
@@ -115,24 +115,24 @@ You can start writing models like this:
 .. note::
    You can read more on defining models in :ref:`models`
 
-After you defined all your models, tortoise needs you to init them, in order to create backward relations between models and match your db client with appropriate models.
+After you defined all your models, kleinmann needs you to init them, in order to create backward relations between models and match your db client with appropriate models.
 
 You can do it like this:
 
 .. code-block:: python3
 
-    from tortoise import Tortoise
+    from kleinmann import Kleinmann
 
     async def init():
         # Here we create a SQLite DB using file "db.sqlite3"
         #  also specify the app name of "models"
         #  which contain models from "app.models"
-        await Tortoise.init(
+        await Kleinmann.init(
             db_url='sqlite://db.sqlite3',
             modules={'models': ['app.models']}
         )
         # Generate the schema
-        await Tortoise.generate_schemas()
+        await Kleinmann.generate_schemas()
 
 
 Here we create a connection to a SQLite DB database with the default ``aiosqlite`` client and then we discover & initialise models.
@@ -145,7 +145,7 @@ If you are running this in a simple script, you can do:
 
     run_async(init())
 
-``run_async`` is a helper function to run simple async Tortoise scripts. If you are running Tortoise ORM as part of a service, please have a look at :ref:`cleaningup`
+``run_async`` is a helper function to run simple async Kleinmann scripts. If you are running Kleinmann ORM as part of a service, please have a look at :ref:`cleaningup`
 
 After that you can start using your models:
 
@@ -187,7 +187,7 @@ After that you can start using your models:
         print(event.tournament.name)
         print([t.name for t in event.participants])
 
-    # Tortoise ORM supports variable depth of prefetching related entities
+    # Kleinmann ORM supports variable depth of prefetching related entities
     # This will fetch all events for team and in those team tournament will be prefetched
     await Team.all().prefetch_related('events__tournament')
 

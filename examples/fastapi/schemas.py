@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING
 from models import Users
 from pydantic import BaseModel
 
-from tortoise.contrib.pydantic import PydanticModel, pydantic_model_creator
+from kleinmann.contrib.pydantic import PydanticModel, pydantic_model_creator
 
 if TYPE_CHECKING:  # pragma: nocoverage
 

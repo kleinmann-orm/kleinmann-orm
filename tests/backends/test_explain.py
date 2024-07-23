@@ -1,6 +1,6 @@
+from kleinmann.contrib import test
+from kleinmann.contrib.test.condition import NotEQ
 from tests.testmodels import Tournament
-from tortoise.contrib import test
-from tortoise.contrib.test.condition import NotEQ
 
 
 class TestExplain(test.TestCase):

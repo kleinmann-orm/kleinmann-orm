@@ -6,9 +6,9 @@ Here we introduce:
 * Early model init
 """
 
-from tortoise import Tortoise, fields, run_async
-from tortoise.contrib.pydantic import pydantic_model_creator
-from tortoise.models import Model
+from kleinmann import Kleinmann, fields, run_async
+from kleinmann.contrib.pydantic import pydantic_model_creator
+from kleinmann.models import Model
 
 
 class Tournament(Model):
@@ -43,7 +43,7 @@ print(Tournament_Pydantic_Early.schema_json(indent=4))
 
 
 # Initialise model structure early. This does not init any database structures
-Tortoise.init_models(["__main__"], "models")
+Kleinmann.init_models(["__main__"], "models")
 
 
 # We now have a complete model
@@ -58,21 +58,21 @@ print(Event_Pydantic.schema_json(indent=4))
 
 
 async def run():
-    await Tortoise.init(db_url="sqlite://:memory:", modules={"models": ["__main__"]})
-    await Tortoise.generate_schemas()
+    await Kleinmann.init(db_url="sqlite://:memory:", modules={"models": ["__main__"]})
+    await Kleinmann.generate_schemas()
 
     # Create objects
     tournament = await Tournament.create(name="New Tournament")
     event = await Event.create(name="The Event", tournament=tournament)
 
     # Serialise Tournament
-    tourpy = await Tournament_Pydantic.from_tortoise_orm(tournament)
+    tourpy = await Tournament_Pydantic.from_kleinmann_orm(tournament)
 
     # As serialised JSON
     print(tourpy.model_dump_json(indent=4))
 
     # Serialise Event
-    eventpy = await Event_Pydantic.from_tortoise_orm(event)
+    eventpy = await Event_Pydantic.from_kleinmann_orm(event)
 
     # As serialised JSON
     print(eventpy.model_dump_json(indent=4))

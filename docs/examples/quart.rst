@@ -13,7 +13,7 @@ This is an example of the :ref:`contrib_quart`
     QUART_APP=main quart
         ...
         Commands:
-          generate-schemas  Populate DB with Tortoise-ORM schemas.
+          generate-schemas  Populate DB with Kleinmann-ORM schemas.
           run               Start and run a development server.
           shell             Open a shell within the app context.
 

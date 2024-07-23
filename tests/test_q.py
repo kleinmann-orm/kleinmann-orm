@@ -1,9 +1,9 @@
 from unittest import TestCase as _TestCase
 
+from kleinmann.contrib.test import TestCase
+from kleinmann.exceptions import OperationalError
+from kleinmann.expressions import Q
 from tests.testmodels import CharFields, IntFields
-from tortoise.contrib.test import TestCase
-from tortoise.exceptions import OperationalError
-from tortoise.expressions import Q
 
 
 class TestQ(_TestCase):

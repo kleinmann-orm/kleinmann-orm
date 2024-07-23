@@ -3,8 +3,8 @@ This example demonstrates most basic operations with single model
 and a Table definition generation with comment support
 """
 
-from tortoise import Tortoise, fields, run_async
-from tortoise.models import Model
+from kleinmann import Kleinmann, fields, run_async
+from kleinmann.models import Model
 
 
 class Event(Model):
@@ -23,8 +23,8 @@ class Event(Model):
 
 
 async def run():
-    await Tortoise.init(db_url="sqlite://:memory:", modules={"models": ["__main__"]})
-    await Tortoise.generate_schemas()
+    await Kleinmann.init(db_url="sqlite://:memory:", modules={"models": ["__main__"]})
+    await Kleinmann.generate_schemas()
 
     event = await Event.create(name="Test")
     await Event.filter(id=event.id).update(name="Updated name")
