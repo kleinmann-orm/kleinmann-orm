@@ -1,6 +1,6 @@
 # Kleinmann ORM
 
-**Kleinmann ORM** is an Object-Relational Mapping (ORM) library for Python hardforked from [Tortoise ORM](https://github.com/tortoise/tortoise-orm). It's in a very early stage of development and not recommended for general use.
+**Kleinmann ORM** is an async ORM library for Python hardforked from [Tortoise ORM](https://github.com/tortoise/tortoise-orm). It's in a very early stage of development and not recommended for general use.
 
 ## Goals
 
@@ -12,12 +12,4 @@
 
 Maintaining compatibility with Tortoise ORM is not a goal, but we will try to keep a list of breaking changes in the documentation.
 
-## Roadmap
-
-### 0.0.1
-
-- [ ] Initial release. Forked from tortoise-orm 0.21.5.
-
-### 0.1.0
-
-- [ ] Port all patches from DipDup.
+Project roadmap: https://github.com/kleinmann-orm/kleinmann-orm/issues/2
