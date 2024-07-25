@@ -40,7 +40,7 @@ classifiers = [
 python = "^3.8"
 pypika-tortoise = "^0.1.6"
 iso8601 = "^1.0.2"
-aiosqlite = ">=0.16.0, <0.18.0"
+aiosqlite = ">=0.20.0"
 pytz = "*"
 ciso8601 = { version = "*", markers = "sys_platform != 'win32' and implementation_name == 'cpython'", optional = true }
 uvloop = { version = "*", markers = "sys_platform != 'win32' and implementation_name == 'cpython'", optional = true }

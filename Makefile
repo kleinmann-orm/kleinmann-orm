@@ -85,3 +85,8 @@ build: deps
 
 publish: deps build
 	twine upload dist/*
+
+loc:
+	@for path in "kleinmann" "examples" "tests"; do \
+		find $$path -name "*.py" -print0 | xargs -0 wc -l | tail -n 1 | cut -d " " -f 2 | xargs echo $$path; \
+	done
