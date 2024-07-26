@@ -1,8 +1,7 @@
-from kleinmann.models import Model
-
 from kleinmann import Kleinmann, fields
 from kleinmann.contrib import test
 from kleinmann.contrib.pydantic import pydantic_model_creator
+from kleinmann.models import Model
 
 
 class Tournament(Model):

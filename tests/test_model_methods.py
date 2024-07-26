@@ -1,6 +1,7 @@
 import os
 from uuid import uuid4
 
+from kleinmann.contrib import test
 from kleinmann.exceptions import (
     ConfigurationError,
     DoesNotExist,
@@ -13,8 +14,6 @@ from kleinmann.exceptions import (
 )
 from kleinmann.expressions import F, Q
 from kleinmann.models import NoneAwaitable
-
-from kleinmann.contrib import test
 from tests.testmodels import (
     Dest_null,
     Event,

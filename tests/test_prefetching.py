@@ -1,8 +1,7 @@
+from kleinmann.contrib import test
 from kleinmann.exceptions import FieldError, OperationalError
 from kleinmann.functions import Count
 from kleinmann.query_utils import Prefetch
-
-from kleinmann.contrib import test
 from tests.testmodels import Address, Event, Team, Tournament
 
 

@@ -5,6 +5,8 @@ from functools import wraps
 from typing import Any, Callable, List, Optional, Sequence, Tuple, TypeVar
 
 import aiosqlite
+from pypika import SQLLiteQuery
+
 from kleinmann.backends.base.client import (
     BaseDBAsyncClient,
     BaseTransactionWrapper,
@@ -20,7 +22,6 @@ from kleinmann.exceptions import (
     OperationalError,
     TransactionManagementError,
 )
-from pypika import SQLLiteQuery
 
 FuncType = Callable[..., Any]
 F = TypeVar("F", bound=FuncType)

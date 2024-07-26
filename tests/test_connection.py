@@ -1,9 +1,8 @@
 from contextvars import ContextVar
 from unittest.mock import AsyncMock, Mock, PropertyMock, call, patch
 
-from kleinmann.connection import ConnectionHandler
-
 from kleinmann import BaseDBAsyncClient, ConfigurationError
+from kleinmann.connection import ConnectionHandler
 from kleinmann.contrib.test import SimpleTestCase
 
 

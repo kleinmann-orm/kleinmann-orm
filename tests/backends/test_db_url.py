@@ -1,7 +1,6 @@
 from kleinmann.backends.base.config_generator import expand_db_url, generate_config
-from kleinmann.exceptions import ConfigurationError
-
 from kleinmann.contrib import test
+from kleinmann.exceptions import ConfigurationError
 
 
 class TestConfigGenerator(test.SimpleTestCase):

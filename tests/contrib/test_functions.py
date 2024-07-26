@@ -1,8 +1,7 @@
-from kleinmann.contrib.postgres.functions import Random as PostgresRandom
-from kleinmann.contrib.sqlite.functions import Random as SqliteRandom
-
 from kleinmann import connections
 from kleinmann.contrib import test
+from kleinmann.contrib.postgres.functions import Random as PostgresRandom
+from kleinmann.contrib.sqlite.functions import Random as SqliteRandom
 from tests.testmodels import IntFields
 
 

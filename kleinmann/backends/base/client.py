@@ -1,12 +1,13 @@
 import asyncio
 from typing import Any, List, Optional, Sequence, Tuple, Type, Union
 
+from pypika import Query
+
 from kleinmann.backends.base.executor import BaseExecutor
 from kleinmann.backends.base.schema_generator import BaseSchemaGenerator
 from kleinmann.connection import connections
 from kleinmann.exceptions import TransactionManagementError
 from kleinmann.log import db_client_logger
-from pypika import Query
 
 
 class Capabilities:

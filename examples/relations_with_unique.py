@@ -5,10 +5,9 @@ Key points in this example are use of ForeignKeyField and OneToOneField has to_f
 For other basic parts, it is the same as relation example.
 """
 
+from kleinmann import Kleinmann, fields, run_async
 from kleinmann.models import Model
 from kleinmann.query_utils import Prefetch
-
-from kleinmann import Kleinmann, fields, run_async
 
 
 class School(Model):

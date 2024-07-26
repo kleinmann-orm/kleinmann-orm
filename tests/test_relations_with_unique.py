@@ -1,6 +1,5 @@
-from kleinmann.query_utils import Prefetch
-
 from kleinmann.contrib import test
+from kleinmann.query_utils import Prefetch
 from tests.testmodels import Principal, School, Student
 
 

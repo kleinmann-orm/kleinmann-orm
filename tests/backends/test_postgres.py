@@ -4,10 +4,9 @@ Test some PostgreSQL-specific features
 
 import ssl
 
-from kleinmann.exceptions import OperationalError
-
 from kleinmann import Kleinmann, connections
 from kleinmann.contrib import test
+from kleinmann.exceptions import OperationalError
 from tests.testmodels import Tournament
 
 

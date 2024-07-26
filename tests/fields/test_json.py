@@ -1,6 +1,5 @@
-from kleinmann.exceptions import ConfigurationError, FieldError, IntegrityError
-
 from kleinmann.contrib import test
+from kleinmann.exceptions import ConfigurationError, FieldError, IntegrityError
 from kleinmann.fields import JSONField
 from tests import testmodels
 

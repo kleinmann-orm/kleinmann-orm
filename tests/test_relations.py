@@ -1,7 +1,6 @@
+from kleinmann.contrib import test
 from kleinmann.exceptions import FieldError, NoValuesFetched
 from kleinmann.functions import Count, Trim
-
-from kleinmann.contrib import test
 from tests.testmodels import (
     Address,
     Author,

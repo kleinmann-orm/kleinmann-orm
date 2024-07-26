@@ -1,9 +1,8 @@
 import datetime
 
+from kleinmann.contrib import test
 from kleinmann.expressions import F, Q
 from kleinmann.functions import Coalesce, Count, Length, Lower, Max, Trim, Upper
-
-from kleinmann.contrib import test
 from tests.testmodels import (
     DatetimeFields,
     Event,

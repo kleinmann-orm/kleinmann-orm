@@ -2,9 +2,8 @@
 Testing Models for a bad/wrong relation reference
 """
 
-from kleinmann.models import Model
-
 from kleinmann import fields
+from kleinmann.models import Model
 
 
 class Tournament(Model):

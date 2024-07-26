@@ -8,7 +8,9 @@ from kleinmann.contrib.test import init_memory_sqlite
 class TestDecorator(test.TestCase):
     @test.requireCapability(dialect="sqlite")
     async def test_script_with_init_memory_sqlite(self) -> None:
-        r = subprocess.run(["python", "examples/basic.py"], capture_output=True)  # nosec
+        r = subprocess.run(
+            ["python", "examples/basic.py"], capture_output=True, check=False
+        )  # nosec
         output = r.stdout.decode()
         s = "[{'id': 1, 'name': 'Updated name'}, {'id': 2, 'name': 'Test 2'}]"
         self.assertIn(s, output)

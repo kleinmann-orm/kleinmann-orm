@@ -25,13 +25,13 @@ async def list_all():
 
 @app.route("/user")
 async def add_user():
-    user = await Users.create(status=choice(STATUSES))  # nosec
+    user = await Users.create(status=choice(STATUSES))  # noqa: S311
     return str(user)
 
 
 @app.route("/worker")
 async def add_worker():
-    worker = await Workers.create(status=choice(STATUSES))  # nosec
+    worker = await Workers.create(status=choice(STATUSES))  # noqa: S311
     return str(worker)
 
 

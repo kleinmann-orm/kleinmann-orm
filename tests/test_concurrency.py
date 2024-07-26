@@ -1,9 +1,8 @@
 import asyncio
 import sys
 
-from kleinmann.transactions import in_transaction
-
 from kleinmann.contrib import test
+from kleinmann.transactions import in_transaction
 from tests.testmodels import Tournament, UniqueName
 
 

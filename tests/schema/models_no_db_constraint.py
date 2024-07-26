@@ -2,9 +2,8 @@
 This example demonstrates SQL Schema generation for each DB type supported without db fk constraint.
 """
 
-from kleinmann.models import Model
-
 from kleinmann import fields
+from kleinmann.models import Model
 
 
 class Tournament(Model):

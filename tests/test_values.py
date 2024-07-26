@@ -1,7 +1,6 @@
+from kleinmann.contrib import test
 from kleinmann.exceptions import FieldError
 from kleinmann.functions import Length, Trim
-
-from kleinmann.contrib import test
 from tests.testmodels import Event, Team, Tournament
 
 

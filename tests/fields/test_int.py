@@ -1,7 +1,6 @@
+from kleinmann.contrib import test
 from kleinmann.exceptions import IntegrityError
 from kleinmann.expressions import F
-
-from kleinmann.contrib import test
 from tests import testmodels
 
 

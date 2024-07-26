@@ -12,6 +12,14 @@ from typing import (
     cast,
 )
 
+from pypika import Case as PypikaCase
+from pypika import Field as PypikaField
+from pypika import Table
+from pypika.functions import DistinctOptionFunction
+from pypika.terms import ArithmeticExpression, Criterion, Term
+from pypika.terms import Function as PypikaFunction
+from pypika.utils import format_alias_sql
+
 from kleinmann.exceptions import ConfigurationError, FieldError, OperationalError
 from kleinmann.fields.relational import (
     BackwardFKRelation,
@@ -20,20 +28,13 @@ from kleinmann.fields.relational import (
 )
 from kleinmann.filters import FilterInfoDict
 from kleinmann.query_utils import QueryModifier, _get_joins_for_related_field
-from pypika import Case as PypikaCase
-from pypika import Field as PypikaField
-from pypika import Table
-from pypika.functions import DistinctOptionFunction
-from pypika.terms import ArithmeticExpression, Criterion
-from pypika.terms import Function as PypikaFunction
-from pypika.terms import Term
-from pypika.utils import format_alias_sql
 
 if TYPE_CHECKING:  # pragma: nocoverage
+    from pypika.queries import Selectable
+
     from kleinmann.fields.base import Field
     from kleinmann.models import Model
     from kleinmann.queryset import AwaitableQuery
-    from pypika.queries import Selectable
 
 
 class F(PypikaField):  # type: ignore

@@ -1,7 +1,6 @@
+from kleinmann.contrib import test
 from kleinmann.exceptions import OperationalError, TransactionManagementError
 from kleinmann.transactions import atomic, in_transaction
-
-from kleinmann.contrib import test
 from tests.testmodels import CharPkModel, Event, Team, Tournament
 
 

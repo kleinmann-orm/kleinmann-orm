@@ -2,9 +2,10 @@ import json
 import operator
 from typing import Any, Callable, Dict, List
 
-from kleinmann.filters import is_null, not_equal, not_null
 from pypika.enums import JSONOperators
 from pypika.terms import BasicCriterion, Criterion, Term, ValueWrapper
+
+from kleinmann.filters import is_null, not_equal, not_null
 
 
 def postgres_json_contains(field: Term, value: str) -> Criterion:

@@ -53,9 +53,7 @@ pydantic = { version = "^2.0,!=2.7.0", optional = true }
 mypy = "*"
 ruff = "*"
 darglint = "*"
-pylint = "*"
 pygments = "*"
-bandit = "*"
 black = "*"
 codespell = "*"
 # Test tools
@@ -98,12 +96,9 @@ accel = ["ciso8601", "uvloop", "orjson"]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
-[tool.isort]
-profile = "black"
-
 [tool.black]
 line-length = 100
-target-version = ["py38", "py39", "py310", "py311"]
+target-version = ["py38", "py39", "py310", "py311", "py312"]
 
 [tool.mypy]
 pretty = true
@@ -163,17 +158,6 @@ disallow_untyped_defs = false
 module = ["kleinmann.backends.base.client"]
 disallow_untyped_defs = false
 
-[tool.flake8]
-ignore = "E203,E501,W503,DAR101,DAR201,DAR402"
-max-line-length = 100
-per-file-ignores = [
-    "kleinmann/__init__.py:F401",
-    "kleinmann/fields/__init__.py:F401",
-    "kleinmann/backends/base/client.py:DAR401,DAR202",
-    "kleinmann/contrib/test/__init__.py:DAR401",
-]
-docstring_style = "sphinx"
-
 [tool.pytest.ini_options]
 filterwarnings = [
     'ignore:`pk` is deprecated:DeprecationWarning',
@@ -188,7 +172,15 @@ source = ["kleinmann"]
 show_missing = true
 
 [tool.ruff.lint]
-ignore = ["E501"]
+ignore = [
+    "E501",     # line too long
+    "PLW2901",  # `for` loop variable `value` overwritten by assignment target
+    "PLW0603",  # Using the global statement is discouraged
+]
+isort = { force-single-line = false, known-first-party = ["kleinmann"] }
+extend-select = ["I", "PLE", "PLW", "S", "W"]
 
-[tool.bandit]
-exclude_dirs = ["tests", 'examples/*/_tests.py', "conftest.py"]
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S"]
+"examples/*/_tests.py" = ["S"]
+"conftest.py" = ["S"]

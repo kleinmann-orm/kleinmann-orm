@@ -3,9 +3,8 @@ Testing Models for a bad/wrong relation reference
 Wrong reference. fk field parameter `to_field` with non exist field.
 """
 
-from kleinmann.models import Model
-
 from kleinmann import fields
+from kleinmann.models import Model
 
 
 class Tournament(Model):

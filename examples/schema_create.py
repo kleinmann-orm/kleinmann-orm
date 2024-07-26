@@ -2,10 +2,9 @@
 This example demonstrates SQL Schema generation for each DB type supported.
 """
 
+from kleinmann import Kleinmann, connections, fields, run_async
 from kleinmann.models import Model
 from kleinmann.utils import get_schema_sql
-
-from kleinmann import Kleinmann, connections, fields, run_async
 
 
 class Tournament(Model):

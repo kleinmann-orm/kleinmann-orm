@@ -1,8 +1,7 @@
 from decimal import Decimal
 
-from kleinmann.exceptions import ValidationError
-
 from kleinmann.contrib import test
+from kleinmann.exceptions import ValidationError
 from tests.testmodels import ValidatorModel
 
 

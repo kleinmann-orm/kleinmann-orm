@@ -1,46 +1,28 @@
-checkfiles = kleinmann/ examples/ tests/ conftest.py
+.PHONY: $(MAKECMDGOALS)
+MAKEFLAGS += --no-print-directory
+##
+##  🚧 Kleinmann ORM developer tools
+##
+SOURCE=kleinmann tests examples conftest.py
 py_warn = PYTHONDEVMODE=1
 pytest_opts = -n auto --cov=kleinmann --cov-append --tb=native -q
 
-help:
-	@echo  "Kleinmann ORM development makefile"
-	@echo
-	@echo  "usage: make <target>"
-	@echo  "Targets:"
-	@echo  "    up      Updates dev/test dependencies"
-	@echo  "    deps    Ensure dev/test dependencies are installed"
-	@echo  "    check	Checks that build is sane"
-	@echo  "    test	Runs all tests"
-	@echo  "    docs 	Builds the documentation"
-	@echo  "    style   Auto-formats the code"
+help:           ## Show this help (default)
+	@grep -Fh "##" $(MAKEFILE_LIST) | grep -Fv grep -F | sed -e 's/\\$$//' | sed -e 's/##//'
 
-up:
-	@poetry update
+##
 
-deps:
-	@poetry install -E accel
+ci: all
+all:            ## Run an entire CI pipeline
+	make format lint test_all
 
-check: deps build
-ifneq ($(shell which black),)
-	black --check $(checkfiles) || (echo "Please run 'make style' to auto-fix style issues" && false)
-endif
-	ruff check $(checkfiles)
-	mypy $(checkfiles)
-	#pylint -d C,W,R $(checkfiles)
-	#bandit -r $(checkfiles)make
-	twine check dist/*
+format:         ## Format with all tools
+	make black
 
-lint: deps build
-ifneq ($(shell which black),)
-	black --check $(checkfiles) || (echo "Please run 'make style' to auto-fix style issues" && false)
-endif
-	ruff check $(checkfiles)
-	mypy $(checkfiles)
-	#pylint $(checkfiles)
-	bandit -c pyproject.toml -r $(checkfiles)
-	twine check dist/*
+lint:           ## Lint with all tools
+	make ruff mypy
 
-test: deps
+test:           ## Run tests
 	$(py_warn) KLEINMANN_TEST_DB=sqlite://:memory: pytest $(pytest_opts)
 
 test_sqlite:
@@ -49,29 +31,43 @@ test_sqlite:
 test_postgres:
 	python -V | grep PyPy || $(py_warn) KLEINMANN_TEST_DB="asyncpg://postgres:$(KLEINMANN_POSTGRES_PASS)@127.0.0.1:5432/test_\{\}" pytest $(pytest_opts) --cov-append --cov-report=
 
-_testall: test_sqlite test_postgres
+test_all:       ## Run tests with all databases
+	make test_sqlite test_postgres
 	coverage report
 
-testall: deps _testall
+##
 
-ci: check _testall
+black:          ## Format with black
+	black ${SOURCE}
 
-docs: deps
+ruff:           ## Lint with ruff
+	ruff check --fix --unsafe-fixes ${SOURCE}
+
+mypy:           ## Lint with mypy
+	mypy ${SOURCE}
+
+##
+
+install:        ## Install all dependencies
+	poetry install -E accel
+
+update:         ## Update all dependencies
+	poetry update
+
+docs:           ## Build the documentation
+	make install
 	rm -fR ./build
 	sphinx-build -M html docs build
 
-style: deps
-	isort -src $(checkfiles)
-	black $(checkfiles)
-
-build: deps
+build:          ## Build and verify the package
+	make install
 	rm -fR dist/
 	poetry build
+	twine check dist/*
 
-publish: deps build
-	twine upload dist/*
+##
 
 loc:
-	@for path in "kleinmann" "examples" "tests"; do \
+	@for path in $(SOURCE); do \
 		find $$path -name "*.py" -print0 | xargs -0 wc -l | tail -n 1 | cut -d " " -f 2 | xargs echo $$path; \
 	done

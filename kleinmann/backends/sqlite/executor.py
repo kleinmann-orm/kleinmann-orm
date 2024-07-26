@@ -3,10 +3,10 @@ from decimal import Decimal
 from typing import Optional, Type, Union
 
 import pytz
-from kleinmann.backends.base.executor import BaseExecutor
 from pypika import Parameter
 
 from kleinmann import Model, fields, timezone
+from kleinmann.backends.base.executor import BaseExecutor
 from kleinmann.fields import (
     BigIntField,
     BooleanField,

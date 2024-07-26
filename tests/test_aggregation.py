@@ -1,9 +1,8 @@
+from kleinmann.contrib import test
 from kleinmann.contrib.test.condition import In
 from kleinmann.exceptions import ConfigurationError
 from kleinmann.expressions import Q
 from kleinmann.functions import Avg, Coalesce, Concat, Count, Lower, Max, Min, Sum, Trim
-
-from kleinmann.contrib import test
 from tests.testmodels import Author, Book, Event, MinRelation, Team, Tournament
 
 

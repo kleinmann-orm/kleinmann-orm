@@ -1,6 +1,5 @@
-from kleinmann.exceptions import OperationalError
-
 from kleinmann.contrib import test
+from kleinmann.exceptions import OperationalError
 from tests import testmodels
 
 

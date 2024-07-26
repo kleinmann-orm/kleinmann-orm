@@ -1,3 +1,4 @@
+from kleinmann import Model, fields
 from kleinmann.contrib.postgres.fields import TSVectorField
 from kleinmann.contrib.postgres.indexes import (
     BloomIndex,
@@ -8,8 +9,6 @@ from kleinmann.contrib.postgres.indexes import (
     PostgreSQLIndex,
     SpGistIndex,
 )
-
-from kleinmann import Model, fields
 
 
 class Index(Model):

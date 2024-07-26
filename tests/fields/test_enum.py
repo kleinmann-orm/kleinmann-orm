@@ -1,8 +1,7 @@
 from enum import IntEnum
 
-from kleinmann.exceptions import ConfigurationError, IntegrityError
-
 from kleinmann.contrib import test
+from kleinmann.exceptions import ConfigurationError, IntegrityError
 from kleinmann.fields import CharEnumField, IntEnumField
 from tests import testmodels
 

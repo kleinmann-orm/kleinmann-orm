@@ -1,8 +1,7 @@
+from kleinmann import Kleinmann, fields, run_async
 from kleinmann.expressions import Q
 from kleinmann.functions import Coalesce, Count, Length, Lower, Min, Sum, Trim, Upper
 from kleinmann.models import Model
-
-from kleinmann import Kleinmann, fields, run_async
 
 
 class Tournament(Model):

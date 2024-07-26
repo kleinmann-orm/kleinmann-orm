@@ -1,10 +1,9 @@
 import uuid
 from typing import Any
 
-from kleinmann.exceptions import ConfigurationError
-
 from kleinmann import fields
 from kleinmann.contrib import test
+from kleinmann.exceptions import ConfigurationError
 from tests.testmodels import (
     CharFkRelatedModel,
     CharM2MRelatedModel,
