@@ -9,9 +9,6 @@ urlparse.uses_netloc.append("postgres")
 urlparse.uses_netloc.append("asyncpg")
 urlparse.uses_netloc.append("psycopg")
 urlparse.uses_netloc.append("sqlite")
-urlparse.uses_netloc.append("mysql")
-urlparse.uses_netloc.append("oracle")
-urlparse.uses_netloc.append("mssql")
 DB_LOOKUP: Dict[str, Dict[str, Any]] = {
     "psycopg": {
         "engine": "kleinmann.backends.psycopg",
@@ -63,61 +60,6 @@ DB_LOOKUP: Dict[str, Dict[str, Any]] = {
         "vmap": {"path": "file_path"},
         "defaults": {"journal_mode": "WAL", "journal_size_limit": 16384},
         "cast": {"journal_size_limit": int},
-    },
-    "mysql": {
-        "engine": "kleinmann.backends.mysql",
-        "vmap": {
-            "path": "database",
-            "hostname": "host",
-            "port": "port",
-            "username": "user",
-            "password": "password",
-        },
-        "defaults": {"port": 3306, "charset": "utf8mb4", "sql_mode": "STRICT_TRANS_TABLES"},
-        "cast": {
-            "minsize": int,
-            "maxsize": int,
-            "connect_timeout": float,
-            "echo": bool,
-            "no_delay": bool,
-            "use_unicode": bool,
-            "pool_recycle": int,
-            "ssl": bool,
-        },
-    },
-    "mssql": {
-        "engine": "kleinmann.backends.mssql",
-        "vmap": {
-            "path": "database",
-            "hostname": "host",
-            "port": "port",
-            "username": "user",
-            "password": "password",
-        },
-        "defaults": {"port": 1433},
-        "cast": {
-            "minsize": int,
-            "maxsize": int,
-            "echo": bool,
-            "pool_recycle": int,
-        },
-    },
-    "oracle": {
-        "engine": "kleinmann.backends.oracle",
-        "vmap": {
-            "path": "database",
-            "hostname": "host",
-            "port": "port",
-            "username": "user",
-            "password": "password",
-        },
-        "defaults": {"port": 1521},
-        "cast": {
-            "minsize": int,
-            "maxsize": int,
-            "echo": bool,
-            "pool_recycle": int,
-        },
     },
 }
 # Create an alias for backwards compatibility

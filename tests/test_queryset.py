@@ -1,6 +1,5 @@
 from typing import Type
 
-from kleinmann.contrib.test.condition import NotEQ
 from kleinmann.exceptions import (
     DoesNotExist,
     FieldError,
@@ -576,41 +575,22 @@ class TestQueryset(test.TestCase):
         sql3 = IntFields.filter(pk=1).only("id").select_for_update(skip_locked=True).sql()
         sql4 = IntFields.filter(pk=1).only("id").select_for_update(of=("intfields",)).sql()
 
-        dialect = self.db.schema_generator.DIALECT
-        if dialect == "postgres":
-            self.assertEqual(
-                sql1,
-                'SELECT "id" "id" FROM "intfields" WHERE "id"=1 FOR UPDATE',
-            )
-            self.assertEqual(
-                sql2,
-                'SELECT "id" "id" FROM "intfields" WHERE "id"=1 FOR UPDATE NOWAIT',
-            )
-            self.assertEqual(
-                sql3,
-                'SELECT "id" "id" FROM "intfields" WHERE "id"=1 FOR UPDATE SKIP LOCKED',
-            )
-            self.assertEqual(
-                sql4,
-                'SELECT "id" "id" FROM "intfields" WHERE "id"=1 FOR UPDATE OF "intfields"',
-            )
-        elif dialect == "mysql":
-            self.assertEqual(
-                sql1,
-                "SELECT `id` `id` FROM `intfields` WHERE `id`=1 FOR UPDATE",
-            )
-            self.assertEqual(
-                sql2,
-                "SELECT `id` `id` FROM `intfields` WHERE `id`=1 FOR UPDATE NOWAIT",
-            )
-            self.assertEqual(
-                sql3,
-                "SELECT `id` `id` FROM `intfields` WHERE `id`=1 FOR UPDATE SKIP LOCKED",
-            )
-            self.assertEqual(
-                sql4,
-                "SELECT `id` `id` FROM `intfields` WHERE `id`=1 FOR UPDATE OF `intfields`",
-            )
+        self.assertEqual(
+            sql1,
+            'SELECT "id" "id" FROM "intfields" WHERE "id"=1 FOR UPDATE',
+        )
+        self.assertEqual(
+            sql2,
+            'SELECT "id" "id" FROM "intfields" WHERE "id"=1 FOR UPDATE NOWAIT',
+        )
+        self.assertEqual(
+            sql3,
+            'SELECT "id" "id" FROM "intfields" WHERE "id"=1 FOR UPDATE SKIP LOCKED',
+        )
+        self.assertEqual(
+            sql4,
+            'SELECT "id" "id" FROM "intfields" WHERE "id"=1 FOR UPDATE OF "intfields"',
+        )
 
     async def test_select_related(self):
         tournament = await Tournament.create(name="1")
@@ -656,7 +636,6 @@ class TestQueryset(test.TestCase):
         ret = await Tournament.filter(pk=t1.pk).annotate(count=RawSQL("count(*)")).values("count")
         self.assertEqual(ret, [{"count": 1}])
 
-    @test.requireCapability(dialect=NotEQ("mssql"))
     async def test_raw_sql_select(self):
         t1 = await Tournament.create(id=1, name="1")
         ret = (

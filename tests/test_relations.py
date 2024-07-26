@@ -1,4 +1,3 @@
-from kleinmann.contrib.test.condition import NotIn
 from kleinmann.exceptions import FieldError, NoValuesFetched
 from kleinmann.functions import Count, Trim
 
@@ -360,7 +359,6 @@ class TestRelations(test.TestCase):
         )
         self.assertIsNone(pair.right.extra)  # should be None
 
-    @test.requireCapability(dialect=NotIn("mssql", "mysql"))
     async def test_0_value_fk(self):
         """ForegnKeyField should exits even if the the source_field looks like false, but not None
         src: https://github.com/kleinmann-orm/kleinmann-orm/issues/1274

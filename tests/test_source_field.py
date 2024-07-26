@@ -5,7 +5,6 @@ This module does a series of use tests on a non-source_field model,
 This is to test that behaviour doesn't change when one defined source_field parameters.
 """
 
-from kleinmann.contrib.test.condition import NotEQ
 from kleinmann.expressions import F, Q
 from kleinmann.functions import Coalesce, Count, Length, Lower, Trim, Upper
 
@@ -221,7 +220,6 @@ class StraightFieldTests(test.TestCase):
         self.assertEqual(len(obj), 1)
         self.assertEqual(obj[0].chars, "aaa")
 
-    @test.requireCapability(dialect=NotEQ("mssql"))
     async def test_filter_by_aggregation_field_length(self):
         await self.model.create(chars="aaa")
         await self.model.create(chars="bbbbb")

@@ -54,11 +54,6 @@ async def run():
     sql = get_schema_sql(connections.get("default"), safe=False)
     print(sql)
 
-    print("\n\nMySQL:\n")
-    await Kleinmann.init(db_url="mysql://root:@127.0.0.1:3306/", modules={"models": ["__main__"]})
-    sql = get_schema_sql(connections.get("default"), safe=False)
-    print(sql)
-
     print("\n\nPostgreSQL:\n")
     await Kleinmann.init(
         db_url="postgres://postgres:@127.0.0.1:5432/", modules={"models": ["__main__"]}

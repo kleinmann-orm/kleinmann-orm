@@ -37,10 +37,6 @@ class TestCapabilities(test.TestCase):
     def test_dialect_sqlite(self):
         self.assertEqual(self.caps.dialect, "sqlite")
 
-    @test.requireCapability(dialect="mysql")
-    def test_dialect_mysql(self):
-        self.assertEqual(self.caps.dialect, "mysql")
-
     @test.requireCapability(dialect="postgres")
     def test_dialect_postgres(self):
         self.assertEqual(self.caps.dialect, "postgres")
