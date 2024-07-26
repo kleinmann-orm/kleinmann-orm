@@ -10,7 +10,7 @@ readme = "README.md"
 homepage = "https://github.com/kleinmann-orm/kleinmann-orm"
 repository = "https://github.com/kleinmann-orm/kleinmann-orm.git"
 documentation = "https://github.com/kleinmann-orm/kleinmann-orm"
-keywords = ["sql", "mysql", "postgres", "psql", "sqlite", "aiosqlite", "asyncpg", "relational", "database", "rdbms", "orm", "object mapper", "async", "asyncio", "aio", "psycopg"]
+keywords = ["sql", "postgres", "sqlite", "aiosqlite", "asyncpg", "relational", "database", "rdbms", "orm", "object mapper", "async", "asyncio", "aio"]
 packages = [
     { include = "kleinmann" }
 ]
@@ -45,9 +45,7 @@ pytz = "*"
 ciso8601 = { version = "*", markers = "sys_platform != 'win32' and implementation_name == 'cpython'", optional = true }
 uvloop = { version = "*", markers = "sys_platform != 'win32' and implementation_name == 'cpython'", optional = true }
 orjson = { version = "*", optional = true }
-asyncpg = { version = "*", optional = true }
-# FIXME: kleinmann/backends/psycopg/client.py:142
-psycopg = { extras = ["pool", "binary"], version = "3.1.19", optional = true }
+asyncpg = "*"
 pydantic = { version = "^2.0,!=2.7.0", optional = true }
 
 [tool.poetry.dev-dependencies]
@@ -95,8 +93,6 @@ docutils = "*"
 
 [tool.poetry.extras]
 accel = ["ciso8601", "uvloop", "orjson"]
-psycopg = ["psycopg"]
-asyncpg = ["asyncpg"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
