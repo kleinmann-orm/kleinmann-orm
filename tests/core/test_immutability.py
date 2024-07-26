@@ -1,6 +1,6 @@
 import unittest
 
-from pypika import Query, Tables
+from kleinmann_core import Query, Tables
 
 
 class ImmutabilityTests(unittest.TestCase):

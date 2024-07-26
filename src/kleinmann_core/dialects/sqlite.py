@@ -1,8 +1,8 @@
 from typing import Any
 
-from pypika.enums import Dialects
-from pypika.queries import Query, QueryBuilder
-from pypika.terms import ValueWrapper
+from kleinmann_core.enums import Dialects
+from kleinmann_core.queries import Query, QueryBuilder
+from kleinmann_core.terms import ValueWrapper
 
 
 class SQLLiteValueWrapper(ValueWrapper):

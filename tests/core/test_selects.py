@@ -1,8 +1,10 @@
 import unittest
 
-from pypika import SYSTEM_TIME, AliasedQuery, Case, EmptyCriterion
-from pypika import Field as F
-from pypika import (
+from kleinmann_core import (
+    SYSTEM_TIME,
+    AliasedQuery,
+    Case,
+    EmptyCriterion,
     Index,
     MySQLQuery,
     NullValue,
@@ -14,8 +16,9 @@ from pypika import (
     Table,
     Tables,
 )
-from pypika import functions as fn
-from pypika.terms import Field, ValueWrapper
+from kleinmann_core import Field as F
+from kleinmann_core import functions as fn
+from kleinmann_core.terms import Field, ValueWrapper
 
 __author__ = "Timothy Heys"
 __email__ = "theys@kayak.com"

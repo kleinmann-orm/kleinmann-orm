@@ -1,6 +1,6 @@
 import unittest
 
-from pypika import (
+from kleinmann_core import (
     SYSTEM_TIME,
     Field,
     Interval,
@@ -12,7 +12,7 @@ from pypika import (
     Table,
     Tables,
 )
-from pypika import functions as fn
+from kleinmann_core import functions as fn
 
 __author__ = "Timothy Heys"
 __email__ = "theys@kayak.com"

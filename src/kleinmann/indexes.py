@@ -1,6 +1,6 @@
 from typing import TYPE_CHECKING, Optional, Tuple, Type
 
-from pypika.terms import Term, ValueWrapper
+from kleinmann_core.terms import Term, ValueWrapper
 
 if TYPE_CHECKING:
     from kleinmann import Model

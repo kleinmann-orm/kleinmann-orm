@@ -1,12 +1,19 @@
 import unittest
 
-from pypika import AliasedQuery, Case
-from pypika import Field as F
-from pypika import MySQLQuery, PostgreSQLQuery, Query, Table, Tables
-from pypika import functions as fn
-from pypika.functions import Avg
-from pypika.terms import Values
-from pypika.utils import QueryException
+from kleinmann_core import (
+    AliasedQuery,
+    Case,
+    MySQLQuery,
+    PostgreSQLQuery,
+    Query,
+    Table,
+    Tables,
+)
+from kleinmann_core import Field as F
+from kleinmann_core import functions as fn
+from kleinmann_core.functions import Avg
+from kleinmann_core.terms import Values
+from kleinmann_core.utils import QueryException
 
 __author__ = "Timothy Heys"
 __email__ = "theys@kayak.com"

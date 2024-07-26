@@ -5,7 +5,7 @@ from functools import wraps
 from typing import Any, Callable, List, Optional, Sequence, Tuple, TypeVar
 
 import aiosqlite
-from pypika import SQLLiteQuery
+from kleinmann_core import SQLLiteQuery
 
 from kleinmann.backends.base.client import (
     BaseDBAsyncClient,

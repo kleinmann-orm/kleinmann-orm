@@ -1,7 +1,7 @@
 import unittest
 
-from pypika import Case, Field, Table
-from pypika.terms import Star
+from kleinmann_core import Case, Field, Table
+from kleinmann_core.terms import Star
 
 
 class TablesTests(unittest.TestCase):

@@ -1,8 +1,8 @@
 import unittest
 
-from pypika import Array, Bracket, PostgreSQLQuery, Query, Table, Tables, Tuple
-from pypika.functions import Coalesce, NullIf, Sum
-from pypika.terms import Field
+from kleinmann_core import Array, Bracket, PostgreSQLQuery, Query, Table, Tables, Tuple
+from kleinmann_core.functions import Coalesce, NullIf, Sum
+from kleinmann_core.terms import Field
 
 
 class TupleTests(unittest.TestCase):
@@ -48,7 +48,7 @@ class TupleTests(unittest.TestCase):
             str(q),
         )
 
-    def test_tuple_in_using_pypika_tuples(self):
+    def test_tuple_in_using_kleinmann_core_tuples(self):
         q = (
             Query.from_(self.table_abc)
             .select(self.table_abc.foo, self.table_abc.bar)

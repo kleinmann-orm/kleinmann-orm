@@ -1,8 +1,15 @@
 import unittest
 
-from pypika import Query, Table
-from pypika.pseudocolumns import ColumnValue, ObjectID, ObjectValue, RowID, RowNum, SysDate
-from pypika.terms import PseudoColumn
+from kleinmann_core import Query, Table
+from kleinmann_core.pseudocolumns import (
+    ColumnValue,
+    ObjectID,
+    ObjectValue,
+    RowID,
+    RowNum,
+    SysDate,
+)
+from kleinmann_core.terms import PseudoColumn
 
 
 class PseudoColumnsTest(unittest.TestCase):

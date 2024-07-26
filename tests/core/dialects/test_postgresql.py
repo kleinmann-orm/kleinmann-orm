@@ -1,8 +1,8 @@
 import unittest
 from collections import OrderedDict
 
-from pypika import JSON, Array, Field, QueryException, Table
-from pypika.dialects import PostgreSQLQuery
+from kleinmann_core import JSON, Array, Field, QueryException, Table
+from kleinmann_core.dialects import PostgreSQLQuery
 
 
 class InsertTests(unittest.TestCase):

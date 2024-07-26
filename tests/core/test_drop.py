@@ -1,6 +1,6 @@
 import unittest
 
-from pypika import Columns, Query, Tables
+from kleinmann_core import Columns, Query, Tables
 
 
 class DropTableTests(unittest.TestCase):

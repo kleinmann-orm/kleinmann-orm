@@ -1,7 +1,7 @@
 import unittest
 
-from pypika import Column, Columns, Query, Tables
-from pypika.terms import ValueWrapper
+from kleinmann_core import Column, Columns, Query, Tables
+from kleinmann_core.terms import ValueWrapper
 
 
 class CreateTableTests(unittest.TestCase):

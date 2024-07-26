@@ -14,7 +14,7 @@ from typing import (
     overload,
 )
 
-from pypika import Table
+from kleinmann_core import Table
 from typing_extensions import Literal
 
 from kleinmann.exceptions import ConfigurationError, NoValuesFetched, OperationalError

@@ -16,7 +16,7 @@ from typing import (
     overload,
 )
 
-from pypika.terms import Term
+from kleinmann_core.terms import Term
 
 from kleinmann.exceptions import ConfigurationError, ValidationError
 from kleinmann.validators import Validator
@@ -113,7 +113,7 @@ class Field(Generic[VALUE], metaclass=_FieldMeta):
         Is this field able to be DB-generated?
 
     .. attribute:: function_cast
-        :annotation: Optional[pypika.Term] = None
+        :annotation: Optional[kleinmann_core.Term] = None
 
         A casting term that we need to apply in case the DB needs emulation help.
 

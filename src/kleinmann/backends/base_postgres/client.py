@@ -12,7 +12,7 @@ from typing import (
     Union,
 )
 
-from pypika import PostgreSQLQuery
+from kleinmann_core import PostgreSQLQuery
 
 from kleinmann.backends.base.client import (
     BaseDBAsyncClient,

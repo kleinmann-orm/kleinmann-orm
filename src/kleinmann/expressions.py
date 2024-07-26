@@ -12,13 +12,13 @@ from typing import (
     cast,
 )
 
-from pypika import Case as PypikaCase
-from pypika import Field as PypikaField
-from pypika import Table
-from pypika.functions import DistinctOptionFunction
-from pypika.terms import ArithmeticExpression, Criterion, Term
-from pypika.terms import Function as PypikaFunction
-from pypika.utils import format_alias_sql
+from kleinmann_core import Case as PypikaCase
+from kleinmann_core import Field as PypikaField
+from kleinmann_core import Table
+from kleinmann_core.functions import DistinctOptionFunction
+from kleinmann_core.terms import ArithmeticExpression, Criterion, Term
+from kleinmann_core.terms import Function as PypikaFunction
+from kleinmann_core.utils import format_alias_sql
 
 from kleinmann.exceptions import ConfigurationError, FieldError, OperationalError
 from kleinmann.fields.relational import (
@@ -30,7 +30,7 @@ from kleinmann.filters import FilterInfoDict
 from kleinmann.query_utils import QueryModifier, _get_joins_for_related_field
 
 if TYPE_CHECKING:  # pragma: nocoverage
-    from pypika.queries import Selectable
+    from kleinmann_core.queries import Selectable
 
     from kleinmann.fields.base import Field
     from kleinmann.models import Model
@@ -361,7 +361,7 @@ class Q(Expression):
         Resolves the logical Q chain into the parts of a SQL statement.
 
         :param model: The Model this Q Expression should be resolved on.
-        :param table: ``pypika.Table`` to keep track of the virtual SQL table
+        :param table: ``kleinmann_core.Table`` to keep track of the virtual SQL table
             (to allow self referential joins)
         """
         if self.filters:
@@ -377,9 +377,9 @@ class Function(Expression):
     :param default_values: Extra parameters to the function.
 
     .. attribute:: database_func
-        :annotation: pypika.terms.Function
+        :annotation: kleinmann_core.terms.Function
 
-        The pypika function this represents.
+        The kleinmann_core function this represents.
 
     .. attribute:: populate_field_object
         :annotation: bool = False
@@ -464,7 +464,7 @@ class Function(Expression):
         Used to resolve the Function statement for SQL generation.
 
         :param model: Model the function is applied on to.
-        :param table: ``pypika.Table`` to keep track of the virtual SQL table
+        :param table: ``kleinmann_core.Table`` to keep track of the virtual SQL table
             (to allow self referential joins)
         :return: Dict with keys ``"joins"`` and ``"fields"``
         """

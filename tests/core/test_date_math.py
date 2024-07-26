@@ -1,8 +1,8 @@
 import unittest
 
-from pypika import Field as F
-from pypika import Interval
-from pypika.enums import Dialects
+from kleinmann_core import Field as F
+from kleinmann_core import Interval
+from kleinmann_core.enums import Dialects
 
 dt = F("dt")
 

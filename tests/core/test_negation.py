@@ -1,8 +1,8 @@
 import unittest
 
-from pypika import Tables
-from pypika import functions as fn
-from pypika.terms import ValueWrapper
+from kleinmann_core import Tables
+from kleinmann_core import functions as fn
+from kleinmann_core.terms import ValueWrapper
 
 
 class NegationTests(unittest.TestCase):

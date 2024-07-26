@@ -1,11 +1,10 @@
 from copy import copy
 from functools import reduce
-from typing import Any, List, Optional, Sequence
+from typing import Any, List, Optional, Sequence, Type, Union
 from typing import Tuple as TypedTuple
-from typing import Type, Union
 
-from pypika.enums import Dialects, JoinType, SetOperation
-from pypika.terms import (
+from kleinmann_core.enums import Dialects, JoinType, SetOperation
+from kleinmann_core.terms import (
     ArithmeticExpression,
     Criterion,
     EmptyCriterion,
@@ -20,7 +19,7 @@ from pypika.terms import (
     Tuple,
     ValueWrapper,
 )
-from pypika.utils import (
+from kleinmann_core.utils import (
     JoinException,
     QueryException,
     RollupException,
@@ -316,12 +315,14 @@ class Column:
         column_sql = "{name}{type}{nullable}{default}".format(
             name=self.get_name_sql(**kwargs),
             type=" {}".format(self.type) if self.type else "",
-            nullable=" {}".format("NULL" if self.nullable else "NOT NULL")
-            if self.nullable is not None
-            else "",
-            default=" {}".format("DEFAULT " + self.default.get_sql(**kwargs))
-            if self.default
-            else "",
+            nullable=(
+                " {}".format("NULL" if self.nullable else "NOT NULL")
+                if self.nullable is not None
+                else ""
+            ),
+            default=(
+                " {}".format("DEFAULT " + self.default.get_sql(**kwargs)) if self.default else ""
+            ),
         )
 
         return column_sql
@@ -378,7 +379,7 @@ _TableClass = Table
 
 class Query:
     """
-    Query is the primary class and entry point in pypika. It is used to build queries iteratively using the builder
+    Query is the primary class and entry point in kleinmann_core. It is used to build queries iteratively using the builder
     design
     pattern.
 
@@ -672,7 +673,7 @@ class _SetOperation(Selectable, Term):
 
 class QueryBuilder(Selectable, Term):
     """
-    Query Builder is the main class in pypika which stores the state of a query and offers functions which allow the
+    Query Builder is the main class in kleinmann_core which stores the state of a query and offers functions which allow the
     state to be branched immutably.
     """
 
@@ -1253,7 +1254,9 @@ class QueryBuilder(Selectable, Term):
 
     def _select_field_str(self, term: str) -> None:
         if 0 == len(self._from):
-            raise QueryException("Cannot select {term}, no FROM table specified.".format(term=term))
+            raise QueryException(
+                "Cannot select {term}, no FROM table specified.".format(term=term)  # noqa: S608
+            )
 
         if term == "*":
             self._select_star = True

@@ -18,7 +18,7 @@ from typing import (
     Union,
 )
 
-from pypika.enums import (
+from kleinmann_core.enums import (
     Arithmetic,
     Boolean,
     Comparator,
@@ -28,7 +28,7 @@ from pypika.enums import (
     Matching,
     Order,
 )
-from pypika.utils import (
+from kleinmann_core.utils import (
     CaseException,
     FunctionException,
     builder,
@@ -39,7 +39,7 @@ from pypika.utils import (
 )
 
 if TYPE_CHECKING:
-    from pypika.queries import QueryBuilder, Selectable, Table
+    from kleinmann_core.queries import QueryBuilder, Selectable, Table
 
 NodeT = TypeVar("NodeT", bound="Node")
 
@@ -66,7 +66,7 @@ class Term(Node):
 
     @property
     def tables_(self) -> Set["Table"]:
-        from pypika import Table
+        from kleinmann_core import Table
 
         return set(self.find_(Table))
 
@@ -85,7 +85,7 @@ class Term(Node):
         :param val:
             Any value.
         :param wrapper_cls:
-            A pypika class which wraps a constant value so it can be handled as a component of the query.
+            A kleinmann_core class which wraps a constant value so it can be handled as a component of the query.
         :return:
             Raw string, number, or decimal values will be returned in a ValueWrapper.  Fields and other parts of the
             querybuilder will be returned as inputted.

@@ -1,7 +1,12 @@
 """
 Package for SQL analytic functions wrappers
 """
-from pypika.terms import AnalyticFunction, IgnoreNullsAnalyticFunction, WindowFrameAnalyticFunction
+
+from kleinmann_core.terms import (
+    AnalyticFunction,
+    IgnoreNullsAnalyticFunction,
+    WindowFrameAnalyticFunction,
+)
 
 
 class Preceding(WindowFrameAnalyticFunction.Edge):

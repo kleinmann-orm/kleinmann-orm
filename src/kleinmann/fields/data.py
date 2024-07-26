@@ -7,9 +7,9 @@ from enum import Enum, IntEnum
 from typing import TYPE_CHECKING, Any, Callable, Optional, Type, TypeVar, Union
 from uuid import UUID, uuid4
 
-from pypika import functions
-from pypika.enums import SqlTypes
-from pypika.terms import Term
+from kleinmann_core import functions
+from kleinmann_core.enums import SqlTypes
+from kleinmann_core.terms import Term
 
 from kleinmann import timezone
 from kleinmann.exceptions import ConfigurationError, FieldError

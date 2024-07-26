@@ -1,6 +1,6 @@
 import unittest
 
-from pypika import (
+from kleinmann_core import (
     FormatParameter,
     NamedParameter,
     NumericParameter,

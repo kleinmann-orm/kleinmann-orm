@@ -1,7 +1,7 @@
 from typing import Union
 
-from pypika.enums import Comparator
-from pypika.terms import BasicCriterion, Function, Term
+from kleinmann_core.enums import Comparator
+from kleinmann_core.terms import BasicCriterion, Function, Term
 
 from kleinmann.contrib.postgres.functions import ToTsQuery, ToTsVector
 

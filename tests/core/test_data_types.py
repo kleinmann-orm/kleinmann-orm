@@ -1,7 +1,7 @@
 import unittest
 import uuid
 
-from pypika.terms import ValueWrapper
+from kleinmann_core.terms import ValueWrapper
 
 
 class StringTests(unittest.TestCase):

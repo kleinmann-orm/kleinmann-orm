@@ -1,9 +1,10 @@
 """
 Package for SQL functions wrappers
 """
-from pypika.enums import SqlTypes
-from pypika.terms import AggregateFunction, Function, Star
-from pypika.utils import builder
+
+from kleinmann_core.enums import SqlTypes
+from kleinmann_core.terms import AggregateFunction, Function, Star
+from kleinmann_core.utils import builder
 
 
 class DistinctOptionFunction(AggregateFunction):

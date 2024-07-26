@@ -1,11 +1,18 @@
 import unittest
 
-from pypika import SYSTEM_TIME, MySQLQuery, PostgreSQLQuery, Query, SQLLiteQuery, Table
+from kleinmann_core import (
+    SYSTEM_TIME,
+    MySQLQuery,
+    PostgreSQLQuery,
+    Query,
+    SQLLiteQuery,
+    Table,
+)
 
 __author__ = "Timothy Heys"
 __email__ = "theys@kayak.com"
 
-from pypika.terms import Star
+from kleinmann_core.terms import Star
 
 
 class DeleteTests(unittest.TestCase):

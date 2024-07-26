@@ -1,10 +1,10 @@
 import unittest
 from datetime import date, datetime
 
-from pypika import Criterion, EmptyCriterion, Field, Table
-from pypika import functions as fn
-from pypika.queries import QueryBuilder
-from pypika.terms import Mod
+from kleinmann_core import Criterion, EmptyCriterion, Field, Table
+from kleinmann_core import functions as fn
+from kleinmann_core.queries import QueryBuilder
+from kleinmann_core.terms import Mod
 
 __author__ = "Timothy Heys"
 __email__ = "theys@kayak.com"

@@ -1,8 +1,8 @@
 import unittest
 
-from pypika import Case, Field, Table
-from pypika import functions as fn
-from pypika.terms import Negative, ValueWrapper
+from kleinmann_core import Case, Field, Table
+from kleinmann_core import functions as fn
+from kleinmann_core.terms import Negative, ValueWrapper
 
 
 class IsAggregateTests(unittest.TestCase):

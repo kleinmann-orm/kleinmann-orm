@@ -1,6 +1,6 @@
 import unittest
 
-from pypika import (
+from kleinmann_core import (
     SYSTEM_TIME,
     AliasedQuery,
     MySQLQuery,
@@ -13,7 +13,7 @@ from pypika import (
 __author__ = "Timothy Heys"
 __email__ = "theys@kayak.com"
 
-from pypika.terms import Star
+from kleinmann_core.terms import Star
 
 
 class UpdateTests(unittest.TestCase):

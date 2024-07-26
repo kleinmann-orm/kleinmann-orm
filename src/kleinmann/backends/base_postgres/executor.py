@@ -1,9 +1,9 @@
 import uuid
 from typing import Optional, Sequence
 
-from pypika import Parameter
-from pypika.dialects import PostgreSQLQueryBuilder
-from pypika.terms import Term
+from kleinmann_core import Parameter
+from kleinmann_core.dialects import PostgreSQLQueryBuilder
+from kleinmann_core.terms import Term
 
 from kleinmann import Model
 from kleinmann.backends.base.executor import BaseExecutor

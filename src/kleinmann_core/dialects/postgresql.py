@@ -2,10 +2,10 @@ import itertools
 from copy import copy
 from typing import Any, Union
 
-from pypika.enums import Dialects
-from pypika.queries import Query, QueryBuilder
-from pypika.terms import ArithmeticExpression, Field, Function, Star, Term
-from pypika.utils import QueryException, builder
+from kleinmann_core.enums import Dialects
+from kleinmann_core.queries import Query, QueryBuilder
+from kleinmann_core.terms import ArithmeticExpression, Field, Function, Star, Term
+from kleinmann_core.utils import QueryException, builder
 
 
 class PostgreSQLQuery(Query):

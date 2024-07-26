@@ -62,7 +62,7 @@ def ignore_copy(func: Callable) -> Callable:
     recursion caused by deepcopy looking for magic functions in the class. Any class implementing __getattr__ that is
     meant to be deepcopy'd should use this decorator.
 
-    deepcopy is used by pypika in builder functions (decorated by @builder) to make the results immutable.  Any data
+    deepcopy is used by kleinmann_core in builder functions (decorated by @builder) to make the results immutable.  Any data
     model type class (stored in the Query instance) is copied.
     """
 

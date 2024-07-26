@@ -1,6 +1,6 @@
 import unittest
 
-from pypika import MySQLQuery, Table
+from kleinmann_core import MySQLQuery, Table
 
 
 class InsertTests(unittest.TestCase):

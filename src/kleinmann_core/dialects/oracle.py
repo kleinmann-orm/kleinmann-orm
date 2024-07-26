@@ -1,7 +1,7 @@
 from typing import Any
 
-from pypika.enums import Dialects
-from pypika.queries import Query, QueryBuilder
+from kleinmann_core.enums import Dialects
+from kleinmann_core.queries import Query, QueryBuilder
 
 
 class OracleQuery(Query):

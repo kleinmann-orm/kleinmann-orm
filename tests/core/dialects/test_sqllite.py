@@ -1,7 +1,7 @@
 import unittest
 
-from pypika import Table
-from pypika.dialects import SQLLiteQuery
+from kleinmann_core import Table
+from kleinmann_core.dialects import SQLLiteQuery
 
 
 class SelectTests(unittest.TestCase):

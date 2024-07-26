@@ -1,7 +1,7 @@
 from unittest import TestCase
 
-from pypika import Field, Query, Table
-from pypika.terms import AtTimezone
+from kleinmann_core import Field, Query, Table
+from kleinmann_core.terms import AtTimezone
 
 
 class FieldAliasTests(TestCase):

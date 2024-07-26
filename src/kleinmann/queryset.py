@@ -20,11 +20,11 @@ from typing import (
     overload,
 )
 
-from pypika import JoinType, Order, Table
-from pypika.analytics import Count
-from pypika.functions import Cast
-from pypika.queries import QueryBuilder
-from pypika.terms import Case, Field, Term, ValueWrapper
+from kleinmann_core import JoinType, Order, Table
+from kleinmann_core.analytics import Count
+from kleinmann_core.functions import Cast
+from kleinmann_core.queries import QueryBuilder
+from kleinmann_core.terms import Case, Field, Term, ValueWrapper
 from typing_extensions import Literal, Protocol
 
 from kleinmann.backends.base.client import BaseDBAsyncClient, Capabilities
@@ -187,7 +187,7 @@ class AwaitableQuery(Generic[MODEL]):
         Applies standard ordering to QuerySet.
 
         :param model: The Model this queryset is based on.
-        :param table: ``pypika.Table`` to keep track of the virtual SQL table
+        :param table: ``kleinmann_core.Table`` to keep track of the virtual SQL table
             (to allow self referential joins)
         :param orderings: What columns/order to order by
         :param annotations:  Annotations that may be ordered on

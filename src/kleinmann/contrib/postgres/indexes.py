@@ -1,6 +1,6 @@
 from typing import Optional, Tuple
 
-from pypika.terms import Term, ValueWrapper
+from kleinmann_core.terms import Term, ValueWrapper
 
 from kleinmann.indexes import PartialIndex
 

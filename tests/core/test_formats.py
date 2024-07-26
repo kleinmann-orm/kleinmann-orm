@@ -1,7 +1,7 @@
 import unittest
 
-from pypika import Query, Tables
-from pypika import functions as fn
+from kleinmann_core import Query, Tables
+from kleinmann_core import functions as fn
 
 
 class QuoteTests(unittest.TestCase):

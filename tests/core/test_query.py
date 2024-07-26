@@ -1,7 +1,7 @@
 import unittest
 
-from pypika import Case, Query, Tables, Tuple, functions
-from pypika.dialects import (
+from kleinmann_core import Case, Query, Tables, Tuple, functions
+from kleinmann_core.dialects import (
     MySQLLoadQueryBuilder,
     MySQLQuery,
     MySQLQueryBuilder,
@@ -10,7 +10,7 @@ from pypika.dialects import (
     SQLLiteQuery,
     SQLLiteQueryBuilder,
 )
-from pypika.queries import CreateQueryBuilder, DropQueryBuilder, QueryBuilder
+from kleinmann_core.queries import CreateQueryBuilder, DropQueryBuilder, QueryBuilder
 
 
 class QueryTablesTests(unittest.TestCase):

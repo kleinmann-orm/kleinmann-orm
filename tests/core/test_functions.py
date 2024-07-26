@@ -1,13 +1,11 @@
 import unittest
 
-from pypika import Case, CaseException, DatePart
-from pypika import Field as F
-from pypika import Query
-from pypika import Query as Q
-from pypika import Schema
-from pypika import Table as T
-from pypika import functions as fn
-from pypika.enums import Dialects, SqlTypes
+from kleinmann_core import Case, CaseException, DatePart, Query, Schema
+from kleinmann_core import Field as F
+from kleinmann_core import Query as Q
+from kleinmann_core import Table as T
+from kleinmann_core import functions as fn
+from kleinmann_core.enums import Dialects, SqlTypes
 
 
 class FunctionTests(unittest.TestCase):

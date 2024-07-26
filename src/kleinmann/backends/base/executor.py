@@ -19,9 +19,9 @@ from typing import (
     cast,
 )
 
-from pypika import JoinType, Parameter, Query, Table
-from pypika.queries import QueryBuilder
-from pypika.terms import ArithmeticExpression, Function
+from kleinmann_core import JoinType, Parameter, Query, Table
+from kleinmann_core.queries import QueryBuilder
+from kleinmann_core.terms import ArithmeticExpression, Function
 
 from kleinmann.exceptions import OperationalError
 from kleinmann.expressions import F, RawSQL
