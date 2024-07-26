@@ -1,4 +1,4 @@
-from pypika.terms import Function, Term
+from kleinmann_core.terms import Function, Term
 
 
 class ToTsVector(Function):  # type: ignore

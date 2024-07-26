@@ -38,7 +38,7 @@ Extending index is simply, you just need to inherit the `kleinmann.indexes.Index
 .. code-block:: python3
 
     from typing import Optional, Set
-    from pypika.terms import Term
+    from kleinmann_core.terms import Term
     from kleinmann.indexes import Index
 
     class FullTextIndex(Index):

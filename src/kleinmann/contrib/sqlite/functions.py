@@ -1,4 +1,4 @@
-from pypika.terms import Function
+from kleinmann_core.terms import Function
 
 
 class Random(Function):  # type: ignore

@@ -9,7 +9,7 @@ from inspect import isclass
 from types import ModuleType
 from typing import Coroutine, Dict, Iterable, List, Optional, Tuple, Type, Union, cast
 
-from pypika import Table
+from kleinmann_core import Table
 
 from kleinmann.backends.base.client import BaseDBAsyncClient
 from kleinmann.backends.base.config_generator import expand_db_url, generate_config

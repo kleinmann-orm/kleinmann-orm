@@ -2047,17 +2047,6 @@ files = [
 windows-terminal = ["colorama (>=0.4.6)"]
 
 [[package]]
-name = "pypika-tortoise"
-version = "0.1.6"
-description = "Forked from pypika and streamline just for tortoise-orm"
-optional = false
-python-versions = ">=3.7,<4.0"
-files = [
-    {file = "pypika-tortoise-0.1.6.tar.gz", hash = "sha256:d802868f479a708e3263724c7b5719a26ad79399b2a70cea065f4a4cadbebf36"},
-    {file = "pypika_tortoise-0.1.6-py3-none-any.whl", hash = "sha256:2d68bbb7e377673743cff42aa1059f3a80228d411fbcae591e4465e173109fd8"},
-]
-
-[[package]]
 name = "pytest"
 version = "8.3.2"
 description = "pytest: simple powerful testing with Python"
@@ -3156,4 +3145,4 @@ accel = ["ciso8601", "orjson", "uvloop"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "fc7d0368abe02908eb5ee23305cbf5b0a620bae4225ec1313203cdd10ccb4920"
+content-hash = "751c1bc35248fa7ab7949138a2216a1bc99e8bdcd9c4cd8a105a7f6026eb445b"

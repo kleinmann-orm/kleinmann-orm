@@ -3,8 +3,8 @@ from __future__ import annotations
 from copy import copy
 from typing import TYPE_CHECKING, List, Optional, Tuple
 
-from pypika import Table
-from pypika.terms import Criterion
+from kleinmann_core import Table
+from kleinmann_core.terms import Criterion
 
 from kleinmann.exceptions import OperationalError
 from kleinmann.fields.relational import (

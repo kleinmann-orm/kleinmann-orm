@@ -11,10 +11,10 @@ from typing import (
     TypedDict,
 )
 
-from pypika import Table
-from pypika.enums import DatePart, SqlTypes
-from pypika.functions import Cast, Extract, Upper
-from pypika.terms import BasicCriterion, Criterion, Equality, Term, ValueWrapper
+from kleinmann_core import Table
+from kleinmann_core.enums import DatePart, SqlTypes
+from kleinmann_core.functions import Cast, Extract, Upper
+from kleinmann_core.terms import BasicCriterion, Criterion, Equality, Term, ValueWrapper
 from typing_extensions import NotRequired
 
 from kleinmann.fields import Field, JSONField

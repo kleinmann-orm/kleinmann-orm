@@ -69,7 +69,7 @@ You can define custom functions which are not builtin, such as ``TruncMonth`` an
 
 .. code-block:: python3
 
-    from pypika import CustomFunction
+    from kleinmann_core import CustomFunction
     from kleinmann.expressions import F, Function
 
     class TruncMonth(Function):
@@ -84,7 +84,7 @@ And you can also use functions in update, the example is only suitable for MySQL
 .. code-block:: python3
 
     from kleinmann.expressions import F
-    from pypika.terms import Function
+    from kleinmann_core.terms import Function
 
     class JsonSet(Function):
         def __init__(self, field: F, expression: str, value: Any):

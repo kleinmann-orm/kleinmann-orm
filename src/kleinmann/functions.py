@@ -1,4 +1,4 @@
-from pypika import functions
+from kleinmann_core import functions
 
 from kleinmann.expressions import Aggregate, Function
 

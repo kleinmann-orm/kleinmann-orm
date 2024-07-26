@@ -2,8 +2,8 @@ import json
 import operator
 from typing import Any, Callable, Dict, List
 
-from pypika.enums import JSONOperators
-from pypika.terms import BasicCriterion, Criterion, Term, ValueWrapper
+from kleinmann_core.enums import JSONOperators
+from kleinmann_core.terms import BasicCriterion, Criterion, Term, ValueWrapper
 
 from kleinmann.filters import is_null, not_equal, not_null
 

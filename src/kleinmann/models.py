@@ -19,8 +19,8 @@ from typing import (
     Union,
 )
 
-from pypika import Order, Query, Table
-from pypika.terms import Term
+from kleinmann_core import Order, Query, Table
+from kleinmann_core.terms import Term
 from typing_extensions import Self
 
 from kleinmann import connections
