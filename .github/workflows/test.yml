@@ -44,8 +44,14 @@ jobs:
         run: |
           pip install -U pip poetry
           poetry config virtualenvs.create false
-      - name: Run ci
-        run: make ci
+
+      - name: Install project
+        run: make install
+
+      - name: Run all checks
+        run: make all
+
+      # FIXME: Mode to Makefile
       - name: Test Examples
         run: |
           export DEST=examples/blacksheep && PYTHONPATH=$DEST pytest $PYTEST_ARGS $DEST/_tests.py
@@ -53,6 +59,7 @@ jobs:
         env:
           PYTHONDEVMODE: 1
           PYTEST_ARGS: "-n auto --cov=kleinmann --cov-append --tb=native -q"
+
       # - name: Upload Coverage
       #   run: |
       #     pip3 install --upgrade coveralls

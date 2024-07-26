@@ -60,7 +60,6 @@ docs:           ## Build the documentation
 	sphinx-build -M html docs build
 
 build:          ## Build and verify the package
-	make install
 	rm -fR dist/
 	poetry build
 	twine check dist/*

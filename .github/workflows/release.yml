@@ -22,10 +22,12 @@ jobs:
         run: pipx install poetry
 
       - name: Install requirements
-        run: make deps
+        run: make install
+
       - name: Build dists
         run: make build
-      - name: Pypi Publish
+
+      - name: Publish package on PyPi
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           user: __token__
