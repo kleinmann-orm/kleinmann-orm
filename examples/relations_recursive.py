@@ -9,8 +9,9 @@ Key points in this example are:
 * That insert-order gets preserved for ForeignFields, but not ManyToManyFields
 """
 
-from kleinmann import Kleinmann, fields, run_async
 from kleinmann.models import Model
+
+from kleinmann import Kleinmann, fields, run_async
 
 
 class Employee(Model):

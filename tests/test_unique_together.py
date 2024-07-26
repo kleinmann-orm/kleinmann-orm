@@ -1,5 +1,6 @@
-from kleinmann.contrib import test
 from kleinmann.exceptions import IntegrityError
+
+from kleinmann.contrib import test
 from tests.testmodels import (
     Tournament,
     UniqueTogetherFields,

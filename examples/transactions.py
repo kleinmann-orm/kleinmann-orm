@@ -2,10 +2,11 @@
 This example demonstrates how you can use transactions with kleinmann
 """
 
-from kleinmann import Kleinmann, fields, run_async
 from kleinmann.exceptions import OperationalError
 from kleinmann.models import Model
 from kleinmann.transactions import atomic, in_transaction
+
+from kleinmann import Kleinmann, fields, run_async
 
 
 class Event(Model):

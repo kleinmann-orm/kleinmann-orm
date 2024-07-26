@@ -2,8 +2,9 @@
 This is the testing Models — Duplicate 1
 """
 
-from kleinmann import fields
 from kleinmann.models import Model
+
+from kleinmann import fields
 
 
 class Tournament(Model):

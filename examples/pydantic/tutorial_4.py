@@ -6,10 +6,11 @@ Here we introduce:
 * Using callable functions to annotate extra data.
 """
 
-from kleinmann import Kleinmann, fields, run_async
-from kleinmann.contrib.pydantic import pydantic_model_creator
 from kleinmann.exceptions import NoValuesFetched
 from kleinmann.models import Model
+
+from kleinmann import Kleinmann, fields, run_async
+from kleinmann.contrib.pydantic import pydantic_model_creator
 
 
 class Tournament(Model):

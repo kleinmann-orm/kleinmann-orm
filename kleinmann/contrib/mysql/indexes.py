@@ -1,8 +1,7 @@
 from typing import Optional, Tuple
 
-from pypika.terms import Term
-
 from kleinmann.indexes import Index
+from pypika.terms import Term
 
 
 class FullTextIndex(Index):

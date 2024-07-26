@@ -1,7 +1,5 @@
 from typing import Type
 
-from kleinmann import connections
-from kleinmann.contrib import test
 from kleinmann.contrib.test.condition import NotEQ
 from kleinmann.exceptions import (
     DoesNotExist,
@@ -12,6 +10,9 @@ from kleinmann.exceptions import (
     ParamsError,
 )
 from kleinmann.expressions import F, RawSQL, Subquery
+
+from kleinmann import connections
+from kleinmann.contrib import test
 from tests.testmodels import (
     Event,
     IntFields,

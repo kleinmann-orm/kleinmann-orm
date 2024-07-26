@@ -2,12 +2,11 @@ import json
 import operator
 from typing import Any, Dict, List
 
+from kleinmann.filters import not_equal
 from pypika.functions import Cast
 from pypika.terms import Criterion
 from pypika.terms import Function as PypikaFunction
 from pypika.terms import Term, ValueWrapper
-
-from kleinmann.filters import not_equal
 
 
 class JSONContains(PypikaFunction):  # type: ignore

@@ -1,6 +1,7 @@
-from kleinmann import Model, fields
 from kleinmann.contrib.mysql.fields import GeometryField
 from kleinmann.contrib.mysql.indexes import FullTextIndex, SpatialIndex
+
+from kleinmann import Model, fields
 
 
 class Index(Model):

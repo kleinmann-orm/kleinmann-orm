@@ -1,5 +1,6 @@
-from kleinmann import Kleinmann, Model, fields, run_async
 from kleinmann.functions import Avg, Count, Sum
+
+from kleinmann import Kleinmann, Model, fields, run_async
 
 
 class Author(Model):

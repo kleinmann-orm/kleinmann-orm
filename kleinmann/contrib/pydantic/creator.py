@@ -3,11 +3,11 @@ from base64 import b32encode
 from hashlib import sha3_224
 from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple, Type
 
+from kleinmann.contrib.pydantic.base import PydanticListModel, PydanticModel
+from kleinmann.contrib.pydantic.utils import get_annotations
 from pydantic import ConfigDict, Field, computed_field, create_model
 from pydantic._internal._decorators import PydanticDescriptorProxy
 
-from kleinmann.contrib.pydantic.base import PydanticListModel, PydanticModel
-from kleinmann.contrib.pydantic.utils import get_annotations
 from kleinmann.fields import IntField, JSONField, TextField, relational
 
 if TYPE_CHECKING:  # pragma: nocoverage

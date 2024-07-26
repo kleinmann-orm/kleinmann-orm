@@ -4,8 +4,9 @@ from kleinmann.backends.base.schema_generator import BaseSchemaGenerator
 from kleinmann.converters import encoders
 
 if TYPE_CHECKING:  # pragma: nocoverage
-    from kleinmann.backends.mssql import MSSQLClient
     from kleinmann.models import Model
+
+    from kleinmann.backends.mssql import MSSQLClient
 
 
 class MSSQLSchemaGenerator(BaseSchemaGenerator):

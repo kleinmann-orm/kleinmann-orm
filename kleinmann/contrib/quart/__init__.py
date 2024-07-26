@@ -3,10 +3,10 @@ import logging
 from types import ModuleType
 from typing import Dict, Iterable, Optional, Union
 
+from kleinmann.log import logger
 from quart import Quart  # pylint: disable=E0401
 
 from kleinmann import Kleinmann, connections
-from kleinmann.log import logger
 
 
 def register_kleinmann(

@@ -2,11 +2,13 @@ from typing import TYPE_CHECKING, Any, List, Type
 
 from kleinmann.backends.base.schema_generator import BaseSchemaGenerator
 from kleinmann.converters import encoders
+
 from kleinmann.fields import CASCADE, SET_NULL
 
 if TYPE_CHECKING:  # pragma: nocoverage
-    from kleinmann.backends.oracle import OracleClient
     from kleinmann.models import Model
+
+    from kleinmann.backends.oracle import OracleClient
 
 
 class OracleSchemaGenerator(BaseSchemaGenerator):

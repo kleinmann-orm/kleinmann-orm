@@ -5,10 +5,11 @@ Tests for __models__
 import re
 from unittest.mock import AsyncMock, patch
 
-from kleinmann import Kleinmann, connections
-from kleinmann.contrib import test
 from kleinmann.exceptions import ConfigurationError
 from kleinmann.utils import get_schema_sql
+
+from kleinmann import Kleinmann, connections
+from kleinmann.contrib import test
 
 
 class TestGenerateSchema(test.SimpleTestCase):

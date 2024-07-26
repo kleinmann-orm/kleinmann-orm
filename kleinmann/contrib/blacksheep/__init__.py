@@ -4,10 +4,10 @@ from typing import Dict, Iterable, Optional, Union
 from blacksheep import Request
 from blacksheep.server import Application
 from blacksheep.server.responses import json
-
-from kleinmann import Kleinmann, connections
 from kleinmann.exceptions import DoesNotExist, IntegrityError
 from kleinmann.log import logger
+
+from kleinmann import Kleinmann, connections
 
 
 def register_kleinmann(

@@ -1,8 +1,9 @@
 from typing import List, Optional, Type
 
+from kleinmann.signals import post_delete, post_save, pre_delete, pre_save
+
 from kleinmann import BaseDBAsyncClient
 from kleinmann.contrib import test
-from kleinmann.signals import post_delete, post_save, pre_delete, pre_save
 from tests.testmodels import Signals
 
 

@@ -1,9 +1,3 @@
-from pypika import Parameter, functions
-from pypika.enums import SqlTypes
-from pypika.terms import Criterion
-from pypika.utils import format_quotes
-
-from kleinmann import Model
 from kleinmann.backends.base.executor import BaseExecutor
 from kleinmann.contrib.mysql.json_functions import (
     mysql_json_contained_by,
@@ -11,7 +5,6 @@ from kleinmann.contrib.mysql.json_functions import (
     mysql_json_filter,
 )
 from kleinmann.contrib.mysql.search import SearchCriterion
-from kleinmann.fields import BigIntField, IntField, SmallIntField
 from kleinmann.filters import (
     Like,
     Term,
@@ -28,6 +21,13 @@ from kleinmann.filters import (
     search,
     starts_with,
 )
+from pypika import Parameter, functions
+from pypika.enums import SqlTypes
+from pypika.terms import Criterion
+from pypika.utils import format_quotes
+
+from kleinmann import Model
+from kleinmann.fields import BigIntField, IntField, SmallIntField
 
 
 class StrWrapper(ValueWrapper):  # type: ignore

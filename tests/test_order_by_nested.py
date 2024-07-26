@@ -1,5 +1,6 @@
-from kleinmann.contrib import test
 from kleinmann.contrib.test.condition import NotEQ
+
+from kleinmann.contrib import test
 from tests.testmodels import Event, Tournament
 
 
