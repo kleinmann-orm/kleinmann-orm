@@ -5,8 +5,9 @@ The model 'Tour' does not exist
 
 from typing import Any
 
-from kleinmann import fields
 from kleinmann.models import Model
+
+from kleinmann import fields
 
 
 class Tournament(Model):

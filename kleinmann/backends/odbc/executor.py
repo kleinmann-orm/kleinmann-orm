@@ -1,7 +1,7 @@
+from kleinmann.backends.base.executor import BaseExecutor
 from pypika import Parameter
 
 from kleinmann import Model
-from kleinmann.backends.base.executor import BaseExecutor
 from kleinmann.fields import BigIntField, IntField, SmallIntField
 
 

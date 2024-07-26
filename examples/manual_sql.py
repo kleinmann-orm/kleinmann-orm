@@ -2,9 +2,10 @@
 This example demonstrates executing manual SQL queries
 """
 
-from kleinmann import Kleinmann, connections, fields, run_async
 from kleinmann.models import Model
 from kleinmann.transactions import in_transaction
+
+from kleinmann import Kleinmann, connections, fields, run_async
 
 
 class Event(Model):

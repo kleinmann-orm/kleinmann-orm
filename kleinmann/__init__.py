@@ -9,8 +9,6 @@ from inspect import isclass
 from types import ModuleType
 from typing import Coroutine, Dict, Iterable, List, Optional, Tuple, Type, Union, cast
 
-from pypika import Table
-
 from kleinmann.backends.base.client import BaseDBAsyncClient
 from kleinmann.backends.base.config_generator import expand_db_url, generate_config
 from kleinmann.connection import connections
@@ -26,6 +24,7 @@ from kleinmann.filters import get_m2m_filters
 from kleinmann.log import logger
 from kleinmann.models import Model, ModelMeta
 from kleinmann.utils import generate_schema_for_client
+from pypika import Table
 
 
 class Kleinmann:

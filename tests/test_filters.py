@@ -1,7 +1,8 @@
 from decimal import Decimal
 
-from kleinmann.contrib import test
 from kleinmann.exceptions import FieldError
+
+from kleinmann.contrib import test
 from tests.testmodels import (
     BooleanFields,
     CharFields,

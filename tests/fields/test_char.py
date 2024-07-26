@@ -1,6 +1,7 @@
+from kleinmann.exceptions import ConfigurationError, ValidationError
+
 from kleinmann import fields
 from kleinmann.contrib import test
-from kleinmann.exceptions import ConfigurationError, ValidationError
 from tests import testmodels
 
 

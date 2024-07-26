@@ -14,11 +14,10 @@ from typing import (
     overload,
 )
 
-from pypika import Table
-from typing_extensions import Literal
-
 from kleinmann.exceptions import ConfigurationError, NoValuesFetched, OperationalError
 from kleinmann.fields.base import CASCADE, SET_NULL, Field, OnDelete
+from pypika import Table
+from typing_extensions import Literal
 
 if TYPE_CHECKING:  # pragma: nocoverage
     from kleinmann.backends.base.client import BaseDBAsyncClient

@@ -1,8 +1,7 @@
 from typing import Optional, Tuple
 
-from pypika.terms import Term, ValueWrapper
-
 from kleinmann.indexes import PartialIndex
+from pypika.terms import Term, ValueWrapper
 
 
 class PostgreSQLIndex(PartialIndex):

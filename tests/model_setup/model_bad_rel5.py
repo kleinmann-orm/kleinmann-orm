@@ -3,8 +3,9 @@ Testing Models for a bad/wrong relation reference
 Wrong reference. App missing.
 """
 
-from kleinmann import fields
 from kleinmann.models import Model
+
+from kleinmann import fields
 
 
 class Tournament(Model):

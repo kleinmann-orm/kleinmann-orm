@@ -11,9 +11,6 @@ except ImportError:
     from pymysql.charset import charset_by_name
     from pymysql import err as errors
 
-from pypika import MySQLQuery
-
-from kleinmann import timezone
 from kleinmann.backends.base.client import (
     BaseDBAsyncClient,
     BaseTransactionWrapper,
@@ -32,6 +29,9 @@ from kleinmann.exceptions import (
     OperationalError,
     TransactionManagementError,
 )
+from pypika import MySQLQuery
+
+from kleinmann import timezone
 
 FuncType = Callable[..., Any]
 F = TypeVar("F", bound=FuncType)

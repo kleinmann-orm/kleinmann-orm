@@ -3,11 +3,11 @@ from datetime import datetime, timedelta
 from typing import Any
 
 import pytz
+from kleinmann.contrib.test.condition import In, NotEQ
+from kleinmann.expressions import F
 from pypika.terms import Function
 
 from kleinmann.contrib import test
-from kleinmann.contrib.test.condition import In, NotEQ
-from kleinmann.expressions import F
 from tests.testmodels import (
     Currency,
     DatetimeFields,

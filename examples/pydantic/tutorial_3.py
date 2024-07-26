@@ -6,9 +6,10 @@ Here we introduce:
 * Early model init
 """
 
+from kleinmann.models import Model
+
 from kleinmann import Kleinmann, fields, run_async
 from kleinmann.contrib.pydantic import pydantic_model_creator
-from kleinmann.models import Model
 
 
 class Tournament(Model):

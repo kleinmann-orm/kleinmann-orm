@@ -1,11 +1,6 @@
 import uuid
 from typing import Optional, Sequence
 
-from pypika import Parameter
-from pypika.dialects import PostgreSQLQueryBuilder
-from pypika.terms import Term
-
-from kleinmann import Model
 from kleinmann.backends.base.executor import BaseExecutor
 from kleinmann.contrib.postgres.json_functions import (
     postgres_json_contained_by,
@@ -14,6 +9,11 @@ from kleinmann.contrib.postgres.json_functions import (
 )
 from kleinmann.contrib.postgres.search import SearchCriterion
 from kleinmann.filters import json_contained_by, json_contains, json_filter, search
+from pypika import Parameter
+from pypika.dialects import PostgreSQLQueryBuilder
+from pypika.terms import Term
+
+from kleinmann import Model
 
 
 def postgres_search(field: Term, value: Term):

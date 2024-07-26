@@ -1,5 +1,6 @@
-from kleinmann.contrib import test
 from kleinmann.exceptions import IncompleteInstanceError
+
+from kleinmann.contrib import test
 from tests.testmodels import SourceFields, StraightFields
 
 

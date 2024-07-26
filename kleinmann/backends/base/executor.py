@@ -19,10 +19,6 @@ from typing import (
     cast,
 )
 
-from pypika import JoinType, Parameter, Query, Table
-from pypika.queries import QueryBuilder
-from pypika.terms import ArithmeticExpression, Function
-
 from kleinmann.exceptions import OperationalError
 from kleinmann.expressions import F, RawSQL
 from kleinmann.fields.base import Field
@@ -34,6 +30,9 @@ from kleinmann.fields.relational import (
 )
 from kleinmann.query_utils import QueryModifier
 from kleinmann.utils import chunk
+from pypika import JoinType, Parameter, Query, Table
+from pypika.queries import QueryBuilder
+from pypika.terms import ArithmeticExpression, Function
 
 if TYPE_CHECKING:  # pragma: nocoverage
     from kleinmann.backends.base.client import BaseDBAsyncClient

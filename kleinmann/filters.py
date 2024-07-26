@@ -11,6 +11,7 @@ from typing import (
     TypedDict,
 )
 
+from kleinmann.fields.relational import BackwardFKRelation, ManyToManyFieldInstance
 from pypika import Table
 from pypika.enums import DatePart, SqlTypes
 from pypika.functions import Cast, Extract, Upper
@@ -18,7 +19,6 @@ from pypika.terms import BasicCriterion, Criterion, Equality, Term, ValueWrapper
 from typing_extensions import NotRequired
 
 from kleinmann.fields import Field, JSONField
-from kleinmann.fields.relational import BackwardFKRelation, ManyToManyFieldInstance
 
 if TYPE_CHECKING:  # pragma: nocoverage
     from kleinmann.models import Model

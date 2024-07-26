@@ -1,5 +1,6 @@
-from kleinmann import Model
 from kleinmann.backends.odbc.executor import ODBCExecutor
+
+from kleinmann import Model
 
 
 class OracleExecutor(ODBCExecutor):

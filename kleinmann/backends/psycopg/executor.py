@@ -2,10 +2,10 @@ from __future__ import annotations
 
 from typing import Optional
 
+from kleinmann.backends.base_postgres.executor import BasePostgresExecutor
 from pypika import Parameter
 
 from kleinmann import Model
-from kleinmann.backends.base_postgres.executor import BasePostgresExecutor
 
 
 class PsycopgExecutor(BasePostgresExecutor):

@@ -4,9 +4,10 @@ This example shows some more complex querying
 Key points are filtering by related names and using Q objects
 """
 
-from kleinmann import Kleinmann, fields, run_async
 from kleinmann.expressions import Q
 from kleinmann.models import Model
+
+from kleinmann import Kleinmann, fields, run_async
 
 
 class Tournament(Model):

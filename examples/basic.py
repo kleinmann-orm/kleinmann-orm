@@ -2,9 +2,10 @@
 This example demonstrates most basic operations with single model
 """
 
+from kleinmann.models import Model
+
 from kleinmann import fields, run_async
 from kleinmann.contrib.test import init_memory_sqlite
-from kleinmann.models import Model
 
 
 class Event(Model):

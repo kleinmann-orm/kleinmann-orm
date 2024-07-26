@@ -1,5 +1,6 @@
-from kleinmann.contrib import test
 from kleinmann.exceptions import ConfigurationError, IntegrityError
+
+from kleinmann.contrib import test
 from kleinmann.fields import BinaryField
 from tests import testmodels
 

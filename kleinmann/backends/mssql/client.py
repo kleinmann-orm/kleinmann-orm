@@ -1,7 +1,5 @@
 from typing import Any, SupportsInt
 
-from pypika.dialects import MSSQLQuery
-
 from kleinmann.backends.base.client import (
     Capabilities,
     TransactionContext,
@@ -14,6 +12,7 @@ from kleinmann.backends.odbc.client import (
     ODBCTransactionWrapper,
     translate_exceptions,
 )
+from pypika.dialects import MSSQLQuery
 
 
 class MSSQLClient(ODBCClient):

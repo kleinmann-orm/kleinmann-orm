@@ -1,9 +1,8 @@
 from typing import Union
 
+from kleinmann.contrib.postgres.functions import ToTsQuery, ToTsVector
 from pypika.enums import Comparator
 from pypika.terms import BasicCriterion, Function, Term
-
-from kleinmann.contrib.postgres.functions import ToTsQuery, ToTsVector
 
 
 class Comp(Comparator):  # type: ignore

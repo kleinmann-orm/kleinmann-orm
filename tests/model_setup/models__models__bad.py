@@ -2,8 +2,9 @@
 'Failure' tests for __models__
 """
 
-from kleinmann import fields
 from kleinmann.models import Model
+
+from kleinmann import fields
 
 
 class BadTournament(Model):

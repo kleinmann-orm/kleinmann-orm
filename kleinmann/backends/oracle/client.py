@@ -11,8 +11,6 @@ except ImportError:  # pragma: nocoverage
     from iso8601 import parse_date
 
     parse_datetime = functools.partial(parse_date, default_timezone=None)
-from pypika import OracleQuery
-
 from kleinmann.backends.base.client import (
     Capabilities,
     ConnectionWrapper,
@@ -27,6 +25,7 @@ from kleinmann.backends.odbc.client import (
 )
 from kleinmann.backends.oracle.executor import OracleExecutor
 from kleinmann.backends.oracle.schema_generator import OracleSchemaGenerator
+from pypika import OracleQuery
 
 
 class OracleClient(ODBCClient):

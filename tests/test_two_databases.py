@@ -1,8 +1,9 @@
+from kleinmann.exceptions import OperationalError, ParamsError
+from kleinmann.transactions import in_transaction
+
 from kleinmann import Kleinmann, connections
 from kleinmann.backends.oracle import OracleClient
 from kleinmann.contrib import test
-from kleinmann.exceptions import OperationalError, ParamsError
-from kleinmann.transactions import in_transaction
 from tests.testmodels import Event, EventTwo, TeamTwo, Tournament
 
 

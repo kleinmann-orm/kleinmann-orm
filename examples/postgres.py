@@ -2,8 +2,9 @@
 This example showcases postgres features
 """
 
-from kleinmann import Kleinmann, fields, run_async
 from kleinmann.models import Model
+
+from kleinmann import Kleinmann, fields, run_async
 
 
 class Report(Model):

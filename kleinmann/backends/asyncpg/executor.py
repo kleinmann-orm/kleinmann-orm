@@ -1,9 +1,9 @@
 from typing import Optional
 
 import asyncpg
+from kleinmann.backends.base_postgres.executor import BasePostgresExecutor
 
 from kleinmann import Model
-from kleinmann.backends.base_postgres.executor import BasePostgresExecutor
 
 
 class AsyncpgExecutor(BasePostgresExecutor):

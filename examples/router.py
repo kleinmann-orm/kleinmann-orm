@@ -4,8 +4,9 @@ This example to use router to implement read/write separation
 
 from typing import Type
 
-from kleinmann import Kleinmann, fields, run_async
 from kleinmann.models import Model
+
+from kleinmann import Kleinmann, fields, run_async
 
 
 class Event(Model):

@@ -1,10 +1,10 @@
 from typing import Any, Optional, Type, Union
 
+from kleinmann.backends.odbc.executor import ODBCExecutor
+from kleinmann.exceptions import UnSupportedError
 from pypika import Query
 
 from kleinmann import Model, fields
-from kleinmann.backends.odbc.executor import ODBCExecutor
-from kleinmann.exceptions import UnSupportedError
 from kleinmann.fields import BooleanField
 
 

@@ -1,6 +1,7 @@
+from kleinmann.exceptions import ConfigurationError
+
 from kleinmann import Kleinmann
 from kleinmann.contrib import test
-from kleinmann.exceptions import ConfigurationError
 
 
 class TestBadRelationReferenceErrors(test.SimpleTestCase):

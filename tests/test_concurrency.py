@@ -1,9 +1,10 @@
 import asyncio
 import sys
 
-from kleinmann.contrib import test
 from kleinmann.contrib.test.condition import NotEQ
 from kleinmann.transactions import in_transaction
+
+from kleinmann.contrib import test
 from tests.testmodels import Tournament, UniqueName
 
 
