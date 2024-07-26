@@ -795,51 +795,22 @@ CREATE UNIQUE INDEX "uidx_team_team_team_re_d994df" ON "team_team" ("team_rel_id
 
 class TestGenerateSchemaAsyncpg(GenerateSchemaPostgresSQL):
     async def init_for(self, module: str, safe=False) -> None:
-        try:
-            with patch("asyncpg.create_pool", new=MagicMock()):
-                await Kleinmann.init(
-                    {
-                        "connections": {
-                            "default": {
-                                "engine": "kleinmann.backends.asyncpg",
-                                "credentials": {
-                                    "database": "test",
-                                    "host": "127.0.0.1",
-                                    "password": "foomip",
-                                    "port": 5432,
-                                    "user": "root",
-                                },
-                            }
-                        },
-                        "apps": {"models": {"models": [module], "default_connection": "default"}},
-                    }
-                )
-                self.sqls = get_schema_sql(connections.get("default"), safe).split("; ")
-        except ImportError:
-            raise test.SkipTest("asyncpg not installed")
-
-
-class TestGenerateSchemaPsycopg(GenerateSchemaPostgresSQL):
-    async def init_for(self, module: str, safe=False) -> None:
-        try:
-            with patch("psycopg_pool.AsyncConnectionPool.open", new=MagicMock()):
-                await Kleinmann.init(
-                    {
-                        "connections": {
-                            "default": {
-                                "engine": "kleinmann.backends.psycopg",
-                                "credentials": {
-                                    "database": "test",
-                                    "host": "127.0.0.1",
-                                    "password": "foomip",
-                                    "port": 5432,
-                                    "user": "root",
-                                },
-                            }
-                        },
-                        "apps": {"models": {"models": [module], "default_connection": "default"}},
-                    }
-                )
-                self.sqls = get_schema_sql(connections.get("default"), safe).split("; ")
-        except ImportError:
-            raise test.SkipTest("psycopg not installed")
+        with patch("asyncpg.create_pool", new=MagicMock()):
+            await Kleinmann.init(
+                {
+                    "connections": {
+                        "default": {
+                            "engine": "kleinmann.backends.asyncpg",
+                            "credentials": {
+                                "database": "test",
+                                "host": "127.0.0.1",
+                                "password": "foomip",
+                                "port": 5432,
+                                "user": "root",
+                            },
+                        }
+                    },
+                    "apps": {"models": {"models": [module], "default_connection": "default"}},
+                }
+            )
+            self.sqls = get_schema_sql(connections.get("default"), safe).split("; ")

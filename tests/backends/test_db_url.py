@@ -8,7 +8,6 @@ class TestConfigGenerator(test.SimpleTestCase):
     _postgres_scheme_engines = {
         "postgres": "kleinmann.backends.asyncpg",
         "asyncpg": "kleinmann.backends.asyncpg",
-        "psycopg": "kleinmann.backends.psycopg",
     }
 
     def test_unknown_scheme(self):

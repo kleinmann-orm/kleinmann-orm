@@ -17,12 +17,8 @@ class TestPostgreSQL(test.SimpleTestCase):
         if Kleinmann._inited:
             await self._tearDownDB()
         self.db_config = test.getDBConfig(app_label="models", modules=["tests.testmodels"])
-        if not self.is_asyncpg and not self.is_psycopg:
+        if not self.is_asyncpg:
             raise test.SkipTest("PostgreSQL only")
-
-    @property
-    def is_psycopg(self) -> bool:
-        return self.db_config["connections"]["models"]["engine"] == "kleinmann.backends.psycopg"
 
     @property
     def is_asyncpg(self) -> bool:
@@ -34,10 +30,7 @@ class TestPostgreSQL(test.SimpleTestCase):
         await super().asyncTearDown()
 
     async def test_schema(self):
-        if self.is_asyncpg:
-            from asyncpg.exceptions import InvalidSchemaNameError
-        else:
-            from psycopg.errors import InvalidSchemaName as InvalidSchemaNameError
+        from asyncpg.exceptions import InvalidSchemaNameError
 
         self.db_config["connections"]["models"]["credentials"]["schema"] = "mytestschema"
         await Kleinmann.init(self.db_config, _create_db=True)

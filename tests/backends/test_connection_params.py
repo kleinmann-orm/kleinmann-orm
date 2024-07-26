@@ -54,36 +54,3 @@ class TestConnectionParams(test.SimpleTestCase):
                 )
         except ImportError:
             self.skipTest("asyncpg not installed")
-
-    async def test_psycopg_connection_params(self):
-        try:
-            with patch(
-                "kleinmann.backends.psycopg.client.PsycopgClient.create_pool", new=AsyncMock()
-            ) as patched_create_pool:
-                mocked_pool = AsyncMock()
-                patched_create_pool.return_value = mocked_pool
-                await connections._init(
-                    {
-                        "models": {
-                            "engine": "kleinmann.backends.psycopg",
-                            "credentials": {
-                                "database": "test",
-                                "host": "127.0.0.1",
-                                "password": "foomip",
-                                "port": 5432,
-                                "user": "root",
-                                "timeout": 1,
-                                "ssl": True,
-                            },
-                        }
-                    },
-                    False,
-                )
-                await connections.get("models").create_connection(with_db=True)
-                patched_create_pool.assert_awaited_once()
-                mocked_pool.open.assert_awaited_once_with(  # nosec
-                    wait=True,
-                    timeout=1,
-                )
-        except ImportError:
-            self.skipTest("psycopg not installed")

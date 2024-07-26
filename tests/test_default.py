@@ -4,7 +4,6 @@ from decimal import Decimal
 import pytz
 
 from kleinmann.backends.asyncpg import AsyncpgDBClient
-from kleinmann.backends.psycopg import PsycopgClient
 from kleinmann.backends.sqlite import SqliteClient
 from kleinmann.contrib import test
 from tests.testmodels import DefaultModel
@@ -18,7 +17,7 @@ class TestDefault(test.TestCase):
             await db.execute_query(
                 "insert into defaultmodel default values",
             )
-        elif isinstance(db, (AsyncpgDBClient, PsycopgClient)):
+        elif isinstance(db, AsyncpgDBClient):
             await db.execute_query(
                 'insert into defaultmodel ("int_default","float_default","decimal_default","bool_default","char_default","date_default","datetime_default") values (DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT)',
             )

@@ -18,7 +18,7 @@ up:
 	@poetry update
 
 deps:
-	@poetry install -E asyncpg -E accel -E psycopg
+	@poetry install -E accel
 
 check: deps build
 ifneq ($(shell which black),)
@@ -46,13 +46,10 @@ test: deps
 test_sqlite:
 	$(py_warn) KLEINMANN_TEST_DB=sqlite://:memory: pytest --cov-report= $(pytest_opts)
 
-test_postgres_asyncpg:
+test_postgres:
 	python -V | grep PyPy || $(py_warn) KLEINMANN_TEST_DB="asyncpg://postgres:$(KLEINMANN_POSTGRES_PASS)@127.0.0.1:5432/test_\{\}" pytest $(pytest_opts) --cov-append --cov-report=
 
-test_postgres_psycopg:
-	python -V | grep PyPy || $(py_warn) KLEINMANN_TEST_DB="psycopg://postgres:$(KLEINMANN_POSTGRES_PASS)@127.0.0.1:5432/test_\{\}" pytest $(pytest_opts) --cov-append --cov-report=
-
-_testall: test_sqlite test_postgres_asyncpg test_postgres_psycopg
+_testall: test_sqlite test_postgres
 	coverage report
 
 testall: deps _testall
