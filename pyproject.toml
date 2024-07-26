@@ -13,6 +13,7 @@ documentation = "https://github.com/kleinmann-orm/kleinmann-orm"
 keywords = ["sql", "postgres", "sqlite", "aiosqlite", "asyncpg", "relational", "database", "rdbms", "orm", "object mapper", "async", "asyncio", "aio"]
 packages = [
     { include = "kleinmann", from = "src" },
+    { include = "pypika", from = "src" },
 ]
 include = ["CHANGELOG.md", "LICENSE", "README.md"]
 classifiers = [
@@ -38,7 +39,6 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.8"
-pypika-tortoise = "^0.1.6"
 iso8601 = "^1.0.2"
 aiosqlite = ">=0.20.0"
 pytz = "*"

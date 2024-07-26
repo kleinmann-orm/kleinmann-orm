@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 ### Other
 
 - Update `aiosqlite` dependency to `>=0.20.0`.
+- Forked pypika-tortoise 0.1.6 as `kleinmann_core`.
 
 ## [0.0.1] - 2024-07-24
 
