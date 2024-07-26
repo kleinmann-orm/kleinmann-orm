@@ -46,11 +46,8 @@ ciso8601 = { version = "*", markers = "sys_platform != 'win32' and implementatio
 uvloop = { version = "*", markers = "sys_platform != 'win32' and implementation_name == 'cpython'", optional = true }
 orjson = { version = "*", optional = true }
 asyncpg = { version = "*", optional = true }
-aiomysql = { version = "*", optional = true }
-asyncmy = { version = "^0.2.8", optional = true, allow-prereleases = true }
 # FIXME: kleinmann/backends/psycopg/client.py:142
 psycopg = { extras = ["pool", "binary"], version = "3.1.19", optional = true }
-asyncodbc = { version = "^0.1.1", optional = true }
 pydantic = { version = "^2.0,!=2.7.0", optional = true }
 
 [tool.poetry.dev-dependencies]
@@ -90,7 +87,6 @@ pytest-asyncio = "^0.23.6"
 # mypy
 types-PyYAML = "*"
 types-pytz = "*"
-types-PyMySQL = "*"
 # Documentation tools
 sphinx-immaterial = "*"
 sphinx-copybutton = "*"
@@ -99,11 +95,8 @@ docutils = "*"
 
 [tool.poetry.extras]
 accel = ["ciso8601", "uvloop", "orjson"]
-asyncpg = ["asyncpg"]
 psycopg = ["psycopg"]
-aiomysql = ["aiomysql"]
-asyncmy = ["asyncmy"]
-asyncodbc = ["asyncodbc"]
+asyncpg = ["asyncpg"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

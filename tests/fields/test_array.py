@@ -1,5 +1,6 @@
-from kleinmann.contrib import test
 from kleinmann.exceptions import IntegrityError, OperationalError
+
+from kleinmann.contrib import test
 from tests import testmodels_postgres as testmodels
 
 

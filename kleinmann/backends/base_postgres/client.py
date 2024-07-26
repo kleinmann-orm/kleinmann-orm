@@ -12,8 +12,6 @@ from typing import (
     Union,
 )
 
-from pypika import PostgreSQLQuery
-
 from kleinmann.backends.base.client import (
     BaseDBAsyncClient,
     Capabilities,
@@ -25,6 +23,7 @@ from kleinmann.backends.base_postgres.executor import BasePostgresExecutor
 from kleinmann.backends.base_postgres.schema_generator import (
     BasePostgresSchemaGenerator,
 )
+from pypika import PostgreSQLQuery
 
 FuncType = Callable[..., Any]
 F = TypeVar("F", bound=FuncType)

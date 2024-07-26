@@ -2,10 +2,11 @@
 This example demonstrates pydantic serialisation of a recursively cycled model.
 """
 
-from kleinmann import Kleinmann, fields, run_async
-from kleinmann.contrib.pydantic import pydantic_model_creator
 from kleinmann.exceptions import NoValuesFetched
 from kleinmann.models import Model
+
+from kleinmann import Kleinmann, fields, run_async
+from kleinmann.contrib.pydantic import pydantic_model_creator
 
 
 class Employee(Model):

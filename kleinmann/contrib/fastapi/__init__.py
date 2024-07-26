@@ -7,12 +7,12 @@ from types import ModuleType
 from typing import TYPE_CHECKING, Dict, Generator, Iterable, Optional, Union
 
 from fastapi.responses import JSONResponse
+from kleinmann.exceptions import DoesNotExist, IntegrityError
+from kleinmann.log import logger
 from pydantic import BaseModel  # pylint: disable=E0611
 from starlette.routing import _DefaultLifespan
 
 from kleinmann import Kleinmann, connections
-from kleinmann.exceptions import DoesNotExist, IntegrityError
-from kleinmann.log import logger
 
 if TYPE_CHECKING:
     from fastapi import FastAPI, Request

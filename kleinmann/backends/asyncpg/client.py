@@ -3,7 +3,6 @@ from typing import Any, Callable, List, Optional, Tuple, TypeVar, Union
 
 import asyncpg
 from asyncpg.transaction import Transaction
-
 from kleinmann.backends.asyncpg.executor import AsyncpgExecutor
 from kleinmann.backends.asyncpg.schema_generator import AsyncpgSchemaGenerator
 from kleinmann.backends.base.client import (

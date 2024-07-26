@@ -20,13 +20,6 @@ from typing import (
     overload,
 )
 
-from pypika import JoinType, Order, Table
-from pypika.analytics import Count
-from pypika.functions import Cast
-from pypika.queries import QueryBuilder
-from pypika.terms import Case, Field, Term, ValueWrapper
-from typing_extensions import Literal, Protocol
-
 from kleinmann.backends.base.client import BaseDBAsyncClient, Capabilities
 from kleinmann.exceptions import (
     DoesNotExist,
@@ -46,6 +39,12 @@ from kleinmann.functions import Function
 from kleinmann.query_utils import Prefetch, QueryModifier, _get_joins_for_related_field
 from kleinmann.router import router
 from kleinmann.utils import chunk
+from pypika import JoinType, Order, Table
+from pypika.analytics import Count
+from pypika.functions import Cast
+from pypika.queries import QueryBuilder
+from pypika.terms import Case, Field, Term, ValueWrapper
+from typing_extensions import Literal, Protocol
 
 # Empty placeholder - Should never be edited.
 

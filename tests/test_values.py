@@ -1,7 +1,7 @@
-from kleinmann.contrib import test
-from kleinmann.contrib.test.condition import NotEQ
 from kleinmann.exceptions import FieldError
 from kleinmann.functions import Length, Trim
+
+from kleinmann.contrib import test
 from tests.testmodels import Event, Team, Tournament
 
 
@@ -154,7 +154,6 @@ class TestValues(test.TestCase):
         with self.assertRaisesRegex(FieldError, 'Unknown field "neem" for model "Tournament"'):
             await Event.filter(name="Test").values_list("name", "tournament__neem")
 
-    @test.requireCapability(dialect="!mssql")
     async def test_values_list_annotations_length(self):
         await Tournament.create(name="Championship")
         await Tournament.create(name="Super Bowl")
@@ -164,7 +163,6 @@ class TestValues(test.TestCase):
         )
         self.assertListSortEqual(tournaments, [("Championship", 12), ("Super Bowl", 10)])
 
-    @test.requireCapability(dialect=NotEQ("mssql"))
     async def test_values_annotations_length(self):
         await Tournament.create(name="Championship")
         await Tournament.create(name="Super Bowl")

@@ -2,14 +2,15 @@ import json
 import uuid
 from typing import Union
 
-from kleinmann import Kleinmann, fields
-from kleinmann.contrib import test
 from kleinmann.fields.relational import (
     BackwardFKRelation,
     ForeignKeyFieldInstance,
     ManyToManyFieldInstance,
     OneToOneFieldInstance,
 )
+
+from kleinmann import Kleinmann, fields
+from kleinmann.contrib import test
 from tests.testmodels import (
     Event,
     JSONFields,
@@ -1318,8 +1319,6 @@ class TestDescribeModel(test.SimpleTestCase):
                         "db_column": "data",
                         "db_field_types": {
                             "": "JSON",
-                            "mssql": "NVARCHAR(MAX)",
-                            "oracle": "NCLOB",
                             "postgres": "JSONB",
                         },
                         "python_type": "Union[dict, list]",
@@ -1338,8 +1337,6 @@ class TestDescribeModel(test.SimpleTestCase):
                         "db_column": "data_null",
                         "db_field_types": {
                             "": "JSON",
-                            "mssql": "NVARCHAR(MAX)",
-                            "oracle": "NCLOB",
                             "postgres": "JSONB",
                         },
                         "python_type": "Union[dict, list]",
@@ -1358,8 +1355,6 @@ class TestDescribeModel(test.SimpleTestCase):
                         "db_column": "data_default",
                         "db_field_types": {
                             "": "JSON",
-                            "mssql": "NVARCHAR(MAX)",
-                            "oracle": "NCLOB",
                             "postgres": "JSONB",
                         },
                         "python_type": "Union[dict, list]",
@@ -1378,8 +1373,6 @@ class TestDescribeModel(test.SimpleTestCase):
                         "db_column": "data_validate",
                         "db_field_types": {
                             "": "JSON",
-                            "mssql": "NVARCHAR(MAX)",
-                            "oracle": "NCLOB",
                             "postgres": "JSONB",
                         },
                         "python_type": "Union[dict, list]",
@@ -1437,8 +1430,6 @@ class TestDescribeModel(test.SimpleTestCase):
                         "db_column": "data",
                         "db_field_types": {
                             "": "JSON",
-                            "mssql": "NVARCHAR(MAX)",
-                            "oracle": "NCLOB",
                             "postgres": "JSONB",
                         },
                         "python_type": Union[dict, list],
@@ -1457,8 +1448,6 @@ class TestDescribeModel(test.SimpleTestCase):
                         "db_column": "data_null",
                         "db_field_types": {
                             "": "JSON",
-                            "mssql": "NVARCHAR(MAX)",
-                            "oracle": "NCLOB",
                             "postgres": "JSONB",
                         },
                         "python_type": Union[dict, list],
@@ -1477,8 +1466,6 @@ class TestDescribeModel(test.SimpleTestCase):
                         "db_column": "data_default",
                         "db_field_types": {
                             "": "JSON",
-                            "mssql": "NVARCHAR(MAX)",
-                            "oracle": "NCLOB",
                             "postgres": "JSONB",
                         },
                         "python_type": Union[dict, list],
@@ -1497,8 +1484,6 @@ class TestDescribeModel(test.SimpleTestCase):
                         "db_column": "data_validate",
                         "db_field_types": {
                             "": "JSON",
-                            "mssql": "NVARCHAR(MAX)",
-                            "oracle": "NCLOB",
                             "postgres": "JSONB",
                         },
                         "python_type": Union[dict, list],

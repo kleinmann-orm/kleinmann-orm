@@ -1,9 +1,9 @@
 from uuid import UUID, uuid4
 
-from kleinmann.contrib import test
-from kleinmann.contrib.test.condition import NotEQ
 from kleinmann.exceptions import IntegrityError
 from kleinmann.transactions import in_transaction
+
+from kleinmann.contrib import test
 from tests.testmodels import UniqueName, UUIDPkModel
 
 
@@ -18,7 +18,6 @@ class TestBulk(test.TruncationTestCase):
             sorted_key="id",
         )
 
-    @test.requireCapability(dialect=NotEQ("mssql"))
     async def test_bulk_create_update_fields(self):
         await UniqueName.bulk_create([UniqueName(name="name")])
         await UniqueName.bulk_create(
@@ -29,7 +28,6 @@ class TestBulk(test.TruncationTestCase):
         all_ = await UniqueName.all().values("name", "optional")
         self.assertListSortEqual(all_, [{"name": "name", "optional": "optional"}])
 
-    @test.requireCapability(dialect=NotEQ("mssql"))
     async def test_bulk_create_more_that_one_update_fields(self):
         await UniqueName.bulk_create([UniqueName(name="name")])
         await UniqueName.bulk_create(
@@ -49,7 +47,6 @@ class TestBulk(test.TruncationTestCase):
             ],
         )
 
-    @test.requireCapability(dialect=NotEQ("mssql"))
     async def test_bulk_create_with_batch_size(self):
         await UniqueName.bulk_create(
             [UniqueName(id=id_ + 1) for id_ in range(1000)], batch_size=100
@@ -61,7 +58,6 @@ class TestBulk(test.TruncationTestCase):
             sorted_key="id",
         )
 
-    @test.requireCapability(dialect=NotEQ("mssql"))
     async def test_bulk_create_with_specified(self):
         await UniqueName.bulk_create([UniqueName(id=id_) for id_ in range(1000, 2000)])
         all_ = await UniqueName.all().values("id", "name")
@@ -71,7 +67,6 @@ class TestBulk(test.TruncationTestCase):
             sorted_key="id",
         )
 
-    @test.requireCapability(dialect=NotEQ("mssql"))
     async def test_bulk_create_mix_specified(self):
         predefined_start = 40000
         predefined_end = 40150
@@ -110,7 +105,6 @@ class TestBulk(test.TruncationTestCase):
         self.assertIsInstance(res[0], UUID)
 
     @test.requireCapability(supports_transactions=True)
-    @test.requireCapability(dialect=NotEQ("mssql"))
     async def test_bulk_create_in_transaction(self):
         async with in_transaction():
             await UniqueName.bulk_create([UniqueName() for _ in range(1000)])
@@ -126,7 +120,6 @@ class TestBulk(test.TruncationTestCase):
         self.assertEqual(len(res), 1000)
         self.assertIsInstance(res[0], UUID)
 
-    @test.requireCapability(dialect=NotEQ("mssql"))
     async def test_bulk_create_fail(self):
         with self.assertRaises(IntegrityError):
             await UniqueName.bulk_create(
@@ -139,7 +132,7 @@ class TestBulk(test.TruncationTestCase):
         with self.assertRaises(IntegrityError):
             await UUIDPkModel.bulk_create([UUIDPkModel(id=val) for _ in range(10)])
 
-    @test.requireCapability(supports_transactions=True, dialect=NotEQ("mssql"))
+    @test.requireCapability(supports_transactions=True)
     async def test_bulk_create_in_transaction_fail(self):
         with self.assertRaises(IntegrityError):
             async with in_transaction():
@@ -155,7 +148,6 @@ class TestBulk(test.TruncationTestCase):
             async with in_transaction():
                 await UUIDPkModel.bulk_create([UUIDPkModel(id=val) for _ in range(10)])
 
-    @test.requireCapability(dialect=NotEQ("mssql"))
     async def test_bulk_create_ignore_conflicts(self):
         name1 = UniqueName(name="name1")
         name2 = UniqueName(name="name2")

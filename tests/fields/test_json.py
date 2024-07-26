@@ -1,5 +1,6 @@
-from kleinmann.contrib import test
 from kleinmann.exceptions import ConfigurationError, FieldError, IntegrityError
+
+from kleinmann.contrib import test
 from kleinmann.fields import JSONField
 from tests import testmodels
 
@@ -65,7 +66,6 @@ class TestJSONFields(test.TestCase):
         obj2 = await testmodels.JSONFields.get(id=obj.id)
         self.assertEqual(obj, obj2)
 
-    @test.requireCapability(dialect="mysql")
     @test.requireCapability(dialect="postgres")
     async def test_list_contains(self):
         await testmodels.JSONFields.create(data=["text", 3, {"msg": "msg2"}])
@@ -75,7 +75,6 @@ class TestJSONFields(test.TestCase):
         obj2 = await testmodels.JSONFields.get(id=obj.id)
         self.assertEqual(obj, obj2)
 
-    @test.requireCapability(dialect="mysql")
     @test.requireCapability(dialect="postgres")
     async def test_list_contained_by(self):
         obj0 = await testmodels.JSONFields.create(data=["text"])
@@ -89,7 +88,6 @@ class TestJSONFields(test.TestCase):
         self.assertSetEqual(created_objs, objs)
         self.assertTrue(obj3 not in objs)
 
-    @test.requireCapability(dialect="mysql")
     @test.requireCapability(dialect="postgres")
     async def test_filter(self):
         obj0 = await testmodels.JSONFields.create(
@@ -128,7 +126,6 @@ class TestJSONFields(test.TestCase):
         self.assertEqual(obj1, obj2)
         self.assertEqual(obj0, obj3)
 
-    @test.requireCapability(dialect="mysql")
     @test.requireCapability(dialect="postgres")
     async def test_filter_not_condition(self):
         obj0 = await testmodels.JSONFields.create(
@@ -165,7 +162,6 @@ class TestJSONFields(test.TestCase):
         self.assertEqual(obj0, obj2)
         self.assertEqual(obj1, obj3)
 
-    @test.requireCapability(dialect="mysql")
     @test.requireCapability(dialect="postgres")
     async def test_filter_is_null_condition(self):
         obj0 = await testmodels.JSONFields.create(
@@ -203,7 +199,6 @@ class TestJSONFields(test.TestCase):
         self.assertEqual(obj0, obj2)
         self.assertEqual(obj1, obj3)
 
-    @test.requireCapability(dialect="mysql")
     @test.requireCapability(dialect="postgres")
     async def test_filter_not_is_null_condition(self):
         obj0 = await testmodels.JSONFields.create(

@@ -4,9 +4,10 @@ This example demonstrates model signals usage
 
 from typing import List, Optional, Type
 
-from kleinmann import BaseDBAsyncClient, Kleinmann, fields, run_async
 from kleinmann.models import Model
 from kleinmann.signals import post_delete, post_save, pre_delete, pre_save
+
+from kleinmann import BaseDBAsyncClient, Kleinmann, fields, run_async
 
 
 class Signal(Model):

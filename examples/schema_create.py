@@ -2,9 +2,10 @@
 This example demonstrates SQL Schema generation for each DB type supported.
 """
 
-from kleinmann import Kleinmann, connections, fields, run_async
 from kleinmann.models import Model
 from kleinmann.utils import get_schema_sql
+
+from kleinmann import Kleinmann, connections, fields, run_async
 
 
 class Tournament(Model):
@@ -50,11 +51,6 @@ class Team(Model):
 async def run():
     print("SQLite:\n")
     await Kleinmann.init(db_url="sqlite://:memory:", modules={"models": ["__main__"]})
-    sql = get_schema_sql(connections.get("default"), safe=False)
-    print(sql)
-
-    print("\n\nMySQL:\n")
-    await Kleinmann.init(db_url="mysql://root:@127.0.0.1:3306/", modules={"models": ["__main__"]})
     sql = get_schema_sql(connections.get("default"), safe=False)
     print(sql)
 

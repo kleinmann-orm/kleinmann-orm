@@ -1,7 +1,7 @@
-from kleinmann.contrib import test
-from kleinmann.contrib.test.condition import NotEQ
 from kleinmann.exceptions import ConfigurationError, FieldError
 from kleinmann.functions import Count, Sum
+
+from kleinmann.contrib import test
 from tests.testmodels import (
     DefaultOrdered,
     DefaultOrderedDesc,
@@ -85,7 +85,6 @@ class TestOrderBy(test.TestCase):
 
 
 class TestDefaultOrdering(test.TestCase):
-    @test.requireCapability(dialect=NotEQ("oracle"))
     async def test_default_order(self):
         await DefaultOrdered.create(one="2", second=1)
         await DefaultOrdered.create(one="1", second=1)
@@ -93,7 +92,6 @@ class TestDefaultOrdering(test.TestCase):
         instance_list = await DefaultOrdered.all()
         self.assertEqual([i.one for i in instance_list], ["1", "2"])
 
-    @test.requireCapability(dialect=NotEQ("oracle"))
     async def test_default_order_desc(self):
         await DefaultOrderedDesc.create(one="1", second=1)
         await DefaultOrderedDesc.create(one="2", second=1)

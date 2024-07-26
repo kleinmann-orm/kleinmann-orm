@@ -1,6 +1,7 @@
 from kleinmann.backends.base.config_generator import expand_db_url, generate_config
-from kleinmann.contrib import test
 from kleinmann.exceptions import ConfigurationError
+
+from kleinmann.contrib import test
 
 
 class TestConfigGenerator(test.SimpleTestCase):
@@ -211,130 +212,6 @@ class TestConfigGenerator(test.SimpleTestCase):
                     },
                 },
             )
-
-    def test_mysql_basic(self):
-        res = expand_db_url("mysql://root:@127.0.0.1:33060/test")
-        self.assertEqual(
-            res,
-            {
-                "engine": "kleinmann.backends.mysql",
-                "credentials": {
-                    "database": "test",
-                    "host": "127.0.0.1",
-                    "password": "",
-                    "port": 33060,
-                    "user": "root",
-                    "charset": "utf8mb4",
-                    "sql_mode": "STRICT_TRANS_TABLES",
-                },
-            },
-        )
-
-    def test_mysql_encoded_password(self):
-        res = expand_db_url("mysql://root:kx%25jj5%2Fg@127.0.0.1:33060/test")
-        self.assertEqual(
-            res,
-            {
-                "engine": "kleinmann.backends.mysql",
-                "credentials": {
-                    "database": "test",
-                    "host": "127.0.0.1",
-                    "password": "kx%jj5/g",
-                    "port": 33060,
-                    "user": "root",
-                    "charset": "utf8mb4",
-                    "sql_mode": "STRICT_TRANS_TABLES",
-                },
-            },
-        )
-
-    def test_mysql_no_db(self):
-        res = expand_db_url("mysql://root:@127.0.0.1:33060")
-        self.assertEqual(
-            res,
-            {
-                "engine": "kleinmann.backends.mysql",
-                "credentials": {
-                    "database": None,
-                    "host": "127.0.0.1",
-                    "password": "",
-                    "port": 33060,
-                    "user": "root",
-                    "charset": "utf8mb4",
-                    "sql_mode": "STRICT_TRANS_TABLES",
-                },
-            },
-        )
-
-    def test_mysql_no_port(self):
-        res = expand_db_url("mysql://root@127.0.0.1/test")
-        self.assertEqual(
-            res,
-            {
-                "engine": "kleinmann.backends.mysql",
-                "credentials": {
-                    "database": "test",
-                    "host": "127.0.0.1",
-                    "password": "",
-                    "port": 3306,
-                    "user": "root",
-                    "charset": "utf8mb4",
-                    "sql_mode": "STRICT_TRANS_TABLES",
-                },
-            },
-        )
-
-    def test_mysql_nonint_port(self):
-        with self.assertRaises(ConfigurationError):
-            expand_db_url("mysql://root:@127.0.0.1:moo/test")
-
-    def test_mysql_testing(self):
-        res = expand_db_url(r"mysql://root:@127.0.0.1:3306/test_\{\}", testing=True)
-        self.assertIn("test_", res["credentials"]["database"])
-        self.assertNotEqual("test_{}", res["credentials"]["database"])
-        self.assertEqual(
-            res,
-            {
-                "engine": "kleinmann.backends.mysql",
-                "credentials": {
-                    "database": res["credentials"]["database"],
-                    "host": "127.0.0.1",
-                    "password": "",
-                    "port": 3306,
-                    "user": "root",
-                    "charset": "utf8mb4",
-                    "sql_mode": "STRICT_TRANS_TABLES",
-                },
-            },
-        )
-
-    def test_mysql_params(self):
-        res = expand_db_url(
-            "mysql://root:@127.0.0.1:3306/test?AHA=5&moo=yes&maxsize=20&minsize=5"
-            "&connect_timeout=1.5&echo=1&ssl=True"
-        )
-        self.assertEqual(
-            res,
-            {
-                "engine": "kleinmann.backends.mysql",
-                "credentials": {
-                    "database": "test",
-                    "host": "127.0.0.1",
-                    "password": "",
-                    "port": 3306,
-                    "user": "root",
-                    "AHA": "5",
-                    "moo": "yes",
-                    "minsize": 5,
-                    "maxsize": 20,
-                    "connect_timeout": 1.5,
-                    "echo": True,
-                    "charset": "utf8mb4",
-                    "sql_mode": "STRICT_TRANS_TABLES",
-                    "ssl": True,
-                },
-            },
-        )
 
     def test_generate_config_basic(self):
         res = generate_config(

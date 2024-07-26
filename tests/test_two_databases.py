@@ -1,8 +1,8 @@
-from kleinmann import Kleinmann, connections
-from kleinmann.backends.oracle import OracleClient
-from kleinmann.contrib import test
 from kleinmann.exceptions import OperationalError, ParamsError
 from kleinmann.transactions import in_transaction
+
+from kleinmann import Kleinmann, connections
+from kleinmann.contrib import test
 from tests.testmodels import Event, EventTwo, TeamTwo, Tournament
 
 
@@ -31,14 +31,8 @@ class TestTwoDatabases(test.SimpleTestCase):
         await EventTwo.create(name="Event", tournament_id=tournament.id)
 
         with self.assertRaises(OperationalError):
-            if isinstance(self.db, OracleClient):
-                await self.db.execute_query('SELECT * FROM "eventtwo"')
-            else:
-                await self.db.execute_query("SELECT * FROM eventtwo")
-        if isinstance(self.db, OracleClient):
-            _, results = await self.second_db.execute_query('SELECT * FROM "eventtwo"')
-        else:
-            _, results = await self.second_db.execute_query("SELECT * FROM eventtwo")
+            await self.db.execute_query("SELECT * FROM eventtwo")
+        _, results = await self.second_db.execute_query("SELECT * FROM eventtwo")
         self.assertEqual(dict(results[0]), {"id": 1, "name": "Event", "tournament_id": 1})
 
     async def test_two_databases_relation(self):
@@ -46,15 +40,9 @@ class TestTwoDatabases(test.SimpleTestCase):
         event = await EventTwo.create(name="Event", tournament_id=tournament.id)
 
         with self.assertRaises(OperationalError):
-            if isinstance(self.db, OracleClient):
-                await self.db.execute_query('SELECT * FROM "eventtwo"')
-            else:
-                await self.db.execute_query("SELECT * FROM eventtwo")
+            await self.db.execute_query("SELECT * FROM eventtwo")
 
-        if isinstance(self.db, OracleClient):
-            _, results = await self.second_db.execute_query('SELECT * FROM "eventtwo"')
-        else:
-            _, results = await self.second_db.execute_query("SELECT * FROM eventtwo")
+        _, results = await self.second_db.execute_query("SELECT * FROM eventtwo")
         self.assertEqual(dict(results[0]), {"id": 1, "name": "Event", "tournament_id": 1})
 
         teams = []

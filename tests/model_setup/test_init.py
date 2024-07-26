@@ -1,8 +1,9 @@
 import os
 
+from kleinmann.exceptions import ConfigurationError
+
 from kleinmann import Kleinmann, connections
 from kleinmann.contrib import test
-from kleinmann.exceptions import ConfigurationError
 
 
 class TestInitErrors(test.SimpleTestCase):

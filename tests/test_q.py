@@ -1,8 +1,9 @@
 from unittest import TestCase as _TestCase
 
-from kleinmann.contrib.test import TestCase
 from kleinmann.exceptions import OperationalError
 from kleinmann.expressions import Q
+
+from kleinmann.contrib.test import TestCase
 from tests.testmodels import CharFields, IntFields
 
 

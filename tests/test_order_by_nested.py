@@ -1,10 +1,8 @@
 from kleinmann.contrib import test
-from kleinmann.contrib.test.condition import NotEQ
 from tests.testmodels import Event, Tournament
 
 
 class TestOrderByNested(test.TestCase):
-    @test.requireCapability(dialect=NotEQ("oracle"))
     async def test_basic(self):
         await Event.create(
             name="Event 1", tournament=await Tournament.create(name="Tournament 1", desc="B")

@@ -7,12 +7,12 @@ from unittest.mock import patch
 
 import pytz
 from iso8601 import ParseError
-
-from kleinmann import Model, fields, timezone
-from kleinmann.contrib import test
 from kleinmann.contrib.test.condition import NotIn
 from kleinmann.exceptions import ConfigurationError, IntegrityError
 from kleinmann.timezone import get_default_timezone
+
+from kleinmann import Model, fields, timezone
+from kleinmann.contrib import test
 from tests import testmodels
 
 
@@ -139,7 +139,7 @@ class TestDatetimeFields(TestEmpty):
         os.environ["TIMEZONE"] = old_tz
         os.environ["USE_TZ"] = old_use_tz
 
-    @test.requireCapability(dialect=NotIn("sqlite", "mssql"))
+    @test.requireCapability(dialect=NotIn("sqlite"))
     async def test_filter_by_year_month_day(self):
         with patch.dict(os.environ, {"USE_TZ": "True"}):
             obj = await self.model.create(datetime=datetime(2024, 1, 2))
@@ -186,79 +186,6 @@ class TestTimeFields(TestTime):
         await self.model.create(time=now)
         obj = await self.model.get(time=now)
         self.assertEqual(obj.time, now)
-
-
-@test.requireCapability(dialect="mysql")
-class TestTimeFieldsMySQL(TestTime):
-    async def test_create(self):
-        now = timezone.now().timetz()
-        obj0 = await self.model.create(time=now)
-        boj1 = await self.model.get(id=obj0.id)
-        self.assertEqual(
-            boj1.time,
-            timedelta(
-                hours=now.hour,
-                minutes=now.minute,
-                seconds=now.second,
-                microseconds=now.microsecond,
-            ),
-        )
-
-    async def test_cast(self):
-        obj0 = await self.model.create(time="21:00+00:00")
-        obj1 = await self.model.get(id=obj0.id)
-        t = time.fromisoformat("21:00+00:00")
-        self.assertEqual(
-            obj1.time,
-            timedelta(
-                hours=t.hour,
-                minutes=t.minute,
-                seconds=t.second,
-                microseconds=t.microsecond,
-            ),
-        )
-
-    async def test_values(self):
-        now = timezone.now().timetz()
-        obj0 = await self.model.create(time=now)
-        values = await self.model.get(id=obj0.id).values("time")
-        self.assertEqual(
-            values["time"],
-            timedelta(
-                hours=now.hour,
-                minutes=now.minute,
-                seconds=now.second,
-                microseconds=now.microsecond,
-            ),
-        )
-
-    async def test_values_list(self):
-        now = timezone.now().timetz()
-        obj0 = await self.model.create(time=now)
-        values = await self.model.get(id=obj0.id).values_list("time", flat=True)
-        self.assertEqual(
-            values,
-            timedelta(
-                hours=now.hour,
-                minutes=now.minute,
-                seconds=now.second,
-                microseconds=now.microsecond,
-            ),
-        )
-
-    async def test_get(self):
-        now = timezone.now().timetz()
-        await self.model.create(time=now)
-        obj = await self.model.get(time=now)
-        self.assertEqual(
-            obj.time,
-            timedelta(
-                hours=now.hour,
-                minutes=now.minute,
-                seconds=now.second,
-                microseconds=now.microsecond,
-            ),
-        )
 
 
 class TestDateFields(TestEmpty):

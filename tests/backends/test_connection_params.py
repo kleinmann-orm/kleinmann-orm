@@ -13,43 +13,6 @@ class TestConnectionParams(test.SimpleTestCase):
     async def asyncTearDown(self) -> None:
         await super().asyncTearDown()
 
-    async def test_mysql_connection_params(self):
-        with patch(
-            "kleinmann.backends.mysql.client.mysql.create_pool", new=AsyncMock()
-        ) as mysql_connect:
-            await connections._init(
-                {
-                    "models": {
-                        "engine": "kleinmann.backends.mysql",
-                        "credentials": {
-                            "database": "test",
-                            "host": "127.0.0.1",
-                            "password": "foomip",
-                            "port": 3306,
-                            "user": "root",
-                            "connect_timeout": 1.5,
-                            "charset": "utf8mb4",
-                        },
-                    }
-                },
-                False,
-            )
-            await connections.get("models").create_connection(with_db=True)
-
-            mysql_connect.assert_awaited_once_with(  # nosec
-                autocommit=True,
-                charset="utf8mb4",
-                connect_timeout=1.5,
-                db="test",
-                host="127.0.0.1",
-                password="foomip",
-                port=3306,
-                user="root",
-                maxsize=5,
-                minsize=1,
-                sql_mode="STRICT_TRANS_TABLES",
-            )
-
     async def test_asyncpg_connection_params(self):
         try:
             with patch(

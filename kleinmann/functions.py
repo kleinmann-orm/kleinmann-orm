@@ -1,6 +1,5 @@
-from pypika import functions
-
 from kleinmann.expressions import Aggregate, Function
+from pypika import functions
 
 ##############################################################################
 # Standard functions

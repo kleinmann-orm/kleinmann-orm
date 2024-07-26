@@ -2,9 +2,9 @@ from types import ModuleType
 from typing import Dict, Iterable, Optional, Union
 
 from aiohttp import web  # pylint: disable=E0401
+from kleinmann.log import logger
 
 from kleinmann import Kleinmann, connections
-from kleinmann.log import logger
 
 
 def register_kleinmann(

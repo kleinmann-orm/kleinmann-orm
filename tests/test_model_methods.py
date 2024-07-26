@@ -1,8 +1,6 @@
 import os
 from uuid import uuid4
 
-from kleinmann.contrib import test
-from kleinmann.contrib.test.condition import NotEQ
 from kleinmann.exceptions import (
     ConfigurationError,
     DoesNotExist,
@@ -15,6 +13,8 @@ from kleinmann.exceptions import (
 )
 from kleinmann.expressions import F, Q
 from kleinmann.models import NoneAwaitable
+
+from kleinmann.contrib import test
 from tests.testmodels import (
     Dest_null,
     Event,
@@ -40,7 +40,6 @@ class TestModelCreate(test.TestCase):
         mdl2 = await UUIDFkRelatedNullModel.get(id=mdl.id)
         self.assertEqual(mdl, mdl2)
 
-    @test.requireCapability(dialect=NotEQ("mssql"))
     async def test_save_generated_custom_id(self):
         cid = 12345
         mdl = await Tournament.create(id=cid, name="Test")
@@ -55,7 +54,6 @@ class TestModelCreate(test.TestCase):
         mdl2 = await UUIDFkRelatedNullModel.get(id=cid)
         self.assertEqual(mdl, mdl2)
 
-    @test.requireCapability(dialect=NotEQ("mssql"))
     async def test_save_generated_duplicate_custom_id(self):
         cid = 12345
         await Tournament.create(id=cid, name="TestOriginal")

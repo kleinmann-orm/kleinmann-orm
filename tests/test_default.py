@@ -4,9 +4,6 @@ from decimal import Decimal
 import pytz
 
 from kleinmann.backends.asyncpg import AsyncpgDBClient
-from kleinmann.backends.mssql import MSSQLClient
-from kleinmann.backends.mysql import MySQLClient
-from kleinmann.backends.oracle import OracleClient
 from kleinmann.backends.psycopg import PsycopgClient
 from kleinmann.backends.sqlite import SqliteClient
 from kleinmann.contrib import test
@@ -17,21 +14,13 @@ class TestDefault(test.TestCase):
     async def asyncSetUp(self) -> None:
         await super(TestDefault, self).asyncSetUp()
         db = self._db
-        if isinstance(db, MySQLClient):
-            await db.execute_query(
-                "insert into defaultmodel (`int_default`,`float_default`,`decimal_default`,`bool_default`,`char_default`,`date_default`,`datetime_default`) values (DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT)",
-            )
-        elif isinstance(db, SqliteClient):
+        if isinstance(db, SqliteClient):
             await db.execute_query(
                 "insert into defaultmodel default values",
             )
-        elif isinstance(db, (AsyncpgDBClient, PsycopgClient, MSSQLClient)):
+        elif isinstance(db, (AsyncpgDBClient, PsycopgClient)):
             await db.execute_query(
                 'insert into defaultmodel ("int_default","float_default","decimal_default","bool_default","char_default","date_default","datetime_default") values (DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT)',
-            )
-        elif isinstance(db, OracleClient):
-            await db.execute_query(
-                'insert into "defaultmodel" ("int_default","float_default","decimal_default","bool_default","char_default","date_default","datetime_default") values (DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT)',
             )
 
     async def test_default(self):

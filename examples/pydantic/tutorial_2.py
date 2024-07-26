@@ -6,9 +6,10 @@ Here we introduce:
 * Default sorting is honoured
 """
 
+from kleinmann.models import Model
+
 from kleinmann import Kleinmann, fields, run_async
 from kleinmann.contrib.pydantic import pydantic_queryset_creator
-from kleinmann.models import Model
 
 
 class Tournament(Model):

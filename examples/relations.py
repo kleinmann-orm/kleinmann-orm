@@ -6,9 +6,10 @@ to declare relations and use of .prefetch_related() and .fetch_related()
 to get this related objects
 """
 
-from kleinmann import Kleinmann, fields, run_async
 from kleinmann.exceptions import NoValuesFetched
 from kleinmann.models import Model
+
+from kleinmann import Kleinmann, fields, run_async
 
 
 class Tournament(Model):

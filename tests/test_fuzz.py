@@ -1,5 +1,4 @@
 from kleinmann.contrib import test
-from kleinmann.contrib.test.condition import NotEQ
 from tests.testmodels import CharFields
 
 DODGY_STRINGS = [
@@ -96,7 +95,6 @@ DODGY_STRINGS = [
 
 
 class TestFuzz(test.TestCase):
-    @test.requireCapability(dialect=NotEQ("mssql"))
     async def test_char_fuzz(self):
         for char in DODGY_STRINGS:
             # print(repr(char))
