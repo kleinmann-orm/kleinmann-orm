@@ -3,7 +3,7 @@ MAKEFLAGS += --no-print-directory
 ##
 ##  🚧 Kleinmann ORM developer tools
 ##
-SOURCE=kleinmann tests examples conftest.py
+SOURCE=src tests examples conftest.py
 py_warn = PYTHONDEVMODE=1
 pytest_opts = -n auto --cov=kleinmann --cov-append --tb=native -q
 
@@ -55,9 +55,12 @@ update:         ## Update all dependencies
 	poetry update
 
 docs:           ## Build the documentation
-	make install
 	rm -fR ./build
 	sphinx-build -M html docs build
+
+docs_serve:     ## Serve the documentation
+	make docs
+	python -m http.server -d build/html
 
 build:          ## Build and verify the package
 	rm -fR dist/
