@@ -10,9 +10,9 @@ import pytest
 import pytz
 from asgi_lifespan import LifespanManager
 from httpx import ASGITransport, AsyncClient
-from kleinmann.fields.data import JSON_LOADS
 
 from kleinmann.contrib.test import MEMORY_SQLITE
+from kleinmann.fields.data import JSON_LOADS
 
 os.environ["DB_URL"] = MEMORY_SQLITE
 try:

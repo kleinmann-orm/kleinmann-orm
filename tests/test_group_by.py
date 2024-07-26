@@ -1,6 +1,5 @@
-from kleinmann.functions import Avg, Count, Sum, Upper
-
 from kleinmann.contrib import test
+from kleinmann.functions import Avg, Count, Sum, Upper
 from tests.testmodels import Author, Book
 
 

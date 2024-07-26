@@ -1,8 +1,7 @@
 from enum import Enum, IntEnum
 
-from kleinmann.models import Model
-
 from kleinmann import fields
+from kleinmann.models import Model
 from tests.fields.subclass_fields import EnumField, IntEnumField
 
 

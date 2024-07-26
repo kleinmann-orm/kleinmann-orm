@@ -1,11 +1,10 @@
 from decimal import Decimal
 
+from kleinmann import fields
+from kleinmann.contrib import test
 from kleinmann.exceptions import ConfigurationError, FieldError, IntegrityError
 from kleinmann.expressions import F
 from kleinmann.functions import Avg, Max, Sum
-
-from kleinmann import fields
-from kleinmann.contrib import test
 from tests import testmodels
 
 

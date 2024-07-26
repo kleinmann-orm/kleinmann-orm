@@ -10,10 +10,9 @@ from types import ModuleType
 from typing import Any, Callable, Coroutine, Iterable, List, Optional, TypeVar, Union
 from unittest import SkipTest, expectedFailure, skip, skipIf, skipUnless
 
+from kleinmann import Kleinmann, Model, connections
 from kleinmann.backends.base.config_generator import generate_config as _generate_config
 from kleinmann.exceptions import DBConnectionError, OperationalError
-
-from kleinmann import Kleinmann, Model, connections
 
 if sys.version_info >= (3, 10):
     from typing import ParamSpec
@@ -283,7 +282,7 @@ class TruncationTestCase(SimpleTestCase):
             for model in app.values():
                 quote_char = model._meta.db.query_class._builder().QUOTE_CHAR
                 await model._meta.db.execute_script(
-                    f"DELETE FROM {quote_char}{model._meta.db_table}{quote_char}"  # nosec
+                    f"DELETE FROM {quote_char}{model._meta.db_table}{quote_char}"  # noqa: S608
                 )
         await super()._tearDownDB()
 

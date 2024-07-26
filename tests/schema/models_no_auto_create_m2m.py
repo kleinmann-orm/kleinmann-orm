@@ -2,10 +2,9 @@
 This example demonstrates SQL Schema generation for each DB type supported.
 """
 
-from kleinmann.models import Model
-
 from kleinmann import fields
 from kleinmann.fields import SET_NULL
+from kleinmann.models import Model
 
 
 class Tournament(Model):

@@ -7,15 +7,15 @@ from enum import Enum, IntEnum
 from typing import TYPE_CHECKING, Any, Callable, Optional, Type, TypeVar, Union
 from uuid import UUID, uuid4
 
-from kleinmann.exceptions import ConfigurationError, FieldError
-from kleinmann.fields.base import Field
-from kleinmann.timezone import get_default_timezone, get_timezone, get_use_tz, localtime
-from kleinmann.validators import MaxLengthValidator
 from pypika import functions
 from pypika.enums import SqlTypes
 from pypika.terms import Term
 
 from kleinmann import timezone
+from kleinmann.exceptions import ConfigurationError, FieldError
+from kleinmann.fields.base import Field
+from kleinmann.timezone import get_default_timezone, get_timezone, get_use_tz, localtime
+from kleinmann.validators import MaxLengthValidator
 
 try:
     from ciso8601 import parse_datetime
@@ -286,7 +286,7 @@ class DatetimeField(Field[datetime.datetime], datetime.datetime):
     def to_python_value(self, value: Any) -> Optional[datetime.datetime]:
         if value is not None:
             if isinstance(value, datetime.datetime):
-                value = value
+                pass
             elif isinstance(value, int):
                 value = datetime.datetime.fromtimestamp(value)
             else:

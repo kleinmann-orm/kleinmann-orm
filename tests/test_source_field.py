@@ -5,10 +5,9 @@ This module does a series of use tests on a non-source_field model,
 This is to test that behaviour doesn't change when one defined source_field parameters.
 """
 
+from kleinmann.contrib import test
 from kleinmann.expressions import F, Q
 from kleinmann.functions import Coalesce, Count, Length, Lower, Trim, Upper
-
-from kleinmann.contrib import test
 from tests.testmodels import NumberSourceField, SourceFields, StraightFields
 
 

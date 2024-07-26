@@ -2,15 +2,14 @@ import json
 import uuid
 from typing import Union
 
+from kleinmann import Kleinmann, fields
+from kleinmann.contrib import test
 from kleinmann.fields.relational import (
     BackwardFKRelation,
     ForeignKeyFieldInstance,
     ManyToManyFieldInstance,
     OneToOneFieldInstance,
 )
-
-from kleinmann import Kleinmann, fields
-from kleinmann.contrib import test
 from tests.testmodels import (
     Event,
     JSONFields,

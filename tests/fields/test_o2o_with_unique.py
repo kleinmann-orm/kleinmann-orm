@@ -1,7 +1,6 @@
+from kleinmann.contrib import test
 from kleinmann.exceptions import IntegrityError, OperationalError
 from kleinmann.queryset import QuerySet
-
-from kleinmann.contrib import test
 from tests import testmodels
 
 

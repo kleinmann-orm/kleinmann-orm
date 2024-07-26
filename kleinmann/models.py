@@ -19,6 +19,11 @@ from typing import (
     Union,
 )
 
+from pypika import Order, Query, Table
+from pypika.terms import Term
+from typing_extensions import Self
+
+from kleinmann import connections
 from kleinmann.backends.base.client import BaseDBAsyncClient
 from kleinmann.exceptions import (
     ConfigurationError,
@@ -57,11 +62,6 @@ from kleinmann.queryset import (
 from kleinmann.router import router
 from kleinmann.signals import Signals
 from kleinmann.transactions import in_transaction
-from pypika import Order, Query, Table
-from pypika.terms import Term
-from typing_extensions import Self
-
-from kleinmann import connections
 
 MODEL = TypeVar("MODEL", bound="Model")
 EMPTY = object()

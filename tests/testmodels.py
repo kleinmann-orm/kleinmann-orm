@@ -12,7 +12,11 @@ from enum import Enum, IntEnum
 from typing import List, Union
 
 import pytz
+from pydantic import ConfigDict
+
+from kleinmann import fields
 from kleinmann.exceptions import ValidationError
+from kleinmann.fields import NO_ACTION
 from kleinmann.manager import Manager
 from kleinmann.models import Model
 from kleinmann.queryset import QuerySet
@@ -24,10 +28,6 @@ from kleinmann.validators import (
     validate_ipv4_address,
     validate_ipv6_address,
 )
-from pydantic import ConfigDict
-
-from kleinmann import fields
-from kleinmann.fields import NO_ACTION
 
 
 def generate_token():

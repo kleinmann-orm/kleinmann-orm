@@ -3,9 +3,8 @@ This example demonstrates most basic operations with single model
 and a Table definition generation with comment support
 """
 
-from kleinmann.models import Model
-
 from kleinmann import Kleinmann, fields, run_async
+from kleinmann.models import Model
 
 
 class Event(Model):

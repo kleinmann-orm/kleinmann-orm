@@ -1,8 +1,7 @@
-from kleinmann.expressions import Case, F, Q, When
-from kleinmann.functions import Coalesce
-
 from kleinmann import connections
 from kleinmann.contrib import test
+from kleinmann.expressions import Case, F, Q, When
+from kleinmann.functions import Coalesce
 from tests.testmodels import IntFields
 
 

@@ -9,10 +9,9 @@ Key notes of this example is using db_route for Kleinmann init
 and explicitly declaring model apps in class Meta
 """
 
+from kleinmann import Kleinmann, connections, fields, run_async
 from kleinmann.exceptions import OperationalError
 from kleinmann.models import Model
-
-from kleinmann import Kleinmann, connections, fields, run_async
 
 
 class Tournament(Model):

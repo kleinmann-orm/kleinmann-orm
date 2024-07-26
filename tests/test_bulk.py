@@ -1,9 +1,8 @@
 from uuid import UUID, uuid4
 
+from kleinmann.contrib import test
 from kleinmann.exceptions import IntegrityError
 from kleinmann.transactions import in_transaction
-
-from kleinmann.contrib import test
 from tests.testmodels import UniqueName, UUIDPkModel
 
 

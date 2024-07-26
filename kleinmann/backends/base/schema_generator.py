@@ -3,14 +3,15 @@ from hashlib import sha256
 from typing import TYPE_CHECKING, Any, List, Set, Type, Union, cast
 
 from kleinmann.exceptions import ConfigurationError
-from kleinmann.indexes import Index
-
 from kleinmann.fields import JSONField, TextField, UUIDField
+from kleinmann.indexes import Index
 
 if TYPE_CHECKING:  # pragma: nocoverage
     from kleinmann.backends.base.client import BaseDBAsyncClient
-    from kleinmann.fields.relational import ForeignKeyFieldInstance  # noqa
-    from kleinmann.fields.relational import ManyToManyFieldInstance
+    from kleinmann.fields.relational import (
+        ForeignKeyFieldInstance,  # noqa
+        ManyToManyFieldInstance,
+    )
     from kleinmann.models import Model
 
 # pylint: disable=R0201

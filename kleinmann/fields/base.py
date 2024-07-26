@@ -16,9 +16,10 @@ from typing import (
     overload,
 )
 
+from pypika.terms import Term
+
 from kleinmann.exceptions import ConfigurationError, ValidationError
 from kleinmann.validators import Validator
-from pypika.terms import Term
 
 if TYPE_CHECKING:  # pragma: nocoverage
     from kleinmann.models import Model

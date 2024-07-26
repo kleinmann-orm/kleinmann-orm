@@ -1,9 +1,8 @@
 from functools import wraps
 from typing import TYPE_CHECKING, Any, Callable, Optional, TypeVar, cast
 
-from kleinmann.exceptions import ParamsError
-
 from kleinmann import connections
+from kleinmann.exceptions import ParamsError
 
 if TYPE_CHECKING:  # pragma: nocoverage
     from kleinmann.backends.base.client import BaseDBAsyncClient, TransactionContext

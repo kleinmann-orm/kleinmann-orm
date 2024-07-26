@@ -1,7 +1,6 @@
+from kleinmann.contrib import test
 from kleinmann.exceptions import ConfigurationError, FieldError
 from kleinmann.functions import Count, Sum
-
-from kleinmann.contrib import test
 from tests.testmodels import (
     DefaultOrdered,
     DefaultOrderedDesc,

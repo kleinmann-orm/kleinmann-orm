@@ -3,9 +3,8 @@ from typing import TYPE_CHECKING, Optional, Tuple, Type
 from pypika.terms import Term, ValueWrapper
 
 if TYPE_CHECKING:
-    from kleinmann.backends.base.schema_generator import BaseSchemaGenerator
-
     from kleinmann import Model
+    from kleinmann.backends.base.schema_generator import BaseSchemaGenerator
 
 
 class Index:
