@@ -12,7 +12,7 @@ repository = "https://github.com/kleinmann-orm/kleinmann-orm.git"
 documentation = "https://github.com/kleinmann-orm/kleinmann-orm"
 keywords = ["sql", "postgres", "sqlite", "aiosqlite", "asyncpg", "relational", "database", "rdbms", "orm", "object mapper", "async", "asyncio", "aio"]
 packages = [
-    { include = "kleinmann" }
+    { include = "kleinmann", from = "src" },
 ]
 include = ["CHANGELOG.md", "LICENSE", "README.md"]
 classifiers = [
