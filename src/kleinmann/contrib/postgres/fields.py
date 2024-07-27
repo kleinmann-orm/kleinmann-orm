@@ -7,7 +7,7 @@ class TSVectorField(Field):
     SQL_TYPE = "TSVECTOR"
 
 
-class ArrayField(Field, list):  # type: ignore
+class ArrayField(Field, list):  # type: ignore[misc]
     def __init__(self, element_type: str = "int", **kwargs: Any):
         super().__init__(**kwargs)
         self.element_type = element_type

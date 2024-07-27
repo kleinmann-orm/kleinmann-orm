@@ -147,8 +147,8 @@ class AwaitableQuery(Generic[MODEL]):
                 self.query = self.query.join(join[0], how=JoinType.left_outer).on(join[1])
                 self._joined_tables.append(join[0])
 
-        self.query._wheres = where_criterion
-        self.query._havings = having_criterion
+        self.query._wheres = where_criterion  # type: ignore[assignment]
+        self.query._havings = having_criterion  # type: ignore[assignment]
 
         if has_aggregate and (self._joined_tables or having_criterion or self.query._orderbys):
             self.query = self.query.groupby(
@@ -196,7 +196,7 @@ class AwaitableQuery(Generic[MODEL]):
         """
         # Do not apply default ordering for annotated queries to not mess them up
         if not orderings and self.model._meta.ordering and not annotations:
-            orderings = self.model._meta.ordering
+            orderings = self.model._meta.ordering  # type: ignore[assignment]
 
         for ordering in orderings:
             field_name = ordering[0]
@@ -252,12 +252,12 @@ class AwaitableQuery(Generic[MODEL]):
                 annotation_info[key] = annotation.resolve(self.model, table)
 
         for key, info in annotation_info.items():
-            for join in info["joins"]:
+            for join in info["joins"]:  # type: ignore[attr-defined]
                 self._join_table_by_field(*join)
             if key in self._annotations:
-                self.query._select_other(info["field"].as_(key))
+                self.query._select_other(info["field"].as_(key))  # type: ignore[attr-defined]
 
-        return any(info["field"].is_aggregate for info in annotation_info.values())
+        return any(info["field"].is_aggregate for info in annotation_info.values())  # type: ignore[attr-defined]
 
     def sql(self, **kwargs) -> str:
         """Return the actual SQL."""
@@ -531,7 +531,7 @@ class QuerySet(AwaitableQuery[MODEL]):
         for key, annotation in kwargs.items():
             # if not isinstance(annotation, (Function, Term)):
             #     raise TypeError("value is expected to be Function/Term instance")
-            queryset._annotations[key] = annotation
+            queryset._annotations[key] = annotation  # type: ignore[assignment]
             queryset._custom_filters.update(get_filters_for_field(key, None, key))
         return queryset
 
@@ -922,7 +922,7 @@ class QuerySet(AwaitableQuery[MODEL]):
             self._db = self._choose_db()  # type: ignore
         self._make_query()
         return await self._db.executor_class(model=self.model, db=self._db).execute_explain(
-            self.query
+            self.query  # type: ignore[arg-type]
         )
 
     def using_db(self, _db: Optional[BaseDBAsyncClient]) -> "QuerySet[MODEL]":
@@ -966,15 +966,15 @@ class QuerySet(AwaitableQuery[MODEL]):
             )
         if forwarded_fields:
             field, __, forwarded_fields_ = forwarded_fields.partition("__")
-            self.query = self._join_table_with_select_related(
+            self.query = self._join_table_with_select_related(  # type: ignore[assignment]
                 model=field_object.related_model,
                 table=table,
                 field=field,
                 forwarded_fields=forwarded_fields_,
                 path=(*path, field),
             )
-            return self.query
-        return self.query
+            return self.query  # type: ignore[return-value]
+        return self.query  # type: ignore[return-value]
 
     def _make_query(self) -> None:
         # clean tmp records first
@@ -989,15 +989,15 @@ class QuerySet(AwaitableQuery[MODEL]):
                 self.model,
                 (None,),
             )
-            if append_item not in self._select_related_idx:
-                self._select_related_idx.append(append_item)
+            if append_item not in self._select_related_idx:  # type: ignore[comparison-overlap]
+                self._select_related_idx.append(append_item)  # type: ignore[arg-type]
             db_fields_for_select = [
                 table[self.model._meta.fields_db_projection[field]].as_(field)
                 for field in self._fields_for_select
             ]
             self.query = copy(self.model._meta.basequery).select(*db_fields_for_select)
         else:
-            self.query = copy(self.model._meta.basequery_all_fields)
+            self.query = copy(self.model._meta.basequery_all_fields)  # type: ignore[assignment]
             append_item = (
                 self.model,
                 len(self.model._meta.db_fields) + len(self._annotations),
@@ -1005,8 +1005,8 @@ class QuerySet(AwaitableQuery[MODEL]):
                 self.model,
                 (None,),
             )
-            if append_item not in self._select_related_idx:
-                self._select_related_idx.append(append_item)
+            if append_item not in self._select_related_idx:  # type: ignore[comparison-overlap]
+                self._select_related_idx.append(append_item)  # type: ignore[arg-type]
         self.resolve_ordering(
             self.model, self.model._meta.basetable, self._orderings, self._annotations
         )
@@ -1017,9 +1017,9 @@ class QuerySet(AwaitableQuery[MODEL]):
             custom_filters=self._custom_filters,
         )
         if self._limit is not None:
-            self.query._limit = self._limit
+            self.query._limit = self._limit  # type: ignore[assignment]
         if self._offset:
-            self.query._offset = self._offset
+            self.query._offset = self._offset  # type: ignore[assignment]
         if self._distinct:
             self.query._distinct = True
         if self._select_for_update:
@@ -1031,7 +1031,7 @@ class QuerySet(AwaitableQuery[MODEL]):
         if self._select_related:
             for field in self._select_related:
                 field, __, forwarded_fields = field.partition("__")
-                self.query = self._join_table_with_select_related(
+                self.query = self._join_table_with_select_related(  # type: ignore[assignment]
                     model=self.model,
                     table=self.model._meta.basetable,
                     field=field,
@@ -1062,7 +1062,9 @@ class QuerySet(AwaitableQuery[MODEL]):
             prefetch_map=self._prefetch_map,
             prefetch_queries=self._prefetch_queries,
             select_related_idx=self._select_related_idx,
-        ).execute_select(self.query, custom_fields=list(self._annotations.keys()))
+        ).execute_select(
+            self.query, custom_fields=list(self._annotations.keys())  # type: ignore[arg-type]
+        )
         if self._single:
             if len(instance_list) == 1:
                 return instance_list[0]
@@ -1110,7 +1112,7 @@ class UpdateQuery(AwaitableQuery):
         table = self.model._meta.basetable
         self.query = self._db.query_class.update(table)
         if self.capabilities.support_update_limit_order_by and self.limit:
-            self.query._limit = self.limit
+            self.query._limit = self.limit  # type: ignore[assignment]
             self.resolve_ordering(self.model, table, self.orderings, self.annotations)
 
         self.resolve_filters(
@@ -1193,7 +1195,7 @@ class DeleteQuery(AwaitableQuery):
     def _make_query(self) -> None:
         self.query = copy(self.model._meta.basequery)
         if self.capabilities.support_update_limit_order_by and self.limit:
-            self.query._limit = self.limit
+            self.query._limit = self.limit  # type: ignore[assignment]
             self.resolve_ordering(
                 model=self.model,
                 table=self.model._meta.basetable,
@@ -1253,8 +1255,8 @@ class ExistsQuery(AwaitableQuery):
             annotations=self.annotations,
             custom_filters=self.custom_filters,
         )
-        self.query._limit = 1
-        self.query._select_other(ValueWrapper(1))
+        self.query._limit = 1  # type: ignore[assignment]
+        self.query._select_other(ValueWrapper(1))  # type: ignore[arg-type]
 
         if self.force_indexes:
             self.query._force_indexes = []
@@ -1315,7 +1317,7 @@ class CountQuery(AwaitableQuery):
             annotations=self.annotations,
             custom_filters=self.custom_filters,
         )
-        count_term = Count("*")
+        count_term = Count("*")  # type: ignore[no-untyped-call]
         if self.query._groupbys:
             count_term = count_term.over()
         self.query._select_other(count_term)
@@ -1530,9 +1532,9 @@ class ValuesListQuery(FieldSelectQuery, Generic[SINGLE]):
             custom_filters=self.custom_filters,
         )
         if self.limit:
-            self.query._limit = self.limit
+            self.query._limit = self.limit  # type: ignore[assignment]
         if self.offset:
-            self.query._offset = self.offset
+            self.query._offset = self.offset  # type: ignore[assignment]
         if self.distinct:
             self.query._distinct = True
         if self.group_bys:
@@ -1660,9 +1662,9 @@ class ValuesQuery(FieldSelectQuery, Generic[SINGLE]):
             custom_filters=self.custom_filters,
         )
         if self.limit:
-            self.query._limit = self.limit
+            self.query._limit = self.limit  # type: ignore[assignment]
         if self.offset:
-            self.query._offset = self.offset
+            self.query._offset = self.offset  # type: ignore[assignment]
         if self.distinct:
             self.query._distinct = True
         if self.group_bys:
@@ -1733,13 +1735,15 @@ class RawSQLQuery(AwaitableQuery):
         self._db = db
 
     def _make_query(self) -> None:
-        self.query = RawSQL(self._sql)
+        self.query = RawSQL(self._sql)  # type: ignore[assignment]
 
     async def _execute(self) -> Any:
         instance_list = await self._db.executor_class(
             model=self.model,
             db=self._db,
-        ).execute_select(self.query)
+        ).execute_select(
+            self.query  # type: ignore[arg-type]
+        )
         return instance_list
 
     def __await__(self) -> Generator[Any, None, List[MODEL]]:
@@ -1784,7 +1788,7 @@ class BulkUpdateQuery(UpdateQuery, Generic[MODEL]):
         table = self.model._meta.basetable
         self.query = self._db.query_class.update(table)
         if self.capabilities.support_update_limit_order_by and self.limit:
-            self.query._limit = self.limit
+            self.query._limit = self.limit  # type: ignore[assignment]
             self.resolve_ordering(
                 model=self.model,
                 table=table,
@@ -1813,7 +1817,7 @@ class BulkUpdateQuery(UpdateQuery, Generic[MODEL]):
                     case.when(
                         pk == value,
                         (
-                            Cast(
+                            Cast(  # type: ignore[no-untyped-call]
                                 self.query._wrapper_cls(field_value),
                                 obj._meta.fields_map[field].get_for_dialect(
                                     self._db.schema_generator.DIALECT, "SQL_TYPE"
@@ -1897,8 +1901,8 @@ class BulkCreateQuery(AwaitableQuery, Generic[MODEL]):
                     self.insert_query_all = self.insert_query_all.do_update(update_field)
                     self.insert_query = self.insert_query.do_update(update_field)
         else:
-            self.insert_query_all = self.executor.insert_query_all
-            self.insert_query = self.executor.insert_query
+            self.insert_query_all = self.executor.insert_query_all  # type: ignore[assignment]
+            self.insert_query = self.executor.insert_query  # type: ignore[assignment]
 
     async def _execute(self) -> None:
         for instance_chunk in chunk(self.objects, self.batch_size):

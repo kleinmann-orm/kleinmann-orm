@@ -19,24 +19,24 @@ class PostgreSQLQuery(Query):
 
 
 class PostgreSQLQueryBuilder(QueryBuilder):
-    ALIAS_QUOTE_CHAR = '"'
+    ALIAS_QUOTE_CHAR = '"'  # type: ignore[assignment]
     QUERY_CLS = PostgreSQLQuery
 
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(dialect=Dialects.POSTGRESQL, **kwargs)
-        self._returns = []
+        self._returns = []  # type: ignore[var-annotated]
         self._return_star = False
 
-        self._distinct_on = []
+        self._distinct_on = []  # type: ignore[var-annotated]
 
     def __copy__(self) -> "PostgreSQLQueryBuilder":
         newone = super().__copy__()
-        newone._returns = copy(self._returns)
+        newone._returns = copy(self._returns)  # type: ignore[attr-defined]
         newone._on_conflict_do_updates = copy(self._on_conflict_do_updates)
-        return newone
+        return newone  # type: ignore[return-value]
 
     @builder
-    def distinct_on(self, *fields: Union[str, Term]) -> "PostgreSQLQueryBuilder":
+    def distinct_on(self, *fields: Union[str, Term]) -> "PostgreSQLQueryBuilder":  # type: ignore[return]
         for field in fields:
             if isinstance(field, str):
                 self._distinct_on.append(Field(field))
@@ -53,7 +53,7 @@ class PostgreSQLQueryBuilder(QueryBuilder):
         return super()._distinct_sql(**kwargs)
 
     @builder
-    def returning(self, *terms: Any) -> "PostgreSQLQueryBuilder":
+    def returning(self, *terms: Any) -> "PostgreSQLQueryBuilder":  # type: ignore[return]
         for term in terms:
             if isinstance(term, Field):
                 self._return_field(term)
@@ -64,7 +64,7 @@ class PostgreSQLQueryBuilder(QueryBuilder):
             elif isinstance(term, Function):
                 raise QueryException("Aggregate functions are not allowed in returning")
             else:
-                self._return_other(self.wrap_constant(term, self._wrapper_cls))
+                self._return_other(self.wrap_constant(term, self._wrapper_cls))  # type: ignore[arg-type]
 
     def _validate_returning_term(self, term: Term) -> None:
         for field in term.fields_():
@@ -94,7 +94,7 @@ class PostgreSQLQueryBuilder(QueryBuilder):
             # Do not add select terms after a star is selected
             return
 
-        self._validate_returning_term(term)
+        self._validate_returning_term(term)  # type: ignore[arg-type]
 
         if isinstance(term, Star):
             self._set_returns_for_star()
@@ -108,11 +108,11 @@ class PostgreSQLQueryBuilder(QueryBuilder):
             return
 
         if self._insert_table:
-            self._return_field(Field(term, table=self._insert_table))
+            self._return_field(Field(term, table=self._insert_table))  # type: ignore[unreachable]
         elif self._update_table:
-            self._return_field(Field(term, table=self._update_table))
+            self._return_field(Field(term, table=self._update_table))  # type: ignore[unreachable]
         elif self._delete_from:
-            self._return_field(Field(term, table=self._from[0]))
+            self._return_field(Field(term, table=self._from[0]))  # type: ignore[arg-type]
         else:
             raise QueryException("Returning can't be used in this query")
 
@@ -129,16 +129,16 @@ class PostgreSQLQueryBuilder(QueryBuilder):
         self._set_kwargs_defaults(kwargs)
         if not (self._selects or self._insert_table or self._delete_from or self._update_table):
             return ""
-        if self._insert_table and not (self._selects or self._values):
-            return ""
-        if self._update_table and not self._updates:
-            return ""
+        if self._insert_table and not (self._selects or self._values):  # type: ignore[unreachable]
+            return ""  # type: ignore[unreachable]
+        if self._update_table and not self._updates:  # type: ignore[unreachable]
+            return ""  # type: ignore[unreachable]
 
         has_joins = bool(self._joins)
         has_multiple_from_clauses = 1 < len(self._from)
         has_subquery_from_clause = 0 < len(self._from) and isinstance(self._from[0], QueryBuilder)
         has_reference_to_foreign_table = self._foreign_table
-        has_update_from = self._update_table and self._from
+        has_update_from = self._update_table and self._from  # type: ignore[unreachable]
 
         kwargs["with_namespace"] = any(
             [
@@ -150,7 +150,7 @@ class PostgreSQLQueryBuilder(QueryBuilder):
             ]
         )
         if self._update_table:
-            if self._with:
+            if self._with:  # type: ignore[unreachable]
                 querystring = self._with_sql(**kwargs)
             else:
                 querystring = ""
@@ -179,6 +179,6 @@ class PostgreSQLQueryBuilder(QueryBuilder):
                 with_alias, subquery, **kwargs
             )
         if self._returns:
-            kwargs["with_namespace"] = self._update_table and self.from_
+            kwargs["with_namespace"] = self._update_table and self.from_  # type: ignore[unreachable]
             querystring += self._returning_sql(**kwargs)
         return querystring

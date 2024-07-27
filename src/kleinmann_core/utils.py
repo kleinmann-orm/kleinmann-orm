@@ -123,4 +123,4 @@ def validate(*args: Any, exc: Optional[Exception] = None, type: Optional[Type] =
     if type is not None:
         for arg in args:
             if not isinstance(arg, type):
-                raise exc
+                raise exc  # type: ignore[misc]

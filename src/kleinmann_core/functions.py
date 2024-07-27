@@ -10,7 +10,7 @@ from kleinmann_core.utils import builder
 class DistinctOptionFunction(AggregateFunction):
     def __init__(self, name, *args, **kwargs):
         alias = kwargs.get("alias")
-        super(DistinctOptionFunction, self).__init__(name, *args, alias=alias)
+        super(DistinctOptionFunction, self).__init__(name, *args, alias=alias)  # type: ignore[no-untyped-call]
         self._distinct = False
 
     def get_function_sql(self, **kwargs):
@@ -29,53 +29,53 @@ class DistinctOptionFunction(AggregateFunction):
 class Count(DistinctOptionFunction):
     def __init__(self, param, alias=None):
         is_star = isinstance(param, str) and "*" == param
-        super(Count, self).__init__("COUNT", Star() if is_star else param, alias=alias)
+        super(Count, self).__init__("COUNT", Star() if is_star else param, alias=alias)  # type: ignore[no-untyped-call]
 
 
 # Arithmetic Functions
 class Sum(DistinctOptionFunction):
     def __init__(self, term, alias=None):
-        super(Sum, self).__init__("SUM", term, alias=alias)
+        super(Sum, self).__init__("SUM", term, alias=alias)  # type: ignore[no-untyped-call]
 
 
 class Avg(AggregateFunction):
     def __init__(self, term, alias=None):
-        super(Avg, self).__init__("AVG", term, alias=alias)
+        super(Avg, self).__init__("AVG", term, alias=alias)  # type: ignore[no-untyped-call]
 
 
 class Min(AggregateFunction):
     def __init__(self, term, alias=None):
-        super(Min, self).__init__("MIN", term, alias=alias)
+        super(Min, self).__init__("MIN", term, alias=alias)  # type: ignore[no-untyped-call]
 
 
 class Max(AggregateFunction):
     def __init__(self, term, alias=None):
-        super(Max, self).__init__("MAX", term, alias=alias)
+        super(Max, self).__init__("MAX", term, alias=alias)  # type: ignore[no-untyped-call]
 
 
 class Std(AggregateFunction):
     def __init__(self, term, alias=None):
-        super(Std, self).__init__("STD", term, alias=alias)
+        super(Std, self).__init__("STD", term, alias=alias)  # type: ignore[no-untyped-call]
 
 
 class StdDev(AggregateFunction):
     def __init__(self, term, alias=None):
-        super(StdDev, self).__init__("STDDEV", term, alias=alias)
+        super(StdDev, self).__init__("STDDEV", term, alias=alias)  # type: ignore[no-untyped-call]
 
 
 class Abs(AggregateFunction):
     def __init__(self, term, alias=None):
-        super(Abs, self).__init__("ABS", term, alias=alias)
+        super(Abs, self).__init__("ABS", term, alias=alias)  # type: ignore[no-untyped-call]
 
 
 class First(AggregateFunction):
     def __init__(self, term, alias=None):
-        super(First, self).__init__("FIRST", term, alias=alias)
+        super(First, self).__init__("FIRST", term, alias=alias)  # type: ignore[no-untyped-call]
 
 
 class Last(AggregateFunction):
     def __init__(self, term, alias=None):
-        super(Last, self).__init__("LAST", term, alias=alias)
+        super(Last, self).__init__("LAST", term, alias=alias)  # type: ignore[no-untyped-call]
 
 
 class Sqrt(Function):
@@ -90,7 +90,7 @@ class Floor(Function):
 
 class ApproximatePercentile(AggregateFunction):
     def __init__(self, term, percentile, alias=None):
-        super(ApproximatePercentile, self).__init__("APPROXIMATE_PERCENTILE", term, alias=alias)
+        super(ApproximatePercentile, self).__init__("APPROXIMATE_PERCENTILE", term, alias=alias)  # type: ignore[no-untyped-call]
         self.percentile = float(percentile)
 
     def get_special_params_sql(self, **kwargs):
@@ -129,12 +129,12 @@ class ToChar(Function):
 
 class Signed(Cast):
     def __init__(self, term, alias=None):
-        super(Signed, self).__init__(term, SqlTypes.SIGNED, alias=alias)
+        super(Signed, self).__init__(term, SqlTypes.SIGNED, alias=alias)  # type: ignore[no-untyped-call]
 
 
 class Unsigned(Cast):
     def __init__(self, term, alias=None):
-        super(Unsigned, self).__init__(term, SqlTypes.UNSIGNED, alias=alias)
+        super(Unsigned, self).__init__(term, SqlTypes.UNSIGNED, alias=alias)  # type: ignore[no-untyped-call]
 
 
 class Date(Function):

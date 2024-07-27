@@ -379,8 +379,8 @@ class Kleinmann:
             for model in app.values():
                 model._meta.finalise_model()
                 model._meta.basetable = Table(name=model._meta.db_table, schema=model._meta.schema)
-                model._meta.basequery = model._meta.db.query_class.from_(model._meta.basetable)
-                model._meta.basequery_all_fields = model._meta.basequery.select(
+                model._meta.basequery = model._meta.db.query_class.from_(model._meta.basetable)  # type: ignore[assignment]
+                model._meta.basequery_all_fields = model._meta.basequery.select(  # type: ignore[assignment]
                     *model._meta.db_fields
                 )
 

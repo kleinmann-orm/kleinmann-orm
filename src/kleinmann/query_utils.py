@@ -75,11 +75,11 @@ def _get_joins_for_related_field(
     return required_joins
 
 
-class EmptyCriterion(Criterion):  # type:ignore[misc]
-    def __or__(self, other: Criterion) -> Criterion:
+class EmptyCriterion(Criterion):
+    def __or__(self, other: Criterion) -> Criterion:  # type: ignore[override]
         return other
 
-    def __and__(self, other: Criterion) -> Criterion:
+    def __and__(self, other: Criterion) -> Criterion:  # type: ignore[override]
         return other
 
     def __bool__(self) -> bool:

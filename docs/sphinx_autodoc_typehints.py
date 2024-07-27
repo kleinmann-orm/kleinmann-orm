@@ -12,7 +12,7 @@ import type_globals
 try:
     from typing_extensions import Protocol
 except ImportError:
-    Protocol = None
+    Protocol = None  # type: ignore[assignment]
 
 logger = logging.getLogger(__name__)
 pydata_annotations = {'Any', 'AnyStr', 'Callable', 'ClassVar', 'NoReturn', 'Optional', 'Tuple',
@@ -38,7 +38,7 @@ def format_annotation(annotation, fully_qualified=False):
             annotation_cls = annotation.__origin__
             try:
                 mro = annotation_cls.mro()
-                if Generic in mro or (Protocol and Protocol in mro):
+                if Generic in mro or (Protocol and Protocol in mro):  # type: ignore[comparison-overlap]
                     module = annotation_cls.__module__
             except TypeError:
                 pass  # annotation_cls was either the "type" object or typing.Type
@@ -58,7 +58,7 @@ def format_annotation(annotation, fully_qualified=False):
                             bound = bound._evaluate(type_globals.__dict__, None)
                         except:
                             bound = bound.__forward_arg__
-                return format_annotation(bound, fully_qualified)
+                return format_annotation(bound, fully_qualified)  # type: ignore[no-untyped-call]
             return '\\%r' % annotation
         elif (annotation is Union or getattr(annotation, '__origin__', None) is Union or
               hasattr(annotation, '__union_params__')):
@@ -90,7 +90,7 @@ def format_annotation(annotation, fully_qualified=False):
                 params = [
                     '\\[{}]'.format(
                         ', '.join(
-                            format_annotation(param, fully_qualified)
+                            format_annotation(param, fully_qualified)  # type: ignore[no-untyped-call]
                             for param in arg_annotations)),
                     result_annotation
                 ]
@@ -108,7 +108,7 @@ def format_annotation(annotation, fully_qualified=False):
 
         if params:
             extra = '\\[{}]'.format(', '.join(
-                format_annotation(param, fully_qualified) for param in params))
+                format_annotation(param, fully_qualified) for param in params))  # type: ignore[no-untyped-call]
 
         return '{prefix}`{qualify}{module}.{name}`{extra}'.format(
             prefix=':py:data:' if class_name in pydata_annotations else ':py:class:',
@@ -124,7 +124,7 @@ def format_annotation(annotation, fully_qualified=False):
         return ':py:func:`{qualify}typing.NewType`\\(:py:data:`~{name}`, {extra})'.format(
             qualify="" if fully_qualified else "~",
             name=annotation.__name__,
-            extra=format_annotation(annotation.__supertype__, fully_qualified),
+            extra=format_annotation(annotation.__supertype__, fully_qualified),  # type: ignore[no-untyped-call]
         )
     elif inspect.isclass(annotation) or inspect.isclass(getattr(annotation, '__origin__', None)):
         if not inspect.isclass(annotation):
@@ -136,12 +136,12 @@ def format_annotation(annotation, fully_qualified=False):
         except TypeError:
             pass
         else:
-            if Generic in mro or (Protocol and Protocol in mro):
+            if Generic in mro or (Protocol and Protocol in mro):  # type: ignore[comparison-overlap]
                 params = (getattr(annotation, '__parameters__', None) or
                           getattr(annotation, '__args__', None))
                 if params:
                     extra = '\\[{}]'.format(', '.join(
-                        format_annotation(param, fully_qualified) for param in params))
+                        format_annotation(param, fully_qualified) for param in params))  # type: ignore[no-untyped-call]
 
         return ':py:class:`{qualify}{module}.{name}`{extra}'.format(
             qualify="" if fully_qualified else "~",
@@ -223,7 +223,7 @@ def get_all_type_hints(obj, name):
     if rv:
         return rv
 
-    rv = backfill_type_hints(obj, name)
+    rv = backfill_type_hints(obj, name)  # type: ignore[no-untyped-call]
 
     try:
         obj.__annotations__ = rv
@@ -267,11 +267,11 @@ def backfill_type_hints(obj, name):
         return children[0]
 
     try:
-        obj_ast = ast.parse(textwrap.dedent(inspect.getsource(obj)), **parse_kwargs)
+        obj_ast = ast.parse(textwrap.dedent(inspect.getsource(obj)), **parse_kwargs)  # type: ignore[call-overload]
     except TypeError:
         return {}
 
-    obj_ast = _one_child(obj_ast)
+    obj_ast = _one_child(obj_ast)  # type: ignore[no-untyped-call]
     if obj_ast is None:
         return {}
 
@@ -293,8 +293,8 @@ def backfill_type_hints(obj, name):
     if comment_returns:
         rv['return'] = comment_returns
 
-    args = load_args(obj_ast)
-    comment_args = split_type_comment_args(comment_args_str)
+    args = load_args(obj_ast)  # type: ignore[no-untyped-call]
+    comment_args = split_type_comment_args(comment_args_str)  # type: ignore[no-untyped-call]
     is_inline = len(comment_args) == 1 and comment_args[0] == "..."
     if not is_inline:
         if args and args[0].arg in ("self", "cls") and len(comment_args) != len(args):
@@ -343,7 +343,7 @@ def split_type_comment_args(comment):
         result.append(val.strip().lstrip("*"))  # remove spaces, and var/kw arg marker
 
     comment = comment.strip().lstrip("(").rstrip(")")
-    result = []
+    result = []  # type: ignore[var-annotated]
     if not comment:
         return result
 
@@ -354,10 +354,10 @@ def split_type_comment_args(comment):
         elif char in ("]", ")"):
             brackets -= 1
         elif char == "," and brackets == 0:
-            add(comment[start_arg_at:at])
+            add(comment[start_arg_at:at])  # type: ignore[no-untyped-call]
             start_arg_at = at + 1
 
-    add(comment[start_arg_at: at + 1])
+    add(comment[start_arg_at: at + 1])  # type: ignore[no-untyped-call]
     return result
 
 
@@ -370,7 +370,7 @@ def process_docstring(app, what, name, obj, options, lines):
             obj = getattr(obj, '__init__')
 
         obj = inspect.unwrap(obj)
-        type_hints = get_all_type_hints(obj, name)
+        type_hints = get_all_type_hints(obj, name)  # type: ignore[no-untyped-call]
 
         for argname, annotation in type_hints.items():
             if argname == 'return':
@@ -378,7 +378,7 @@ def process_docstring(app, what, name, obj, options, lines):
             if argname.endswith('_'):
                 argname = '{}\\_'.format(argname[:-1])
 
-            formatted_annotation = format_annotation(
+            formatted_annotation = format_annotation(  # type: ignore[no-untyped-call]
                 annotation, fully_qualified=app.config.typehints_fully_qualified)
 
             searchfor = ':param {}:'.format(argname)
@@ -400,7 +400,7 @@ def process_docstring(app, what, name, obj, options, lines):
                 )
 
         if 'return' in type_hints and what not in ('class', 'exception'):
-            formatted_annotation = format_annotation(
+            formatted_annotation = format_annotation(  # type: ignore[no-untyped-call]
                 type_hints['return'], fully_qualified=app.config.typehints_fully_qualified)
 
             insert_index = len(lines)

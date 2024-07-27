@@ -8,7 +8,6 @@
 import json
 
 # -- Path setup --------------------------------------------------------------
-
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
@@ -172,7 +171,7 @@ html_theme_options = {
     ],
     "version_dropdown": True,
     "toc_title_is_page_title": True,
-    "version_info": get_version_info(),
+    "version_info": get_version_info(),  # type: ignore[no-untyped-call]
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
@@ -202,9 +201,7 @@ html_static_path = ["_static"]
 # default: ``['localtoc.html', 'relations.html', 'sourcelink.html',
 # 'searchbox.html']``.
 #
-html_sidebars = {
-    "**": ["logo-text.html", "globaltoc.html", "localtoc.html", "searchbox.html"]
-}
+html_sidebars = {"**": ["logo-text.html", "globaltoc.html", "localtoc.html", "searchbox.html"]}
 
 # -- Options for HTMLHelp output ---------------------------------------------
 
@@ -213,7 +210,7 @@ htmlhelp_basename = "kleinmanndoc"
 
 # -- Options for LaTeX output ------------------------------------------------
 
-latex_elements = {
+latex_elements = {  # type: ignore[var-annotated]
     # The paper size ('letterpaper' or 'a4paper').
     #
     # 'papersize': 'letterpaper',

@@ -23,7 +23,7 @@ class MSSQLQueryBuilder(QueryBuilder):
         self._top = None
 
     @builder
-    def top(self, value: Union[str, int]) -> "MSSQLQueryBuilder":
+    def top(self, value: Union[str, int]) -> "MSSQLQueryBuilder":  # type: ignore[return]
         """
         Implements support for simple TOP clauses.
 
@@ -32,14 +32,14 @@ class MSSQLQueryBuilder(QueryBuilder):
         https://docs.microsoft.com/en-us/sql/t-sql/queries/top-transact-sql?view=sql-server-2017
         """
         try:
-            self._top = int(value)
+            self._top = int(value)  # type: ignore[assignment]
         except ValueError:
             raise QueryException("TOP value must be an integer")
 
     @builder
-    def fetch_next(self, limit: int) -> "MSSQLQueryBuilder":
+    def fetch_next(self, limit: int) -> "MSSQLQueryBuilder":  # type: ignore[return]
         # Overridden to provide a more domain-specific API for T-SQL users
-        self._limit = limit
+        self._limit = limit  # type: ignore[assignment]
 
     def _offset_sql(self) -> str:
         order_by = ""
@@ -54,10 +54,10 @@ class MSSQLQueryBuilder(QueryBuilder):
         # Note: Overridden as MSSQL specifies offset before the fetch next limit
         if self._limit is not None or self._offset:
             # Offset has to be present if fetch next is specified in a MSSQL query
-            querystring += self._offset_sql()
+            querystring += self._offset_sql()  # type: ignore[unreachable]
 
         if self._limit is not None:
-            querystring += self._limit_sql()
+            querystring += self._limit_sql()  # type: ignore[unreachable]
 
         return querystring
 
@@ -69,7 +69,7 @@ class MSSQLQueryBuilder(QueryBuilder):
 
     def _top_sql(self) -> str:
         if self._top:
-            return "TOP ({}) ".format(self._top)
+            return "TOP ({}) ".format(self._top)  # type: ignore[unreachable]
         else:
             return ""
 
