@@ -122,21 +122,6 @@ class AddIntervalMultipleUnitsTests(unittest.TestCase):
 
 
 class DialectIntervalTests(unittest.TestCase):
-    def test_mysql_dialect_uses_single_quotes_around_expression_in_an_interval(self):
-        c = Interval(days=1).get_sql(dialect=Dialects.MYSQL)
-        self.assertEqual("INTERVAL '1' DAY", c)
-
-    def test_oracle_dialect_uses_single_quotes_around_expression_in_an_interval(self):
-        c = Interval(days=1).get_sql(dialect=Dialects.ORACLE)
-        self.assertEqual("INTERVAL '1' DAY", c)
-
-    def test_vertica_dialect_uses_single_quotes_around_interval(self):
-        c = Interval(days=1).get_sql(dialect=Dialects.VERTICA)
-        self.assertEqual("INTERVAL '1 DAY'", c)
-
-    def test_redshift_dialect_uses_single_quotes_around_interval(self):
-        c = Interval(days=1).get_sql(dialect=Dialects.REDSHIFT)
-        self.assertEqual("INTERVAL '1 DAY'", c)
 
     def test_postgresql_dialect_uses_single_quotes_around_interval(self):
         c = Interval(days=1).get_sql(dialect=Dialects.POSTGRESQL)

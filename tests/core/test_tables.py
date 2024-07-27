@@ -7,7 +7,7 @@ from kleinmann_core import (
     Dialects,
     Query,
     Schema,
-    SQLLiteQuery,
+    SQLiteQuery,
     Table,
     Tables,
 )
@@ -171,7 +171,7 @@ class TableDialectTests(unittest.TestCase):
         self.assertIs(q.dialect, None)
 
     def test_table_with_dialect_query_cls(self):
-        table = Table("abc", query_cls=SQLLiteQuery)
+        table = Table("abc", query_cls=SQLiteQuery)
         q = table.select("1")
         self.assertIs(q.dialect, Dialects.SQLITE)
 
@@ -181,7 +181,7 @@ class TableDialectTests(unittest.TestCase):
         self.assertIs(q.dialect, None)
 
     def test_table_factory_with_dialect_query_cls(self):
-        table = SQLLiteQuery.Table("abc")
+        table = SQLiteQuery.Table("abc")
         q = table.select("1")
         self.assertIs(q.dialect, Dialects.SQLITE)
 
@@ -193,7 +193,7 @@ class TableDialectTests(unittest.TestCase):
         self.assertIs(q2.dialect, None)
 
     def test_make_tables_factory_with_dialect_query_cls(self):
-        t1, t2 = SQLLiteQuery.Tables("abc", "def")
+        t1, t2 = SQLiteQuery.Tables("abc", "def")
         q1 = t1.select("1")
         q2 = t2.select("2")
         self.assertIs(q1.dialect, Dialects.SQLITE)

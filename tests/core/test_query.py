@@ -2,13 +2,10 @@ import unittest
 
 from kleinmann_core import Case, Query, Tables, Tuple, functions
 from kleinmann_core.dialects import (
-    MySQLLoadQueryBuilder,
-    MySQLQuery,
-    MySQLQueryBuilder,
     PostgreSQLQuery,
     PostgreSQLQueryBuilder,
-    SQLLiteQuery,
-    SQLLiteQueryBuilder,
+    SQLiteQuery,
+    SQLiteQueryBuilder,
 )
 from kleinmann_core.queries import CreateQueryBuilder, DropQueryBuilder, QueryBuilder
 
@@ -164,14 +161,8 @@ class QueryBuilderTests(unittest.TestCase):
         with self.subTest("CreateQueryBuilder"):
             self.assertEqual(Query, CreateQueryBuilder.QUERY_CLS)
 
-        with self.subTest("MySQLQueryBuilder"):
-            self.assertEqual(MySQLQuery, MySQLQueryBuilder.QUERY_CLS)
-
-        with self.subTest("MySQLLoadQueryBuilder"):
-            self.assertEqual(MySQLQuery, MySQLLoadQueryBuilder.QUERY_CLS)
-
         with self.subTest("PostgreSQLQueryBuilder"):
             self.assertEqual(PostgreSQLQuery, PostgreSQLQueryBuilder.QUERY_CLS)
 
-        with self.subTest("SQLLiteQueryBuilder"):
-            self.assertEqual(SQLLiteQuery, SQLLiteQueryBuilder.QUERY_CLS)
+        with self.subTest("SQLiteQueryBuilder"):
+            self.assertEqual(SQLiteQuery, SQLiteQueryBuilder.QUERY_CLS)

@@ -22,7 +22,6 @@ from kleinmann_core.terms import (
 from kleinmann_core.utils import (
     JoinException,
     QueryException,
-    RollupException,
     SetOperationException,
     builder,
     format_alias_sql,
@@ -728,7 +727,6 @@ class QueryBuilder(Selectable, Term):  # type: ignore[misc]
 
         self._select_star = False
         self._select_star_tables = set()  # type: ignore[var-annotated]
-        self._mysql_rollup = False
         self._select_into = False
 
         self._subquery_count = 0
@@ -1111,25 +1109,10 @@ class QueryBuilder(Selectable, Term):  # type: ignore[misc]
 
     @builder
     def rollup(self, *terms: Union[list, tuple, set, Term], **kwargs: Any) -> "QueryBuilder":  # type: ignore[return]
-        for_mysql = "mysql" == kwargs.get("vendor")
-
-        if self._mysql_rollup:
-            raise AttributeError("'Query' object has no attribute '%s'" % "rollup")
 
         terms = [Tuple(*term) if isinstance(term, (list, tuple, set)) else term for term in terms]
 
-        if for_mysql:
-            # MySQL rolls up all of the dimensions always
-            if not terms and not self._groupbys:
-                raise RollupException(
-                    "At least one group is required. Call Query.groupby(term) or pass"
-                    "as parameter to rollup."
-                )
-
-            self._mysql_rollup = True
-            self._groupbys += terms
-
-        elif 0 < len(self._groupbys) and isinstance(self._groupbys[-1], Rollup):
+        if 0 < len(self._groupbys) and isinstance(self._groupbys[-1], Rollup):
             # If a rollup was added last, then append the new terms to the previous rollup
             self._groupbys[-1].args += terms  # type: ignore[arg-type]
 
@@ -1480,8 +1463,6 @@ class QueryBuilder(Selectable, Term):  # type: ignore[misc]
 
         if self._groupbys:
             querystring += self._group_sql(**kwargs)
-            if self._mysql_rollup:
-                querystring += self._rollup_sql()
 
         if self._havings:
             querystring += self._having_sql(**kwargs)  # type: ignore[unreachable]
@@ -1718,9 +1699,6 @@ class QueryBuilder(Selectable, Term):  # type: ignore[misc]
             )
 
         return " ORDER BY {orderby}".format(orderby=",".join(clauses))
-
-    def _rollup_sql(self) -> str:
-        return " WITH ROLLUP"
 
     def _having_sql(self, quote_char: Optional[str] = None, **kwargs: Any) -> str:
         return " HAVING {having}".format(

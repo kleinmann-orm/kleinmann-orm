@@ -5,29 +5,29 @@ from kleinmann_core.queries import Query, QueryBuilder
 from kleinmann_core.terms import ValueWrapper
 
 
-class SQLLiteValueWrapper(ValueWrapper):
+class SQLiteValueWrapper(ValueWrapper):
     def get_value_sql(self, **kwargs: Any) -> str:
         if isinstance(self.value, bool):
             return "1" if self.value else "0"
         return super().get_value_sql(**kwargs)
 
 
-class SQLLiteQuery(Query):
+class SQLiteQuery(Query):
     """
     Defines a query class for use with Microsoft SQL Server.
     """
 
     @classmethod
-    def _builder(cls, **kwargs: Any) -> "SQLLiteQueryBuilder":
-        return SQLLiteQueryBuilder(**kwargs)  # type: ignore[no-untyped-call]
+    def _builder(cls, **kwargs: Any) -> "SQLiteQueryBuilder":
+        return SQLiteQueryBuilder(**kwargs)  # type: ignore[no-untyped-call]
 
 
-class SQLLiteQueryBuilder(QueryBuilder):
-    QUERY_CLS = SQLLiteQuery
+class SQLiteQueryBuilder(QueryBuilder):
+    QUERY_CLS = SQLiteQuery
 
     def __init__(self, **kwargs):
-        super(SQLLiteQueryBuilder, self).__init__(
-            dialect=Dialects.SQLITE, wrapper_cls=SQLLiteValueWrapper, **kwargs
+        super(SQLiteQueryBuilder, self).__init__(
+            dialect=Dialects.SQLITE, wrapper_cls=SQLiteValueWrapper, **kwargs
         )
 
     def get_sql(self, **kwargs: Any) -> str:  # type: ignore[override]
@@ -80,5 +80,5 @@ class SQLLiteQueryBuilder(QueryBuilder):
             if self._limit:
                 querystring += self._limit_sql()
         else:
-            querystring = super(SQLLiteQueryBuilder, self).get_sql(**kwargs)
+            querystring = super(SQLiteQueryBuilder, self).get_sql(**kwargs)
         return querystring

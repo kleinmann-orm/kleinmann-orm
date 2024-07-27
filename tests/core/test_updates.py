@@ -3,10 +3,9 @@ import unittest
 from kleinmann_core import (
     SYSTEM_TIME,
     AliasedQuery,
-    MySQLQuery,
     PostgreSQLQuery,
     Query,
-    SQLLiteQuery,
+    SQLiteQuery,
     Table,
 )
 
@@ -181,18 +180,18 @@ class PostgresUpdateTests(unittest.TestCase):
         )
 
 
-class SQLLiteUpdateTests(unittest.TestCase):
+class SQLiteUpdateTests(unittest.TestCase):
     table_abc = Table("abc")
     table_def = Table("def")
 
     def test_update_with_bool(self):
-        q = SQLLiteQuery.update(self.table_abc).set(self.table_abc.foo, True)
+        q = SQLiteQuery.update(self.table_abc).set(self.table_abc.foo, True)
 
         self.assertEqual('UPDATE "abc" SET "foo"=1', str(q))
 
     def test_update_with_limit_order(self):
         q = (
-            SQLLiteQuery.update(self.table_abc)
+            SQLiteQuery.update(self.table_abc)
             .set(self.table_abc.lname, "test")
             .limit(1)
             .orderby(self.table_abc.id)
@@ -201,38 +200,12 @@ class SQLLiteUpdateTests(unittest.TestCase):
 
     def test_update_with_join(self):
         q = (
-            SQLLiteQuery.update(self.table_abc)
+            SQLiteQuery.update(self.table_abc)
             .join(self.table_def)
             .on(self.table_def.abc_id == self.table_abc.id)
             .set(self.table_abc.lname, self.table_def.lname)
         )
         self.assertEqual(
             'UPDATE "abc" SET "lname"="def"."lname" FROM "abc" "abc_" JOIN "def" ON "def"."abc_id"="abc"."id"',
-            str(q),
-        )
-
-
-class MySQLUpdateTests(unittest.TestCase):
-    table_abc = Table("abc")
-    table_def = Table("def")
-
-    def test_update_with_limit_order(self):
-        q = (
-            MySQLQuery.update(self.table_abc)
-            .set(self.table_abc.lname, "test")
-            .limit(1)
-            .orderby(self.table_abc.id)
-        )
-        self.assertEqual("UPDATE `abc` SET `lname`='test' ORDER BY `id` LIMIT 1", str(q))
-
-    def test_update_with_join(self):
-        q = (
-            MySQLQuery.update(self.table_abc)
-            .join(self.table_def)
-            .on(self.table_def.abc_id == self.table_abc.id)
-            .set(self.table_abc.lname, self.table_def.lname)
-        )
-        self.assertEqual(
-            "UPDATE `abc` JOIN `def` ON `def`.`abc_id`=`abc`.`id` SET `lname`=`def`.`lname`",
             str(q),
         )

@@ -1,9 +1,6 @@
 from kleinmann_core.dialects import (
-    MSSQLQuery,
-    MySQLQuery,
-    OracleQuery,
     PostgreSQLQuery,
-    SQLLiteQuery,
+    SQLiteQuery,
 )
 from kleinmann_core.enums import DatePart, Dialects, JoinType, Order
 from kleinmann_core.queries import AliasedQuery, Column, Database, Query, Schema, Table
@@ -68,8 +65,6 @@ __all__ = [
     "JoinException",
     "JoinType",
     "JSON",
-    "MSSQLQuery",
-    "MySQLQuery",
     "NamedParameter",
     "Not",
     "NullValue",
@@ -86,7 +81,7 @@ __all__ = [
     "RollupException",
     "Schema",
     "SetOperationException",
-    "SQLLiteQuery",
+    "SQLiteQuery",
     "SYSTEM_TIME",
     "Table",
     "Tables",

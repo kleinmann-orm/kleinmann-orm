@@ -2,10 +2,9 @@ import unittest
 
 from kleinmann_core import (
     SYSTEM_TIME,
-    MySQLQuery,
     PostgreSQLQuery,
     Query,
-    SQLLiteQuery,
+    SQLiteQuery,
     Table,
 )
 
@@ -99,17 +98,9 @@ class PostgresDeleteTests(unittest.TestCase):
         self.assertEqual('DELETE FROM "abc" WHERE "foo"="bar" RETURNING *', str(q1))
 
 
-class MySQLTests(unittest.TestCase):
-    table_abc = Table("abc")
-
-    def test_delete_with_orderby_limit(self):
-        q = MySQLQuery.from_(self.table_abc).orderby(self.table_abc.id).limit(1).delete()
-        self.assertEqual("DELETE FROM `abc` ORDER BY `id` LIMIT 1", str(q))
-
-
 class SQLiteTests(unittest.TestCase):
     table_abc = Table("abc")
 
     def test_delete_with_orderby_limit(self):
-        q = SQLLiteQuery.from_(self.table_abc).orderby(self.table_abc.id).limit(1).delete()
+        q = SQLiteQuery.from_(self.table_abc).orderby(self.table_abc.id).limit(1).delete()
         self.assertEqual('DELETE FROM "abc" ORDER BY "id" LIMIT 1', str(q))
