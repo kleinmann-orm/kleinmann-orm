@@ -20,7 +20,7 @@ from typing_extensions import Literal
 from kleinmann.exceptions import ConfigurationError, NoValuesFetched, OperationalError
 from kleinmann.fields.base import CASCADE, SET_NULL, Field, OnDelete
 
-if TYPE_CHECKING:  # pragma: nocoverage
+if TYPE_CHECKING:
     from kleinmann.backends.base.client import BaseDBAsyncClient
     from kleinmann.models import Model
     from kleinmann.queryset import Q, QuerySet

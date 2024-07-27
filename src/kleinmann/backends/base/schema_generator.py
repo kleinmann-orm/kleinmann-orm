@@ -6,7 +6,7 @@ from kleinmann.exceptions import ConfigurationError
 from kleinmann.fields import JSONField, TextField, UUIDField
 from kleinmann.indexes import Index
 
-if TYPE_CHECKING:  # pragma: nocoverage
+if TYPE_CHECKING:
     from kleinmann.backends.base.client import BaseDBAsyncClient
     from kleinmann.fields.relational import (
         ForeignKeyFieldInstance,  # noqa
@@ -74,7 +74,7 @@ class BaseSchemaGenerator:
     def _table_comment_generator(self, table: str, comment: str) -> str:
         # Databases have their own way of supporting comments for table level
         # needs to be implemented for each supported client
-        raise NotImplementedError()  # pragma: nocoverage
+        raise NotImplementedError()
 
     def _column_default_generator(
         self,
@@ -86,7 +86,7 @@ class BaseSchemaGenerator:
     ) -> str:
         # Databases have their own way of supporting default for column level
         # needs to be implemented for each supported client
-        raise NotImplementedError()  # pragma: nocoverage
+        raise NotImplementedError()
 
     def _escape_default_value(self, default: Any):
         # Databases have their own way of supporting default value
@@ -96,7 +96,7 @@ class BaseSchemaGenerator:
     def _column_comment_generator(self, table: str, column: str, comment: str) -> str:
         # Databases have their own way of supporting comments for column level
         # needs to be implemented for each supported client
-        raise NotImplementedError()  # pragma: nocoverage
+        raise NotImplementedError()
 
     def _post_table_hook(self) -> str:
         # This method provides a mechanism where you can perform a set of

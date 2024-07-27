@@ -4,7 +4,7 @@ from kleinmann.backends.base_postgres.schema_generator import (
     BasePostgresSchemaGenerator,
 )
 
-if TYPE_CHECKING:  # pragma: nocoverage
+if TYPE_CHECKING:
     from kleinmann.backends.asyncpg.client import AsyncpgDBClient
 
 

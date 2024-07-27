@@ -77,7 +77,7 @@ class AsyncpgDBClient(BasePostgresClient):
         if self._pool:  # pragma: nobranch
             try:
                 await asyncio.wait_for(self._pool.close(), 10)
-            except asyncio.TimeoutError:  # pragma: nocoverage
+            except asyncio.TimeoutError:  # pragma: no cover
                 self._pool.terminate()
             self._pool = None
             self.log.debug("Closed connection pool %s with params: %s", self._pool, self._template)
@@ -89,13 +89,13 @@ class AsyncpgDBClient(BasePostgresClient):
             raise OperationalError(exc)
         except asyncpg.IntegrityConstraintViolationError as exc:
             raise IntegrityError(exc)
-        except asyncpg.InvalidTransactionStateError as exc:  # pragma: nocoverage
+        except asyncpg.InvalidTransactionStateError as exc:  # pragma: no cover
             raise TransactionManagementError(exc)
 
     async def db_delete(self) -> None:
         try:
             return await super().db_delete()
-        except asyncpg.InvalidCatalogNameError:  # pragma: nocoverage
+        except asyncpg.InvalidCatalogNameError:  # pragma: no cover
             pass
         await self.close()
 
@@ -141,7 +141,7 @@ class AsyncpgDBClient(BasePostgresClient):
                 res = await connection.execute(*params)
                 try:
                     rows_affected = int(res.split(" ")[1])
-                except Exception:  # pragma: nocoverage
+                except Exception:  # pragma: no cover
                     rows_affected = 0
                 return rows_affected, []
 

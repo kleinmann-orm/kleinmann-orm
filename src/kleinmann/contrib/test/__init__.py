@@ -75,7 +75,7 @@ async def _init_db(config: dict) -> None:
     await Kleinmann.init(config)
     try:
         await Kleinmann._drop_databases()
-    except (DBConnectionError, OperationalError):  # pragma: nocoverage
+    except (DBConnectionError, OperationalError):  # pragma: no cover
         pass
 
     await Kleinmann.init(config, _create_db=True)
@@ -135,7 +135,7 @@ def finalizer() -> None:
     loop.run_until_complete(Kleinmann._drop_databases())
 
 
-def env_initializer() -> None:  # pragma: nocoverage
+def env_initializer() -> None:  # pragma: no cover
     """
     Calls ``initializer()`` with parameters mapped from environment variables.
 
@@ -153,7 +153,7 @@ def env_initializer() -> None:  # pragma: nocoverage
     modules = str(_os.environ.get("KLEINMANN_TEST_MODULES", "tests.testmodels")).split(",")
     db_url = _os.environ.get("KLEINMANN_TEST_DB", "sqlite://:memory:")
     app_label = _os.environ.get("KLEINMANN_TEST_APP", "models")
-    if not modules:  # pragma: nocoverage
+    if not modules:  # pragma: no cover
         raise Exception("KLEINMANN_TEST_MODULES envvar not defined")
     initializer(modules, db_url=db_url, app_label=app_label)
 

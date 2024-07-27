@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING, Any, List
 from kleinmann.backends.base.schema_generator import BaseSchemaGenerator
 from kleinmann.converters import encoders
 
-if TYPE_CHECKING:  # pragma: nocoverage
+if TYPE_CHECKING:
     from .client import BasePostgresClient
 
 

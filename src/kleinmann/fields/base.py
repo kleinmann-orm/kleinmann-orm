@@ -21,7 +21,7 @@ from kleinmann_core.terms import Term
 from kleinmann.exceptions import ConfigurationError, ValidationError
 from kleinmann.validators import Validator
 
-if TYPE_CHECKING:  # pragma: nocoverage
+if TYPE_CHECKING:
     from kleinmann.models import Model
 
 if sys.version_info >= (3, 11):
@@ -328,7 +328,7 @@ class Field(Generic[VALUE], metaclass=_FieldMeta):
         :return: A dictionary that is keyed by dialect.
             A blank dialect `""` means it is the default DB field type.
         """
-        if not self.has_db_field:  # pragma: nocoverage
+        if not self.has_db_field:  # pragma: no cover
             return None
         return {
             "": getattr(self, "SQL_TYPE"),

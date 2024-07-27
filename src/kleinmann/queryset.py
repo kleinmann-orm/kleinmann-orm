@@ -51,7 +51,7 @@ from kleinmann.utils import chunk
 
 QUERY: QueryBuilder = QueryBuilder()
 
-if TYPE_CHECKING:  # pragma: nocoverage
+if TYPE_CHECKING:
     from kleinmann.models import Model
 
 MODEL = TypeVar("MODEL", bound="Model")
@@ -65,25 +65,25 @@ class QuerySetSingle(Protocol[T_co]):
     """
 
     # pylint: disable=W0104
-    def __await__(self) -> Generator[Any, None, T_co]: ...  # pragma: nocoverage
+    def __await__(self) -> Generator[Any, None, T_co]: ...  # pragma: no cover
 
     def prefetch_related(
         self, *args: Union[str, Prefetch]
-    ) -> "QuerySetSingle[T_co]": ...  # pragma: nocoverage
+    ) -> "QuerySetSingle[T_co]": ...  # pragma: no cover
 
-    def select_related(self, *args: str) -> "QuerySetSingle[T_co]": ...  # pragma: nocoverage
+    def select_related(self, *args: str) -> "QuerySetSingle[T_co]": ...  # pragma: no cover
 
-    def annotate(self, **kwargs: Function) -> "QuerySetSingle[T_co]": ...  # pragma: nocoverage
+    def annotate(self, **kwargs: Function) -> "QuerySetSingle[T_co]": ...  # pragma: no cover
 
-    def only(self, *fields_for_select: str) -> "QuerySetSingle[T_co]": ...  # pragma: nocoverage
+    def only(self, *fields_for_select: str) -> "QuerySetSingle[T_co]": ...  # pragma: no cover
 
     def values_list(
         self, *fields_: str, flat: bool = False
-    ) -> "ValuesListQuery[Literal[True]]": ...  # pragma: nocoverage
+    ) -> "ValuesListQuery[Literal[True]]": ...  # pragma: no cover
 
     def values(
         self, *args: str, **kwargs: str
-    ) -> "ValuesQuery[Literal[True]]": ...  # pragma: nocoverage
+    ) -> "ValuesQuery[Literal[True]]": ...  # pragma: no cover
 
 
 class AwaitableQuery(Generic[MODEL]):
@@ -271,10 +271,10 @@ class AwaitableQuery(Generic[MODEL]):
         return self.query
 
     def _make_query(self) -> None:
-        raise NotImplementedError()  # pragma: nocoverage
+        raise NotImplementedError()
 
     async def _execute(self) -> Any:
-        raise NotImplementedError()  # pragma: nocoverage
+        raise NotImplementedError()
 
 
 class QuerySet(AwaitableQuery[MODEL]):

@@ -35,7 +35,7 @@ from kleinmann.fields.relational import (
 from kleinmann.query_utils import QueryModifier
 from kleinmann.utils import chunk
 
-if TYPE_CHECKING:  # pragma: nocoverage
+if TYPE_CHECKING:
     from kleinmann.backends.base.client import BaseDBAsyncClient
     from kleinmann.models import Model
     from kleinmann.query_utils import Prefetch
@@ -193,10 +193,10 @@ class BaseExecutor:
         return query
 
     async def _process_insert_result(self, instance: "Model", results: Any) -> None:
-        raise NotImplementedError()  # pragma: nocoverage
+        raise NotImplementedError()
 
     def parameter(self, pos: int) -> Parameter:
-        raise NotImplementedError()  # pragma: nocoverage
+        raise NotImplementedError()
 
     async def execute_insert(self, instance: "Model") -> None:
         if not instance._custom_generated_pk:

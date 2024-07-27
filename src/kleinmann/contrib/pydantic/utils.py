@@ -1,7 +1,7 @@
 import typing
 from typing import Any, Callable, Dict, Optional, Type
 
-if typing.TYPE_CHECKING:  # pragma: nocoverage
+if typing.TYPE_CHECKING:
     from kleinmann.models import Model
 
 

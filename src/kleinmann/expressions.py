@@ -29,7 +29,7 @@ from kleinmann.fields.relational import (
 from kleinmann.filters import FilterInfoDict
 from kleinmann.query_utils import QueryModifier, _get_joins_for_related_field
 
-if TYPE_CHECKING:  # pragma: nocoverage
+if TYPE_CHECKING:
     from kleinmann_core.queries import Selectable
 
     from kleinmann.fields.base import Field

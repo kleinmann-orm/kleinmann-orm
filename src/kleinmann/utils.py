@@ -14,7 +14,7 @@ else:
             yield batch
 
 
-if TYPE_CHECKING:  # pragma: nocoverage
+if TYPE_CHECKING:
     from kleinmann.backends.base.client import BaseDBAsyncClient
 
 

@@ -5,7 +5,7 @@ from pydantic import BaseModel
 
 from kleinmann.contrib.pydantic import PydanticModel, pydantic_model_creator
 
-if TYPE_CHECKING:  # pragma: nocoverage
+if TYPE_CHECKING:
 
     class UserIn_Pydantic(Users, PydanticModel):  # type:ignore[misc]
         pass

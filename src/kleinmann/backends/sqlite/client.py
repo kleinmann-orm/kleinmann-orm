@@ -98,7 +98,7 @@ class SqliteClient(BaseDBAsyncClient):
         await self.close()
         try:
             os.remove(self.filename)
-        except FileNotFoundError:  # pragma: nocoverage
+        except FileNotFoundError:  # pragma: no cover
             pass
         except OSError as e:
             if e.errno != 22:  # fix: "sqlite://:memory:" in Windows
@@ -180,7 +180,7 @@ class TransactionWrapper(SqliteClient, BaseTransactionWrapper):
         try:
             await self._connection.commit()
             await self._connection.execute("BEGIN")
-        except sqlite3.OperationalError as exc:  # pragma: nocoverage
+        except sqlite3.OperationalError as exc:  # pragma: no cover
             raise TransactionManagementError(exc)
 
     async def rollback(self) -> None:
