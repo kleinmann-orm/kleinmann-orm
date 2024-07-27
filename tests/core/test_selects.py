@@ -6,13 +6,12 @@ from kleinmann_core import (
     Case,
     EmptyCriterion,
     Index,
-    MySQLQuery,
     NullValue,
     Order,
     PostgreSQLQuery,
     Query,
     QueryException,
-    SQLLiteQuery,
+    SQLiteQuery,
     Table,
     Tables,
 )
@@ -260,11 +259,6 @@ class SelectTests(unittest.TestCase):
         )
 
         self.assertEqual('SELECT "foo" FROM "abc" USE INDEX ("egg","spam")', str(q))
-
-    def test_mysql_query_uses_backtick_quote_chars(self):
-        q = MySQLQuery.from_("abc").select("foo", "bar")
-
-        self.assertEqual("SELECT `foo`,`bar` FROM `abc`", str(q))
 
     def test_postgresql_query_uses_double_quote_chars(self):
         q = PostgreSQLQuery.from_("abc").select("foo", "bar")
@@ -625,9 +619,8 @@ class GroupByTests(unittest.TestCase):
         bar = self.t.bar.as_("bar01")
 
         for query_cls in [
-            MySQLQuery,
             PostgreSQLQuery,
-            SQLLiteQuery,
+            SQLiteQuery,
         ]:
             q = query_cls.from_(self.t).select(fn.Sum(self.t.foo), bar).groupby(bar)
 
@@ -693,11 +686,6 @@ class GroupByTests(unittest.TestCase):
             'GROUP BY "who_was_it"',
             str(q),
         )
-
-    def test_mysql_query_uses_backtick_quote_chars(self):
-        q = MySQLQuery.from_(self.t).groupby(self.t.foo).select(self.t.foo)
-
-        self.assertEqual("SELECT `foo` FROM `abc` GROUP BY `foo`", str(q))
 
     def test_postgres_query_uses_double_quote_chars(self):
         q = PostgreSQLQuery.from_(self.t).groupby(self.t.foo).select(self.t.foo)
@@ -767,15 +755,6 @@ class HavingTests(unittest.TestCase):
             'HAVING "abc"."buz"=\'fiz\' AND SUM("efg"."bar")>100',
             str(q),
         )
-
-    def test_mysql_query_uses_backtick_quote_chars(self):
-        q = (
-            MySQLQuery.from_(self.table_abc)
-            .select(self.table_abc.foo)
-            .groupby(self.table_abc.foo)
-            .having(self.table_abc.buz == "fiz")
-        )
-        self.assertEqual("SELECT `foo` FROM `abc` GROUP BY `foo` HAVING `buz`='fiz'", str(q))
 
     def test_postgres_query_uses_double_quote_chars(self):
         q = (

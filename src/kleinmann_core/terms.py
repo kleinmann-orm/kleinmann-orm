@@ -1529,9 +1529,6 @@ class Interval(Node):
         Dialects.POSTGRESQL: "INTERVAL '{expr} {unit}'",
         Dialects.REDSHIFT: "INTERVAL '{expr} {unit}'",
         Dialects.VERTICA: "INTERVAL '{expr} {unit}'",
-        # Oracle and MySQL requires just single quotes around the expr
-        Dialects.ORACLE: "INTERVAL '{expr}' {unit}",
-        Dialects.MYSQL: "INTERVAL '{expr}' {unit}",
     }
 
     units = ["years", "months", "days", "hours", "minutes", "seconds", "microseconds"]

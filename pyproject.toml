@@ -166,7 +166,7 @@ filterwarnings = [
 
 [tool.coverage.run]
 branch = true
-source = ["kleinmann"]
+source = ["src"]
 
 [tool.coverage.report]
 show_missing = true

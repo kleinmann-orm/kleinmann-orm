@@ -5,7 +5,7 @@ from functools import wraps
 from typing import Any, Callable, List, Optional, Sequence, Tuple, TypeVar
 
 import aiosqlite
-from kleinmann_core import SQLLiteQuery
+from kleinmann_core import SQLiteQuery
 
 from kleinmann.backends.base.client import (
     BaseDBAsyncClient,
@@ -42,7 +42,7 @@ def translate_exceptions(func: F) -> F:
 
 class SqliteClient(BaseDBAsyncClient):
     executor_class = SqliteExecutor
-    query_class = SQLLiteQuery
+    query_class = SQLiteQuery
     schema_generator = SqliteSchemaGenerator
     capabilities = Capabilities(
         "sqlite", daemon=False, requires_limit=True, inline_comment=True, support_for_update=False
