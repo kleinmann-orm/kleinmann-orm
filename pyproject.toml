@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "kleinmann-orm"
 version = "0.0.1"
-description = "Easy async ORM for python, built with relations in mind"
+description = "A tiny tortoise ORM"
 # NOTE: See CONTRIBUTORS.rst for upstream authors/contributors
 authors = ["Lev Gorodetskii <github@drsr.io>"]
 maintainers = ["Lev Gorodetskii <github@drsr.io>"]
@@ -170,6 +170,17 @@ source = ["kleinmann"]
 
 [tool.coverage.report]
 show_missing = true
+precision = 2
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+    "if TYPE_CHECKING:",
+    "if env.DEBUG:",
+]
 
 [tool.ruff.lint]
 ignore = [

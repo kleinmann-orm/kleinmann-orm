@@ -13,7 +13,7 @@ from kleinmann.fields.relational import (
     RelationalField,
 )
 
-if TYPE_CHECKING:  # pragma: nocoverage
+if TYPE_CHECKING:
     from kleinmann.queryset import QuerySet
 
 

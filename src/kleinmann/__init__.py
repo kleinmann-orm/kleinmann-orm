@@ -48,7 +48,7 @@ class Kleinmann:
     @classmethod
     def describe_model(
         cls, model: Type["Model"], serializable: bool = True
-    ) -> dict:  # pragma: nocoverage
+    ) -> dict:  # pragma: no cover
         """
         Describes the given list of models or ALL registered models.
 
@@ -138,7 +138,7 @@ class Kleinmann:
 
             :raises ConfigurationError: If reference is invalid.
             """
-            if len(items := reference.split(".")) != 2:  # pragma: nocoverage
+            if len(items := reference.split(".")) != 2:  # pragma: no cover
                 raise ConfigurationError(
                     f"'{reference}' is not a valid model reference Bad Reference."
                     " Should be something like '<appname>.<modelname>'."

@@ -19,12 +19,12 @@ from kleinmann.validators import MaxLengthValidator
 
 try:
     from ciso8601 import parse_datetime
-except ImportError:  # pragma: nocoverage
+except ImportError:  # pragma: no cover
     from iso8601 import parse_date
 
     parse_datetime = functools.partial(parse_date, default_timezone=None)
 
-if TYPE_CHECKING:  # pragma: nocoverage
+if TYPE_CHECKING:
     from kleinmann.models import Model
 
 __all__ = (
@@ -58,7 +58,7 @@ try:
 
     JSON_DUMPS = lambda x: orjson.dumps(x).decode()  # noqa: E731
     JSON_LOADS = orjson.loads
-except ImportError:  # pragma: nocoverage
+except ImportError:  # pragma: no cover
     pass
 
 

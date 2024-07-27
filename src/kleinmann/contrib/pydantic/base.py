@@ -6,12 +6,12 @@ from pydantic import BaseModel, ConfigDict, RootModel
 
 from kleinmann import fields
 
-if sys.version_info >= (3, 11):  # pragma: nocoverage
+if sys.version_info >= (3, 11):  # pragma: no cover
     from typing import Self
 else:
     from typing_extensions import Self
 
-if TYPE_CHECKING:  # pragma: nocoverage
+if TYPE_CHECKING:
     from kleinmann.models import Model
     from kleinmann.queryset import QuerySet, QuerySetSingle
 

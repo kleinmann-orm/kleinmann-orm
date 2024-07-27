@@ -20,7 +20,7 @@ from typing_extensions import NotRequired
 from kleinmann.fields import Field, JSONField
 from kleinmann.fields.relational import BackwardFKRelation, ManyToManyFieldInstance
 
-if TYPE_CHECKING:  # pragma: nocoverage
+if TYPE_CHECKING:
     from kleinmann.models import Model
 
 
@@ -42,7 +42,7 @@ class Like(BasicCriterion):
             right=self.right.get_sql(quote_char=quote_char, **kwargs),
             escape=self.escape,
         )
-        if with_alias and self.alias:  # pragma: nocoverage
+        if with_alias and self.alias:  # pragma: no cover
             return '{sql} "{alias}"'.format(sql=sql, alias=self.alias)
         return sql
 

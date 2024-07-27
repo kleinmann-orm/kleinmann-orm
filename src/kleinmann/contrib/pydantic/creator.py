@@ -10,7 +10,7 @@ from kleinmann.contrib.pydantic.base import PydanticListModel, PydanticModel
 from kleinmann.contrib.pydantic.utils import get_annotations
 from kleinmann.fields import IntField, JSONField, TextField, relational
 
-if TYPE_CHECKING:  # pragma: nocoverage
+if TYPE_CHECKING:
     from kleinmann.models import Model
 
 _MODEL_INDEX: Dict[str, Type[PydanticModel]] = {}
