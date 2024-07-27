@@ -19,7 +19,7 @@ class DeleteTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         super().setUpClass()
-        cls.table_abc = Table("abc")
+        cls.table_abc = Table("abc")  # type: ignore[attr-defined]
 
     def test_omit_where(self):
         q = Query.from_("abc").delete()
@@ -66,7 +66,7 @@ class PostgresDeleteTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         super().setUpClass()
-        cls.table_abc = Table("abc")
+        cls.table_abc = Table("abc")  # type: ignore[attr-defined]
 
     def test_delete_returning(self):
         q1 = (

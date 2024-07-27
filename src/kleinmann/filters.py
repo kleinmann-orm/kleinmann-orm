@@ -27,12 +27,12 @@ if TYPE_CHECKING:  # pragma: nocoverage
 ##############################################################################
 
 
-class Like(BasicCriterion):  # type: ignore
+class Like(BasicCriterion):
     def __init__(self, left, right, alias=None, escape=" ESCAPE '\\'") -> None:
         """
         A Like that supports an ESCAPE clause
         """
-        super().__init__(" LIKE ", left, right, alias=alias)
+        super().__init__(" LIKE ", left, right, alias=alias)  # type: ignore[arg-type]
         self.escape = escape
 
     def get_sql(self, quote_char='"', with_alias=False, **kwargs):
@@ -122,7 +122,7 @@ def not_null(field: Term, value: Any) -> Criterion:
 
 
 def contains(field: Term, value: str) -> Criterion:
-    return Like(Cast(field, SqlTypes.VARCHAR), field.wrap_constant(f"%{escape_like(value)}%"))
+    return Like(Cast(field, SqlTypes.VARCHAR), field.wrap_constant(f"%{escape_like(value)}%"))  # type: ignore[no-untyped-call]
 
 
 def search(field: Term, value: str):
@@ -131,82 +131,82 @@ def search(field: Term, value: str):
 
 
 def starts_with(field: Term, value: str) -> Criterion:
-    return Like(Cast(field, SqlTypes.VARCHAR), field.wrap_constant(f"{escape_like(value)}%"))
+    return Like(Cast(field, SqlTypes.VARCHAR), field.wrap_constant(f"{escape_like(value)}%"))  # type: ignore[no-untyped-call]
 
 
 def ends_with(field: Term, value: str) -> Criterion:
-    return Like(Cast(field, SqlTypes.VARCHAR), field.wrap_constant(f"%{escape_like(value)}"))
+    return Like(Cast(field, SqlTypes.VARCHAR), field.wrap_constant(f"%{escape_like(value)}"))  # type: ignore[no-untyped-call]
 
 
 def insensitive_exact(field: Term, value: str) -> Criterion:
-    return Upper(Cast(field, SqlTypes.VARCHAR)).eq(Upper(str(value)))
+    return Upper(Cast(field, SqlTypes.VARCHAR)).eq(Upper(str(value)))  # type: ignore[no-untyped-call]
 
 
 def insensitive_contains(field: Term, value: str) -> Criterion:
     return Like(
-        Upper(Cast(field, SqlTypes.VARCHAR)), field.wrap_constant(Upper(f"%{escape_like(value)}%"))
+        Upper(Cast(field, SqlTypes.VARCHAR)), field.wrap_constant(Upper(f"%{escape_like(value)}%"))  # type: ignore[no-untyped-call]
     )
 
 
 def insensitive_starts_with(field: Term, value: str) -> Criterion:
     return Like(
-        Upper(Cast(field, SqlTypes.VARCHAR)), field.wrap_constant(Upper(f"{escape_like(value)}%"))
+        Upper(Cast(field, SqlTypes.VARCHAR)), field.wrap_constant(Upper(f"{escape_like(value)}%"))  # type: ignore[no-untyped-call]
     )
 
 
 def insensitive_ends_with(field: Term, value: str) -> Criterion:
     return Like(
-        Upper(Cast(field, SqlTypes.VARCHAR)), field.wrap_constant(Upper(f"%{escape_like(value)}"))
+        Upper(Cast(field, SqlTypes.VARCHAR)), field.wrap_constant(Upper(f"%{escape_like(value)}"))  # type: ignore[no-untyped-call]
     )
 
 
 def extract_year_equal(field: Term, value: int) -> Criterion:
-    return Extract(DatePart.year, field).eq(value)
+    return Extract(DatePart.year, field).eq(value)  # type: ignore[no-untyped-call]
 
 
 def extract_quarter_equal(field: Term, value: int) -> Criterion:
-    return Extract(DatePart.quarter, field).eq(value)
+    return Extract(DatePart.quarter, field).eq(value)  # type: ignore[no-untyped-call]
 
 
 def extract_month_equal(field: Term, value: int) -> Criterion:
-    return Extract(DatePart.month, field).eq(value)
+    return Extract(DatePart.month, field).eq(value)  # type: ignore[no-untyped-call]
 
 
 def extract_week_equal(field: Term, value: int) -> Criterion:
-    return Extract(DatePart.week, field).eq(value)
+    return Extract(DatePart.week, field).eq(value)  # type: ignore[no-untyped-call]
 
 
 def extract_day_equal(field: Term, value: int) -> Criterion:
-    return Extract(DatePart.day, field).eq(value)
+    return Extract(DatePart.day, field).eq(value)  # type: ignore[no-untyped-call]
 
 
 def extract_hour_equal(field: Term, value: int) -> Criterion:
-    return Extract(DatePart.hour, field).eq(value)
+    return Extract(DatePart.hour, field).eq(value)  # type: ignore[no-untyped-call]
 
 
 def extract_minute_equal(field: Term, value: int) -> Criterion:
-    return Extract(DatePart.minute, field).eq(value)
+    return Extract(DatePart.minute, field).eq(value)  # type: ignore[no-untyped-call]
 
 
 def extract_second_equal(field: Term, value: int) -> Criterion:
-    return Extract(DatePart.second, field).eq(value)
+    return Extract(DatePart.second, field).eq(value)  # type: ignore[no-untyped-call]
 
 
 def extract_microsecond_equal(field: Term, value: int) -> Criterion:
-    return Extract(DatePart.microsecond, field).eq(value)
+    return Extract(DatePart.microsecond, field).eq(value)  # type: ignore[no-untyped-call]
 
 
-def json_contains(field: Term, value: str) -> Criterion:
+def json_contains(field: Term, value: str) -> Criterion:  # type: ignore[empty-body]
     # will be override in each executor
     pass
 
 
-def json_contained_by(field: Term, value: str) -> Criterion:
+def json_contained_by(field: Term, value: str) -> Criterion:  # type: ignore[empty-body]
     # will be override in each executor
     pass
 
 
-def json_filter(field: Term, value: Dict) -> Criterion:
+def json_filter(field: Term, value: Dict) -> Criterion:  # type: ignore[empty-body]
     # will be override in each executor
     pass
 

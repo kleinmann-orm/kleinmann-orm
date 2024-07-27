@@ -30,8 +30,8 @@ class MySQLValueWrapper(ValueWrapper):
             value = value.replace("\\", "\\\\")
             return format_quotes(value, quote_char)
         elif isinstance(self.value, time):
-            value = self.value.replace(tzinfo=None)
-            return format_quotes(value.isoformat(), quote_char)
+            value = self.value.replace(tzinfo=None)  # type: ignore[assignment]
+            return format_quotes(value.isoformat(), quote_char)  # type: ignore[attr-defined]
         elif isinstance(self.value, (dict, list)):
             value = format_quotes(json.dumps(self.value), quote_char)
             return value.replace("\\", "\\\\")
@@ -49,7 +49,7 @@ class MySQLQueryBuilder(QueryBuilder):
             wrap_set_operation_queries=False,
             **kwargs,
         )
-        self._modifiers = []
+        self._modifiers = []  # type: ignore[var-annotated]
 
     def _on_conflict_sql(self, **kwargs: Any) -> str:
         kwargs["alias_quote_char"] = (
@@ -61,12 +61,12 @@ class MySQLQueryBuilder(QueryBuilder):
         querystring = format_alias_sql("", self.alias, **kwargs)
         return querystring
 
-    def get_sql(self, **kwargs: Any) -> str:
+    def get_sql(self, **kwargs: Any) -> str:  # type: ignore[override]
         self._set_kwargs_defaults(kwargs)
         querystring = super(MySQLQueryBuilder, self).get_sql(**kwargs)
         if querystring:
             if self._update_table:
-                if self._orderbys:
+                if self._orderbys:  # type: ignore[unreachable]
                     querystring += self._orderby_sql(**kwargs)
                 if self._limit:
                     querystring += self._limit_sql()
@@ -98,7 +98,7 @@ class MySQLQueryBuilder(QueryBuilder):
         return ""
 
     @builder
-    def modifier(self, value: str) -> "MySQLQueryBuilder":
+    def modifier(self, value: str) -> "MySQLQueryBuilder":  # type: ignore[return]
         """
         Adds a modifier such as SQL_CALC_FOUND_ROWS to the query.
         https://dev.mysql.com/doc/refman/5.7/en/select.html
@@ -122,7 +122,7 @@ class MySQLQueryBuilder(QueryBuilder):
 
     def _insert_sql(self, **kwargs: Any) -> str:
         return "INSERT {ignore}INTO {table}".format(
-            table=self._insert_table.get_sql(**kwargs),
+            table=self._insert_table.get_sql(**kwargs),  # type: ignore[attr-defined]
             ignore="IGNORE " if self._on_conflict_do_nothing else "",
         )
 
@@ -135,17 +135,17 @@ class MySQLLoadQueryBuilder:
         self._into_table = None
 
     @builder
-    def load(self, fp: str) -> "MySQLLoadQueryBuilder":
-        self._load_file = fp
+    def load(self, fp: str) -> "MySQLLoadQueryBuilder":  # type: ignore[return]
+        self._load_file = fp  # type: ignore[assignment]
 
     @builder
-    def into(self, table: Union[str, Table]) -> "MySQLLoadQueryBuilder":
-        self._into_table = table if isinstance(table, Table) else Table(table)
+    def into(self, table: Union[str, Table]) -> "MySQLLoadQueryBuilder":  # type: ignore[return]
+        self._into_table = table if isinstance(table, Table) else Table(table)  # type: ignore[assignment]
 
     def get_sql(self, *args: Any, **kwargs: Any) -> str:
         querystring = ""
-        if self._load_file and self._into_table:
-            querystring += self._load_file_sql(**kwargs)
+        if self._load_file and self._into_table:  # type: ignore[unreachable]
+            querystring += self._load_file_sql(**kwargs)  # type: ignore[unreachable]
             querystring += self._into_table_sql(**kwargs)
             querystring += self._options_sql(**kwargs)
 
@@ -155,7 +155,7 @@ class MySQLLoadQueryBuilder:
         return "LOAD DATA LOCAL INFILE '{}'".format(self._load_file)
 
     def _into_table_sql(self, **kwargs: Any) -> str:
-        return " INTO TABLE `{}`".format(self._into_table.get_sql(**kwargs))
+        return " INTO TABLE `{}`".format(self._into_table.get_sql(**kwargs))  # type: ignore[attr-defined]
 
     def _options_sql(self, **kwargs: Any) -> str:
         return " FIELDS TERMINATED BY ','"

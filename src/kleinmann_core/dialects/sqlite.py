@@ -19,7 +19,7 @@ class SQLLiteQuery(Query):
 
     @classmethod
     def _builder(cls, **kwargs: Any) -> "SQLLiteQueryBuilder":
-        return SQLLiteQueryBuilder(**kwargs)
+        return SQLLiteQueryBuilder(**kwargs)  # type: ignore[no-untyped-call]
 
 
 class SQLLiteQueryBuilder(QueryBuilder):
@@ -30,20 +30,20 @@ class SQLLiteQueryBuilder(QueryBuilder):
             dialect=Dialects.SQLITE, wrapper_cls=SQLLiteValueWrapper, **kwargs
         )
 
-    def get_sql(self, **kwargs: Any) -> str:
+    def get_sql(self, **kwargs: Any) -> str:  # type: ignore[override]
         self._set_kwargs_defaults(kwargs)
         if not (self._selects or self._insert_table or self._delete_from or self._update_table):
             return ""
-        if self._insert_table and not (self._selects or self._values):
-            return ""
-        if self._update_table and not self._updates:
-            return ""
+        if self._insert_table and not (self._selects or self._values):  # type: ignore[unreachable]
+            return ""  # type: ignore[unreachable]
+        if self._update_table and not self._updates:  # type: ignore[unreachable]
+            return ""  # type: ignore[unreachable]
 
         has_joins = bool(self._joins)
         has_multiple_from_clauses = 1 < len(self._from)
         has_subquery_from_clause = 0 < len(self._from) and isinstance(self._from[0], QueryBuilder)
         has_reference_to_foreign_table = self._foreign_table
-        has_update_from = self._update_table and self._from
+        has_update_from = self._update_table and self._from  # type: ignore[unreachable]
 
         kwargs["with_namespace"] = any(
             [
@@ -55,7 +55,7 @@ class SQLLiteQueryBuilder(QueryBuilder):
             ]
         )
         if self._update_table:
-            if self._with:
+            if self._with:  # type: ignore[unreachable]
                 querystring = self._with_sql(**kwargs)
             else:
                 querystring = ""

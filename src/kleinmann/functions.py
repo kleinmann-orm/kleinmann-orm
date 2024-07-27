@@ -101,7 +101,7 @@ class Max(Aggregate):
     :samp:`Max("{FIELD_NAME}")`
     """
 
-    database_func = functions.Max
+    database_func = functions.Max  # type: ignore[assignment]
     populate_field_object = True
 
 
@@ -112,7 +112,7 @@ class Min(Aggregate):
     :samp:`Min("{FIELD_NAME}")`
     """
 
-    database_func = functions.Min
+    database_func = functions.Min  # type: ignore[assignment]
     populate_field_object = True
 
 
@@ -123,5 +123,5 @@ class Avg(Aggregate):
     :samp:`Avg("{FIELD_NAME}")`
     """
 
-    database_func = functions.Avg
+    database_func = functions.Avg  # type: ignore[assignment]
     populate_field_object = True

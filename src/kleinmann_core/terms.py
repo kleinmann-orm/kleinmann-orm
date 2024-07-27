@@ -48,20 +48,20 @@ class Node:
     is_aggregate = None
 
     def nodes_(self) -> Iterator[NodeT]:
-        yield self
+        yield self  # type: ignore[misc]
 
     def find_(self, type: Type[NodeT]) -> List[NodeT]:
-        return [node for node in self.nodes_() if isinstance(node, type)]
+        return [node for node in self.nodes_() if isinstance(node, type)]  # type: ignore[var-annotated]
 
 
 class Term(Node):
-    is_aggregate = False
+    is_aggregate = False  # type: ignore[assignment]
 
     def __init__(self, alias: Optional[str] = None) -> None:
         self.alias = alias
 
     @builder
-    def as_(self, alias: str) -> "Term":
+    def as_(self, alias: str) -> "Term":  # type: ignore[return]
         self.alias = alias
 
     @property
@@ -93,7 +93,7 @@ class Term(Node):
         """
 
         if isinstance(val, Node):
-            return val
+            return val  # type: ignore[return-value]
         if val is None:
             return NullValue()
         if isinstance(val, list):
@@ -103,7 +103,7 @@ class Term(Node):
 
         # Need to default here to avoid the recursion. ValueWrapper extends this class.
         wrapper_cls = wrapper_cls or ValueWrapper
-        return wrapper_cls(val)
+        return wrapper_cls(val)  # type: ignore[return-value]
 
     @staticmethod
     def wrap_json(
@@ -119,7 +119,7 @@ class Term(Node):
             wrapper_cls = wrapper_cls or ValueWrapper
             return wrapper_cls(val)
 
-        return JSON(val)
+        return JSON(val)  # type: ignore[unreachable]
 
     def replace_table(
         self, current_table: Optional["Table"], new_table: Optional["Table"]
@@ -165,25 +165,25 @@ class Term(Node):
         return self != other
 
     def glob(self, expr: str) -> "BasicCriterion":
-        return BasicCriterion(Matching.glob, self, self.wrap_constant(expr))
+        return BasicCriterion(Matching.glob, self, self.wrap_constant(expr))  # type: ignore[arg-type]
 
     def like(self, expr: str) -> "BasicCriterion":
-        return BasicCriterion(Matching.like, self, self.wrap_constant(expr))
+        return BasicCriterion(Matching.like, self, self.wrap_constant(expr))  # type: ignore[arg-type]
 
     def not_like(self, expr: str) -> "BasicCriterion":
-        return BasicCriterion(Matching.not_like, self, self.wrap_constant(expr))
+        return BasicCriterion(Matching.not_like, self, self.wrap_constant(expr))  # type: ignore[arg-type]
 
     def ilike(self, expr: str) -> "BasicCriterion":
-        return BasicCriterion(Matching.ilike, self, self.wrap_constant(expr))
+        return BasicCriterion(Matching.ilike, self, self.wrap_constant(expr))  # type: ignore[arg-type]
 
     def not_ilike(self, expr: str) -> "BasicCriterion":
-        return BasicCriterion(Matching.not_ilike, self, self.wrap_constant(expr))
+        return BasicCriterion(Matching.not_ilike, self, self.wrap_constant(expr))  # type: ignore[arg-type]
 
     def rlike(self, expr: str) -> "BasicCriterion":
-        return BasicCriterion(Matching.rlike, self, self.wrap_constant(expr))
+        return BasicCriterion(Matching.rlike, self, self.wrap_constant(expr))  # type: ignore[arg-type]
 
     def regex(self, pattern: str) -> "BasicCriterion":
-        return BasicCriterion(Matching.regex, self, self.wrap_constant(pattern))
+        return BasicCriterion(Matching.regex, self, self.wrap_constant(pattern))  # type: ignore[arg-type]
 
     def between(self, lower: Any, upper: Any) -> "BetweenCriterion":
         return BetweenCriterion(self, self.wrap_constant(lower), self.wrap_constant(upper))
@@ -192,7 +192,7 @@ class Term(Node):
         return PeriodCriterion(self, self.wrap_constant(start), self.wrap_constant(end))
 
     def as_of(self, expr: str) -> "BasicCriterion":
-        return BasicCriterion(Matching.as_of, self, self.wrap_constant(expr))
+        return BasicCriterion(Matching.as_of, self, self.wrap_constant(expr))  # type: ignore[arg-type]
 
     def all_(self) -> "All":
         return All(self)
@@ -206,7 +206,7 @@ class Term(Node):
         return self.isin(arg).negate()
 
     def bin_regex(self, pattern: str) -> "BasicCriterion":
-        return BasicCriterion(Matching.bin_regex, self, self.wrap_constant(pattern))
+        return BasicCriterion(Matching.bin_regex, self, self.wrap_constant(pattern))  # type: ignore[arg-type]
 
     def negate(self) -> "Not":
         return Not(self)
@@ -250,23 +250,23 @@ class Term(Node):
     def __rtruediv__(self, other: Any) -> "ArithmeticExpression":
         return ArithmeticExpression(Arithmetic.div, self.wrap_constant(other), self)
 
-    def __eq__(self, other: Any) -> "BasicCriterion":
-        return BasicCriterion(Equality.eq, self, self.wrap_constant(other))
+    def __eq__(self, other: Any) -> "BasicCriterion":  # type: ignore[override]
+        return BasicCriterion(Equality.eq, self, self.wrap_constant(other))  # type: ignore[arg-type]
 
-    def __ne__(self, other: Any) -> "BasicCriterion":
-        return BasicCriterion(Equality.ne, self, self.wrap_constant(other))
+    def __ne__(self, other: Any) -> "BasicCriterion":  # type: ignore[override]
+        return BasicCriterion(Equality.ne, self, self.wrap_constant(other))  # type: ignore[arg-type]
 
     def __gt__(self, other: Any) -> "BasicCriterion":
-        return BasicCriterion(Equality.gt, self, self.wrap_constant(other))
+        return BasicCriterion(Equality.gt, self, self.wrap_constant(other))  # type: ignore[arg-type]
 
     def __ge__(self, other: Any) -> "BasicCriterion":
-        return BasicCriterion(Equality.gte, self, self.wrap_constant(other))
+        return BasicCriterion(Equality.gte, self, self.wrap_constant(other))  # type: ignore[arg-type]
 
     def __lt__(self, other: Any) -> "BasicCriterion":
-        return BasicCriterion(Equality.lt, self, self.wrap_constant(other))
+        return BasicCriterion(Equality.lt, self, self.wrap_constant(other))  # type: ignore[arg-type]
 
     def __le__(self, other: Any) -> "BasicCriterion":
-        return BasicCriterion(Equality.lte, self, self.wrap_constant(other))
+        return BasicCriterion(Equality.lte, self, self.wrap_constant(other))  # type: ignore[arg-type]
 
     def __getitem__(self, item: slice) -> "BetweenCriterion":
         if not isinstance(item, slice):
@@ -341,8 +341,8 @@ class Negative(Term):
         self.term = term
 
     @property
-    def is_aggregate(self) -> Optional[bool]:
-        return self.term.is_aggregate
+    def is_aggregate(self) -> Optional[bool]:  # type: ignore[override]
+        return self.term.is_aggregate  # type: ignore[has-type]
 
     def get_sql(self, **kwargs: Any) -> str:
         return "-{term}".format(term=self.term.get_sql(**kwargs))
@@ -430,31 +430,31 @@ class JSON(Term):
         return format_alias_sql(sql, self.alias, **kwargs)
 
     def get_json_value(self, key_or_index: Union[str, int]) -> "BasicCriterion":
-        return BasicCriterion(JSONOperators.GET_JSON_VALUE, self, self.wrap_constant(key_or_index))
+        return BasicCriterion(JSONOperators.GET_JSON_VALUE, self, self.wrap_constant(key_or_index))  # type: ignore[arg-type]
 
     def get_text_value(self, key_or_index: Union[str, int]) -> "BasicCriterion":
-        return BasicCriterion(JSONOperators.GET_TEXT_VALUE, self, self.wrap_constant(key_or_index))
+        return BasicCriterion(JSONOperators.GET_TEXT_VALUE, self, self.wrap_constant(key_or_index))  # type: ignore[arg-type]
 
     def get_path_json_value(self, path_json: str) -> "BasicCriterion":
-        return BasicCriterion(JSONOperators.GET_PATH_JSON_VALUE, self, self.wrap_json(path_json))
+        return BasicCriterion(JSONOperators.GET_PATH_JSON_VALUE, self, self.wrap_json(path_json))  # type: ignore[arg-type]
 
     def get_path_text_value(self, path_json: str) -> "BasicCriterion":
-        return BasicCriterion(JSONOperators.GET_PATH_TEXT_VALUE, self, self.wrap_json(path_json))
+        return BasicCriterion(JSONOperators.GET_PATH_TEXT_VALUE, self, self.wrap_json(path_json))  # type: ignore[arg-type]
 
     def has_key(self, other: Any) -> "BasicCriterion":
-        return BasicCriterion(JSONOperators.HAS_KEY, self, self.wrap_json(other))
+        return BasicCriterion(JSONOperators.HAS_KEY, self, self.wrap_json(other))  # type: ignore[arg-type]
 
     def contains(self, other: Any) -> "BasicCriterion":
-        return BasicCriterion(JSONOperators.CONTAINS, self, self.wrap_json(other))
+        return BasicCriterion(JSONOperators.CONTAINS, self, self.wrap_json(other))  # type: ignore[arg-type]
 
     def contained_by(self, other: Any) -> "BasicCriterion":
-        return BasicCriterion(JSONOperators.CONTAINED_BY, self, self.wrap_json(other))
+        return BasicCriterion(JSONOperators.CONTAINED_BY, self, self.wrap_json(other))  # type: ignore[arg-type]
 
     def has_keys(self, other: Iterable) -> "BasicCriterion":
-        return BasicCriterion(JSONOperators.HAS_KEYS, self, Array(*other))
+        return BasicCriterion(JSONOperators.HAS_KEYS, self, Array(*other))  # type: ignore[arg-type]
 
     def has_any_keys(self, other: Iterable) -> "BasicCriterion":
-        return BasicCriterion(JSONOperators.HAS_ANY_KEYS, self, Array(*other))
+        return BasicCriterion(JSONOperators.HAS_ANY_KEYS, self, Array(*other))  # type: ignore[arg-type]
 
 
 class Values(Term):
@@ -513,13 +513,13 @@ class Criterion(Term):
 
         return crit
 
-    def get_sql(self) -> str:
+    def get_sql(self) -> str:  # type: ignore[override]
         raise NotImplementedError()
 
 
 class EmptyCriterion:
     is_aggregate = None
-    tables_ = set()
+    tables_ = set()  # type: ignore[var-annotated]
 
     def fields_(self) -> Set["Field"]:
         return set()
@@ -543,15 +543,15 @@ class Field(Criterion, JSON):
     ) -> None:
         super().__init__(alias=alias)
         self.name = name
-        self.table = table
+        self.table = table  # type: ignore[assignment]
 
     def nodes_(self) -> Iterator[NodeT]:
-        yield self
+        yield self  # type: ignore[misc]
         if self.table is not None:
-            yield from self.table.nodes_()
+            yield from self.table.nodes_()  # type: ignore[unreachable]
 
     @builder
-    def replace_table(
+    def replace_table(  # type: ignore[return]
         self, current_table: Optional["Table"], new_table: Optional["Table"]
     ) -> "Field":
         """
@@ -564,9 +564,9 @@ class Field(Criterion, JSON):
         :return:
             A copy of the field with the tables replaced.
         """
-        self.table = new_table if self.table == current_table else self.table
+        self.table = new_table if self.table == current_table else self.table  # type: ignore[assignment]
 
-    def get_sql(self, **kwargs: Any) -> str:
+    def get_sql(self, **kwargs: Any) -> str:  # type: ignore[override]
         with_alias = kwargs.pop("with_alias", False)
         with_namespace = kwargs.pop("with_namespace", False)
         quote_char = kwargs.pop("quote_char", None)
@@ -574,8 +574,8 @@ class Field(Criterion, JSON):
         field_sql = format_quotes(self.name, quote_char)
 
         # Need to add namespace if the table has an alias
-        if self.table and (with_namespace or self.table.alias):
-            table_name = self.table.get_table_name()
+        if self.table and (with_namespace or self.table.alias):  # type: ignore[unreachable]
+            table_name = self.table.get_table_name()  # type: ignore[unreachable]
             field_sql = "{namespace}.{name}".format(
                 namespace=format_quotes(table_name, quote_char),
                 name=field_sql,
@@ -601,19 +601,19 @@ class Star(Field):
         super().__init__("*", table=table)
 
     def nodes_(self) -> Iterator[NodeT]:
-        yield self
+        yield self  # type: ignore[misc]
         if self.table is not None:
-            yield from self.table.nodes_()
+            yield from self.table.nodes_()  # type: ignore[unreachable]
 
-    def get_sql(
+    def get_sql(  # type: ignore[override]
         self,
         with_alias: bool = False,
         with_namespace: bool = False,
         quote_char: Optional[str] = None,
         **kwargs: Any,
     ) -> str:
-        if self.table and (with_namespace or self.table.alias):
-            namespace = self.table.alias or getattr(self.table, "_table_name")
+        if self.table and (with_namespace or self.table.alias):  # type: ignore[unreachable]
+            namespace = self.table.alias or getattr(self.table, "_table_name")  # type: ignore[unreachable]
             return "{}.*".format(format_quotes(namespace, quote_char))
 
         return "*"
@@ -625,20 +625,20 @@ class Tuple(Criterion):
         self.values = [self.wrap_constant(value) for value in values]
 
     def nodes_(self) -> Iterator[NodeT]:
-        yield self
+        yield self  # type: ignore[misc]
         for value in self.values:
-            yield from value.nodes_()
+            yield from value.nodes_()  # type: ignore[union-attr]
 
     def get_sql(self, **kwargs: Any) -> str:
-        sql = "({})".format(",".join(term.get_sql(**kwargs) for term in self.values))
+        sql = "({})".format(",".join(term.get_sql(**kwargs) for term in self.values))  # type: ignore[union-attr]
         return format_alias_sql(sql, self.alias, **kwargs)
 
     @property
-    def is_aggregate(self) -> bool:
-        return resolve_is_aggregate([val.is_aggregate for val in self.values])
+    def is_aggregate(self) -> bool:  # type: ignore[override]
+        return resolve_is_aggregate([val.is_aggregate for val in self.values])  # type: ignore[has-type,return-value,union-attr]
 
     @builder
-    def replace_table(
+    def replace_table(  # type: ignore[return]
         self, current_table: Optional["Table"], new_table: Optional["Table"]
     ) -> "Tuple":
         """
@@ -651,13 +651,13 @@ class Tuple(Criterion):
         :return:
             A copy of the field with the tables replaced.
         """
-        self.values = [value.replace_table(current_table, new_table) for value in self.values]
+        self.values = [value.replace_table(current_table, new_table) for value in self.values]  # type: ignore[misc,union-attr]
 
 
 class Array(Tuple):
     def get_sql(self, **kwargs: Any) -> str:
         dialect = kwargs.get("dialect", None)
-        values = ",".join(term.get_sql(**kwargs) for term in self.values)
+        values = ",".join(term.get_sql(**kwargs) for term in self.values)  # type: ignore[union-attr]
 
         sql = "[{}]".format(values)
         if dialect in (Dialects.POSTGRESQL, Dialects.REDSHIFT):
@@ -689,19 +689,19 @@ class NestedCriterion(Criterion):
         self.nested = nested
 
     def nodes_(self) -> Iterator[NodeT]:
-        yield self
+        yield self  # type: ignore[misc]
         yield from self.right.nodes_()
         yield from self.left.nodes_()
         yield from self.nested.nodes_()
 
     @property
-    def is_aggregate(self) -> Optional[bool]:
+    def is_aggregate(self) -> Optional[bool]:  # type: ignore[override]
         return resolve_is_aggregate(
             [term.is_aggregate for term in [self.left, self.right, self.nested]]
         )
 
     @builder
-    def replace_table(
+    def replace_table(  # type: ignore[return]
         self, current_table: Optional["Table"], new_table: Optional["Table"]
     ) -> "NestedCriterion":
         """
@@ -723,7 +723,7 @@ class NestedCriterion(Criterion):
             left=self.left.get_sql(**kwargs),
             comparator=self.comparator.value,
             right=self.right.get_sql(**kwargs),
-            nested_comparator=self.nested_comparator.value,
+            nested_comparator=self.nested_comparator.value,  # type: ignore[attr-defined]
             nested=self.nested.get_sql(**kwargs),
         )
 
@@ -756,16 +756,16 @@ class BasicCriterion(Criterion):
         self.right = right
 
     def nodes_(self) -> Iterator[NodeT]:
-        yield self
+        yield self  # type: ignore[misc]
         yield from self.right.nodes_()
         yield from self.left.nodes_()
 
     @property
-    def is_aggregate(self) -> Optional[bool]:
-        return resolve_is_aggregate([term.is_aggregate for term in [self.left, self.right]])
+    def is_aggregate(self) -> Optional[bool]:  # type: ignore[override]
+        return resolve_is_aggregate([term.is_aggregate for term in [self.left, self.right]])  # type: ignore[has-type]
 
     @builder
-    def replace_table(
+    def replace_table(  # type: ignore[return]
         self, current_table: Optional["Table"], new_table: Optional["Table"]
     ) -> "BasicCriterion":
         """
@@ -810,16 +810,16 @@ class ContainsCriterion(Criterion):
         self._is_negated = False
 
     def nodes_(self) -> Iterator[NodeT]:
-        yield self
+        yield self  # type: ignore[misc]
         yield from self.term.nodes_()
         yield from self.container.nodes_()
 
     @property
-    def is_aggregate(self) -> Optional[bool]:
+    def is_aggregate(self) -> Optional[bool]:  # type: ignore[override]
         return self.term.is_aggregate
 
     @builder
-    def replace_table(
+    def replace_table(  # type: ignore[return]
         self, current_table: Optional["Table"], new_table: Optional["Table"]
     ) -> "ContainsCriterion":
         """
@@ -843,31 +843,31 @@ class ContainsCriterion(Criterion):
         return format_alias_sql(sql, self.alias, **kwargs)
 
     @builder
-    def negate(self) -> "ContainsCriterion":
+    def negate(self) -> "ContainsCriterion":  # type: ignore[return]
         self._is_negated = True
 
 
 class RangeCriterion(Criterion):
-    def __init__(self, term: Term, start: Any, end: Any, alias: Optional[str] = None) -> str:
+    def __init__(self, term: Term, start: Any, end: Any, alias: Optional[str] = None) -> None:
         super().__init__(alias)
         self.term = term
         self.start = start
         self.end = end
 
     def nodes_(self) -> Iterator[NodeT]:
-        yield self
+        yield self  # type: ignore[misc]
         yield from self.term.nodes_()
         yield from self.start.nodes_()
         yield from self.end.nodes_()
 
     @property
-    def is_aggregate(self) -> Optional[bool]:
-        return self.term.is_aggregate
+    def is_aggregate(self) -> Optional[bool]:  # type: ignore[override]
+        return self.term.is_aggregate  # type: ignore[has-type]
 
 
 class BetweenCriterion(RangeCriterion):
     @builder
-    def replace_table(
+    def replace_table(  # type: ignore[return]
         self, current_table: Optional["Table"], new_table: Optional["Table"]
     ) -> "BetweenCriterion":
         """
@@ -909,12 +909,12 @@ class BitwiseAndCriterion(Criterion):
         self.value = value
 
     def nodes_(self) -> Iterator[NodeT]:
-        yield self
+        yield self  # type: ignore[misc]
         yield from self.term.nodes_()
         yield from self.value.nodes_()
 
     @builder
-    def replace_table(
+    def replace_table(  # type: ignore[return]
         self, current_table: Optional["Table"], new_table: Optional["Table"]
     ) -> "BitwiseAndCriterion":
         """
@@ -943,11 +943,11 @@ class NullCriterion(Criterion):
         self.term = term
 
     def nodes_(self) -> Iterator[NodeT]:
-        yield self
+        yield self  # type: ignore[misc]
         yield from self.term.nodes_()
 
     @builder
-    def replace_table(
+    def replace_table(  # type: ignore[return]
         self, current_table: Optional["Table"], new_table: Optional["Table"]
     ) -> "NullCriterion":
         """
@@ -970,7 +970,7 @@ class NullCriterion(Criterion):
 
 
 class ComplexCriterion(BasicCriterion):
-    def get_sql(self, subcriterion: bool = False, **kwargs: Any) -> str:
+    def get_sql(self, subcriterion: bool = False, **kwargs: Any) -> str:  # type: ignore[override]
         sql = "{left} {comparator} {right}".format(
             comparator=self.comparator.value,
             left=self.left.get_sql(subcriterion=self.needs_brackets(self.left), **kwargs),
@@ -1018,17 +1018,17 @@ class ArithmeticExpression(Term):
         self.right = right
 
     def nodes_(self) -> Iterator[NodeT]:
-        yield self
+        yield self  # type: ignore[misc]
         yield from self.left.nodes_()
         yield from self.right.nodes_()
 
     @property
-    def is_aggregate(self) -> Optional[bool]:
+    def is_aggregate(self) -> Optional[bool]:  # type: ignore[override]
         # True if both left and right terms are True or None. None if both terms are None. Otherwise, False
         return resolve_is_aggregate([self.left.is_aggregate, self.right.is_aggregate])
 
     @builder
-    def replace_table(
+    def replace_table(  # type: ignore[return]
         self, current_table: Optional["Table"], new_table: Optional["Table"]
     ) -> "ArithmeticExpression":
         """
@@ -1109,33 +1109,33 @@ class ArithmeticExpression(Term):
 class Case(Term):
     def __init__(self, alias: Optional[str] = None) -> None:
         super().__init__(alias=alias)
-        self._cases = []
+        self._cases = []  # type: ignore[var-annotated]
         self._else = None
 
     def nodes_(self) -> Iterator[NodeT]:
-        yield self
+        yield self  # type: ignore[misc]
 
         for criterion, term in self._cases:
             yield from criterion.nodes_()
             yield from term.nodes_()
 
         if self._else is not None:
-            yield from self._else.nodes_()
+            yield from self._else.nodes_()  # type: ignore[unreachable]
 
     @property
-    def is_aggregate(self) -> Optional[bool]:
+    def is_aggregate(self) -> Optional[bool]:  # type: ignore[override]
         # True if all criterions/cases are True or None. None all cases are None. Otherwise, False
         return resolve_is_aggregate(
             [criterion.is_aggregate or term.is_aggregate for criterion, term in self._cases]
-            + [self._else.is_aggregate if self._else else None]
+            + [self._else.is_aggregate if self._else else None]  # type: ignore[attr-defined]
         )
 
     @builder
-    def when(self, criterion: Any, term: Any) -> "Case":
+    def when(self, criterion: Any, term: Any) -> "Case":  # type: ignore[return]
         self._cases.append((criterion, self.wrap_constant(term)))
 
     @builder
-    def replace_table(
+    def replace_table(  # type: ignore[return]
         self, current_table: Optional["Table"], new_table: Optional["Table"]
     ) -> "Case":
         """
@@ -1155,11 +1155,11 @@ class Case(Term):
             ]
             for criterion, term in self._cases
         ]
-        self._else = self._else.replace_table(current_table, new_table) if self._else else None
+        self._else = self._else.replace_table(current_table, new_table) if self._else else None  # type: ignore[attr-defined]
 
     @builder
     def else_(self, term: Any) -> "Case":
-        self._else = self.wrap_constant(term)
+        self._else = self.wrap_constant(term)  # type: ignore[assignment]
         return self
 
     def get_sql(self, with_alias: bool = False, **kwargs: Any) -> str:
@@ -1172,7 +1172,7 @@ class Case(Term):
             )
             for criterion, term in self._cases
         )
-        else_ = " ELSE {}".format(self._else.get_sql(**kwargs)) if self._else else ""
+        else_ = " ELSE {}".format(self._else.get_sql(**kwargs)) if self._else else ""  # type: ignore[attr-defined]
 
         case_sql = "CASE {cases}{else_} END".format(cases=cases, else_=else_)
 
@@ -1188,7 +1188,7 @@ class Not(Criterion):
         self.term = term
 
     def nodes_(self) -> Iterator[NodeT]:
-        yield self
+        yield self  # type: ignore[misc]
         yield from self.term.nodes_()
 
     def get_sql(self, **kwargs: Any) -> str:
@@ -1216,7 +1216,7 @@ class Not(Criterion):
         return inner
 
     @builder
-    def replace_table(
+    def replace_table(  # type: ignore[return]
         self, current_table: Optional["Table"], new_table: Optional["Table"]
     ) -> "Not":
         """
@@ -1238,7 +1238,7 @@ class All(Criterion):
         self.term = term
 
     def nodes_(self) -> Iterator[NodeT]:
-        yield self
+        yield self  # type: ignore[misc]
         yield from self.term.nodes_()
 
     def get_sql(self, **kwargs: Any) -> str:
@@ -1252,14 +1252,14 @@ class CustomFunction:
         self.params = params
 
     def __call__(self, *args: Any, **kwargs: Any) -> "Function":
-        if not self._has_params():
+        if not self._has_params():  # type: ignore[no-untyped-call]
             return Function(self.name, alias=kwargs.get("alias"))
 
-        if not self._is_valid_function_call(*args):
+        if not self._is_valid_function_call(*args):  # type: ignore[no-untyped-call]
             raise FunctionException(
                 "Function {name} require these arguments ({params}), ({args}) passed".format(
                     name=self.name,
-                    params=", ".join(str(p) for p in self.params),
+                    params=", ".join(str(p) for p in self.params),  # type: ignore[union-attr]
                     args=", ".join(str(p) for p in args),
                 )
             )
@@ -1270,7 +1270,7 @@ class CustomFunction:
         return self.params is not None
 
     def _is_valid_function_call(self, *args):
-        return len(args) == len(self.params)
+        return len(args) == len(self.params)  # type: ignore[arg-type]
 
 
 class Function(Criterion):
@@ -1281,22 +1281,22 @@ class Function(Criterion):
         self.schema = kwargs.get("schema")
 
     def nodes_(self) -> Iterator[NodeT]:
-        yield self
+        yield self  # type: ignore[misc]
         for arg in self.args:
-            yield from arg.nodes_()
+            yield from arg.nodes_()  # type: ignore[union-attr]
 
     @property
-    def is_aggregate(self) -> Optional[bool]:
+    def is_aggregate(self) -> Optional[bool]:  # type: ignore[override]
         """
         This is a shortcut that assumes if a function has a single argument and that argument is aggregated, then this
         function is also aggregated. A more sophisticated approach is needed, however it is unclear how that might work.
         :returns:
             True if the function accepts one argument and that argument is aggregate.
         """
-        return resolve_is_aggregate([arg.is_aggregate for arg in self.args])
+        return resolve_is_aggregate([arg.is_aggregate for arg in self.args])  # type: ignore[has-type,union-attr]
 
     @builder
-    def replace_table(
+    def replace_table(  # type: ignore[return]
         self, current_table: Optional["Table"], new_table: Optional["Table"]
     ) -> "Function":
         """
@@ -1309,7 +1309,7 @@ class Function(Criterion):
         :return:
             A copy of the criterion with the tables replaced.
         """
-        self.args = [param.replace_table(current_table, new_table) for param in self.args]
+        self.args = [param.replace_table(current_table, new_table) for param in self.args]  # type: ignore[misc,union-attr]
 
     def get_special_params_sql(self, **kwargs: Any) -> Any:
         pass
@@ -1324,7 +1324,7 @@ class Function(Criterion):
 
         return "{name}({args}{special})".format(
             name=self.name,
-            args=",".join(self.get_arg_sql(arg, **kwargs) for arg in self.args),
+            args=",".join(self.get_arg_sql(arg, **kwargs) for arg in self.args),  # type: ignore[no-untyped-call]
             special=(" " + special_params_sql) if special_params_sql else "",
         )
 
@@ -1361,14 +1361,14 @@ class AggregateFunction(Function):
         self._include_filter = False
 
     @builder
-    def filter(self, *filters: Any) -> "AnalyticFunction":
+    def filter(self, *filters: Any) -> "AnalyticFunction":  # type: ignore[return]
         self._include_filter = True
         self._filters += filters
 
-    def get_filter_sql(self, **kwargs: Any) -> str:
+    def get_filter_sql(self, **kwargs: Any) -> str:  # type: ignore[return]
         if self._include_filter:
             return "WHERE {criterions}".format(
-                criterions=Criterion.all(self._filters).get_sql(**kwargs)
+                criterions=Criterion.all(self._filters).get_sql(**kwargs)  # type: ignore[attr-defined]
             )
 
     def get_function_sql(self, **kwargs: Any):
@@ -1386,20 +1386,20 @@ class AnalyticFunction(AggregateFunction):
     is_analytic = True
 
     def __init__(self, name: str, *args: Any, **kwargs: Any) -> None:
-        super().__init__(name, *args, **kwargs)
+        super().__init__(name, *args, **kwargs)  # type: ignore[no-untyped-call]
         self._filters = []
-        self._partition = []
-        self._orderbys = []
+        self._partition = []  # type: ignore[var-annotated]
+        self._orderbys = []  # type: ignore[var-annotated]
         self._include_filter = False
         self._include_over = False
 
     @builder
-    def over(self, *terms: Any) -> "AnalyticFunction":
+    def over(self, *terms: Any) -> "AnalyticFunction":  # type: ignore[return]
         self._include_over = True
         self._partition += terms
 
     @builder
-    def orderby(self, *terms: Any, **kwargs: Any) -> "AnalyticFunction":
+    def orderby(self, *terms: Any, **kwargs: Any) -> "AnalyticFunction":  # type: ignore[return]
         self._include_over = True
         self._orderbys += [(term, kwargs.get("order")) for term in terms]
 
@@ -1459,7 +1459,7 @@ class WindowFrameAnalyticFunction(AnalyticFunction):
             # pylint: disable=E1101
             return "{value} {modifier}".format(
                 value=self.value or "UNBOUNDED",
-                modifier=self.modifier,
+                modifier=self.modifier,  # type: ignore[attr-defined]
             )
 
     def __init__(self, name: str, *args: Any, **kwargs: Any) -> None:
@@ -1471,26 +1471,26 @@ class WindowFrameAnalyticFunction(AnalyticFunction):
         if self.frame or self.bound:
             raise AttributeError()
 
-        self.frame = frame
-        self.bound = (bound, and_bound) if and_bound else bound
+        self.frame = frame  # type: ignore[assignment]
+        self.bound = (bound, and_bound) if and_bound else bound  # type: ignore[assignment]
 
     @builder
-    def rows(
+    def rows(  # type: ignore[return]
         self, bound: Union[str, EdgeT], and_bound: Optional[EdgeT] = None
     ) -> "WindowFrameAnalyticFunction":
-        self._set_frame_and_bounds("ROWS", bound, and_bound)
+        self._set_frame_and_bounds("ROWS", bound, and_bound)  # type: ignore[arg-type]
 
     @builder
-    def range(
+    def range(  # type: ignore[return]
         self, bound: Union[str, EdgeT], and_bound: Optional[EdgeT] = None
     ) -> "WindowFrameAnalyticFunction":
-        self._set_frame_and_bounds("RANGE", bound, and_bound)
+        self._set_frame_and_bounds("RANGE", bound, and_bound)  # type: ignore[arg-type]
 
     def get_frame_sql(self) -> str:
         if not isinstance(self.bound, tuple):
             return "{frame} {bound}".format(frame=self.frame, bound=self.bound)
 
-        lower, upper = self.bound
+        lower, upper = self.bound  # type: ignore[unreachable]
         return "{frame} BETWEEN {lower} AND {upper}".format(
             frame=self.frame,
             lower=lower,
@@ -1503,7 +1503,7 @@ class WindowFrameAnalyticFunction(AnalyticFunction):
         if not self.frame and not self.bound:
             return partition_sql
 
-        return "{over} {frame}".format(over=partition_sql, frame=self.get_frame_sql())
+        return "{over} {frame}".format(over=partition_sql, frame=self.get_frame_sql())  # type: ignore[unreachable]
 
 
 class IgnoreNullsAnalyticFunction(AnalyticFunction):
@@ -1512,7 +1512,7 @@ class IgnoreNullsAnalyticFunction(AnalyticFunction):
         self._ignore_nulls = False
 
     @builder
-    def ignore_nulls(self) -> "IgnoreNullsAnalyticFunction":
+    def ignore_nulls(self) -> "IgnoreNullsAnalyticFunction":  # type: ignore[return]
         self._ignore_nulls = True
 
     def get_special_params_sql(self, **kwargs: Any) -> Optional[str]:
@@ -1612,7 +1612,7 @@ class Interval(Node):
                 expr = "-" + expr
 
             unit = (
-                "{largest}_{smallest}".format(
+                "{largest}_{smallest}".format(  # type: ignore[assignment]
                     largest=self.largest,
                     smallest=self.smallest,
                 )
@@ -1622,9 +1622,9 @@ class Interval(Node):
 
             # Set default unit with DAY
             if unit is None:
-                unit = "DAY"
+                unit = "DAY"  # type: ignore[unreachable]
 
-        return self.templates.get(dialect, "INTERVAL '{expr} {unit}'").format(expr=expr, unit=unit)
+        return self.templates.get(dialect, "INTERVAL '{expr} {unit}'").format(expr=expr, unit=unit)  # type: ignore[arg-type]
 
 
 class Pow(Function):

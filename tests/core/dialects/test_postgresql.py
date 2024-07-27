@@ -255,7 +255,7 @@ class ReturningClauseTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         super().setUpClass()
-        cls.table_abc = Table("abc")
+        cls.table_abc = Table("abc")  # type: ignore[attr-defined]
 
     def test_returning_from_missing_table_raises_queryexception(self):
         field_from_diff_table = Field("xyz", table=Table("other"))

@@ -9,11 +9,11 @@ from kleinmann.filters import is_null, not_equal, not_null
 
 
 def postgres_json_contains(field: Term, value: str) -> Criterion:
-    return BasicCriterion(JSONOperators.CONTAINS, field, ValueWrapper(value))
+    return BasicCriterion(JSONOperators.CONTAINS, field, ValueWrapper(value))  # type: ignore[arg-type]
 
 
 def postgres_json_contained_by(field: Term, value: str) -> Criterion:
-    return BasicCriterion(JSONOperators.CONTAINED_BY, field, ValueWrapper(value))
+    return BasicCriterion(JSONOperators.CONTAINED_BY, field, ValueWrapper(value))  # type: ignore[arg-type]
 
 
 operator_keywords = {
@@ -27,11 +27,11 @@ def _get_json_criterion(items: List):
     if len(items) == 2:
         left = items.pop(0)
         right = items.pop(0)
-        return BasicCriterion(JSONOperators.GET_TEXT_VALUE, ValueWrapper(left), ValueWrapper(right))
+        return BasicCriterion(JSONOperators.GET_TEXT_VALUE, ValueWrapper(left), ValueWrapper(right))  # type: ignore[arg-type]
 
     left = items.pop(0)
     return BasicCriterion(
-        JSONOperators.GET_JSON_VALUE, ValueWrapper(left), _get_json_criterion(items)
+        JSONOperators.GET_JSON_VALUE, ValueWrapper(left), _get_json_criterion(items)  # type: ignore[arg-type]
     )
 
 
@@ -39,11 +39,11 @@ def _create_json_criterion(items: List, field_term: Term, operator_: Callable, v
     if len(items) == 1:
         term = items.pop(0)
         return operator_(
-            BasicCriterion(JSONOperators.GET_TEXT_VALUE, field_term, ValueWrapper(term)), value
+            BasicCriterion(JSONOperators.GET_TEXT_VALUE, field_term, ValueWrapper(term)), value  # type: ignore[arg-type]
         )
 
     return operator_(
-        BasicCriterion(JSONOperators.GET_JSON_VALUE, field_term, _get_json_criterion(items)), value
+        BasicCriterion(JSONOperators.GET_JSON_VALUE, field_term, _get_json_criterion(items)), value  # type: ignore[arg-type]
     )
 
 
@@ -59,6 +59,6 @@ def postgres_json_filter(field: Term, value: Dict) -> Criterion:
     key_parts = [int(item) if item.isdigit() else str(item) for item in key.split("__")]
     operator_ = operator.eq
     if key_parts[-1] in operator_keywords:
-        operator_ = operator_keywords[str(key_parts.pop(-1))]
+        operator_ = operator_keywords[str(key_parts.pop(-1))]  # type: ignore[assignment]
 
     return _create_json_criterion(key_parts, field, operator_, filter_value)

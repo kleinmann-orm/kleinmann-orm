@@ -164,7 +164,7 @@ class CharField(Field[str]):
         return f"VARCHAR({self.max_length})"
 
 
-class TextField(Field[str], str):  # type: ignore
+class TextField(Field[str], str):  # type: ignore[misc]
     """
     Large Text field.
     """
@@ -246,7 +246,7 @@ class DecimalField(Field[Decimal], Decimal):
         SQL_TYPE = "VARCHAR(40)"
 
         def function_cast(self, term: Term) -> Term:
-            return functions.Cast(term, SqlTypes.NUMERIC)
+            return functions.Cast(term, SqlTypes.NUMERIC)  # type: ignore[no-untyped-call]
 
 
 # In case of queryset with filter `__year`/`__month`/`__day` ..., value can be int, float or str. Example:
@@ -450,7 +450,7 @@ class FloatField(Field[float], float):
         SQL_TYPE = "REAL"
 
 
-class JSONField(Field[Union[dict, list]], dict, list):  # type: ignore
+class JSONField(Field[Union[dict, list]], dict, list):  # type: ignore[misc]
     """
     JSON field.
 
@@ -539,7 +539,7 @@ class UUIDField(Field[UUID], UUID):
         return UUID(value)
 
 
-class BinaryField(Field[bytes], bytes):  # type: ignore
+class BinaryField(Field[bytes], bytes):  # type: ignore[misc]
     """
     Binary field.
 

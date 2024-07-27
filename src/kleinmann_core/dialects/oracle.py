@@ -17,7 +17,7 @@ class OracleQuery(Query):
 class OracleQueryBuilder(QueryBuilder):
     QUOTE_CHAR = '"'
     QUERY_CLS = OracleQuery
-    ALIAS_QUOTE_CHAR = '"'
+    ALIAS_QUOTE_CHAR = '"'  # type: ignore[assignment]
 
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(dialect=Dialects.ORACLE, **kwargs)

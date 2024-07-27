@@ -37,7 +37,7 @@ if TYPE_CHECKING:  # pragma: nocoverage
     from kleinmann.queryset import AwaitableQuery
 
 
-class F(PypikaField):  # type: ignore
+class F(PypikaField):
     @classmethod
     def resolver_arithmetic_expression(
         cls,
@@ -70,27 +70,27 @@ class F(PypikaField):  # type: ignore
                 left_field_object,
             ) = cls.resolver_arithmetic_expression(model, left)
             if left_field_object:
-                if field_object and type(field_object) != type(left_field_object):  # noqa: E721
+                if field_object and type(field_object) is not type(left_field_object):  # type: ignore[comparison-overlap]
                     raise FieldError(
                         "Cannot use arithmetic expression between different field type"
                     )
-                field_object = left_field_object
+                field_object = left_field_object  # type: ignore[assignment]
 
             (
                 arithmetic_expression_or_field.right,
                 right_field_object,
             ) = cls.resolver_arithmetic_expression(model, right)
             if right_field_object:
-                if field_object and type(field_object) != type(right_field_object):  # noqa: E721
+                if field_object and type(field_object) is not type(right_field_object):  # type: ignore[comparison-overlap]
                     raise FieldError(
                         "Cannot use arithmetic expression between different field type"
                     )
-                field_object = right_field_object
+                field_object = right_field_object  # type: ignore[assignment]
 
-        return arithmetic_expression_or_field, field_object
+        return arithmetic_expression_or_field, field_object  # type: ignore[return-value]
 
 
-class Subquery(Term):  # type: ignore
+class Subquery(Term):
     def __init__(self, query: "AwaitableQuery"):
         super().__init__()
         self.query = query
@@ -102,7 +102,7 @@ class Subquery(Term):  # type: ignore
         return self.query.as_query().as_(alias)
 
 
-class RawSQL(Term):  # type: ignore
+class RawSQL(Term):
     def __init__(self, sql: str):
         super().__init__()
         self.sql = sql
@@ -237,7 +237,7 @@ class Q(Expression):
         )
         if overridden_operator:
             operator = overridden_operator
-        if annotation_info["field"].is_aggregate:
+        if annotation_info["field"].is_aggregate:  # type: ignore[has-type]
             modifier = QueryModifier(having_criterion=operator(annotation_info["field"], value))
         else:
             modifier = QueryModifier(where_criterion=operator(annotation_info["field"], value))
@@ -323,7 +323,7 @@ class Q(Expression):
     def _resolve_kwargs(self, model: "Type[Model]", table: Table) -> QueryModifier:
         modifier = QueryModifier()
         for raw_key, raw_value in self.filters.items():
-            key, value = self._get_actual_filter_params(model, raw_key, raw_value)
+            key, value = self._get_actual_filter_params(model, raw_key, raw_value)  # type: ignore[arg-type]
             if key in self._custom_filters:
                 filter_modifier = self._resolve_custom_kwarg(model, key, value, table)
             else:
@@ -403,7 +403,7 @@ class Function(Expression):
     def _get_function_field(
         self, field: Union[ArithmeticExpression, PypikaField, str], *default_values
     ):
-        return self.database_func(field, *default_values)
+        return self.database_func(field, *default_values)  # type: ignore[arg-type]
 
     def _resolve_field_for_model(self, model: "Type[Model]", table: Table, field: str) -> dict:
         joins = []
@@ -482,8 +482,8 @@ class Function(Expression):
 
         field, field_object = F.resolver_arithmetic_expression(model, self.field)
         if self.populate_field_object:
-            self.field_object = field_object
-        return {"joins": [], "field": self._get_function_field(field, *default_values)}
+            self.field_object = field_object  # type: ignore[assignment]
+        return {"joins": [], "field": self._get_function_field(field, *default_values)}  # type: ignore[arg-type]
 
 
 class Aggregate(Function):
@@ -512,8 +512,8 @@ class Aggregate(Function):
         self, field: Union[ArithmeticExpression, PypikaField, str], *default_values
     ):
         if self.distinct:
-            return self.database_func(field, *default_values).distinct()
-        return self.database_func(field, *default_values)
+            return self.database_func(field, *default_values).distinct()  # type: ignore[no-untyped-call]
+        return self.database_func(field, *default_values)  # type: ignore[no-untyped-call]
 
     def _resolve_field_for_model(self, model: "Type[Model]", table: Table, field: str) -> dict:
         ret = super()._resolve_field_for_model(model, table, field)
@@ -591,7 +591,7 @@ class Case(Expression):
     """
 
     def __init__(
-        self, *args: When, default: Union[str, F, ArithmeticExpression, Function] = None
+        self, *args: When, default: Union[str, F, ArithmeticExpression, Function] = None  # type: ignore[assignment]
     ) -> None:
         self.args = args
         self.default = default
