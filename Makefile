@@ -5,7 +5,7 @@ MAKEFLAGS += --no-print-directory
 ##
 SOURCE=src tests examples conftest.py
 py_warn = PYTHONDEVMODE=1
-pytest_opts = -n auto --cov=kleinmann --cov-append --tb=native -q
+pytest_opts = -n auto --cov=kleinmann --cov=kleinmann_core --cov-append --tb=native -q
 
 help:           ## Show this help (default)
 	@grep -Fh "##" $(MAKEFILE_LIST) | grep -Fv grep -F | sed -e 's/\\$$//' | sed -e 's/##//'
