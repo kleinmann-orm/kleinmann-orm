@@ -1,6 +1,10 @@
 # Kleinmann ORM
 
-**Kleinmann ORM** is an async ORM library for Python hardforked from [Tortoise ORM](https://github.com/tortoise/tortoise-orm). It's in a very early stage of development and not recommended for general use.
+**Kleinmann ORM** is an async ORM library for Python hardforked from [Tortoise ORM](https://github.com/tortoise/tortoise-orm) and [pypika](https://github.com/tortoise/pypika-tortoise). It's in a very early stage of development and not recommended for general use.
+
+[Project roadmap](https://github.com/kleinmann-orm/kleinmann-orm/issues/2)
+
+Docs are not ready yet; read the code.
 
 ## Goals
 
@@ -10,9 +14,15 @@
 - Improve type safety and code quality.
 - Reduce the codebase size by reducing the project's scope.
 
-Maintaining compatibility with Tortoise ORM is not a goal, but we will try to keep a list of breaking changes in the documentation.
+## Breaking changes
 
-Project roadmap: https://github.com/kleinmann-orm/kleinmann-orm/issues/2
+Coming from Tortoise ORM as a user or dev? Great! Here's what you need to know.
+
+- Everything named `tortoise` is now `kleinmann`.
+- `pypika` code now lives in `kleinmann_core` package.
+- MySQL, MSSQL and Oracle databases are no longer supported.
+- `psycopg` driver is no longer supported.
+- Default branch is `main`.
 
 ## F.A.Q
 

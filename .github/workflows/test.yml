@@ -20,12 +20,11 @@ jobs:
         ports:
           - 5432:5432
         env:
-          POSTGRES_PASSWORD: 123456
+          POSTGRES_PASSWORD: test
           POSTGRES_USER: postgres
         options: --health-cmd=pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     env:
       KLEINMANN_TEST_MODULES: tests.testmodels
-      KLEINMANN_POSTGRES_PASS: 123456
     strategy:
       matrix:
         python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
@@ -50,15 +49,6 @@ jobs:
 
       - name: Run all checks
         run: make all
-
-      # FIXME: Mode to Makefile
-      - name: Test Examples
-        run: |
-          export DEST=examples/blacksheep && PYTHONPATH=$DEST pytest $PYTEST_ARGS $DEST/_tests.py
-          export DEST=examples/fastapi && PYTHONPATH=$DEST pytest $PYTEST_ARGS $DEST/_tests.py
-        env:
-          PYTHONDEVMODE: 1
-          PYTEST_ARGS: "-n auto --cov=kleinmann --cov-append --tb=native -q"
 
       # - name: Upload Coverage
       #   run: |

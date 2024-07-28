@@ -6,18 +6,23 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 ## [Unreleased]
 
+## Added
+
+- Forked pypika-tortoise 0.1.6 as `kleinmann_core`.
+
 ### Removed
 
 - Removed Oracle support (`asyncodbc` driver).
 - Removed MySQL support (`aiomysql`, `asyncmy` drivers).
 - Removed MSSQL support (`asyncodbc` driver).
 - Removed `psycopg` driver support.
+- Removed `pypika-tortoise` dependency.
+- Removed SQL dialects except postgresql and sqlite.
 
 ### Other
 
 - Update `aiosqlite` dependency to `>=0.20.0`.
 - `asyncpg` driver is now a required dependency.
-- Forked pypika-tortoise 0.1.6 as `kleinmann_core`.
 
 ## [0.0.1] - 2024-07-24
 
