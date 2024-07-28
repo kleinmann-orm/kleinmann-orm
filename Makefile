@@ -3,7 +3,7 @@ MAKEFLAGS += --no-print-directory
 ##
 ##  🚧 Kleinmann ORM developer tools
 ##
-SOURCE=src tests examples conftest.py
+SOURCE=src tests examples
 py_warn = PYTHONDEVMODE=1
 pytest_opts = -n auto --cov=kleinmann --cov=kleinmann_core --cov-append --tb=native -q
 

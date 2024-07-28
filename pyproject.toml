@@ -151,7 +151,7 @@ module = ["kleinmann.contrib.sanic.*"]
 disallow_untyped_defs = false
 
 [[tool.mypy.overrides]]
-module = ["conftest"]
+module = ["tests.conftest"]
 disallow_untyped_defs = false
 
 [[tool.mypy.overrides]]
@@ -194,4 +194,3 @@ extend-select = ["I", "PLE", "PLW", "S", "W"]
 [tool.ruff.lint.per-file-ignores]
 "tests/*" = ["S"]
 "examples/*/_tests.py" = ["S"]
-"conftest.py" = ["S"]
