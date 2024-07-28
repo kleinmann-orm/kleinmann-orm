@@ -159,7 +159,7 @@ module = ["kleinmann.backends.base.client"]
 disallow_untyped_defs = false
 
 [tool.pytest.ini_options]
-addopts = "-n auto --cov-append --cov-report=term-missing"
+addopts = "-n auto --cov kleinmann --cov kleinmann_core --cov-append"
 filterwarnings = [
     'ignore:`pk` is deprecated:DeprecationWarning',
     'ignore:`index` is deprecated:DeprecationWarning',
