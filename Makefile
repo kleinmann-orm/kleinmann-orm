@@ -4,8 +4,7 @@ MAKEFLAGS += --no-print-directory
 ##  🚧 Kleinmann ORM developer tools
 ##
 SOURCE=src tests examples
-py_warn = PYTHONDEVMODE=1
-pytest_opts = -n auto --cov=kleinmann --cov=kleinmann_core --cov-append --tb=native -q
+py_warn=PYTHONDEVMODE=1
 
 help:           ## Show this help (default)
 	@grep -Fh "##" $(MAKEFILE_LIST) | grep -Fv grep -F | sed -e 's/\\$$//' | sed -e 's/##//'
@@ -22,22 +21,27 @@ format:         ## Format with all tools
 lint:           ## Lint with all tools
 	make ruff mypy
 
-test:           ## Run tests
-	$(py_warn) KLEINMANN_TEST_DB=sqlite://:memory: pytest $(pytest_opts)
+test_sqlite:    ## Run sqlite tests
+	$(py_warn) KLEINMANN_TEST_DB=sqlite://:memory: pytest
 
-test_sqlite:
-	$(py_warn) KLEINMANN_TEST_DB=sqlite://:memory: pytest --cov-report= $(pytest_opts)
-
-test_postgres:
+test_postgres:  ## Run postgresq tests
 	@if `python -V | grep PyPy`; then \
 		echo "Skipping PostgreSQL tests on PyPy"; \
 	else \
 		make run_test_postgres; \
-		$(py_warn) KLEINMANN_TEST_DB="asyncpg://postgres:test@127.0.0.1:5432/test_\{\}" pytest tests/schema --cov-append --cov-report=; \
+		$(py_warn) KLEINMANN_TEST_DB="asyncpg://postgres:test@127.0.0.1:5432/test_\{\}" pytest; \
 	fi
 
-test_all:       ## Run tests with all databases
-	make test_sqlite test_postgres
+test_examples:  ## Run tests for contrib examples
+	for dir in blacksheep fastapi; do \
+		cd examples/$$dir; \
+		PYTHONPATH=. $(py_warn) pytest _tests.py; \
+		cd ../..; \
+	done
+
+test_all:       ## Run all tests
+	rm -f .coverage
+	make test_sqlite test_postgres test_examples
 	coverage report
 
 ##

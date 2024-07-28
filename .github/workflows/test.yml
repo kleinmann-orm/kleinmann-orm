@@ -50,15 +50,6 @@ jobs:
       - name: Run all checks
         run: make all
 
-      # FIXME: Mode to Makefile
-      - name: Test Examples
-        run: |
-          export DEST=examples/blacksheep && PYTHONPATH=$DEST pytest $PYTEST_ARGS $DEST/_tests.py
-          export DEST=examples/fastapi && PYTHONPATH=$DEST pytest $PYTEST_ARGS $DEST/_tests.py
-        env:
-          PYTHONDEVMODE: 1
-          PYTEST_ARGS: "-n auto --cov=kleinmann --cov-append --tb=native -q"
-
       # - name: Upload Coverage
       #   run: |
       #     pip3 install --upgrade coveralls
