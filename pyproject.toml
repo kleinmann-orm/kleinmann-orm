@@ -70,16 +70,16 @@ sanic = "*"
 # Sample integration - Starlette
 starlette = "*"
 # Pydantic support
-pydantic = "^2.0,!=2.7.0"
+pydantic = "*"
 # FastAPI support
-fastapi = "^0.100.0"
+fastapi = "*"
 asgi_lifespan = "*"
 httpx = "*"
 # Aiohttp support
 aiohttp = "*"
 # BlackSheep support
-blacksheep = "^2.0.7"
-pytest-asyncio = "^0.23.6"
+blacksheep = "*"
+pytest-asyncio = "*"
 # mypy
 types-PyYAML = "*"
 types-pytz = "*"
@@ -159,6 +159,7 @@ module = ["kleinmann.backends.base.client"]
 disallow_untyped_defs = false
 
 [tool.pytest.ini_options]
+addopts = "-n auto --cov-append --cov-report=term-missing"
 filterwarnings = [
     'ignore:`pk` is deprecated:DeprecationWarning',
     'ignore:`index` is deprecated:DeprecationWarning',
