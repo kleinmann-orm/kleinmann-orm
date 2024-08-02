@@ -47,7 +47,7 @@ jobs:
           - os: ubuntu-latest
             arch: arm64
             python-version: 3.12
-          - os: ubuntu-latest
+          - os: macos-latest
             arch: arm64
             python-version: 3.12
 
