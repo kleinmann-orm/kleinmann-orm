@@ -27,7 +27,30 @@ jobs:
       KLEINMANN_TEST_MODULES: tests.testmodels
     strategy:
       matrix:
-        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        include:
+          # NOTE: Each version on Linux; arm64 and macOS only on latest
+          - os: ubuntu-latest
+            arch: amd64
+            python-version: 3.8
+          - os: ubuntu-latest
+            arch: amd64
+            python-version: 3.9
+          - os: ubuntu-latest
+            arch: amd64
+            python-version: "3.10"
+          - os: ubuntu-latest
+            arch: amd64
+            python-version: 3.11
+          - os: ubuntu-latest
+            arch: amd64
+            python-version: 3.12
+          - os: ubuntu-latest
+            arch: arm64
+            python-version: 3.12
+          - os: macos-latest
+            arch: arm64
+            python-version: 3.12
+
     steps:
       - uses: actions/cache@v4
         with:
@@ -47,8 +70,12 @@ jobs:
       - name: Install project
         run: make install
 
-      - name: Run all checks
-        run: make all
+      - name: Format and lint
+        run: make format lint
+        if: contains(matrix.os, 'ubuntu') && contains(matrix.arch, 'amd64')
+
+      - name: Run tests
+        run: make test_all
 
       # - name: Upload Coverage
       #   run: |
