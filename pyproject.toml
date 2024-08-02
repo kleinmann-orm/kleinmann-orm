@@ -34,7 +34,6 @@ classifiers = [
     "Topic :: Database",
     "Operating System :: POSIX",
     "Operating System :: MacOS :: MacOS X",
-    "Operating System :: Microsoft :: Windows",
 ]
 
 [tool.poetry.dependencies]

@@ -22,6 +22,7 @@ Coming from Tortoise ORM as a user or dev? Great! Here's what you need to know.
 - `pypika` code now lives in `kleinmann_core` package.
 - MySQL, MSSQL and Oracle databases are no longer supported.
 - `psycopg` driver is no longer supported.
+- Windows is not supported, but arm64 is.
 - Default branch is `main`.
 
 ## F.A.Q
